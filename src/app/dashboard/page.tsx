@@ -34,7 +34,7 @@ export default function Dashboard() {
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 14, marginBottom: 32 }}>
-            <DashCard href="/curriculum" title="Curriculum" body="20 chapters · weighted to PSI exam" />
+            <DashCard href="/course" title="The Course" body="20 chapters · weighted to PSI exam" />
             <DashCard href="/practice" title="Mock Exam" body="Timed 130 questions · same as PSI" />
             <DashCard href="/flashcards" title="Flashcards" body="170+ terms · spaced review" />
             <DashCard href="/glossary" title="Glossary" body="Searchable · all categories" />
@@ -43,7 +43,7 @@ export default function Dashboard() {
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 800, color: T.text, marginBottom: 18, letterSpacing: '-0.02em' }}>Continue learning</h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
             {CURRICULUM.slice(0, 6).map(c => (
-              <Link key={c.slug} href={`/chapter/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ ...CARD, padding: 18, height: '100%' }}>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', marginBottom: 6 }}>
                     Ch. {c.number.toString().padStart(2, '0')} · {c.examItems}Q

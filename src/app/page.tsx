@@ -54,7 +54,7 @@ function Hero() {
         <Link href="/signup" style={{ ...BUTTON_3D.primary, padding: '16px 36px', fontSize: 16, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 12, textDecoration: 'none' }}>
           Start studying free
         </Link>
-        <Link href="/curriculum" style={{ ...BUTTON_3D.secondary, padding: '16px 32px', fontSize: 16, fontWeight: 600, borderRadius: 12, textDecoration: 'none' }}>
+        <Link href="/course" style={{ ...BUTTON_3D.secondary, padding: '16px 32px', fontSize: 16, fontWeight: 600, borderRadius: 12, textDecoration: 'none' }}>
           See curriculum →
         </Link>
       </div>
@@ -151,7 +151,7 @@ function CurriculumPreview() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 14 }}>
         {featured.map((c) => (
-          <Link key={c.slug} href={`/chapter/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <div style={{ ...CARD, padding: 24, height: '100%' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
                 <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase' }}>
@@ -166,7 +166,7 @@ function CurriculumPreview() {
         ))}
       </div>
       <div style={{ textAlign: 'center', marginTop: 32 }}>
-        <Link href="/curriculum" style={{ ...BUTTON_3D.secondary, padding: '12px 24px', fontSize: 14, fontWeight: 600, borderRadius: 10, textDecoration: 'none' }}>
+        <Link href="/course" style={{ ...BUTTON_3D.secondary, padding: '12px 24px', fontSize: 14, fontWeight: 600, borderRadius: 10, textDecoration: 'none' }}>
           See all 20 chapters →
         </Link>
       </div>
@@ -211,7 +211,7 @@ function Pricing() {
           Every chapter, every practice question, every flashcard, every mock exam — all of it open to anyone preparing for the Hawaii real estate license. Sign up to track your progress, or just dive into the content directly.
         </p>
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link href="/curriculum" style={{ ...BUTTON_3D.primary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, textDecoration: 'none' }}>
+          <Link href="/course" style={{ ...BUTTON_3D.primary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, textDecoration: 'none' }}>
             Browse the curriculum
           </Link>
           <Link href="/practice" style={{ ...BUTTON_3D.secondary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, textDecoration: 'none' }}>

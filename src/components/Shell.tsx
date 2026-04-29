@@ -28,15 +28,15 @@ export function Header({ active }: { active?: string }) {
         </span>
       </Link>
       <nav style={{ display: 'flex', gap: 18, alignItems: 'center', flexWrap: 'wrap' }}>
-        {link('/curriculum', 'Curriculum')}
-        {link('/practice', 'Practice Exam')}
+        {link('/course', 'Course')}
+        {link('/practice', 'Mock Exam')}
         {link('/flashcards', 'Flashcards')}
         {link('/math', 'Math')}
         {link('/glossary', 'Glossary')}
-        <Link href="/curriculum" style={{
+        <Link href="/course" style={{
           ...BUTTON_3D.primary, padding: '9px 18px', borderRadius: 10,
           fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
-        }}>Start studying</Link>
+        }}>Start course</Link>
       </nav>
     </header>
   );
@@ -47,7 +47,7 @@ export function Footer() {
     <footer style={{ borderTop: `1px solid ${T.border}`, padding: '48px 32px 32px', marginTop: 64, background: T.bgRaised }}>
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 24, marginBottom: 32 }}>
-          <FooterCol title="Study" links={[['Curriculum', '/curriculum'], ['Practice Exam', '/practice'], ['Flashcards', '/flashcards'], ['Glossary', '/glossary'], ['Math drills', '/math']]}/>
+          <FooterCol title="Study" links={[['Course', '/course'], ['Practice Exam', '/practice'], ['Flashcards', '/flashcards'], ['Glossary', '/glossary'], ['Math drills', '/math']]}/>
           <FooterCol title="Account" links={[['Sign up', '/signup'], ['Log in', '/login'], ['Pricing', '/pricing'], ['Dashboard', '/dashboard']]}/>
           <FooterCol title="Resources" links={[['Hawaii REC', 'https://cca.hawaii.gov/reb/'], ['PSI Exam Info', 'https://www.psiexams.com/'], ['HRS 467 (License Law)', 'https://www.capitol.hawaii.gov/hrs/'], ['Contact', '/contact']]}/>
           <FooterCol title="Legal" links={[['Terms', '/policies/terms'], ['Privacy', '/policies/privacy'], ['Disclaimer', '/policies/disclaimer']]}/>

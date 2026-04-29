@@ -59,7 +59,7 @@ export default function PricingPage() {
           </div>
 
           <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/curriculum" style={{ ...BUTTON_3D.primary, padding: '16px 36px', fontSize: 15, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 12, textDecoration: 'none' }}>
+            <Link href="/course" style={{ ...BUTTON_3D.primary, padding: '16px 36px', fontSize: 15, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 12, textDecoration: 'none' }}>
               Start learning →
             </Link>
           </div>
