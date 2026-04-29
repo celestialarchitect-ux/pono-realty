@@ -203,19 +203,25 @@ function FeatureGrid() {
 
 function Pricing() {
   return (
-    <section style={{ padding: '64px 32px', maxWidth: 1100, margin: '0 auto' }}>
-      <div style={{ textAlign: 'center', marginBottom: 40 }}>
-        <Eyebrow>Pricing</Eyebrow>
-        <H2>Pay once. Study until you pass.</H2>
+    <section style={{ padding: '64px 32px', maxWidth: 880, margin: '0 auto' }}>
+      <div style={{ ...CARD, padding: 48, textAlign: 'center', borderTop: `4px solid ${T.ocean}` }}>
+        <Eyebrow>Open access</Eyebrow>
+        <H2 style={{ marginBottom: 16 }}>100% free. No card. No catch.</H2>
+        <p style={{ fontSize: 17, color: T.textDim, lineHeight: 1.6, maxWidth: 640, margin: '0 auto 28px' }}>
+          Every chapter, every practice question, every flashcard, every mock exam — all of it open to anyone preparing for the Hawaii real estate license. Sign up to track your progress, or just dive into the content directly.
+        </p>
+        <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Link href="/curriculum" style={{ ...BUTTON_3D.primary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, textDecoration: 'none' }}>
+            Browse the curriculum
+          </Link>
+          <Link href="/practice" style={{ ...BUTTON_3D.secondary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, textDecoration: 'none' }}>
+            Take a mock exam →
+          </Link>
+        </div>
+        <p style={{ marginTop: 28, fontSize: 12, color: T.textMute, fontStyle: 'italic' }}>
+          Reminder: the 60-hour Salesperson Pre-Licensing Course must still be completed at a Hawaii REC-approved school. This academy is a study supplement.
+        </p>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-        <PricingCard tier="Free" price="$0" sub="forever" perks={['First chapter (Property Ownership) full', '20 sample flashcards', '10 practice questions', 'Glossary access (read-only)']} cta="Start free" href="/signup" highlight={false} />
-        <PricingCard tier="Lifetime" price="$97" sub="one-time" perks={['All 20 chapters · full content', 'Unlimited mock exams', 'Full flashcard deck (170+)', 'All math drills', 'Progress tracking', 'No expiration · re-take any time']} cta="Get lifetime" href="/signup?plan=lifetime" highlight={true} />
-        <PricingCard tier="Pro" price="$197" sub="lifetime" perks={['Everything in Lifetime', 'Hawaii-specific deep-dive videos', '1-on-1 weekly Q&A (group)', 'Pass guarantee · re-pay if you don\'t pass on 2nd attempt', 'Continuing education credits (post-license)']} cta="Go Pro" href="/signup?plan=pro" highlight={false} />
-      </div>
-      <p style={{ textAlign: 'center', fontSize: 13, color: T.textMute, marginTop: 20, fontStyle: 'italic' }}>
-        Compare: Vitousek textbook $50 + Prep Kit $175 = $225. Ralph&apos;s Lifetime gets you more for $97.
-      </p>
     </section>
   );
 }

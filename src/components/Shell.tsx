@@ -27,17 +27,16 @@ export function Header({ active }: { active?: string }) {
           REAL ESTATE · ACADEMY
         </span>
       </Link>
-      <nav style={{ display: 'flex', gap: 22, alignItems: 'center', flexWrap: 'wrap' }}>
+      <nav style={{ display: 'flex', gap: 18, alignItems: 'center', flexWrap: 'wrap' }}>
         {link('/curriculum', 'Curriculum')}
         {link('/practice', 'Practice Exam')}
         {link('/flashcards', 'Flashcards')}
+        {link('/math', 'Math')}
         {link('/glossary', 'Glossary')}
-        {link('/pricing', 'Pricing')}
-        <Link href="/login" style={{ color: T.textDim, fontSize: 14, textDecoration: 'none' }}>Log in</Link>
-        <Link href="/signup" style={{
+        <Link href="/curriculum" style={{
           ...BUTTON_3D.primary, padding: '9px 18px', borderRadius: 10,
           fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
-        }}>Start free</Link>
+        }}>Start studying</Link>
       </nav>
     </header>
   );
