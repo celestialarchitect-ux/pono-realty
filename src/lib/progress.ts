@@ -1,22 +1,23 @@
-// Course progress tracking — localStorage-backed for now.
-// Tracks which chapters/lessons are complete and which quiz scores.
+// Course progress tracking — localStorage-backed.
+// Two phases: reading (Phase 1) and quizzing (Phase 2).
 
 export interface ChapterProgress {
   slug: string;
   startedAt?: number;
-  completedAt?: number;
-  lessonsCompleted: string[]; // 'overview' | 'concepts' | 'quiz'
-  quizScore?: number;          // 0-100 last quiz attempt
+  readCompletedAt?: number;     // finished reading the chapter
+  quizCompletedAt?: number;     // passed the chapter quiz
+  quizScore?: number;            // best quiz score 0-100
   quizAttempts: number;
 }
 
 export interface CourseProgress {
   enrolledAt: number;
-  lastChapter?: string;
+  lastReadChapter?: string;
+  lastQuizChapter?: string;
   chapters: Record<string, ChapterProgress>;
 }
 
-const STORAGE_KEY = 'ralph-course-progress';
+const STORAGE_KEY = 'ralph-course-progress-v2';
 
 export function loadProgress(): CourseProgress {
   if (typeof window === 'undefined') return emptyProgress();
@@ -37,37 +38,46 @@ export function emptyProgress(): CourseProgress {
 }
 
 export function getChapterProgress(p: CourseProgress, slug: string): ChapterProgress {
-  return p.chapters[slug] || { slug, lessonsCompleted: [], quizAttempts: 0 };
+  return p.chapters[slug] || { slug, quizAttempts: 0 };
 }
 
-export function markLessonComplete(slug: string, lesson: 'overview' | 'concepts' | 'quiz', extra?: { quizScore?: number }): CourseProgress {
+export function markChapterRead(slug: string): CourseProgress {
   const p = loadProgress();
   const ch = getChapterProgress(p, slug);
   if (!ch.startedAt) ch.startedAt = Date.now();
-  if (!ch.lessonsCompleted.includes(lesson)) ch.lessonsCompleted = [...ch.lessonsCompleted, lesson];
-  if (lesson === 'quiz' && extra?.quizScore != null) {
-    ch.quizScore = Math.max(ch.quizScore || 0, extra.quizScore);
-    ch.quizAttempts = ch.quizAttempts + 1;
-  }
-  if (ch.lessonsCompleted.length >= 3 && !ch.completedAt) ch.completedAt = Date.now();
+  ch.readCompletedAt = Date.now();
   p.chapters[slug] = ch;
-  p.lastChapter = slug;
+  p.lastReadChapter = slug;
   saveProgress(p);
   return p;
 }
 
-export function isChapterComplete(p: CourseProgress, slug: string): boolean {
-  const ch = p.chapters[slug];
-  return !!ch?.completedAt;
+export function markQuizComplete(slug: string, score: number): CourseProgress {
+  const p = loadProgress();
+  const ch = getChapterProgress(p, slug);
+  ch.quizScore = Math.max(ch.quizScore || 0, score);
+  ch.quizAttempts = ch.quizAttempts + 1;
+  if (score >= 70 && !ch.quizCompletedAt) ch.quizCompletedAt = Date.now();
+  p.chapters[slug] = ch;
+  p.lastQuizChapter = slug;
+  saveProgress(p);
+  return p;
 }
 
-export function chapterPct(p: CourseProgress, slug: string): number {
-  const ch = p.chapters[slug];
-  if (!ch) return 0;
-  return Math.round((ch.lessonsCompleted.length / 3) * 100);
+export function isChapterRead(p: CourseProgress, slug: string): boolean {
+  return !!p.chapters[slug]?.readCompletedAt;
 }
 
-export function overallPct(p: CourseProgress, totalChapters: number): number {
-  const completed = Object.values(p.chapters).filter(c => c.completedAt).length;
+export function isQuizPassed(p: CourseProgress, slug: string): boolean {
+  return !!p.chapters[slug]?.quizCompletedAt;
+}
+
+export function readingPct(p: CourseProgress, totalChapters: number): number {
+  const completed = Object.values(p.chapters).filter(c => c.readCompletedAt).length;
+  return Math.round((completed / totalChapters) * 100);
+}
+
+export function quizzingPct(p: CourseProgress, totalChapters: number): number {
+  const completed = Object.values(p.chapters).filter(c => c.quizCompletedAt).length;
   return Math.round((completed / totalChapters) * 100);
 }

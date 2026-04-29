@@ -27,8 +27,9 @@ export function Header({ active }: { active?: string }) {
           REAL ESTATE · ACADEMY
         </span>
       </Link>
-      <nav style={{ display: 'flex', gap: 18, alignItems: 'center', flexWrap: 'wrap' }}>
+      <nav style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
         {link('/course', 'Course')}
+        {link('/quizzes', 'Quizzes')}
         {link('/practice', 'Mock Exam')}
         {link('/flashcards', 'Flashcards')}
         {link('/math', 'Math')}
