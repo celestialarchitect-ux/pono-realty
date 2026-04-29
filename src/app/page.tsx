@@ -210,11 +210,11 @@ function Pricing() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
         <PricingCard tier="Free" price="$0" sub="forever" perks={['First chapter (Property Ownership) full', '20 sample flashcards', '10 practice questions', 'Glossary access (read-only)']} cta="Start free" href="/signup" highlight={false} />
-        <PricingCard tier="Pono Lifetime" price="$97" sub="one-time" perks={['All 20 chapters · full content', 'Unlimited mock exams', 'Full flashcard deck (170+)', 'All math drills', 'Progress tracking', 'No expiration · re-take any time']} cta="Get lifetime" href="/signup?plan=lifetime" highlight={true} />
-        <PricingCard tier="Pono Pro" price="$197" sub="lifetime" perks={['Everything in Lifetime', 'Hawaii-specific deep-dive videos', '1-on-1 weekly Q&A (group)', 'Pass guarantee · re-pay if you don\'t pass on 2nd attempt', 'Continuing education credits (post-license)']} cta="Go Pro" href="/signup?plan=pro" highlight={false} />
+        <PricingCard tier="Lifetime" price="$97" sub="one-time" perks={['All 20 chapters · full content', 'Unlimited mock exams', 'Full flashcard deck (170+)', 'All math drills', 'Progress tracking', 'No expiration · re-take any time']} cta="Get lifetime" href="/signup?plan=lifetime" highlight={true} />
+        <PricingCard tier="Pro" price="$197" sub="lifetime" perks={['Everything in Lifetime', 'Hawaii-specific deep-dive videos', '1-on-1 weekly Q&A (group)', 'Pass guarantee · re-pay if you don\'t pass on 2nd attempt', 'Continuing education credits (post-license)']} cta="Go Pro" href="/signup?plan=pro" highlight={false} />
       </div>
       <p style={{ textAlign: 'center', fontSize: 13, color: T.textMute, marginTop: 20, fontStyle: 'italic' }}>
-        Compare: Vitousek textbook $50 + Prep Kit $175 = $225. Pono Lifetime gets you more for $97.
+        Compare: Vitousek textbook $50 + Prep Kit $175 = $225. Ralph&apos;s Lifetime gets you more for $97.
       </p>
     </section>
   );
@@ -256,11 +256,11 @@ function PricingCard({ tier, price, sub, perks, cta, href, highlight }: { tier: 
 
 function Faq() {
   const items: Array<[string, string]> = [
-    ['Is this affiliated with the Hawaii REC?', 'No. Pono Realty Academy is an independent study aid. The 60-hour pre-licensing course must still be completed at a REC-approved school. Use Pono to drill the material before, during, and after.'],
-    ['Can I pass without the 60-hour course?', 'No — Hawaii requires the 60-hour Salesperson Pre-Licensing Course at an approved school for license eligibility. Pono is a study supplement, not a replacement.'],
-    ['How is this different from Vitousek\'s prep kit?', 'Pono is built around the official PSI Content Outline, structured digitally for active recall, mobile-first, includes unlimited timed mock exams, and updates as Hawaii law changes — printed books can\'t.'],
+    ['Is this affiliated with the Hawaii REC?', "No. Ralph's Real Estate Academy is an independent study aid. The 60-hour pre-licensing course must still be completed at a REC-approved school. Use this academy to drill the material before, during, and after."],
+    ['Can I pass without the 60-hour course?', 'No — Hawaii requires the 60-hour Salesperson Pre-Licensing Course at an approved school for license eligibility. This academy is a study supplement, not a replacement.'],
+    ['How is this different from Vitousek\'s prep kit?', "Ralph's Academy is built around the official PSI Content Outline, structured digitally for active recall, mobile-first, includes unlimited timed mock exams, and updates as Hawaii law changes — printed books can\'t."],
     ['What about the broker exam?', 'Most chapters cover broker-relevant material too. A dedicated Broker module is on the roadmap.'],
-    ['Do you guarantee I\'ll pass?', 'Pono Pro tier includes a pass guarantee — if you complete the curriculum and don\'t pass on your 2nd attempt, we refund. Free and Lifetime tiers don\'t.'],
+    ['Do you guarantee I\'ll pass?', 'The Pro tier includes a pass guarantee — if you complete the curriculum and don\'t pass on your 2nd attempt, we refund. Free and Lifetime tiers don\'t.'],
     ['Is the content original?', 'Yes. All chapter content is original writing based on the public PSI Content Outline, Hawaii Revised Statutes, and general real estate principles. No textbook excerpts.'],
   ];
   return (

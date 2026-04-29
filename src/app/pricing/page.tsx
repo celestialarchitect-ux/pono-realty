@@ -18,8 +18,8 @@ export default function PricingPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 48 }}>
             <Tier name="Free" price="$0" sub="forever" perks={['First chapter full', 'Sample flashcards', '10 practice questions', 'Glossary read-only']} cta="Start free" href="/signup" highlight={false} />
-            <Tier name="Pono Lifetime" price="$97" sub="one-time" perks={['All 20 chapters', 'Unlimited mock exams', 'Full flashcards (170+)', 'All math drills', 'Progress tracking', 'No expiration']} cta="Get lifetime" href="/signup?plan=lifetime" highlight={true} />
-            <Tier name="Pono Pro" price="$197" sub="lifetime" perks={['Everything in Lifetime', 'Hawaii deep-dive videos', 'Weekly group Q&A', 'Pass guarantee*', 'CE credits post-license']} cta="Go Pro" href="/signup?plan=pro" highlight={false} />
+            <Tier name="Lifetime" price="$97" sub="one-time" perks={['All 20 chapters', 'Unlimited mock exams', 'Full flashcards (170+)', 'All math drills', 'Progress tracking', 'No expiration']} cta="Get lifetime" href="/signup?plan=lifetime" highlight={true} />
+            <Tier name="Pro" price="$197" sub="lifetime" perks={['Everything in Lifetime', 'Hawaii deep-dive videos', 'Weekly group Q&A', 'Pass guarantee*', 'CE credits post-license']} cta="Go Pro" href="/signup?plan=pro" highlight={false} />
           </div>
 
           <div style={{ ...CARD, padding: 32, marginBottom: 32 }}>
@@ -29,7 +29,7 @@ export default function PricingPage() {
                 <thead>
                   <tr style={{ background: T.bgRaised }}>
                     <th style={{ textAlign: 'left', padding: '12px 14px', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: T.textMute, textTransform: 'uppercase' }}>Feature</th>
-                    <th style={{ textAlign: 'center', padding: '12px 14px', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700 }}>Pono Lifetime $97</th>
+                    <th style={{ textAlign: 'center', padding: '12px 14px', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700 }}>Ralph&apos;s Lifetime $97</th>
                     <th style={{ textAlign: 'center', padding: '12px 14px', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: T.textMute, textTransform: 'uppercase' }}>Vitousek $50 Book + $175 Kit</th>
                     <th style={{ textAlign: 'center', padding: '12px 14px', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.16em', color: T.textMute, textTransform: 'uppercase' }}>Online Course $300+</th>
                   </tr>

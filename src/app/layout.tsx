@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Pono Realty Academy · Hawaii Real Estate Exam Prep',
+  title: "Ralph's Real Estate Academy · Hawaii Real Estate Exam Prep",
   description: 'The most complete Hawaii real estate licensing prep system. 20-chapter curriculum, mock exams, flashcards, glossary — built around the official PSI Hawaii exam blueprint.',
 };
 

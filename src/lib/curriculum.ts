@@ -1,4 +1,4 @@
-// PONO REALTY ACADEMY — Curriculum index aligned to the official PSI Hawaii
+// RALPH'S REAL ESTATE ACADEMY — Curriculum index aligned to the official PSI Hawaii
 // Real Estate Examination Content Outline (public document). Question counts
 // match the PSI blueprint exactly.
 

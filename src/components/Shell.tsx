@@ -22,9 +22,9 @@ export function Header({ active }: { active?: string }) {
         fontSize: 22, color: T.text, textShadow: SHADOW_3D.sm, textDecoration: 'none',
         display: 'flex', alignItems: 'center', gap: 8,
       }}>
-        <span style={{ color: T.ocean }}>PONO</span>
+        <span style={{ color: T.ocean }}>RALPH&apos;S</span>
         <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', fontWeight: 600 }}>
-          REALTY · ACADEMY
+          REAL ESTATE · ACADEMY
         </span>
       </Link>
       <nav style={{ display: 'flex', gap: 22, alignItems: 'center', flexWrap: 'wrap' }}>
@@ -54,7 +54,7 @@ export function Footer() {
           <FooterCol title="Legal" links={[['Terms', '/policies/terms'], ['Privacy', '/policies/privacy'], ['Disclaimer', '/policies/disclaimer']]}/>
         </div>
         <div style={{ paddingTop: 24, borderTop: `1px solid ${T.border}`, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em', color: T.textMute, textTransform: 'uppercase', textAlign: 'center' }}>
-          PONO REALTY ACADEMY · NOT AFFILIATED WITH HAWAII REC · STUDY AID ONLY
+          RALPH&apos;S REAL ESTATE ACADEMY · NOT AFFILIATED WITH HAWAII REC · STUDY AID ONLY
         </div>
       </div>
     </footer>

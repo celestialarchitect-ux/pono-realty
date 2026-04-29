@@ -1,4 +1,4 @@
-// Pono Realty Academy theme — Hawaiian aloha-inspired professional palette.
+// Ralph's Real Estate Academy theme — Hawaiian aloha-inspired professional palette.
 // Warm cream + ocean teal + sunset coral. Trustworthy, premium, distinctive.
 
 export const T = {
