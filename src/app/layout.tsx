@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: "Ralph's Real Estate Academy · Hawaii Real Estate Exam Prep",

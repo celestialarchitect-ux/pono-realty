@@ -61,7 +61,53 @@ body{font-family:'Inter',system-ui,sans-serif;background:#0a0d10;color:#e3e8ed;-
 .matrix td.score.high{color:#22b8a3}
 .matrix td.score.med{color:#f7b81c}
 .matrix td.score.low{color:#e85d3c}
-@media(max-width:1100px){.grid,.grid.three{grid-template-columns:1fr}}
+@media(max-width:1280px){.grid.three{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:980px){
+  .grid,.grid.three{grid-template-columns:1fr;padding:20px 20px 48px;gap:16px}
+  .top{padding:20px 22px 18px}
+  .top h1{font-size:28px}
+  .top p.deck{font-size:13px}
+  .controls{gap:6px;margin-top:14px}
+  .ctrl{padding:7px 10px;font-size:10px;letter-spacing:.08em}
+  .recommend{padding:24px 24px;margin:0 20px 32px}
+  .recommend h2{font-size:24px;line-height:1.2;margin-bottom:12px}
+  .recommend p{font-size:14px;line-height:1.6;margin-bottom:14px}
+  .recommend ul{grid-template-columns:1fr;gap:8px}
+  .recommend ul li{padding:12px 14px;font-size:13px}
+  .matrix{margin:0 20px 48px}
+  .matrix h3{padding:14px 18px;font-size:18px}
+  .matrix table{display:block;overflow-x:auto;white-space:nowrap}
+  .matrix th,.matrix td{padding:10px 14px;font-size:12px}
+  .tile-frame iframe{height:480px}
+  .tile.tall .tile-frame iframe{height:560px}
+  .tile-head{flex-direction:column;align-items:flex-start;gap:10px;padding:16px 18px}
+  .tile-head .stamp{align-self:flex-start}
+  .tile-head h2{font-size:20px}
+  .tile-head p{font-size:11px;line-height:1.5}
+}
+@media(max-width:600px){
+  .grid,.grid.three{padding:16px 14px 36px;gap:14px}
+  .top{padding:18px 16px 14px;position:static}
+  .top h1{font-size:24px}
+  .top .lead{flex-direction:column;align-items:flex-start;gap:6px}
+  .top .meta{font-size:9px}
+  .top p.deck{font-size:12px;line-height:1.5}
+  .controls{flex-wrap:wrap}
+  .controls a{margin-left:0!important;margin-top:6px;width:100%;text-align:center}
+  .ctrl-group{flex:1;min-width:0}
+  .ctrl{flex:1;text-align:center;padding:7px 4px;font-size:9px;letter-spacing:.06em}
+  .recommend{padding:20px 18px;margin:0 14px 24px;border-radius:10px}
+  .recommend h2{font-size:20px}
+  .recommend p{font-size:13px}
+  .matrix{margin:0 14px 36px;border-radius:10px}
+  .tile-frame iframe{height:420px}
+  .tile.tall .tile-frame iframe{height:480px}
+  .tile{border-radius:10px}
+  .tile-head{padding:14px 16px}
+  .tile-head h2{font-size:18px}
+  .tile-foot{padding:11px 16px;font-size:11px}
+  .tile-foot a{font-size:10px}
+}
 </style>
 </head>
 <body>

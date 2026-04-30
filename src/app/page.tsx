@@ -34,9 +34,8 @@ export default function Landing() {
 
 function Hero() {
   return (
-    <header style={{
+    <header className="ed-hero" style={{
       position: 'relative',
-      minHeight: '92vh',
       display: 'grid',
       gridTemplateRows: 'auto 1fr',
       backgroundImage: `linear-gradient(0deg, rgba(14,26,38,0.55), rgba(14,26,38,0.25)), url(${HERO_IMG})`,
@@ -50,9 +49,9 @@ function Hero() {
       }} />
 
       {/* Nav */}
-      <nav style={{
+      <nav className="ed-hero-nav" style={{
         position: 'relative', zIndex: 2,
-        padding: '24px 48px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
         color: '#fbf7f0',
       }}>
         <Link href="/" style={{
@@ -65,9 +64,9 @@ function Hero() {
       </nav>
 
       {/* Hero content */}
-      <div style={{
+      <div className="ed-hero-content" style={{
         position: 'relative', zIndex: 2,
-        maxWidth: 1100, margin: '0 auto', padding: '60px 48px 80px',
+        maxWidth: 1100, margin: '0 auto',
         color: '#fbf7f0', alignSelf: 'center', width: '100%',
       }}>
         <div style={{
@@ -76,16 +75,16 @@ function Hero() {
         }}>
           Volume 21 · Hawaii Real Estate
         </div>
-        <h1 style={{
+        <h1 className="ed-hero-h1" style={{
           fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontWeight: 400,
-          fontSize: 'clamp(56px, 9vw, 132px)', lineHeight: 0.94, letterSpacing: '-0.025em',
+          lineHeight: 0.94, letterSpacing: '-0.025em',
           marginBottom: 28, maxWidth: 1000, color: '#fbf7f0',
         }}>
           Pass Hawaii{' '}
           <em style={{ fontStyle: 'italic', fontWeight: 700 }}>real estate</em>
           <br />the first time.
         </h1>
-        <p style={{
+        <p className="ed-hero-lede" style={{
           fontSize: 19, maxWidth: 680, lineHeight: 1.55, marginBottom: 36,
           color: 'rgba(251,247,240,0.92)',
         }}>
@@ -93,7 +92,7 @@ function Hero() {
           twenty chapters, 130 mock questions, every Hawaii statute that matters. Free,
           for anyone studying the islands.
         </p>
-        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+        <div className="ed-hero-cta-row">
           <Link href="/course" style={{
             padding: '15px 30px',
             background: T.ocean, color: '#fbf7f0',
@@ -132,7 +131,7 @@ function NavLinks() {
     ['/listen', 'Listen'],
   ];
   return (
-    <ul style={{ display: 'flex', gap: 28, listStyle: 'none', margin: 0, padding: 0 }}>
+    <ul className="ed-hero-nav-links">
       {links.map(([href, label]) => (
         <li key={href}>
           <Link href={href === '/listen' ? '/course' : href} style={{
@@ -157,9 +156,8 @@ function NavLinks() {
 
 function PayoutMath({ totalQ, totalTerms }: { totalQ: number; totalTerms: number }) {
   return (
-    <section style={{ padding: '64px 48px', maxWidth: 1180, margin: '0 auto' }}>
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))', gap: 0,
+    <section className="ed-stats-section" style={{ maxWidth: 1180, margin: '0 auto' }}>
+      <div className="ed-stats-grid" style={{
         borderTop: `1px solid ${T.text}`, borderBottom: `1px solid ${T.text}`,
       }}>
         {[
@@ -168,12 +166,9 @@ function PayoutMath({ totalQ, totalTerms }: { totalQ: number; totalTerms: number
           [`${totalTerms}+`, 'Glossary terms', 'Hawaii flagged'],
           [`${PASSING_PCT}%`, 'Pass threshold', 'each portion'],
           ['$0', 'Forever', 'Free, no card'],
-        ].map(([n, label, sub], i, arr) => (
-          <div key={label} style={{
-            padding: '28px 24px',
-            borderRight: i < arr.length - 1 ? `1px solid rgba(14,26,38,0.15)` : 'none',
-          }}>
-            <div style={{
+        ].map(([n, label, sub]) => (
+          <div key={label} className="ed-stats-cell">
+            <div className="ed-stats-num" style={{
               fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900,
               fontSize: 44, color: T.ocean, letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 6,
             }}>{n}</div>
@@ -191,7 +186,7 @@ function PayoutMath({ totalQ, totalTerms }: { totalQ: number; totalTerms: number
 
 function Deck({ featured }: { featured: typeof CURRICULUM }) {
   return (
-    <section style={{ padding: '96px 48px', maxWidth: 1200, margin: '0 auto' }}>
+    <section className="ed-deck-section" style={{ maxWidth: 1200, margin: '0 auto' }}>
       <div style={{ marginBottom: 56, maxWidth: 880 }}>
         <Eyebrow>The curriculum</Eyebrow>
         <H2 style={{ marginBottom: 18 }}>
@@ -204,18 +199,10 @@ function Deck({ featured }: { featured: typeof CURRICULUM }) {
         </p>
       </div>
 
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 0,
-        borderTop: `1px solid ${T.text}`,
-      }}>
-        {featured.map((c, i, arr) => (
+      <div className="ed-deck-cols" style={{ borderTop: `1px solid ${T.text}` }}>
+        {featured.map((c) => (
           <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <article style={{
-              padding: '36px 32px 56px',
-              borderRight: i < arr.length - 1 ? `1px solid rgba(14,26,38,0.15)` : 'none',
-              height: '100%',
-              transition: 'background 0.2s',
-            }}>
+            <article className="ed-deck-card" style={{ height: '100%', transition: 'background 0.2s' }}>
               <div style={{
                 fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontSize: 56,
                 color: T.ocean, lineHeight: 1, marginBottom: 18, letterSpacing: '-0.02em',
@@ -258,8 +245,8 @@ function Deck({ featured }: { featured: typeof CURRICULUM }) {
 
 function BlueprintAlignment() {
   return (
-    <section style={{ padding: '96px 48px', background: T.bgRaised }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64, alignItems: 'start' }}>
+    <section className="ed-blueprint-section" style={{ background: T.bgRaised }}>
+      <div className="ed-blueprint-grid" style={{ alignItems: 'start' }}>
         <div>
           <Eyebrow>Exam blueprint</Eyebrow>
           <H2 style={{ marginBottom: 24 }}>What the test is actually scored on.</H2>
@@ -275,7 +262,7 @@ function BlueprintAlignment() {
             Laws of Agency (10Q), Contracts (10Q).
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 0, borderTop: `1px solid rgba(14,26,38,0.2)` }}>
+        <div className="ed-blueprint-list" style={{ borderTop: `1px solid rgba(14,26,38,0.2)` }}>
           {CURRICULUM.map((c, i) => (
             <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <div style={{
@@ -320,18 +307,14 @@ function ThreeStepFlow() {
   ];
 
   return (
-    <section style={{ padding: '96px 48px', maxWidth: 1100, margin: '0 auto' }}>
+    <section className="ed-method-section" style={{ maxWidth: 1100, margin: '0 auto' }}>
       <div style={{ marginBottom: 48, maxWidth: 720 }}>
         <Eyebrow>Method</Eyebrow>
         <H2>Three phases, in order. One thing at a time.</H2>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 0 }}>
-        {steps.map((s, i, arr) => (
-          <div key={s.n} style={{
-            padding: '28px 32px 36px',
-            borderTop: `2px solid ${T.text}`,
-            borderRight: i < arr.length - 1 ? `1px solid rgba(14,26,38,0.15)` : 'none',
-          }}>
+      <div className="ed-method-grid">
+        {steps.map((s) => (
+          <div key={s.n} className="ed-method-cell" style={{ borderTop: `2px solid ${T.text}` }}>
             <div style={{
               fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontStyle: 'italic',
               fontSize: 44, color: T.coral, lineHeight: 1, marginBottom: 16, letterSpacing: '-0.02em',
@@ -354,7 +337,7 @@ function ThreeStepFlow() {
 
 function Quote() {
   return (
-    <section style={{ padding: '96px 48px', background: T.bg, borderTop: `1px solid rgba(14,26,38,0.12)`, borderBottom: `1px solid rgba(14,26,38,0.12)` }}>
+    <section className="ed-quote-section" style={{ background: T.bg, borderTop: `1px solid rgba(14,26,38,0.12)`, borderBottom: `1px solid rgba(14,26,38,0.12)` }}>
       <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
         <div style={{
           fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic',
@@ -378,13 +361,13 @@ function Quote() {
 
 function FreeCta() {
   return (
-    <section style={{ padding: '120px 48px 96px', maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+    <section className="ed-final-section" style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
       <Eyebrow>One more thing</Eyebrow>
       <H2 style={{ marginBottom: 24 }}>The exam doesn&apos;t care how hard you tried.</H2>
       <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.65, marginBottom: 36, maxWidth: 640, margin: '0 auto 36px' }}>
         It cares whether you got 70% on each portion. We make sure you do.
       </p>
-      <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div className="ed-final-cta-row" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
         <Link href="/course" style={{
           padding: '16px 36px', background: T.ocean, color: '#fbf7f0',
           border: `1px solid ${T.oceanDark}`, borderRadius: 0,
