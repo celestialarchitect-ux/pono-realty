@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant F — Soft Warm Indie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#fbf6ec;color:#1a1614;-webkit-font-smoothing:antialiased;line-height:1.55}
+.serif{font-family:'Fraunces',Georgia,serif}
+.hand{font-family:'Caveat',cursive}
+nav{display:flex;justify-content:space-between;align-items:center;padding:24px 48px}
+.brand{font-family:'Fraunces',serif;font-weight:700;font-size:21px;letter-spacing:-.01em;color:#1a1614}
+.brand .heart{color:#e85d3c;font-style:italic;font-weight:600}
+nav ul{display:flex;gap:24px;list-style:none;font-size:14px;font-weight:500}
+nav a{color:#5a4f48;text-decoration:none}
+nav a:hover{color:#e85d3c}
+.btn-pill{padding:10px 20px;background:#e85d3c;color:#fbf6ec;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.02em;box-shadow:0 4px 14px rgba(232,93,60,.25),0 1px 0 rgba(255,255,255,.3) inset}
+.hero{padding:48px 48px 96px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.hero-text h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(48px,6vw,84px);line-height:1.0;letter-spacing:-.025em;margin-bottom:20px;color:#1a1614}
+.hero-text h1 em{font-style:italic;color:#e85d3c}
+.hero-text .lede{font-size:18px;color:#5a4f48;margin-bottom:16px;line-height:1.65}
+.hero-text .from{font-family:'Caveat',cursive;font-size:22px;color:#876c44;margin-bottom:32px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:14px 26px;border-radius:999px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;letter-spacing:.01em}
+.btn-primary{background:#e85d3c;color:#fbf6ec;box-shadow:0 6px 18px rgba(232,93,60,.3),0 1px 0 rgba(255,255,255,.3) inset}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,93,60,.35)}
+.btn-secondary{background:#fbf6ec;color:#1a1614;border:1px solid rgba(26,22,20,.18)}
+.illustration{display:flex;justify-content:center;align-items:center}
+.illustration svg{width:100%;max-width:380px;color:#e85d3c}
+.steps{padding:80px 48px;max-width:1000px;margin:0 auto;text-align:center}
+.steps .eyebrow{font-family:'Caveat',cursive;font-size:24px;color:#876c44;margin-bottom:8px}
+.steps h2{font-family:'Fraunces',serif;font-weight:600;font-size:42px;letter-spacing:-.02em;margin-bottom:8px}
+.steps .sub{color:#5a4f48;margin-bottom:56px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:left}
+.step{padding:24px;background:#f5ebd7;border-radius:18px;border:1px solid rgba(26,22,20,.06);position:relative}
+.step .num{font-family:'Caveat',cursive;font-size:42px;color:#e85d3c;line-height:1;margin-bottom:8px}
+.step .ico{margin-bottom:14px;color:#5a4f48}
+.step h3{font-family:'Fraunces',serif;font-weight:600;font-size:21px;margin-bottom:6px;color:#1a1614}
+.step p{font-size:14px;color:#5a4f48;line-height:1.6}
+.note{padding:80px 48px;max-width:760px;margin:0 auto;text-align:center}
+.note .quote{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:24px;color:#1a1614;line-height:1.5;margin-bottom:18px}
+.note .signature{font-family:'Caveat',cursive;font-size:36px;color:#1a1614;margin-bottom:8px}
+.note .role{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:#876c44;text-transform:uppercase}
+footer{padding:32px 48px;text-align:center;color:#876c44;font-size:13px;border-top:1px solid rgba(26,22,20,.08);margin-top:48px}
+@media(max-width:780px){.hero{grid-template-columns:1fr;padding:24px 24px 64px}.illustration{order:-1}.three{grid-template-columns:1fr}nav{padding:18px 24px}nav ul{display:none}.steps,.note{padding:48px 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">Ralph's <span class="heart">♡</span> Academy</span>
+  <ul>
+    <li><a href="#">The Course</a></li>
+    <li><a href="#">Quizzes</a></li>
+    <li><a href="#">Mock Exam</a></li>
+    <li><a href="#" class="btn-pill">Start free</a></li>
+  </ul>
+</nav>
+<header class="hero">
+  <div class="hero-text">
+    <h1>A friendlier way<br>to <em>pass.</em></h1>
+    <p class="lede">Hawaii real estate licensing prep, written like a book a friend would lend you. Twenty chapters, all the statutes, none of the corporate bloat.</p>
+    <p class="from">Made for Hawaii agents. Free, because Ralph thought it should be.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Start the course →</a>
+      <a href="#" class="btn btn-secondary">▶ Listen instead</a>
+    </div>
+  </div>
+  <div class="illustration">
+    <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Sun -->
+      <circle cx="240" cy="80" r="24" stroke-width="2"/>
+      <!-- Rays -->
+      <line x1="240" y1="40" x2="240" y2="48"/>
+      <line x1="280" y1="80" x2="288" y2="80"/>
+      <line x1="208" y1="48" x2="214" y2="54"/>
+      <line x1="266" y1="54" x2="272" y2="48"/>
+      <!-- Mountain ridge -->
+      <path d="M0 200 L60 130 L100 170 L150 110 L200 160 L260 120 L320 175 L320 200 Z" stroke-linejoin="round"/>
+      <!-- Wave 1 -->
+      <path d="M0 230 Q40 220 80 230 T160 230 T240 230 T320 230"/>
+      <!-- Wave 2 (lower) -->
+      <path d="M0 258 Q40 248 80 258 T160 258 T240 258 T320 258"/>
+      <!-- Outrigger canoe -->
+      <path d="M70 285 Q160 270 250 285 L240 295 Q160 305 80 295 Z"/>
+      <line x1="120" y1="278" x2="120" y2="270"/>
+      <line x1="200" y1="278" x2="200" y2="270"/>
+      <!-- Outrigger float -->
+      <line x1="80" y1="295" x2="80" y2="305"/>
+      <line x1="80" y1="305" x2="60" y2="305"/>
+      <line x1="60" y1="305" x2="60" y2="298"/>
+      <!-- Palm left -->
+      <line x1="40" y1="290" x2="40" y2="170"/>
+      <path d="M40 170 Q20 160 8 170 M40 170 Q60 158 76 168 M40 170 Q28 150 16 152 M40 170 Q56 148 70 152"/>
+      <!-- Palm right -->
+      <line x1="296" y1="294" x2="296" y2="180"/>
+      <path d="M296 180 Q278 170 266 180 M296 180 Q314 168 318 176 M296 180 Q282 162 270 164 M296 180 Q310 160 318 162"/>
+    </svg>
+  </div>
+</header>
+<section class="steps">
+  <div class="eyebrow">how this works</div>
+  <h2>Three things, in order.</h2>
+  <p class="sub">Read everything. Then quiz everything. Then mock the exam.</p>
+  <div class="three">
+    <div class="step">
+      <div class="num">1.</div>
+      <div class="ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 4h7a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2zM22 4h-7a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h8z"/></svg></div>
+      <h3>Read the chapters</h3>
+      <p>20 chapters of Hawaii real estate, written tight. No filler. Voice-narrated if you'd rather listen on a walk.</p>
+    </div>
+    <div class="step">
+      <div class="num">2.</div>
+      <div class="ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Take the quizzes</h3>
+      <p>One quiz per chapter. 70% to pass. Retake as many times as you want — your best score saves.</p>
+    </div>
+    <div class="step">
+      <div class="num">3.</div>
+      <div class="ico"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M9 14l-3 7 6-3 6 3-3-7"/></svg></div>
+      <h3>Mock the exam</h3>
+      <p>130 questions. 240 minutes. Same format as PSI. Take it as many times as you need to walk in confident.</p>
+    </div>
+  </div>
+</section>
+<section class="note">
+  <p class="quote">"I built this because I couldn't find a Hawaii real estate prep that didn't feel like a textbook from 1998 or a $300 course from a chain school. So I made the one I wanted."</p>
+  <p class="signature">— Ralph</p>
+  <p class="role">Founder · Real Estate Agent · Honolulu</p>
+</section>
+<footer>Ralph's Real Estate Academy · Independent study aid · Not affiliated with Hawaii REC · Free, forever</footer>
+</body>
+</html>

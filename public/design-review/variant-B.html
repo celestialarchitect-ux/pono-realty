@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant B — Modern Luxury Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0d10;color:#f5f7f8;-webkit-font-smoothing:antialiased;line-height:1.5}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:10px;color:#7e8a96;font-weight:600}
+.hero{position:relative;min-height:100vh;display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,16,.4),rgba(10,13,16,.85) 70%,rgba(10,13,16,1)),url("https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=2400&q=85") center/cover;z-index:0}
+nav{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;backdrop-filter:blur(12px);background:rgba(10,13,16,.4);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{font-weight:800;font-size:16px;letter-spacing:-.01em;color:#fff}
+.brand span{color:#22b8a3}
+nav ul{display:flex;gap:24px;list-style:none;font-size:13px;font-weight:500}
+nav a{color:#cfd6dd;text-decoration:none}
+nav a:hover{color:#fff}
+.btn-pill{padding:9px 18px;background:linear-gradient(180deg,#22b8a3,#14837b);color:#fff;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.04em;box-shadow:0 0 28px rgba(34,184,163,.4),0 1px 0 rgba(255,255,255,.2) inset}
+.hero-content{position:relative;z-index:5;align-self:center;padding:80px 48px;max-width:1100px;margin:0 auto;width:100%}
+.eyebrow-tag{display:inline-block;padding:6px 14px;background:rgba(34,184,163,.12);border:1px solid rgba(34,184,163,.3);border-radius:999px;color:#7be0d0;margin-bottom:24px}
+h1{font-weight:900;font-size:clamp(60px,8vw,116px);line-height:.95;letter-spacing:-.04em;color:#fff;margin-bottom:28px;max-width:980px}
+h1 .accent{background:linear-gradient(135deg,#22b8a3,#7be0d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subline{font-size:20px;color:#cfd6dd;max-width:620px;margin-bottom:40px;font-weight:400}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:16px 32px;border-radius:999px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;letter-spacing:.02em}
+.btn-primary{background:linear-gradient(180deg,#22b8a3,#14837b);color:#fff;box-shadow:0 0 40px rgba(34,184,163,.5),0 1px 0 rgba(255,255,255,.2) inset;border:none}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px)}
+.feature-grid{position:relative;z-index:5;padding:80px 48px 120px;max-width:1300px;margin:-200px auto 0}
+.feature-grid h2{font-weight:300;font-size:36px;color:#cfd6dd;margin-bottom:48px;letter-spacing:-.015em;max-width:680px}
+.feature-grid h2 b{color:#fff;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{padding:32px 28px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);border-radius:18px;backdrop-filter:blur(10px);transition:all .3s}
+.card:hover{border-color:rgba(34,184,163,.4);box-shadow:0 0 40px rgba(34,184,163,.15)}
+.card .icon{width:36px;height:36px;border-radius:10px;background:rgba(34,184,163,.15);border:1px solid rgba(34,184,163,.3);display:flex;align-items:center;justify-content:center;color:#22b8a3;font-size:14px;font-weight:700;margin-bottom:18px}
+.card h3{font-weight:700;font-size:20px;margin-bottom:8px;color:#fff;letter-spacing:-.01em}
+.card p{font-size:14px;color:#9ca6b0;line-height:1.6}
+.sticky-cta{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100;background:#0e1a26;border:1px solid rgba(255,255,255,.12);padding:8px 8px 8px 22px;border-radius:999px;display:flex;align-items:center;gap:14px;box-shadow:0 12px 48px rgba(0,0,0,.4)}
+.sticky-cta span{font-size:13px;color:#cfd6dd;font-weight:500}
+.sticky-cta .mono{color:#7be0d0}
+@media(max-width:780px){.cards{grid-template-columns:1fr}.feature-grid{padding:60px 24px;margin-top:-80px}nav{padding:16px 24px}nav ul{display:none}.hero-content{padding:48px 24px}.sticky-cta span{display:none}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <nav>
+    <span class="brand">RALPH'S<span>·</span>ACADEMY</span>
+    <ul>
+      <li><a href="#">Course</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Mock Exam</a></li>
+      <li><a href="#">Listen</a></li>
+      <li><a href="#" class="btn-pill">Start free</a></li>
+    </ul>
+  </nav>
+  <div class="hero-content">
+    <span class="mono eyebrow-tag">PSI exam blueprint · 130 questions</span>
+    <h1>Pass Hawaii<br>real estate.<br><span class="accent">With aloha.</span></h1>
+    <p class="subline">A complete licensing course. Free for everyone. Voice-narrated chapters. Built for the way the islands actually work.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Begin Course →</a>
+      <a href="#" class="btn btn-ghost">▶ Listen instead</a>
+    </div>
+  </div>
+</section>
+<section class="feature-grid">
+  <h2>The whole curriculum, <b>open to everyone</b>. No paywall, no card, no compromise on quality.</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">01</div>
+      <h3>Read 20 chapters</h3>
+      <p>11 national + 9 Hawaii state, weighted to match the actual PSI question counts. Every chapter has a substantive overview, key concepts, and Hawaii-specific notes.</p>
+    </div>
+    <div class="card">
+      <div class="icon">02</div>
+      <h3>Drill the quizzes</h3>
+      <p>One quiz per chapter. 70% to pass. Unlimited retakes — your best score saves. Detailed answer review with rationale on every question you miss.</p>
+    </div>
+    <div class="card">
+      <div class="icon">03</div>
+      <h3>Mock the exam</h3>
+      <p>130 questions · 80 national + 50 state · 240 minutes. Same format PSI uses. Timed, scored by portion. Take it as many times as you need.</p>
+    </div>
+  </div>
+</section>
+<div class="sticky-cta">
+  <span>Free Hawaii real estate prep · <span class="mono">20 chapters · 130 Q</span></span>
+  <a href="#" class="btn-pill">Start now</a>
+</div>
+</body>
+</html>

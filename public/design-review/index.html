@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Shotgun · Ralph's Real Estate Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0d10;color:#e3e8ed;-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.16em;text-transform:uppercase;font-size:11px;font-weight:600}
+.serif{font-family:'Playfair Display',serif}
+.top{padding:32px 40px 28px;border-bottom:1px solid rgba(255,255,255,.08);position:sticky;top:0;z-index:50;background:rgba(10,13,16,.92);backdrop-filter:blur(16px)}
+.top .lead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px}
+.top h1{font-family:'Playfair Display',serif;font-weight:900;font-size:36px;letter-spacing:-.02em;color:#fff}
+.top h1 .ac{color:#22b8a3;font-style:italic}
+.top .meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:#7e8a96;text-transform:uppercase}
+.top p.deck{margin-top:12px;color:#9ca6b0;font-size:14px;max-width:780px}
+.controls{display:flex;gap:8px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.ctrl-group{display:flex;background:#1a2330;border:1px solid rgba(255,255,255,.08);border-radius:8px;overflow:hidden}
+.ctrl{padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:transparent;color:#cfd6dd;border:none;cursor:pointer;border-right:1px solid rgba(255,255,255,.06)}
+.ctrl:last-child{border-right:none}
+.ctrl.active{background:#22b8a3;color:#0a0d10}
+.ctrl:hover:not(.active){background:rgba(255,255,255,.04);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:28px 40px 60px}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.grid.one{grid-template-columns:1fr}
+.tile{background:#0e1a26;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.tile:hover{border-color:rgba(34,184,163,.4)}
+.tile.featured{border-color:rgba(34,184,163,.6);box-shadow:0 0 50px rgba(34,184,163,.12)}
+.tile-head{padding:18px 22px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tile-head .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:#22b8a3;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.tile-head h2{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:#fff;letter-spacing:-.015em;line-height:1.2;margin-bottom:6px}
+.tile-head p{font-size:12px;color:#9ca6b0;line-height:1.55}
+.tile-head .stamp{padding:4px 10px;background:rgba(34,184,163,.12);border:1px solid rgba(34,184,163,.3);border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;color:#7be0d0;text-transform:uppercase;font-weight:700;flex-shrink:0;white-space:nowrap}
+.tile-head .stamp.warn{background:rgba(247,184,28,.12);border-color:rgba(247,184,28,.3);color:#f7b81c}
+.tile-frame{position:relative;background:#fff;flex:1}
+.tile-frame iframe{width:100%;height:600px;border:none;display:block}
+.tile.tall .tile-frame iframe{height:780px}
+.tile-foot{padding:14px 22px;background:#0a0d10;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:#9ca6b0}
+.tile-foot a{color:#7be0d0;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em}
+.tile-foot a:hover{color:#22b8a3}
+.recommend{background:linear-gradient(135deg,rgba(34,184,163,.08),rgba(232,93,60,.05));border:1px solid rgba(34,184,163,.25);border-radius:14px;padding:32px 40px;margin:0 40px 40px}
+.recommend .mono{color:#22b8a3;margin-bottom:14px}
+.recommend h2{font-family:'Playfair Display',serif;font-weight:900;font-size:30px;color:#fff;letter-spacing:-.02em;margin-bottom:14px;line-height:1.15}
+.recommend h2 .pick{background:linear-gradient(135deg,#22b8a3,#7be0d0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
+.recommend p{color:#cfd6dd;font-size:15px;line-height:1.7;margin-bottom:18px;max-width:920px}
+.recommend ul{list-style:none;margin:0 0 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.recommend ul li{padding:14px 18px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:8px;font-size:13px;color:#cfd6dd}
+.recommend ul li b{display:block;color:#fff;font-size:14px;margin-bottom:4px;letter-spacing:-.01em}
+.matrix{margin:0 40px 60px;background:#0e1a26;border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}
+.matrix h3{padding:18px 24px;font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#fff;border-bottom:1px solid rgba(255,255,255,.06)}
+.matrix table{width:100%;border-collapse:collapse}
+.matrix th,.matrix td{padding:12px 18px;text-align:left;font-size:13px;border-bottom:1px solid rgba(255,255,255,.04)}
+.matrix th{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:#7e8a96;text-transform:uppercase;font-weight:700;background:#0a0d10}
+.matrix td{color:#cfd6dd}
+.matrix td b{color:#fff;display:block;margin-bottom:2px}
+.matrix td.score{font-family:'JetBrains Mono',monospace;font-weight:700}
+.matrix td.score.high{color:#22b8a3}
+.matrix td.score.med{color:#f7b81c}
+.matrix td.score.low{color:#e85d3c}
+@media(max-width:1100px){.grid,.grid.three{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="lead">
+    <div>
+      <span class="mono" style="color:#22b8a3">Design Shotgun · 6 Variants</span>
+      <h1>Ralph's <span class="ac">Real Estate</span> Academy</h1>
+      <p class="deck">Six landing-page directions for the Hawaii real estate licensing prep platform. Each is real production-ready HTML — pick one and we ship it directly. Use the size controls to compare wider or narrower.</p>
+    </div>
+    <span class="meta">2026-04-29 · Live preview</span>
+  </div>
+  <div class="controls">
+    <div class="ctrl-group">
+      <button class="ctrl" onclick="setLayout(1)">1 col</button>
+      <button class="ctrl active" onclick="setLayout(2)">2 col</button>
+      <button class="ctrl" onclick="setLayout(3)">3 col</button>
+    </div>
+    <div class="ctrl-group">
+      <button class="ctrl active" onclick="setHeight('normal')">Normal height</button>
+      <button class="ctrl" onclick="setHeight('tall')">Tall (full hero+)</button>
+    </div>
+    <a href="https://pono-realty-production.up.railway.app/" target="_blank" style="margin-left:auto;padding:9px 18px;background:#22b8a3;color:#0a0d10;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;text-decoration:none;text-transform:uppercase">↗ Current live site</a>
+  </div>
+</header>
+
+<section class="recommend">
+  <div class="mono">My recommendation</div>
+  <h2>Ship <span class="pick">Variant C — Hawaiian Heritage</span> as the base, with editorial structure (Variant A) for chapter pages.</h2>
+  <p>Variant C delivers the strongest signal that this is genuinely <i>for Hawaii</i> — pono headline, kapa-cloth texture, plumeria dividers, coral + teal punch — without crossing into resort-tourism kitsch. It's distinct from every competitor (Vitousek, Cooke, Carol Ball — all generic American academic). Pair it with Variant A's editorial layout for chapter content because long-form reading wants serif typography and column structure. Skip B (too SaaS), D (too clinical for a free product), E (admirable but commercially intimidating), F (charming but undermines authority needed for a licensing exam prep).</p>
+  <ul>
+    <li><b>Hero</b>Variant C — pono headline, legend stat band, plumeria dividers</li>
+    <li><b>Course hub</b>Variant C structure with editorial chapter cards</li>
+    <li><b>Chapter pages</b>Variant A — three-column editorial deck for substantive reading</li>
+    <li><b>Mock exam UI</b>Light Variant D influence — focused, instrument-like</li>
+  </ul>
+</section>
+
+<section class="grid two" id="grid">
+  <div class="tile featured">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant C</div>
+        <h2>Hawaiian Heritage</h2>
+        <p>Pono-rooted. Coral + teal punches on cream. Plumeria dividers, kapa-cloth texture. Authentically of-the-islands without resort kitsch.</p>
+      </div>
+      <span class="stamp">Recommended</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-C.html"></iframe></div>
+    <div class="tile-foot"><span>Hawaiian heritage · serif · coral accent</span><a href="variant-C.html" target="_blank">Open full →</a></div>
+  </div>
+  <div class="tile">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant A</div>
+        <h2>Premium Editorial</h2>
+        <p>Atlantic / NYT magazine treatment. Photographic Hawaiian shore hero, italicized serif headline, three-column deck below. Quietly authoritative.</p>
+      </div>
+      <span class="stamp">Strong runner-up</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-A.html"></iframe></div>
+    <div class="tile-foot"><span>Editorial · photo hero · italic serif</span><a href="variant-A.html" target="_blank">Open full →</a></div>
+  </div>
+  <div class="tile">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant B</div>
+        <h2>Modern Luxury Academy</h2>
+        <p>Masterclass meets Patagonia. Dark cinematic hero with teal glow CTA. Sticky bottom bar. Reads "premium streaming" — too SaaS for a licensing supplement.</p>
+      </div>
+      <span class="stamp warn">Skip</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-B.html"></iframe></div>
+    <div class="tile-foot"><span>Dark luxury · gradient CTA · streaming-platform vibe</span><a href="variant-B.html" target="_blank">Open full →</a></div>
+  </div>
+  <div class="tile tall">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant D</div>
+        <h2>Clinical Certification Platform</h2>
+        <p>Bloomberg-terminal density. Three-column app shell, sidebar tree, right rail of stats. Powerful for the actual study UI, but wrong for a public landing.</p>
+      </div>
+      <span class="stamp warn">For app, not landing</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-D.html"></iframe></div>
+    <div class="tile-foot"><span>Dashboard · monospace · high-density</span><a href="variant-D.html" target="_blank">Open full →</a></div>
+  </div>
+  <div class="tile">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant E</div>
+        <h2>Brutalist Academic</h2>
+        <p>Swiss design, all-caps masthead, two-column TOC like a printed legal textbook. Beautiful but commercially intimidating; the warmth gets lost.</p>
+      </div>
+      <span class="stamp warn">Skip</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-E.html"></iframe></div>
+    <div class="tile-foot"><span>Swiss · stark · table-of-contents</span><a href="variant-E.html" target="_blank">Open full →</a></div>
+  </div>
+  <div class="tile">
+    <div class="tile-head">
+      <div>
+        <div class="lbl">Variant F</div>
+        <h2>Soft Warm Indie</h2>
+        <p>Hand-drawn outrigger illustration, Caveat handwriting accents, Ralph quote. Genuinely charming — but undermines the authority needed to gain trust on a licensing exam.</p>
+      </div>
+      <span class="stamp warn">Skip</span>
+    </div>
+    <div class="tile-frame"><iframe src="variant-F.html"></iframe></div>
+    <div class="tile-foot"><span>Indie · illustration · hand-set</span><a href="variant-F.html" target="_blank">Open full →</a></div>
+  </div>
+</section>
+
+<section class="matrix">
+  <h3>Decision matrix</h3>
+  <table>
+    <thead><tr><th>Variant</th><th>Hawaii signal</th><th>Authority</th><th>Free-product fit</th><th>Distinct from competitors</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td><b>A · Editorial</b></td><td class="score high">8</td><td class="score high">9</td><td class="score high">8</td><td class="score med">6</td><td>Use for chapter pages</td></tr>
+      <tr><td><b>B · Luxury Dark</b></td><td class="score med">5</td><td class="score med">7</td><td class="score low">3</td><td class="score med">5</td><td>Skip — feels paid</td></tr>
+      <tr><td><b>C · Heritage</b></td><td class="score high">10</td><td class="score high">8</td><td class="score high">9</td><td class="score high">10</td><td><b style="color:#22b8a3">SHIP THIS</b></td></tr>
+      <tr><td><b>D · Clinical</b></td><td class="score low">3</td><td class="score high">9</td><td class="score med">5</td><td class="score high">8</td><td>Use for /course internal</td></tr>
+      <tr><td><b>E · Brutalist</b></td><td class="score low">3</td><td class="score high">10</td><td class="score med">5</td><td class="score high">9</td><td>Skip — too austere</td></tr>
+      <tr><td><b>F · Indie</b></td><td class="score med">7</td><td class="score med">5</td><td class="score high">8</td><td class="score high">8</td><td>Skip — too cute for licensing</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+function setLayout(n){
+  const grid=document.getElementById('grid');
+  grid.classList.remove('one','two','three');
+  grid.classList.add(n===1?'one':n===2?'two':'three');
+  document.querySelectorAll('.controls .ctrl-group:first-of-type .ctrl').forEach((b,i)=>b.classList.toggle('active',i===n-1));
+}
+function setHeight(mode){
+  document.querySelectorAll('.tile').forEach(t=>t.classList.toggle('tall',mode==='tall'));
+  document.querySelectorAll('.controls .ctrl-group:nth-of-type(2) .ctrl').forEach((b,i)=>b.classList.toggle('active',(mode==='normal'&&i===0)||(mode==='tall'&&i===1)));
+}
+</script>
+</body>
+</html>

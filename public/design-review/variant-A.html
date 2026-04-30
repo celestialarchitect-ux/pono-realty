@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Variant A — Premium Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:#fbf7f0;color:#0e1a26;-webkit-font-smoothing:antialiased;line-height:1.55}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:#6b7a8a;font-weight:600}
+.serif{font-family:'Playfair Display',Georgia,serif}
+.hero{position:relative;min-height:88vh;display:grid;grid-template-rows:auto 1fr auto;background:linear-gradient(0deg,rgba(14,26,38,.55),rgba(14,26,38,.25)),url("https://images.unsplash.com/photo-1542259009477-d625272157b7?w=2400&q=85") center/cover}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 30% 70%,transparent 30%,rgba(14,26,38,.4));pointer-events:none}
+nav{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:28px 56px;color:#fbf7f0}
+nav .brand{font-family:'Playfair Display',serif;font-weight:900;font-size:20px;letter-spacing:-.01em}
+nav ul{display:flex;gap:28px;list-style:none;font-size:13px;font-weight:500;letter-spacing:.02em}
+nav a{color:#fbf7f0;text-decoration:none;opacity:.85}
+.hero-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:80px 56px 56px;color:#fbf7f0;align-self:center}
+.eyebrow{color:#fbf7f0;opacity:.85;margin-bottom:18px;font-size:11px;letter-spacing:.24em}
+h1.headline{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:clamp(56px,9vw,128px);line-height:.95;letter-spacing:-.025em;margin-bottom:28px;max-width:1000px}
+h1 em{font-style:italic;font-weight:700;color:#fbf7f0}
+.lede{font-size:19px;max-width:680px;line-height:1.55;margin-bottom:36px;font-weight:400;opacity:.92}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:15px 30px;border-radius:0;font-size:14px;font-weight:600;letter-spacing:.04em;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-primary{background:#14837b;color:#fbf7f0;border:1px solid #14837b}
+.btn-primary:hover{background:#0d5e58}
+.btn-secondary{background:transparent;color:#fbf7f0;border:1px solid rgba(251,247,240,.5)}
+.btn-secondary:hover{border-color:#fbf7f0}
+.byline{margin-top:32px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.65}
+.deck{padding:120px 56px;max-width:1200px;margin:0 auto}
+.deck-eyebrow{margin-bottom:14px}
+.deck h2{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-.025em;margin-bottom:60px;max-width:880px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid #0e1a26}
+.col{padding:32px 32px 48px;border-right:1px solid rgba(14,26,38,.15)}
+.col:last-child{border-right:none}
+.col .num{font-family:'Playfair Display',serif;font-weight:900;font-size:48px;color:#14837b;line-height:1;margin-bottom:14px}
+.col h3{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;line-height:1.2;margin-bottom:12px;letter-spacing:-.01em}
+.col p{font-size:15px;color:#3a4a5c;line-height:1.7}
+.col .meta{display:block;margin-top:20px;font-size:10px}
+.section-rule{border-top:1px solid rgba(14,26,38,.15);margin:80px 0}
+@media(max-width:780px){.cols{grid-template-columns:1fr}.col{border-right:none;border-bottom:1px solid rgba(14,26,38,.15)}.deck{padding:60px 24px}nav{padding:20px 24px}.hero-content{padding:48px 24px}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <nav>
+    <span class="brand">Ralph's Academy</span>
+    <ul>
+      <li><a href="#">Course</a></li>
+      <li><a href="#">Quizzes</a></li>
+      <li><a href="#">Mock Exam</a></li>
+      <li><a href="#">Listen</a></li>
+    </ul>
+  </nav>
+  <div class="hero-content">
+    <div class="mono eyebrow">Volume 21 · Hawaii Real Estate</div>
+    <h1 class="headline">Pass Hawaii <em>real estate</em><br>the first time.</h1>
+    <p class="lede">A complete licensing course built around the official PSI exam blueprint — 20 chapters, 130 mock questions, every Hawaii statute that matters. Open to anyone studying the islands.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Start the course</a>
+      <a href="#" class="btn btn-secondary">Take a mock exam</a>
+    </div>
+    <div class="byline">Free · No card · Voice playback included</div>
+  </div>
+</header>
+<section class="deck">
+  <div class="mono deck-eyebrow">The curriculum</div>
+  <h2>Twenty chapters, written for the way the exam is actually graded.</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="num">01</div>
+      <h3>Property Ownership</h3>
+      <p>Real vs personal property, fixtures and the MARIA test, fee simple, life estates, leaseholds, and the four unities of joint tenancy. Six exam questions on the national portion.</p>
+      <span class="mono meta">National · 6 Q</span>
+    </div>
+    <div class="col">
+      <div class="num">12</div>
+      <h3>Hawaii Material Facts</h3>
+      <p>Bureau of Conveyances vs Land Court. HARPTA's 7.25% withholding on non-resident sellers. GET on commissions. Conveyance tax tiers. Mandatory leasehold disclosure.</p>
+      <span class="mono meta">Hawaii · 8 Q</span>
+    </div>
+    <div class="col">
+      <div class="num">20</div>
+      <h3>Professional Conduct</h3>
+      <p>HRS 467 license law and HAR Title 16 Chapter 99 administrative rules. Trust accounts. CE requirements. Disciplinary grounds. The heaviest section on the state portion.</p>
+      <span class="mono meta">Hawaii · 14 Q</span>
+    </div>
+  </div>
+  <div class="section-rule"></div>
+  <p class="mono" style="text-align:center;color:#6b7a8a">Ralph's Real Estate Academy · Not affiliated with Hawaii REC · Independent study aid · Free</p>
+</section>
+</body>
+</html>
