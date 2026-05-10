@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: "Ralph's Real Estate Academy · Hawaii Real Estate Exam Prep",
-  description: 'The most complete Hawaii real estate licensing prep system. 20-chapter curriculum, mock exams, flashcards, glossary — built around the official PSI Hawaii exam blueprint.',
+  title: "Ralph Foulger's School of Real Estate · Hawaii's Most Advanced Licensing Program",
+  description: "Hawaii's most sophisticated real estate licensing system, built for 2026. 20-chapter PSI-aligned curriculum with full audiobook narration, smart flashcards, math drills, mock exams. Pass first time, then launch your career with our agent lead engine and IDX-enabled website.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

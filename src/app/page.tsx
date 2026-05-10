@@ -1,411 +1,325 @@
 import Link from 'next/link';
-import { CURRICULUM, NATIONAL_TOTAL, STATE_TOTAL, TOTAL_QUESTIONS, PASSING_PCT } from '@/lib/curriculum';
+import { CURRICULUM, NATIONAL_TOTAL, STATE_TOTAL } from '@/lib/curriculum';
 import { GLOSSARY } from '@/lib/content/glossary';
 import { EXAM_BANK } from '@/lib/content/exam-bank';
 import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
-import { Footer } from '@/components/Shell';
+import { Header, Footer, Backgrounds } from '@/components/Shell';
 
-// Premium Editorial direction — Atlantic/NYT magazine. Photographic hero,
-// italic serif headline, editorial 3-column deck, generous whitespace.
 const HERO_IMG = 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=2400&q=85&auto=format&fit=crop';
 
 export default function Landing() {
-  const featured = [
-    CURRICULUM.find(c => c.slug === 'property-ownership')!,
-    CURRICULUM.find(c => c.slug === 'hi-material-facts')!,
-    CURRICULUM.find(c => c.slug === 'hi-professional-conduct')!,
-  ];
   const totalQ = EXAM_BANK.length;
   const totalTerms = GLOSSARY.length;
+  const totalMinutes = CURRICULUM.reduce((s, c) => s + c.estimatedMinutes, 0);
+  const totalHours = Math.round(totalMinutes / 60);
 
   return (
-    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
-      <Hero />
-      <PayoutMath totalQ={totalQ} totalTerms={totalTerms} />
-      <Deck featured={featured} />
-      <BlueprintAlignment />
-      <ThreeStepFlow />
-      <Quote />
-      <FreeCta />
-      <Footer />
+    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
+      <Backgrounds />
+      <div style={{ position: 'relative', zIndex: 10 }}>
+        <Header active="/" />
+
+        {/* HERO */}
+        <section style={{ padding: '64px 32px 48px', maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: 56, alignItems: 'center' }}>
+            <div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '8px 14px', borderRadius: 999, background: T.bgElevated, border: `1px solid ${T.border}`, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 20 }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Hawaii · Built for 2026
+              </div>
+              <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(44px, 6vw, 76px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.02, marginBottom: 22, color: T.text }}>
+                Pass Hawaii&apos;s real estate exam <em style={{ color: T.ocean, fontStyle: 'italic' }}>the first time.</em>
+              </h1>
+              <p style={{ fontSize: 19, lineHeight: 1.6, color: T.textDim, marginBottom: 28, maxWidth: 560 }}>
+                The most sophisticated licensing system ever built for the Hawaii salesperson exam &mdash; every chapter narrated as audio, smart flashcards, math drills, full-length mock exams, and a post-license launchpad with leads and your own agent website.
+              </p>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
+                <Link href="/free" style={{ ...BUTTON_3D.primary, padding: '14px 28px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                  Start the Free Foundation Course →
+                </Link>
+                <Link href="/pricing" style={{ ...BUTTON_3D.secondary, padding: '14px 28px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none' }}>
+                  See Pricing
+                </Link>
+              </div>
+              <div style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>
+                Free foundation · No credit card · Pass guarantee on paid tiers
+              </div>
+            </div>
+            <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: SHADOW_3D.lg, aspectRatio: '4 / 5' }}>
+              <img src={HERO_IMG} alt="Hawaii real estate" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(14,26,38,0.55) 100%)' }} />
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 24px', color: '#fff' }}>
+                <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', opacity: 0.85, textTransform: 'uppercase', marginBottom: 6 }}>Founded by</div>
+                <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 800, letterSpacing: '-0.01em' }}>Ralph Foulger</div>
+                <div style={{ fontSize: 13, opacity: 0.85, marginTop: 4 }}>Veteran Hawaii broker · Decades of licensing &amp; training experience</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* THE STATEWIDE PROBLEM */}
+        <section style={{ background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '56px 32px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>The 2025 reality</div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 52px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text, maxWidth: 880, margin: '0 auto' }}>
+                Most Hawaii test-takers don&apos;t pass on their first attempt.
+              </h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginBottom: 28 }}>
+              <Stat big="922" sub="candidates tested in the past 12 months across all 28 Hawaii schools" />
+              <Stat big="40–45%" sub="statewide pass rate (Hawaii REC, rolling 2025 data)" highlight />
+              <Stat big="55%+" sub="of test-takers fail and have to retake" />
+              <Stat big="$300+" sub="average cost of every retake — and weeks lost" />
+            </div>
+            <p style={{ textAlign: 'center', fontSize: 15, color: T.textDim, maxWidth: 720, margin: '0 auto', lineHeight: 1.7 }}>
+              We built Ralph Foulger&apos;s School of Real Estate to fix that. Every tool below exists because we studied where students fall short — and we engineered the curriculum to close those gaps.
+            </p>
+            <div style={{ textAlign: 'center', marginTop: 8 }}>
+              <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.textGhost, textTransform: 'uppercase' }}>
+                Source: Hawaii Real Estate Commission &middot; School Files Q3 2025 (cca.hawaii.gov)
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* THE VALUE STACK */}
+        <section style={{ padding: '72px 32px', maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>What you get</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
+              The most complete prep system in Hawaii.
+            </h2>
+            <p style={{ fontSize: 16, color: T.textDim, maxWidth: 640, margin: '20px auto 0', lineHeight: 1.7 }}>
+              Built around the exact PSI exam blueprint &mdash; {CURRICULUM.length} chapters, {NATIONAL_TOTAL} national + {STATE_TOTAL} state items, {totalHours}+ hours of study material.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
+            <Feature
+              icon="🎧"
+              title="Audiobook for every chapter"
+              body="Listen in the car, on a hike, at the gym. Every chapter is professionally narrated so you can learn while you live your life. No other Hawaii school does this end-to-end."
+            />
+            <Feature
+              icon="📖"
+              title="Read → Study → Quiz, per chapter"
+              body="Each chapter teaches in three phases. You read the material, internalize the key terms, then prove you got it before moving on. Knowledge sticks because the structure forces it to."
+            />
+            <Feature
+              icon="🃏"
+              title={`${totalTerms}+ smart flashcards`}
+              body="Spaced repetition built in &mdash; the cards you miss come back more often, the ones you nail recede. The system learns you and prioritizes your weak spots automatically."
+            />
+            <Feature
+              icon="🧮"
+              title="Math drills (where most fail)"
+              body="Prorations, commission splits, LTV, capitalization, GRM &mdash; with step-by-step worked examples. The single category that knocks the most candidates out, eliminated."
+            />
+            <Feature
+              icon="📝"
+              title={`${totalQ}-question exam bank + full mock`}
+              body="Practice with the same 80 + 50 PSI question split, same time pressure, same calibration. The mock exam predicts your real exam score within a few points."
+            />
+            <Feature
+              icon="📚"
+              title={`${totalTerms}-term searchable glossary`}
+              body="Every key term &mdash; national + Hawaii &mdash; defined plainly, indexed, instantly searchable. Cross-linked to the chapters where it appears."
+            />
+            <Feature
+              icon="📱"
+              title="Mobile-first, lives in your pocket"
+              body="Studied on the bus to Kahala? Phone in your hand at the beach? The platform is designed for that. Resume exactly where you left off, on any device."
+            />
+            <Feature
+              icon="🎯"
+              title="Adaptive review engine"
+              body="The platform tracks every quiz miss, builds you a personal weakness map, and automatically routes you back through the chapters where you&apos;re shaky &mdash; until you&apos;re solid."
+            />
+            <Feature
+              icon="🛡️"
+              title="Pass-or-Pay-Zero guarantee"
+              body="On Coached and VIP tiers: don&apos;t pass on your first attempt? Your second attempt prep is on us. We&apos;re betting on you because we&apos;ve built the system that wins."
+              highlight
+            />
+          </div>
+        </section>
+
+        {/* POST-LICENSE LAUNCHPAD */}
+        <section style={{ background: `linear-gradient(180deg, ${T.bg} 0%, ${T.bgElevated} 100%)`, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '72px 32px' }}>
+          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>The unfair advantage</div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
+                Pass the exam &mdash; <em style={{ fontStyle: 'italic', color: T.coral }}>then we hand you a business.</em>
+              </h2>
+              <p style={{ fontSize: 16, color: T.textDim, maxWidth: 720, margin: '20px auto 0', lineHeight: 1.7 }}>
+                Other schools end at the test. We start there. Our VIP students walk out with the actual infrastructure of a working agent &mdash; leads, a website, a brand. Built in.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+              <Tool
+                title="Lead Engine"
+                tag="Built-in"
+                body="Automated lead scraper that surfaces buyers, sellers, and FSBO/expired listings across all Hawaiian islands. We hand you the pipeline so you don&apos;t cold-knock door to door on day one."
+              />
+              <Tool
+                title="Your Own Agent Website"
+                tag="IDX-enabled"
+                body="A premium-designed personal real estate site, your name and brand, with full IDX so visitors search live MLS listings on YOUR domain. Built and deployed for you."
+              />
+              <Tool
+                title="Business Launchpad"
+                tag="First 90 Days"
+                body="Sponsoring broker introductions, contract templates, listing presentation deck, social media starter kit, and a 90-day onboarding playbook so you start producing fast."
+              />
+              <Tool
+                title="1:1 With Ralph"
+                tag="VIP Tier"
+                body="Direct mentorship sessions with Ralph Foulger himself. Decades of Hawaii market experience compressed into the answers to your specific questions, your specific market, your specific deals."
+              />
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 36 }}>
+              <Link href="/tools" style={{ ...BUTTON_3D.primary, padding: '14px 32px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                Tour the Agent Toolkit →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* WHY RALPH */}
+        <section style={{ padding: '72px 32px', maxWidth: 980, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 36 }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Why Ralph</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
+              A household name in Hawaii real estate, modernized for 2026.
+            </h2>
+          </div>
+          <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, lineHeight: 1.8, fontSize: 16, color: T.textDim }}>
+            <p style={{ marginBottom: 16 }}>
+              Ralph Foulger has spent decades placing agents into Hawaii&apos;s most demanding market &mdash; the one where the average home is over <strong style={{ color: T.text }}>$1M</strong>, where state-specific rules like leasehold disclosure and HARPTA trip up the unprepared, and where the local relationships matter more than the textbook.
+            </p>
+            <p style={{ marginBottom: 16 }}>
+              When COVID closed classrooms, traditional in-person schools like Ralph&apos;s went quiet. Online behemoths absorbed the volume. <strong style={{ color: T.text }}>2026 is the comeback.</strong> Ralph is back &mdash; but this time with the most technologically sophisticated platform Hawaii&apos;s real estate education has ever seen.
+            </p>
+            <p>
+              Every chapter narrated. Every concept gamified. Every weak spot mapped. And &mdash; for students who want it &mdash; the actual business infrastructure to start earning the moment the license drops in your inbox.
+            </p>
+          </div>
+        </section>
+
+        {/* PRICING TEASE */}
+        <section style={{ background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '72px 32px' }}>
+          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Choose your path</div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
+                From curious to closing.
+              </h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+              <Tier name="Free Foundation" price="$0" tagline="Is real estate right for you?" features={['5-lesson preview', 'Hawaii market 101', 'Career fit assessment', 'Income reality check']} cta="Start Free" href="/free" />
+              <Tier name="Self-Paced" price="$399" tagline="The full toolkit" features={['All 20 chapters + audio', 'Flashcards & math drills', 'Mock exam', 'Glossary', 'Lifetime access']} cta="Enroll" href="/pricing#self" />
+              <Tier name="Coached" price="$699" tagline="With pass guarantee" featured features={['Everything in Self-Paced', '4 live coach sessions', 'Pass-or-Pay-Zero guarantee', 'Cohort community', 'Priority support']} cta="Enroll" href="/pricing#coached" />
+              <Tier name="Founder VIP" price="$1,497" tagline="License + business launch" features={['Everything in Coached', '🎯 Lead Engine access', '🌐 Personal agent website', '👤 1:1 with Ralph', 'Lifetime updates']} cta="Apply" href="/pricing#vip" />
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 32 }}>
+              <Link href="/pricing" style={{ fontSize: 14, color: T.ocean, textDecoration: 'none', fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
+                Full pricing comparison &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* FINAL CTA */}
+        <section style={{ padding: '88px 32px', maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(38px, 5vw, 64px)', fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.05, color: T.text, marginBottom: 20 }}>
+            Try the Free Foundation.
+          </h2>
+          <p style={{ fontSize: 18, color: T.textDim, maxWidth: 600, margin: '0 auto 32px', lineHeight: 1.65 }}>
+            Five short lessons. Zero cost. Decide if real estate is for you, and if Ralph Foulger&apos;s School is for you. No credit card.
+          </p>
+          <Link href="/free" style={{ ...BUTTON_3D.primary, padding: '18px 36px', borderRadius: 14, fontSize: 16, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+            Start Now &mdash; Free →
+          </Link>
+        </section>
+
+        <Footer />
+      </div>
     </div>
   );
 }
 
-function Hero() {
-  return (
-    <header className="ed-hero" style={{
-      position: 'relative',
-      display: 'grid',
-      gridTemplateRows: 'auto 1fr',
-      backgroundImage: `linear-gradient(0deg, rgba(14,26,38,0.55), rgba(14,26,38,0.25)), url(${HERO_IMG})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }}>
-      {/* Soft radial vignette */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: 'radial-gradient(ellipse at 30% 70%, transparent 30%, rgba(14,26,38,0.4))',
-      }} />
+/* ───────────  PIECES  ─────────── */
 
-      {/* Nav */}
-      <nav className="ed-hero-nav" style={{
-        position: 'relative', zIndex: 2,
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        color: '#fbf7f0',
-      }}>
-        <Link href="/" style={{
-          fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, letterSpacing: '-0.01em',
-          fontSize: 22, color: '#fbf7f0', textDecoration: 'none',
-        }}>
-          Ralph&apos;s Academy
-        </Link>
-        <NavLinks />
-      </nav>
-
-      {/* Hero content */}
-      <div className="ed-hero-content" style={{
-        position: 'relative', zIndex: 2,
-        maxWidth: 1100, margin: '0 auto',
-        color: '#fbf7f0', alignSelf: 'center', width: '100%',
-      }}>
-        <div style={{
-          fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.24em',
-          textTransform: 'uppercase', color: 'rgba(251,247,240,0.85)', marginBottom: 18, fontWeight: 600,
-        }}>
-          Volume 21 · Hawaii Real Estate
-        </div>
-        <h1 className="ed-hero-h1" style={{
-          fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontWeight: 400,
-          lineHeight: 0.94, letterSpacing: '-0.025em',
-          marginBottom: 28, maxWidth: 1000, color: '#fbf7f0',
-        }}>
-          Pass Hawaii{' '}
-          <em style={{ fontStyle: 'italic', fontWeight: 700 }}>real estate</em>
-          <br />the first time.
-        </h1>
-        <p className="ed-hero-lede" style={{
-          fontSize: 19, maxWidth: 680, lineHeight: 1.55, marginBottom: 36,
-          color: 'rgba(251,247,240,0.92)',
-        }}>
-          A complete licensing course built around the official PSI exam blueprint —
-          twenty chapters, 130 mock questions, every Hawaii statute that matters. Free,
-          for anyone studying the islands.
-        </p>
-        <div className="ed-hero-cta-row">
-          <Link href="/course" style={{
-            padding: '15px 30px',
-            background: T.ocean, color: '#fbf7f0',
-            border: `1px solid ${T.oceanDark}`, borderRadius: 0,
-            fontSize: 14, fontWeight: 600, letterSpacing: '0.04em',
-            textDecoration: 'none', display: 'inline-block',
-          }}>
-            Start the course
-          </Link>
-          <Link href="/practice" style={{
-            padding: '15px 30px',
-            background: 'transparent', color: '#fbf7f0',
-            border: '1px solid rgba(251,247,240,0.5)', borderRadius: 0,
-            fontSize: 14, fontWeight: 600, letterSpacing: '0.04em',
-            textDecoration: 'none', display: 'inline-block',
-          }}>
-            Take a mock exam
-          </Link>
-        </div>
-        <div style={{
-          marginTop: 32, fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
-          fontFamily: "'JetBrains Mono', monospace", color: 'rgba(251,247,240,0.65)', fontWeight: 600,
-        }}>
-          Free · No card · Voice playback included
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function NavLinks() {
-  const links: Array<[string, string]> = [
-    ['/course', 'Course'],
-    ['/quizzes', 'Quizzes'],
-    ['/practice', 'Mock Exam'],
-    ['/listen', 'Listen'],
-  ];
-  return (
-    <ul className="ed-hero-nav-links">
-      {links.map(([href, label]) => (
-        <li key={href}>
-          <Link href={href === '/listen' ? '/course' : href} style={{
-            color: '#fbf7f0', textDecoration: 'none', fontSize: 13, fontWeight: 500,
-            letterSpacing: '0.02em', opacity: 0.88,
-          }}>
-            {label}
-          </Link>
-        </li>
-      ))}
-      <li>
-        <Link href="/glossary" style={{
-          color: '#fbf7f0', textDecoration: 'none', fontSize: 13, fontWeight: 500,
-          letterSpacing: '0.02em', opacity: 0.88,
-        }}>
-          Glossary
-        </Link>
-      </li>
-    </ul>
-  );
-}
-
-function PayoutMath({ totalQ, totalTerms }: { totalQ: number; totalTerms: number }) {
-  return (
-    <section className="ed-stats-section" style={{ maxWidth: 1180, margin: '0 auto' }}>
-      <div className="ed-stats-grid" style={{
-        borderTop: `1px solid ${T.text}`, borderBottom: `1px solid ${T.text}`,
-      }}>
-        {[
-          ['20', 'Chapters', 'PSI-aligned'],
-          [TOTAL_QUESTIONS.toString(), 'Mock questions', `${NATIONAL_TOTAL} national + ${STATE_TOTAL} state`],
-          [`${totalTerms}+`, 'Glossary terms', 'Hawaii flagged'],
-          [`${PASSING_PCT}%`, 'Pass threshold', 'each portion'],
-          ['$0', 'Forever', 'Free, no card'],
-        ].map(([n, label, sub]) => (
-          <div key={label} className="ed-stats-cell">
-            <div className="ed-stats-num" style={{
-              fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900,
-              fontSize: 44, color: T.ocean, letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 6,
-            }}>{n}</div>
-            <div style={{
-              fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em',
-              textTransform: 'uppercase', color: T.text, fontWeight: 600, marginBottom: 4,
-            }}>{label}</div>
-            <div style={{ fontSize: 12, color: T.textMute }}>{sub}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Deck({ featured }: { featured: typeof CURRICULUM }) {
-  return (
-    <section className="ed-deck-section" style={{ maxWidth: 1200, margin: '0 auto' }}>
-      <div style={{ marginBottom: 56, maxWidth: 880 }}>
-        <Eyebrow>The curriculum</Eyebrow>
-        <H2 style={{ marginBottom: 18 }}>
-          Twenty chapters, written for the way the exam is actually graded.
-        </H2>
-        <p style={{ fontSize: 17, color: T.textDim, lineHeight: 1.65, maxWidth: 720 }}>
-          Eleven national chapters and nine Hawaii-specific chapters, weighted to match
-          the official PSI Content Outline question counts. Every chapter cross-references
-          the underlying Hawaii Revised Statutes — HRS 467, 514B, 521, 508D, 515.
-        </p>
-      </div>
-
-      <div className="ed-deck-cols" style={{ borderTop: `1px solid ${T.text}` }}>
-        {featured.map((c) => (
-          <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <article className="ed-deck-card" style={{ height: '100%', transition: 'background 0.2s' }}>
-              <div style={{
-                fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontSize: 56,
-                color: T.ocean, lineHeight: 1, marginBottom: 18, letterSpacing: '-0.02em',
-              }}>
-                {c.number.toString().padStart(2, '0')}
-              </div>
-              <h3 style={{
-                fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 26,
-                lineHeight: 1.2, marginBottom: 14, letterSpacing: '-0.015em', color: T.text,
-              }}>
-                {c.title}
-              </h3>
-              <p style={{ fontSize: 15, color: T.textDim, lineHeight: 1.7, marginBottom: 24 }}>
-                {c.description}
-              </p>
-              <div style={{
-                fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.2em',
-                textTransform: 'uppercase', color: T.textMute, fontWeight: 600,
-              }}>
-                {c.portion} · {c.examItems} Q · ~{c.estimatedMinutes} min
-              </div>
-            </article>
-          </Link>
-        ))}
-      </div>
-
-      <div style={{ marginTop: 40, textAlign: 'center' }}>
-        <Link href="/course" style={{
-          padding: '12px 26px', background: 'transparent', color: T.text,
-          border: `1px solid ${T.text}`, borderRadius: 0,
-          fontSize: 13, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
-          textDecoration: 'none',
-        }}>
-          See all 20 chapters
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function BlueprintAlignment() {
-  return (
-    <section className="ed-blueprint-section" style={{ background: T.bgRaised }}>
-      <div className="ed-blueprint-grid" style={{ alignItems: 'start' }}>
-        <div>
-          <Eyebrow>Exam blueprint</Eyebrow>
-          <H2 style={{ marginBottom: 24 }}>What the test is actually scored on.</H2>
-          <p style={{ fontSize: 16, color: T.textDim, lineHeight: 1.7, marginBottom: 16 }}>
-            The PSI Hawaii salesperson exam contains <b style={{ color: T.text }}>{TOTAL_QUESTIONS} questions</b>
-            : <b style={{ color: T.text }}>{NATIONAL_TOTAL} national</b> + <b style={{ color: T.text }}>{STATE_TOTAL} state</b>.
-            You need {PASSING_PCT}% on each portion to pass — that&apos;s {Math.ceil(NATIONAL_TOTAL * 0.7)} of {NATIONAL_TOTAL} national,
-            and {Math.ceil(STATE_TOTAL * 0.7)} of {STATE_TOTAL} state.
-          </p>
-          <p style={{ fontSize: 16, color: T.textDim, lineHeight: 1.7 }}>
-            Every chapter in our curriculum is sized to its share of the test. Heavy sections
-            get heavy treatment — Practice of Real Estate (12Q), Hawaii Professional Conduct (14Q),
-            Laws of Agency (10Q), Contracts (10Q).
-          </p>
-        </div>
-        <div className="ed-blueprint-list" style={{ borderTop: `1px solid rgba(14,26,38,0.2)` }}>
-          {CURRICULUM.map((c, i) => (
-            <Link key={c.slug} href={`/course/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{
-                padding: '12px 16px',
-                borderBottom: `1px solid rgba(14,26,38,0.12)`,
-                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 10,
-              }}>
-                <div style={{ display: 'flex', gap: 12, alignItems: 'baseline', minWidth: 0 }}>
-                  <span style={{
-                    fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em',
-                    color: T.textMute, fontWeight: 600, minWidth: 22,
-                  }}>
-                    {c.number.toString().padStart(2, '0')}
-                  </span>
-                  <span style={{
-                    fontSize: 13, color: T.text, fontWeight: 500,
-                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-                  }}>
-                    {c.title}
-                  </span>
-                </div>
-                <span style={{
-                  fontFamily: "'JetBrains Mono', monospace", fontSize: 11, fontWeight: 700,
-                  color: c.portion === 'state' ? T.coral : T.ocean, flexShrink: 0,
-                }}>
-                  {c.examItems}Q
-                </span>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ThreeStepFlow() {
-  const steps = [
-    { n: 'I.', t: 'Read all chapters.', b: 'Twenty in order. Each one a substantive overview, key concepts, and Hawaii-specific notes. Voice-narrated for studying on the move.' },
-    { n: 'II.', t: 'Take chapter quizzes.', b: 'Once you&apos;ve read everything, go back and quiz yourself per chapter. Ten to twelve questions each. Seventy percent passes. Unlimited retakes.' },
-    { n: 'III.', t: 'Mock the exam.', b: 'A full timed 130-question PSI-format mock. Eighty national + fifty state, scored separately. Take it until you&apos;re consistently 85%+ before your real test.' },
-  ];
-
-  return (
-    <section className="ed-method-section" style={{ maxWidth: 1100, margin: '0 auto' }}>
-      <div style={{ marginBottom: 48, maxWidth: 720 }}>
-        <Eyebrow>Method</Eyebrow>
-        <H2>Three phases, in order. One thing at a time.</H2>
-      </div>
-      <div className="ed-method-grid">
-        {steps.map((s) => (
-          <div key={s.n} className="ed-method-cell" style={{ borderTop: `2px solid ${T.text}` }}>
-            <div style={{
-              fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontStyle: 'italic',
-              fontSize: 44, color: T.coral, lineHeight: 1, marginBottom: 16, letterSpacing: '-0.02em',
-            }}>
-              {s.n}
-            </div>
-            <h3 style={{
-              fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 700, fontSize: 22,
-              marginBottom: 10, letterSpacing: '-0.01em', color: T.text, lineHeight: 1.25,
-            }}>
-              {s.t}
-            </h3>
-            <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.7 }} dangerouslySetInnerHTML={{ __html: s.b }} />
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Quote() {
-  return (
-    <section className="ed-quote-section" style={{ background: T.bg, borderTop: `1px solid rgba(14,26,38,0.12)`, borderBottom: `1px solid rgba(14,26,38,0.12)` }}>
-      <div style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
-        <div style={{
-          fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic',
-          fontSize: 'clamp(28px, 4vw, 44px)', lineHeight: 1.3, letterSpacing: '-0.015em',
-          color: T.text, marginBottom: 24, fontWeight: 400,
-        }}>
-          &ldquo;Built around the actual PSI Content Outline. Hawaii statutes
-          covered in the depth a working agent needs. Open to anyone studying
-          the islands — no card, no paywall, no compromise on craft.&rdquo;
-        </div>
-        <div style={{
-          fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em',
-          textTransform: 'uppercase', color: T.textMute, fontWeight: 600,
-        }}>
-          The editor&apos;s note · Volume 21
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FreeCta() {
-  return (
-    <section className="ed-final-section" style={{ maxWidth: 880, margin: '0 auto', textAlign: 'center' }}>
-      <Eyebrow>One more thing</Eyebrow>
-      <H2 style={{ marginBottom: 24 }}>The exam doesn&apos;t care how hard you tried.</H2>
-      <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.65, marginBottom: 36, maxWidth: 640, margin: '0 auto 36px' }}>
-        It cares whether you got 70% on each portion. We make sure you do.
-      </p>
-      <div className="ed-final-cta-row" style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-        <Link href="/course" style={{
-          padding: '16px 36px', background: T.ocean, color: '#fbf7f0',
-          border: `1px solid ${T.oceanDark}`, borderRadius: 0,
-          fontSize: 14, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
-          textDecoration: 'none',
-        }}>
-          Start the course
-        </Link>
-        <Link href="/practice" style={{
-          padding: '16px 36px', background: 'transparent', color: T.text,
-          border: `1px solid ${T.text}`, borderRadius: 0,
-          fontSize: 14, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase',
-          textDecoration: 'none',
-        }}>
-          Take a mock exam
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Stat({ big, sub, highlight }: { big: string; sub: string; highlight?: boolean }) {
   return (
     <div style={{
-      fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.24em',
-      textTransform: 'uppercase', color: T.textMute, marginBottom: 18, fontWeight: 600,
+      ...CARD,
+      padding: '24px 22px', borderRadius: 14, textAlign: 'center',
+      background: highlight ? `linear-gradient(180deg, ${T.coral} 0%, ${T.coralDark} 100%)` : T.bg,
+      color: highlight ? T.white : T.text,
     }}>
-      {children}
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 44, fontWeight: 900, letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 8 }}>{big}</div>
+      <div style={{ fontSize: 13, lineHeight: 1.5, opacity: highlight ? 0.95 : 0.7 }}>{sub}</div>
     </div>
   );
 }
 
-function H2({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+function Feature({ icon, title, body, highlight }: { icon: string; title: string; body: string; highlight?: boolean }) {
   return (
-    <h2 style={{
-      fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900,
-      fontSize: 'clamp(40px, 5.5vw, 68px)', lineHeight: 1.05, letterSpacing: '-0.025em',
-      color: T.text, ...style,
-    }}>{children}</h2>
+    <div style={{
+      ...CARD,
+      padding: '24px 22px', borderRadius: 14,
+      borderColor: highlight ? T.ocean : undefined,
+      background: highlight ? `linear-gradient(180deg, ${T.bg} 0%, rgba(20,131,123,0.06) 100%)` : T.bg,
+    }}>
+      <div style={{ fontSize: 28, marginBottom: 12, lineHeight: 1 }}>{icon}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 19, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
+      <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
+    </div>
+  );
+}
+
+function Tool({ title, tag, body }: { title: string; tag: string; body: string }) {
+  return (
+    <div style={{ ...CARD, padding: '26px 24px', borderRadius: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+        <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 800, letterSpacing: '-0.01em', color: T.text }}>{title}</div>
+        <div style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.coral, textTransform: 'uppercase', padding: '4px 8px', background: 'rgba(232,93,60,0.08)', borderRadius: 6, fontWeight: 600 }}>{tag}</div>
+      </div>
+      <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
+    </div>
+  );
+}
+
+function Tier({ name, price, tagline, features, cta, href, featured }: { name: string; price: string; tagline: string; features: string[]; cta: string; href: string; featured?: boolean }) {
+  return (
+    <div style={{
+      ...CARD,
+      padding: '24px 22px', borderRadius: 16, position: 'relative',
+      borderColor: featured ? T.ocean : undefined,
+      borderWidth: featured ? 2 : 1,
+      transform: featured ? 'translateY(-4px)' : undefined,
+    }}>
+      {featured && (
+        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: T.ocean, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', borderRadius: 6, fontWeight: 700 }}>
+          Most popular
+        </div>
+      )}
+      <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 6 }}>{name}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 36, fontWeight: 900, letterSpacing: '-0.02em', color: T.text, marginBottom: 4 }}>{price}</div>
+      <div style={{ fontSize: 13, color: T.textDim, marginBottom: 14, lineHeight: 1.4 }}>{tagline}</div>
+      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', borderTop: `1px solid ${T.border}`, paddingTop: 14 }}>
+        {features.map((f, i) => (
+          <li key={i} style={{ fontSize: 13, color: T.textDim, marginBottom: 8, lineHeight: 1.5, paddingLeft: 16, position: 'relative' }}>
+            <span style={{ position: 'absolute', left: 0, color: T.ocean, fontWeight: 700 }}>✓</span>
+            {f}
+          </li>
+        ))}
+      </ul>
+      <Link href={href} style={{ ...(featured ? BUTTON_3D.primary : BUTTON_3D.secondary), display: 'block', textAlign: 'center', padding: '11px 16px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+        {cta}
+      </Link>
+    </div>
   );
 }
