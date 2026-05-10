@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { T, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import { LessonAudio } from '@/components/LessonAudio';
 import { FREE_LESSONS, getLesson, getNeighbors } from '../lessons-data';
 
 export function generateStaticParams() {
@@ -13,6 +14,16 @@ export default async function FreeLessonPage({ params }: { params: Promise<{ slu
   const lesson = getLesson(slug);
   if (!lesson) notFound();
   const { prev, next } = getNeighbors(slug);
+
+  // Build audio segments: title intro → each section (heading + body) → takeaway
+  const audioSegments = [
+    { label: 'Introduction', text: `${lesson.title}. ${lesson.summary}` },
+    ...lesson.sections.map((s, i) => ({
+      label: `Section ${i + 1}: ${s.heading}`,
+      text: `${s.heading}. ${s.body}`,
+    })),
+    { label: 'The takeaway', text: `The takeaway. ${lesson.takeaway}` },
+  ];
 
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
@@ -33,9 +44,11 @@ export default async function FreeLessonPage({ params }: { params: Promise<{ slu
           <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(36px, 5.5vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.05, color: T.text, marginBottom: 18 }}>
             {lesson.title}
           </h1>
-          <p style={{ fontSize: 18, lineHeight: 1.65, color: T.textDim, marginBottom: 0 }}>
+          <p style={{ fontSize: 18, lineHeight: 1.65, color: T.textDim, marginBottom: 24 }}>
             {lesson.summary}
           </p>
+
+          <LessonAudio title={lesson.title} segments={audioSegments} />
         </section>
 
         {/* SECTIONS */}
