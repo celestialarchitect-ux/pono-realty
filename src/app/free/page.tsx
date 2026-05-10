@@ -1,39 +1,7 @@
 import Link from 'next/link';
-import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
+import { T, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
-
-const LESSONS = [
-  {
-    n: 1,
-    title: 'Is Real Estate Right for You?',
-    body: 'A clear-eyed look at what the job actually is — the income realities, the personality fit, the time horizons. Walk away with a real answer.',
-    duration: '8 min',
-  },
-  {
-    n: 2,
-    title: 'Hawaii Market 101',
-    body: 'How Hawaii real estate is different — leasehold vs fee simple, condo dominance, military buyers, mainland investors, the seasonal rhythms.',
-    duration: '10 min',
-  },
-  {
-    n: 3,
-    title: 'The License Pathway, Mapped',
-    body: 'The exact 60-hour pre-license course requirement, the PSI exam (80 + 50 questions), the application process, and finding a sponsoring broker.',
-    duration: '7 min',
-  },
-  {
-    n: 4,
-    title: 'The Real Income Picture',
-    body: 'Commission splits, brokerage fees, MLS dues, E&O insurance, taxes (you&apos;re a 1099). What new agents actually take home in year one — not the brochure number.',
-    duration: '9 min',
-  },
-  {
-    n: 5,
-    title: '5 Things Every Hawaii Agent Knows on Day 1',
-    body: 'HARPTA, GET, the standard purchase contract, the agency disclosure, and how to read a leasehold lease. The bare minimum to not embarrass yourself with your first client.',
-    duration: '12 min',
-  },
-];
+import { FREE_LESSONS } from './lessons-data';
 
 export default function FreeFoundation() {
   return (
@@ -53,7 +21,7 @@ export default function FreeFoundation() {
           <p style={{ fontSize: 19, lineHeight: 1.6, color: T.textDim, maxWidth: 660, margin: '0 auto 28px' }}>
             Five short lessons. About 45 minutes total. Decide if Hawaii real estate is for you &mdash; before you spend a dollar on the full course.
           </p>
-          <Link href="#lesson-1" style={{ ...BUTTON_3D.primary, padding: '14px 32px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <Link href={`/free/${FREE_LESSONS[0].slug}`} style={{ ...BUTTON_3D.primary, padding: '14px 32px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             Start Lesson 1 →
           </Link>
         </section>
@@ -71,24 +39,29 @@ export default function FreeFoundation() {
         </section>
 
         {/* THE 5 LESSONS */}
-        <section style={{ padding: '64px 32px', maxWidth: 880, margin: '0 auto' }}>
-          {LESSONS.map((lesson) => (
-            <div key={lesson.n} id={`lesson-${lesson.n}`} style={{
-              ...CARD, padding: '28px 32px', borderRadius: 16, marginBottom: 16,
-              display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 24, alignItems: 'center',
-            }}>
-              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 56, fontWeight: 900, color: T.ocean, lineHeight: 1, opacity: 0.5 }}>{lesson.n}</div>
+        <section data-mobile-padding style={{ padding: '64px 32px', maxWidth: 880, margin: '0 auto' }}>
+          {FREE_LESSONS.map((lesson) => (
+            <Link
+              key={lesson.slug}
+              href={`/free/${lesson.slug}`}
+              style={{
+                ...CARD, padding: '24px 28px', borderRadius: 16, marginBottom: 14,
+                display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: 24, alignItems: 'center',
+                textDecoration: 'none', color: 'inherit', cursor: 'pointer',
+              }}
+            >
+              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 52, fontWeight: 900, color: T.ocean, lineHeight: 1, opacity: 0.5 }}>{lesson.number}</div>
               <div>
-                <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 800, color: T.text, marginBottom: 6, letterSpacing: '-0.01em' }}>{lesson.title}</div>
-                <div style={{ fontSize: 14, lineHeight: 1.6, color: T.textDim }}>{lesson.body}</div>
+                <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 21, fontWeight: 800, color: T.text, marginBottom: 6, letterSpacing: '-0.01em' }}>{lesson.title}</div>
+                <div style={{ fontSize: 14, lineHeight: 1.6, color: T.textDim }}>{lesson.summary}</div>
               </div>
-              <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 8 }}>{lesson.duration}</div>
-                <div style={{ ...BUTTON_3D.secondary, padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', display: 'inline-block', cursor: 'pointer' }}>
-                  Open
+              <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+                <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase' }}>{lesson.duration}</div>
+                <div style={{ ...BUTTON_3D.secondary, padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em' }}>
+                  Open →
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </section>
 
