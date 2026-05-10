@@ -1,71 +1,229 @@
 import Link from 'next/link';
-import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
+import { T, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function PricingPage() {
   return (
-    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header active="/pricing" />
-        <main style={{ padding: '64px 32px', maxWidth: 880, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 48 }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Open access</div>
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(48px, 8vw, 96px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 16 }}>
-              Free for everyone.
-            </h1>
-            <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.6, maxWidth: 640, margin: '0 auto' }}>
-              All 20 chapters, every practice question, full glossary, unlimited mock exams. No payment, no card, no catch.
+
+        {/* HERO */}
+        <section style={{ padding: '64px 32px 32px', maxWidth: 1100, margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Pricing</div>
+          <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(46px, 6.5vw, 80px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 20 }}>
+            Built to be worth <em style={{ color: T.ocean, fontStyle: 'italic' }}>more</em> than you pay.
+          </h1>
+          <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.6, maxWidth: 720, margin: '0 auto 8px' }}>
+            Four paths. From a free taste of the field, to the full curriculum, to a complete license-and-launch bundle that hands you the infrastructure of a working agent.
+          </p>
+          <p style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', marginTop: 16 }}>
+            All prices in USD · One-time, lifetime access · Pass guarantee on Coached & VIP
+          </p>
+        </section>
+
+        {/* FOUR TIERS */}
+        <section style={{ padding: '32px 32px 64px', maxWidth: 1240, margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
+            <BigTier
+              id="free"
+              name="Free Foundation"
+              price="$0"
+              tagline="Decide if real estate is for you."
+              features={[
+                '5-lesson preview course',
+                'Hawaii market 101',
+                'Career fit assessment',
+                'Income reality check',
+                'Day-1 essentials breakdown',
+              ]}
+              cta="Start Free"
+              href="/free"
+            />
+            <BigTier
+              id="self"
+              name="Self-Paced"
+              price="$549"
+              tagline="The complete prep toolkit."
+              features={[
+                'All 20 chapters (PSI-aligned)',
+                '🎧 Full audiobook narration',
+                'Smart flashcards (spaced repetition)',
+                'Math drills with worked examples',
+                '130-question mock exams',
+                'Searchable glossary',
+                'Mobile + desktop',
+                'Lifetime access',
+              ]}
+              cta="Enroll"
+              href="/signup?tier=self"
+            />
+            <BigTier
+              id="coached"
+              name="Coached"
+              price="$899"
+              tagline="With Pass-or-Pay-Zero guarantee."
+              features={[
+                'Everything in Self-Paced',
+                '4 live coach sessions (group)',
+                '🛡️ Pass-or-Pay-Zero guarantee',
+                'Cohort community access',
+                'Priority email support',
+                'Personal weakness mapping',
+                'Exam-week intensive review',
+              ]}
+              cta="Enroll"
+              href="/signup?tier=coached"
+              featured
+            />
+            <BigTier
+              id="vip"
+              name="Founder VIP"
+              price="$1,997"
+              tagline="License + business launch."
+              features={[
+                'Everything in Coached',
+                '🎯 Lead Engine access (built-in)',
+                '🌐 Personal IDX-enabled agent website',
+                '👤 Monthly 1:1 with Ralph',
+                'Sponsoring broker introductions',
+                '90-Day Launchpad playbook',
+                'Hawaii contract templates',
+                'Lifetime updates + alumni cohort',
+              ]}
+              cta="Apply"
+              href="/signup?tier=vip"
+              accent
+            />
+          </div>
+        </section>
+
+        {/* COMPARISON / VALUE FRAMING */}
+        <section style={{ background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '64px 32px' }}>
+          <div style={{ maxWidth: 980, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Why we cost a little more</div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
+                Most Hawaii schools end at the textbook. We go four steps further.
+              </h2>
+            </div>
+            <div style={{ ...CARD, padding: '32px 36px', borderRadius: 16, marginBottom: 20 }}>
+              <ValueRow label="Full audiobook narration of every chapter" included="Included on Self-Paced+" elsewhere="Audio sold separately or absent" />
+              <ValueRow label="Smart flashcards with spaced repetition" included="Included on Self-Paced+" elsewhere="Static flashcards or none" />
+              <ValueRow label="Math drills with step-by-step worked examples" included="Included on Self-Paced+" elsewhere="Calculation sections in textbook only" />
+              <ValueRow label="Adaptive review (auto-mapped weak spots)" included="Included on Self-Paced+" elsewhere="Manual review only" />
+              <ValueRow label="Pass-or-Pay-Zero guarantee" included="Coached & VIP" elsewhere="Some offer retake of same content" />
+              <ValueRow label="Lead Engine (live deal pipeline)" included="VIP only" elsewhere="Not offered anywhere in Hawaii" />
+              <ValueRow label="Personal IDX-enabled agent website" included="VIP only" elsewhere="$50–$300/month elsewhere" />
+              <ValueRow label="1:1 with a veteran Hawaii broker" included="VIP only" elsewhere="Not bundled — typically $200+/hr" />
+              <ValueRow label="Lifetime updates as Hawaii law changes" included="All paid tiers" elsewhere="Annual subscription typical" last />
+            </div>
+            <p style={{ fontSize: 14, color: T.textMute, textAlign: 'center', maxWidth: 660, margin: '0 auto', lineHeight: 1.7 }}>
+              We compared honestly across the 28 Hawaii REC-registered schools and the major national platforms. The above reflects publicly listed offerings as of 2026.
             </p>
           </div>
+        </section>
 
-          <div style={{ ...CARD, padding: 40, marginBottom: 32 }}>
-            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 28, fontWeight: 800, color: T.text, marginBottom: 20, letterSpacing: '-0.02em' }}>What you get — all of it, free</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12 }}>
-              {[
-                ['20 chapters', 'Mapped 1:1 to PSI Hawaii blueprint'],
-                ['11 national + 9 state', 'Weighted to actual question counts'],
-                ['Practice questions', 'Per chapter with explanations'],
-                ['Mock exams', 'Timed, 130 Q, scored by portion'],
-                ['Flashcards', 'Tap-to-flip, category filters'],
-                ['Glossary', 'Searchable, Hawaii-specific flagged'],
-                ['Hawaii statutes', 'HRS 467, 514B, 521, 508D, 515, 478, 514E, 507, 667, 449'],
-                ['No expiration', 'Study now, retake later'],
-              ].map(([t, b]) => (
-                <div key={t} style={{ display: 'flex', gap: 10, padding: 14, background: T.bgRaised, borderRadius: 8 }}>
-                  <span style={{ color: T.ocean, fontWeight: 700, flexShrink: 0 }}>✓</span>
-                  <div>
-                    <div style={{ fontWeight: 700, fontSize: 14, color: T.text, marginBottom: 2 }}>{t}</div>
-                    <div style={{ fontSize: 12, color: T.textDim, lineHeight: 1.5 }}>{b}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* GUARANTEE */}
+        <section style={{ padding: '64px 32px', maxWidth: 880, margin: '0 auto' }}>
+          <div style={{ ...CARD, padding: '40px 44px', borderRadius: 20, borderLeftWidth: 4, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Our promise</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 16 }}>
+              Pass-or-Pay-Zero
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
+              Coached and Founder VIP students who complete the full curriculum (all chapters watched/read, all quizzes passed at &ge;70%, full mock exam taken) and don&apos;t pass the PSI Hawaii Salesperson Exam on their first attempt get their second-attempt prep <strong style={{ color: T.text }}>completely free.</strong>
+            </p>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
+              That includes: an additional cohort coaching session, an exam-week intensive review, fresh mock exams, and direct support from your coach until you pass. No paperwork gymnastics, no fine print &mdash; we built the system that wins, and we&apos;re willing to bet on it.
+            </p>
+            <p style={{ fontSize: 14, color: T.textMute, lineHeight: 1.6 }}>
+              Statewide first-attempt pass rate is 40&ndash;45% (Hawaii REC, 2025). With the full system, our students aim for the top of that distribution &mdash; not the middle.
+            </p>
           </div>
+        </section>
 
-          <div style={{ ...CARD, padding: 32, marginBottom: 32, borderLeft: `3px solid ${T.coral}` }}>
-            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, marginBottom: 12 }}>What this is NOT</h3>
+        {/* DISCLAIMERS */}
+        <section style={{ padding: '0 32px 80px', maxWidth: 880, margin: '0 auto' }}>
+          <div style={{ ...CARD, padding: 28, borderRadius: 14, borderLeft: `3px solid ${T.coral}` }}>
+            <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 800, color: T.text, marginBottom: 12 }}>The fine print</h3>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <li style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6 }}>
-                <b style={{ color: T.text }}>Not the 60-hour course.</b> Hawaii requires the Salesperson Pre-Licensing Course at a REC-approved school for license eligibility. This academy is a study supplement.
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Hawaii license requirement:</b> All Hawaii salesperson candidates must complete a 60-hour pre-licensing course at a REC-approved school for license eligibility. This program is structured to meet that requirement plus exam mastery. Verify current requirements at cca.hawaii.gov/reb.
               </li>
-              <li style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6 }}>
-                <b style={{ color: T.text }}>Not legal advice.</b> Statutes change. Verify against current Hawaii Revised Statutes and REC rules before relying on anything for a real transaction.
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Not legal advice.</b> Hawaii statutes change. Verify against current Hawaii Revised Statutes and REC rules before relying on any material for a real transaction.
               </li>
-              <li style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6 }}>
-                <b style={{ color: T.text }}>Not affiliated with Hawaii REC, PSI, or any official body.</b> Independent study aid built on the public PSI Content Outline.
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Independent.</b> Not affiliated with the Hawaii Real Estate Commission, PSI, or any official body.
+              </li>
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Lead Engine and IDX site:</b> Available at the Founder VIP tier only. Lead pipeline subject to fair-housing and Hawaii REC advertising rules. IDX site requires MLS membership through your sponsoring brokerage.
               </li>
             </ul>
           </div>
+        </section>
 
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <Link href="/course" style={{ ...BUTTON_3D.primary, padding: '16px 36px', fontSize: 15, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 12, textDecoration: 'none' }}>
-              Start learning →
-            </Link>
-          </div>
-        </main>
         <Footer />
       </div>
+    </div>
+  );
+}
+
+function BigTier({ id, name, price, tagline, features, cta, href, featured, accent }: {
+  id: string; name: string; price: string; tagline: string; features: string[];
+  cta: string; href: string; featured?: boolean; accent?: boolean;
+}) {
+  return (
+    <div id={id} style={{
+      ...CARD,
+      padding: '28px 26px', borderRadius: 18, position: 'relative',
+      borderColor: featured ? T.ocean : accent ? T.coral : undefined,
+      borderWidth: (featured || accent) ? 2 : 1,
+      transform: featured ? 'translateY(-4px)' : undefined,
+      background: accent ? `linear-gradient(180deg, ${T.bg} 0%, rgba(232,93,60,0.04) 100%)` : T.bg,
+    }}>
+      {featured && (
+        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: T.ocean, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 6, fontWeight: 700 }}>
+          Most popular
+        </div>
+      )}
+      {accent && (
+        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: T.coral, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 6, fontWeight: 700 }}>
+          License + Business
+        </div>
+      )}
+      <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 6 }}>{name}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 42, fontWeight: 900, letterSpacing: '-0.02em', color: T.text, marginBottom: 4, lineHeight: 1 }}>{price}</div>
+      <div style={{ fontSize: 13, color: T.textDim, marginBottom: 18, lineHeight: 1.45, minHeight: 40 }}>{tagline}</div>
+      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 22px', borderTop: `1px solid ${T.border}`, paddingTop: 16 }}>
+        {features.map((f, i) => (
+          <li key={i} style={{ fontSize: 13, color: T.textDim, marginBottom: 10, lineHeight: 1.5, paddingLeft: 18, position: 'relative' }}>
+            <span style={{ position: 'absolute', left: 0, color: T.ocean, fontWeight: 700 }}>✓</span>
+            {f}
+          </li>
+        ))}
+      </ul>
+      <Link href={href} style={{ ...((featured || accent) ? BUTTON_3D.primary : BUTTON_3D.secondary), display: 'block', textAlign: 'center', padding: '12px 16px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+        {cta}
+      </Link>
+    </div>
+  );
+}
+
+function ValueRow({ label, included, elsewhere, last }: { label: string; included: string; elsewhere: string; last?: boolean }) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 20, padding: '12px 0',
+      borderBottom: last ? undefined : `1px solid ${T.border}`,
+      alignItems: 'center',
+    }}>
+      <div style={{ fontSize: 14, color: T.text, fontWeight: 500, lineHeight: 1.4 }}>{label}</div>
+      <div style={{ fontSize: 13, color: T.ocean, fontWeight: 600, lineHeight: 1.4 }}>
+        <span style={{ marginRight: 6 }}>✓</span>{included}
+      </div>
+      <div style={{ fontSize: 12, color: T.textMute, lineHeight: 1.4 }}>{elsewhere}</div>
     </div>
   );
 }

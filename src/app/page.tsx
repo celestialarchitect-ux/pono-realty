@@ -218,9 +218,9 @@ export default function Landing() {
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
               <Tier name="Free Foundation" price="$0" tagline="Is real estate right for you?" features={['5-lesson preview', 'Hawaii market 101', 'Career fit assessment', 'Income reality check']} cta="Start Free" href="/free" />
-              <Tier name="Self-Paced" price="$399" tagline="The full toolkit" features={['All 20 chapters + audio', 'Flashcards & math drills', 'Mock exam', 'Glossary', 'Lifetime access']} cta="Enroll" href="/pricing#self" />
-              <Tier name="Coached" price="$699" tagline="With pass guarantee" featured features={['Everything in Self-Paced', '4 live coach sessions', 'Pass-or-Pay-Zero guarantee', 'Cohort community', 'Priority support']} cta="Enroll" href="/pricing#coached" />
-              <Tier name="Founder VIP" price="$1,497" tagline="License + business launch" features={['Everything in Coached', '🎯 Lead Engine access', '🌐 Personal agent website', '👤 1:1 with Ralph', 'Lifetime updates']} cta="Apply" href="/pricing#vip" />
+              <Tier name="Self-Paced" price="$549" tagline="The full toolkit" features={['All 20 chapters + audio', 'Flashcards & math drills', 'Mock exam', 'Glossary', 'Lifetime access']} cta="Enroll" href="/pricing#self" />
+              <Tier name="Coached" price="$899" tagline="With pass guarantee" featured features={['Everything in Self-Paced', '4 live coach sessions', 'Pass-or-Pay-Zero guarantee', 'Cohort community', 'Priority support']} cta="Enroll" href="/pricing#coached" />
+              <Tier name="Founder VIP" price="$1,997" tagline="License + business launch" features={['Everything in Coached', '🎯 Lead Engine access', '🌐 Personal agent website', '👤 1:1 with Ralph', 'Lifetime updates']} cta="Apply" href="/pricing#vip" />
             </div>
             <div style={{ textAlign: 'center', marginTop: 32 }}>
               <Link href="/pricing" style={{ fontSize: 14, color: T.ocean, textDecoration: 'none', fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>

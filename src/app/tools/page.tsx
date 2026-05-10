@@ -111,7 +111,7 @@ export default function AgentTools() {
               All four tools. Founder VIP tier.
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, maxWidth: 600, margin: '0 auto 32px' }}>
-              The full curriculum, the pass guarantee, the lead engine, your own agent site, the 90-day launchpad, and direct mentorship from Ralph &mdash; bundled at <strong style={{ color: T.text }}>$1,497.</strong>
+              The full curriculum, the pass guarantee, the lead engine, your own agent site, the 90-day launchpad, and direct mentorship from Ralph &mdash; bundled at <strong style={{ color: T.text }}>$1,997.</strong>
             </p>
             <Link href="/pricing#vip" style={{ ...BUTTON_3D.primary, padding: '16px 36px', borderRadius: 14, fontSize: 16, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 10 }}>
               See Founder VIP Pricing →
