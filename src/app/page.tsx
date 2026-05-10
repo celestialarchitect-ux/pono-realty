@@ -24,19 +24,19 @@ export default function Landing() {
         <Header active="/" />
 
         {/* HERO */}
-        <section style={{ padding: '64px 32px 48px', maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: 56, alignItems: 'center' }}>
+        <section data-mobile-padding style={{ padding: '64px 32px 48px', maxWidth: 1180, margin: '0 auto' }}>
+          <div className="rf-hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: 56, alignItems: 'center' }}>
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '8px 14px', borderRadius: 999, background: T.bgElevated, border: `1px solid ${T.border}`, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 20 }}>
                 <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Hawaii · Built for 2026
               </div>
-              <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(44px, 6vw, 76px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.02, marginBottom: 22, color: T.text }}>
+              <h1 className="rf-hero-h1" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(44px, 6vw, 76px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.02, marginBottom: 22, color: T.text }}>
                 Pass Hawaii&apos;s real estate exam <em style={{ color: T.ocean, fontStyle: 'italic' }}>the first time.</em>
               </h1>
               <p style={{ fontSize: 19, lineHeight: 1.6, color: T.textDim, marginBottom: 28, maxWidth: 560 }}>
                 The most sophisticated licensing system ever built for the Hawaii salesperson exam &mdash; every chapter narrated as audio, smart flashcards, math drills, full-length mock exams, and a 24/7 AI real estate tutor that knows the Hawaii curriculum cold.
               </p>
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
+              <div className="rf-hero-cta-row" style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
                 <Link href="/free" style={{ ...BUTTON_3D.primary, padding: '14px 28px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                   Start the Free Foundation Course →
                 </Link>

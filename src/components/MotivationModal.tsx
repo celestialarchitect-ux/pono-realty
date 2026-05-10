@@ -30,16 +30,17 @@ export function MotivationModal() {
       aria-modal="true"
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
-        background: 'rgba(14, 26, 38, 0.92)',
-        backdropFilter: 'blur(8px)',
+        background: 'rgba(14, 26, 38, 0.94)',
+        backdropFilter: 'blur(10px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '24px', overflowY: 'auto',
+        padding: 'env(safe-area-inset-top, 24px) 24px env(safe-area-inset-bottom, 24px)',
+        overflowY: 'auto',
       }}
     >
       <div style={{
-        maxWidth: 640, width: '100%', background: T.bg, borderRadius: 24,
-        padding: 'clamp(32px, 5vw, 56px)', position: 'relative',
-        boxShadow: '0 24px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)',
+        maxWidth: 660, width: '100%', background: T.bg, borderRadius: 24,
+        padding: 'clamp(28px, 5vw, 56px)', position: 'relative',
+        boxShadow: '0 24px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)',
         animation: 'modalIn 0.5s ease-out',
       }}>
         <style>{`
@@ -51,46 +52,80 @@ export function MotivationModal() {
 
         <div style={{
           fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
-          letterSpacing: '0.28em', color: T.coral, textTransform: 'uppercase',
-          fontWeight: 700, marginBottom: 16, textAlign: 'center',
+          letterSpacing: '0.3em', color: T.coral, textTransform: 'uppercase',
+          fontWeight: 700, marginBottom: 18, textAlign: 'center',
         }}>
-          Before You Begin · Read This
+          A word before you begin
         </div>
 
         <h2 style={{
           fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: 'clamp(32px, 4.8vw, 48px)', fontWeight: 900,
-          letterSpacing: '-0.025em', lineHeight: 1.05,
-          color: T.text, marginBottom: 24, textAlign: 'center',
+          fontSize: 'clamp(34px, 5vw, 52px)', fontWeight: 900,
+          letterSpacing: '-0.025em', lineHeight: 1.02,
+          color: T.text, marginBottom: 28, textAlign: 'center',
         }}>
           Your future is in <em style={{ color: T.ocean, fontStyle: 'italic' }}>your hands.</em>
         </h2>
 
-        <div style={{ fontSize: 16, lineHeight: 1.8, color: T.textDim, marginBottom: 18 }}>
-          <p style={{ marginBottom: 14 }}>
-            What you&apos;re about to enter is real. The Hawaii Real Estate Salesperson Exam is real.
-            The clients you will one day represent are real. The hundreds of thousands of dollars
-            that will move because of your signature on a contract &mdash; <strong style={{ color: T.text }}>that is real.</strong>
+        <div style={{ fontSize: 16, lineHeight: 1.85, color: T.textDim }}>
+          <p style={{ marginBottom: 18, fontSize: 17, color: T.text, fontWeight: 500 }}>
+            What waits for you is real.
           </p>
-          <p style={{ marginBottom: 14 }}>
-            We have built every tool we know how to build to help you pass the first time:
-            audiobook narration, math drills, adaptive review, an AI study companion. We bet on you because
-            we believe in you. <strong style={{ color: T.text }}>But we cannot do the work for you.</strong>
+
+          <p style={{ marginBottom: 18 }}>
+            The exam is real. The clients you&apos;ll one day stand beside &mdash;
+            guiding them through the biggest financial decision of their lives &mdash;
+            are real. The contracts your signature will move are real.
+            The trust placed in your hands will be real.
           </p>
-          <p style={{ marginBottom: 14 }}>
-            Skipping chapters won&apos;t fool the exam. Memorizing answers without
-            understanding won&apos;t fool real clients. Cheating yourself only delays the moment
-            you face a test that doesn&apos;t care about shortcuts.
+
+          <p style={{ marginBottom: 18 }}>
+            We&apos;ve built every tool we know how to build to put you in position to win.
+            Audiobook narration for the days you can&apos;t sit still. Math drills calibrated
+            to where students actually fall. An AI tutor that knows the Hawaii curriculum
+            cold. Adaptive review that fights for your weak spots so you don&apos;t have to.
+          </p>
+
+          <p style={{ marginBottom: 18 }}>
+            We bet on you because <strong style={{ color: T.text }}>we believe in you.</strong>
+            {' '}But betting isn&apos;t the same as carrying. We cannot sit in the exam seat
+            for you. We cannot move the pen.
+          </p>
+
+          <p style={{
+            marginBottom: 22, padding: '20px 24px', borderRadius: 12,
+            background: T.bgRaised, borderLeft: `3px solid ${T.coral}`,
+            color: T.text, fontSize: 16, lineHeight: 1.75,
+          }}>
+            Shortcuts feel clever &mdash; right up until the moment you face a test
+            that doesn&apos;t care. The exam doesn&apos;t reward memorization without
+            understanding. Clients don&apos;t tolerate confidence without competence.
+            Cheating yourself isn&apos;t getting away with anything. It&apos;s postponing
+            the bill, with interest.
+          </p>
+
+          <p style={{ marginBottom: 14, fontSize: 17, color: T.text, fontWeight: 500 }}>
+            So show up.
+          </p>
+
+          <p style={{ marginBottom: 22 }}>
+            Do the reading. Listen to the audio. Wrestle with the math until it gives.
+            Take the quizzes seriously enough that your wrong answers teach you something.
+          </p>
+
+          <p style={{
+            marginBottom: 8, fontSize: 19, fontFamily: "'Playfair Display', Georgia, serif",
+            fontStyle: 'italic', color: T.text, lineHeight: 1.5, textAlign: 'center',
+          }}>
+            Earn this license honestly &mdash; and walk into your career with the
+            one thing no shortcut ever gives you:
           </p>
           <p style={{
-            marginBottom: 8, padding: '18px 22px', borderRadius: 12,
-            background: T.bgRaised, borderLeft: `3px solid ${T.coral}`,
-            fontStyle: 'italic', color: T.text, fontSize: 17, lineHeight: 1.7,
+            marginBottom: 28, fontSize: 22, fontFamily: "'Playfair Display', Georgia, serif",
+            fontWeight: 800, color: T.ocean, lineHeight: 1.3, textAlign: 'center',
+            letterSpacing: '-0.01em',
           }}>
-            Show up. Do the reading. Listen to the audio. Take the quizzes seriously.
-            Wrestle with the math until it makes sense. Earn this license honestly &mdash; and
-            you will walk into your career with something no shortcut can ever give you:
-            <strong> the actual ability to do the work.</strong>
+            the actual ability to do the work.
           </p>
         </div>
 
@@ -99,12 +134,12 @@ export function MotivationModal() {
           style={{
             ...BUTTON_3D.primary,
             width: '100%',
-            padding: '16px 24px',
+            padding: '18px 24px',
             borderRadius: 14,
             fontSize: 15, fontWeight: 700,
-            letterSpacing: '0.04em', textTransform: 'uppercase',
-            cursor: 'pointer', marginTop: 8,
-            border: 'none',
+            letterSpacing: '0.05em', textTransform: 'uppercase',
+            cursor: 'pointer', marginTop: 4,
+            border: 'none', minHeight: 56,
           }}
         >
           I&apos;m ready to do the work →
