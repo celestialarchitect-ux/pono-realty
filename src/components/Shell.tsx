@@ -31,7 +31,7 @@ export function Header({ active }: { active?: string }) {
         {link('/free', 'Free Course')}
         {link('/course', 'Curriculum')}
         {link('/practice', 'Mock Exam')}
-        {link('/tools', 'AI Tutor')}
+        {link('/tutor', 'AI Tutor')}
         {link('/pricing', 'Pricing')}
         <Link href="/free" style={{
           ...BUTTON_3D.primary, padding: '9px 18px', borderRadius: 10,
@@ -48,7 +48,7 @@ export function Footer() {
       <div style={{ maxWidth: 1180, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 24, marginBottom: 32 }}>
           <FooterCol title="Study" links={[['Free Foundation', '/free'], ['Full Course', '/course'], ['Practice Exam', '/practice'], ['Flashcards', '/flashcards'], ['Math drills', '/math'], ['Glossary', '/glossary']]}/>
-          <FooterCol title="Tools" links={[['AI Real Estate Tutor', '/tools'], ['Pricing', '/pricing']]}/>
+          <FooterCol title="Tools" links={[['AI Tutor (Live Chat)', '/tutor'], ['About the Tutor', '/tools'], ['Pricing', '/pricing']]}/>
           <FooterCol title="Account" links={[['Sign up', '/signup'], ['Log in', '/login'], ['Dashboard', '/dashboard']]}/>
           <FooterCol title="Resources" links={[['Hawaii REC', 'https://cca.hawaii.gov/reb/'], ['PSI Exam Info', 'https://www.psiexams.com/'], ['HRS 467 (License Law)', 'https://www.capitol.hawaii.gov/hrs/'], ['Contact', '/contact']]}/>
           <FooterCol title="Legal" links={[['Terms', '/policies/terms'], ['Privacy', '/policies/privacy'], ['Disclaimer', '/policies/disclaimer']]}/>
