@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { TimeTracker } from '@/components/TimeTracker';
 
 const SITE_URL = process.env.SITE_URL || 'https://ralphfoulger.com';
-const SITE_NAME = "Ralph Foulger's School of Real Estate";
+const SITE_NAME = "Ralph Foulger's Academy of Real Estate";
 const DESCRIPTION = "Hawaii's most sophisticated real estate licensing system, built for 2026. 20-chapter PSI-aligned curriculum with full audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI Real Estate Tutor.";
 
 export const metadata: Metadata = {
@@ -93,7 +94,7 @@ const ORGANIZATION_SCHEMA = {
         honorificSuffix: 'CPM',
         jobTitle: 'Principal Broker & Real Estate Educator',
         description:
-          'Hawaii real estate professional licensed since November 1972, Hawaii broker since April 1987. Certified Property Manager (CPM, 1985). State-certified instructor for salesperson, broker, and continuing-education candidates. Past President of the Hawaii Association of Real Estate Schools (HARES, 1994–95), NAIOP Hawaii (1991–92), and IREM Hawaii Chapter (1993). IREM National Faculty Member (1994). Founded Ralph Foulger’s School of Real Estate in 1996.',
+          'Hawaii real estate professional licensed since November 1972, Hawaii broker since April 1987. Certified Property Manager (CPM, 1985). State-certified instructor for salesperson, broker, and continuing-education candidates. Past President of the Hawaii Association of Real Estate Schools (HARES, 1994–95), NAIOP Hawaii (1991–92), and IREM Hawaii Chapter (1993). IREM National Faculty Member (1994). Founded Ralph Foulger’s Academy of Real Estate in 1996.',
         alumniOf: {
           '@type': 'CollegeOrUniversity',
           name: 'Chaminade University of Honolulu',
@@ -188,6 +189,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Inter', system-ui, sans-serif" }}>
+        <TimeTracker />
         {children}
       </body>
     </html>

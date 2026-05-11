@@ -2,32 +2,65 @@
 
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { sampleMockExam, EXAM_TOTAL, EXAM_NATIONAL, EXAM_STATE, EXAM_PASSING_PCT, EXAM_TIME_MINUTES } from '@/lib/content/exam-bank';
+import {
+  sampleMockExam,
+  EXAM_TOTAL,
+  EXAM_NATIONAL,
+  EXAM_STATE,
+  EXAM_PASSING_PCT,
+  EXAM_TIME_MINUTES,
+  DIFFICULTY_META,
+  type ExamDifficulty,
+} from '@/lib/content/exam-bank';
 import type { ExamItem } from '@/lib/content/exam-bank';
-import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
+import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import {
+  loadLog,
+  progressTo60,
+  hasUnlockOverride,
+  formatDuration,
+  STATE_LAW_HOURS_REQUIRED,
+} from '@/lib/time-tracking';
 
-type Phase = 'intro' | 'taking' | 'results';
+type Phase = 'gate' | 'pick' | 'taking' | 'results';
+
+const DIFFICULTY_ORDER: ExamDifficulty[] = ['standard', 'hard', 'gnarly'];
 
 export default function PracticeExam() {
-  const [phase, setPhase] = useState<Phase>('intro');
+  const [phase, setPhase] = useState<Phase>('gate');
+  const [difficulty, setDifficulty] = useState<ExamDifficulty>('standard');
   const [questions, setQuestions] = useState<ExamItem[]>([]);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [current, setCurrent] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(EXAM_TIME_MINUTES * 60);
+  const [unlocked, setUnlocked] = useState(false);
+  const [studiedSeconds, setStudiedSeconds] = useState(0);
 
+  // Check the 60-hour gate on mount + when phase flips back to 'gate'
+  useEffect(() => {
+    const log = loadLog();
+    const p = progressTo60(log.totalSeconds);
+    setStudiedSeconds(log.totalSeconds);
+    if (p.unlocked || hasUnlockOverride()) {
+      setUnlocked(true);
+      setPhase('pick');
+    }
+  }, []);
+
+  // Timer
   useEffect(() => {
     if (phase !== 'taking') return;
     const id = setInterval(() => setSecondsLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(id);
   }, [phase]);
-
   useEffect(() => {
     if (phase === 'taking' && secondsLeft === 0) setPhase('results');
   }, [secondsLeft, phase]);
 
-  const start = () => {
-    setQuestions(sampleMockExam(Date.now()));
+  const start = (d: ExamDifficulty) => {
+    setDifficulty(d);
+    setQuestions(sampleMockExam(Date.now(), d));
     setAnswers({});
     setCurrent(0);
     setSecondsLeft(EXAM_TIME_MINUTES * 60);
@@ -52,8 +85,9 @@ export default function PracticeExam() {
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header active="/practice" />
-        <main style={{ padding: '48px 32px', maxWidth: 880, margin: '0 auto' }}>
-          {phase === 'intro' && <Intro start={start} />}
+        <main style={{ padding: '48px 32px', maxWidth: 980, margin: '0 auto' }}>
+          {phase === 'gate' && !unlocked && <Gate studiedSeconds={studiedSeconds} />}
+          {phase === 'pick' && <PickDifficulty onStart={start} studiedSeconds={studiedSeconds} />}
           {phase === 'taking' && (
             <TakingExam
               questions={questions}
@@ -62,10 +96,19 @@ export default function PracticeExam() {
               current={current}
               setCurrent={setCurrent}
               secondsLeft={secondsLeft}
+              difficulty={difficulty}
               submit={() => setPhase('results')}
             />
           )}
-          {phase === 'results' && <Results score={score} questions={questions} answers={answers} restart={() => setPhase('intro')} />}
+          {phase === 'results' && (
+            <Results
+              score={score}
+              questions={questions}
+              answers={answers}
+              difficulty={difficulty}
+              restart={() => setPhase('pick')}
+            />
+          )}
         </main>
         <Footer />
       </div>
@@ -73,50 +116,163 @@ export default function PracticeExam() {
   );
 }
 
-function Intro({ start }: { start: () => void }) {
+function Gate({ studiedSeconds }: { studiedSeconds: number }) {
+  const p = progressTo60(studiedSeconds);
   return (
     <div>
-      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Practice Exam</div>
-      <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 6vw, 56px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.1, marginBottom: 24 }}>
-        Mock the real thing.
-      </h1>
-      <p style={{ fontSize: 17, color: T.textDim, lineHeight: 1.6, marginBottom: 32 }}>
-        {EXAM_TOTAL} questions · {EXAM_NATIONAL} national + {EXAM_STATE} state · {EXAM_TIME_MINUTES} minutes · {EXAM_PASSING_PCT}% to pass each portion.
-        Same format as the actual PSI exam.
-      </p>
-      <div style={{ ...CARD, padding: 28, marginBottom: 24 }}>
-        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, marginBottom: 14 }}>Before you start</h3>
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {['Find a quiet 4-hour block', 'Have a calculator ready (math = 7-10 questions)', 'No reference material — just like the real thing', 'You can navigate freely between questions', 'Your score breaks out national vs state — both must hit 70%'].map(t => (
-            <li key={t} style={{ fontSize: 14, color: T.textDim, display: 'flex', gap: 10 }}>
-              <span style={{ color: T.ocean, fontWeight: 700 }}>✓</span>
-              {t}
-            </li>
-          ))}
-        </ul>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>
+        Mock exams locked
       </div>
-      <button onClick={start} style={{ ...BUTTON_3D.primary, padding: '18px 40px', fontSize: 16, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 12, cursor: 'pointer', fontFamily: 'inherit', border: 'none' }}>
-        Start mock exam →
-      </button>
+      <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 6vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 20 }}>
+        Hawaii law: <em style={{ color: T.ocean, fontStyle: 'italic' }}>60 study hours first.</em>
+      </h1>
+      <p style={{ fontSize: 17, color: T.textDim, lineHeight: 1.7, marginBottom: 28, maxWidth: 720 }}>
+        Hawaii state law requires every pre-license candidate to complete <strong style={{ color: T.text }}>60 hours of approved coursework</strong> before sitting the PSI Salesperson Exam. Our mock exams unlock at exactly the same threshold &mdash; so the practice mirrors the real eligibility rule.
+      </p>
+
+      <div style={{ ...CARD, padding: 28, marginBottom: 24 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 14, flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 6, fontWeight: 600 }}>Study time logged</div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 44, fontWeight: 900, letterSpacing: '-0.02em', color: T.text, lineHeight: 1 }}>
+              {p.hours.toFixed(1)} <span style={{ fontSize: 22, color: T.textMute, fontWeight: 700 }}>hours</span>
+            </div>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 6, fontWeight: 600 }}>Remaining</div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 18, color: T.coral, fontWeight: 700 }}>
+              {formatDuration(p.remainingSeconds, 'short')}
+            </div>
+          </div>
+        </div>
+        <div style={{ height: 12, background: T.bgRaised, borderRadius: 999, overflow: 'hidden', border: `1px solid ${T.border}` }}>
+          <div style={{
+            height: '100%', width: `${p.pct}%`,
+            background: `linear-gradient(90deg, ${T.ocean} 0%, ${T.oceanDark} 100%)`,
+            transition: 'width 0.4s ease-out',
+          }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: T.textMute, letterSpacing: '0.08em' }}>
+          <span>{p.pct.toFixed(1)}% of the way to {STATE_LAW_HOURS_REQUIRED}h</span>
+          <span>{STATE_LAW_HOURS_REQUIRED}h required</span>
+        </div>
+      </div>
+
+      <div style={{ ...CARD, padding: 24, marginBottom: 24, borderLeft: `3px solid ${T.ocean}` }}>
+        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 19, fontWeight: 800, color: T.text, marginBottom: 10 }}>Why we enforce this</h3>
+        <p style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim, marginBottom: 10 }}>
+          The core curriculum can be read in less than 60 hours of pure reading. The state-law minimum exists because <strong style={{ color: T.text }}>retention requires repetition</strong> &mdash; reviewing chapters, drilling flashcards, working math problems, and asking the AI tutor follow-up questions until the material is owned, not just seen.
+        </p>
+        <p style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim, margin: 0 }}>
+          Time accrues while you&apos;re actively in the platform (visible tab, active mouse / keyboard). You can check your progress anytime on your <Link href="/profile" style={{ color: T.ocean, textDecoration: 'underline', fontWeight: 600 }}>profile page</Link>.
+        </p>
+      </div>
+
+      <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+        <Link href="/course" style={{ ...BUTTON_3D.primary, padding: '14px 26px', borderRadius: 12, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          Open the curriculum →
+        </Link>
+        <Link href="/profile" style={{ ...BUTTON_3D.secondary, padding: '14px 26px', borderRadius: 12, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          View my profile
+        </Link>
+      </div>
     </div>
   );
 }
 
-function TakingExam({ questions, answers, setAnswers, current, setCurrent, secondsLeft, submit }: {
+function PickDifficulty({ onStart, studiedSeconds }: { onStart: (d: ExamDifficulty) => void; studiedSeconds: number }) {
+  return (
+    <div>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 12 }}>
+        Eligible · {(studiedSeconds / 3600).toFixed(1)} hours logged
+      </div>
+      <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 6vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 16 }}>
+        Three mock exams. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Pick your difficulty.</em>
+      </h1>
+      <p style={{ fontSize: 17, color: T.textDim, lineHeight: 1.6, marginBottom: 32, maxWidth: 760 }}>
+        Same {EXAM_TOTAL} questions ({EXAM_NATIONAL} national + {EXAM_STATE} state). Same {EXAM_TIME_MINUTES}-minute timer. Same {EXAM_PASSING_PCT}% threshold on each portion. The difference is <strong style={{ color: T.text }}>how the questions are written</strong>.
+      </p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginBottom: 32 }} data-stack-mobile="true">
+        {DIFFICULTY_ORDER.map((d, idx) => {
+          const meta = DIFFICULTY_META[d];
+          const accents: Record<ExamDifficulty, string> = {
+            standard: T.ocean,
+            hard: T.sand,
+            gnarly: T.coral,
+          };
+          const accent = accents[d];
+          const featured = d === 'hard';
+          return (
+            <div key={d} style={{
+              ...CARD,
+              padding: '26px 24px',
+              borderRadius: 16,
+              borderColor: featured ? accent : undefined,
+              borderWidth: featured ? 2 : 1,
+              position: 'relative',
+            }}>
+              {featured && (
+                <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: accent, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 6, fontWeight: 700 }}>
+                  Recommended next
+                </div>
+              )}
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: accent, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>
+                Mock {idx + 1} · {meta.name}
+              </div>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 800, color: T.text, letterSpacing: '-0.01em', lineHeight: 1.15, marginBottom: 10 }}>
+                {meta.tagline}
+              </h3>
+              <p style={{ fontSize: 14, lineHeight: 1.65, color: T.textDim, marginBottom: 22 }}>
+                {meta.description}
+              </p>
+              <button
+                onClick={() => onStart(d)}
+                style={{
+                  ...(featured ? BUTTON_3D.primary : BUTTON_3D.secondary),
+                  width: '100%',
+                  padding: '12px 16px',
+                  borderRadius: 10,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                  cursor: 'pointer',
+                  fontFamily: 'inherit',
+                  border: featured ? 'none' : undefined,
+                }}
+              >
+                Start Mock {idx + 1} →
+              </button>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ ...CARD, padding: 22, borderLeft: `3px solid ${T.ocean}` }}>
+        <p style={{ fontSize: 13, lineHeight: 1.7, color: T.textDim, margin: 0 }}>
+          <strong style={{ color: T.text }}>Hawaii exam reputation:</strong> the real PSI Hawaii Salesperson Exam is known for unusual phrasing &mdash; double negatives, two technically-correct options where you pick the &ldquo;best&rdquo; one, scenarios with red-herring data, and HRS-specific edge cases. The Hard and Gnarly tiers lean into that style so the real exam doesn&apos;t catch you off-guard.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TakingExam({ questions, answers, setAnswers, current, setCurrent, secondsLeft, difficulty, submit }: {
   questions: ExamItem[]; answers: Record<number, number>; setAnswers: (a: Record<number, number>) => void;
-  current: number; setCurrent: (n: number) => void; secondsLeft: number; submit: () => void;
+  current: number; setCurrent: (n: number) => void; secondsLeft: number; difficulty: ExamDifficulty; submit: () => void;
 }) {
   const q = questions[current];
   if (!q) return null;
   const mins = Math.floor(secondsLeft / 60);
   const secs = secondsLeft % 60;
   const answered = Object.keys(answers).length;
+  const meta = DIFFICULTY_META[difficulty];
 
   return (
     <div>
       <div style={{ position: 'sticky', top: 80, background: T.bg, padding: '12px 0', marginBottom: 16, borderBottom: `1px solid ${T.border}`, zIndex: 50, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 13, color: T.text, fontWeight: 600 }}>
-          Q{current + 1} / {questions.length} · {answered} answered · <span style={{ color: q.portion === 'state' ? T.coral : T.ocean, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: 11 }}>{q.portion}</span>
+          {meta.name} · Q{current + 1} / {questions.length} · {answered} answered · <span style={{ color: q.portion === 'state' ? T.coral : T.ocean, textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: 11 }}>{q.portion}</span>
         </div>
         <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 16, color: secondsLeft < 600 ? T.red : T.text, fontWeight: 700, letterSpacing: '0.04em' }}>
           {mins.toString().padStart(2, '0')}:{secs.toString().padStart(2, '0')}
@@ -161,10 +317,18 @@ function TakingExam({ questions, answers, setAnswers, current, setCurrent, secon
   );
 }
 
-function Results({ score, questions, answers, restart }: { score: { nat: number; st: number; natPct: number; stPct: number; passed: boolean }; questions: ExamItem[]; answers: Record<number, number>; restart: () => void }) {
+function Results({ score, questions, answers, difficulty, restart }: {
+  score: { nat: number; st: number; natPct: number; stPct: number; passed: boolean };
+  questions: ExamItem[]; answers: Record<number, number>;
+  difficulty: ExamDifficulty;
+  restart: () => void;
+}) {
+  const meta = DIFFICULTY_META[difficulty];
   return (
     <div>
-      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Result</div>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
+        Result · {meta.name} mock
+      </div>
       <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(48px, 7vw, 72px)', fontWeight: 900, letterSpacing: '-0.025em', color: score.passed ? T.green : T.coral, lineHeight: 1.1, marginBottom: 24 }}>
         {score.passed ? 'You passed!' : 'Not yet — review and retry.'}
       </h1>
@@ -197,7 +361,9 @@ function Results({ score, questions, answers, restart }: { score: { nat: number;
         </div>
       </div>
 
-      <button onClick={restart} style={{ ...BUTTON_3D.primary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit', border: 'none' }}>Take another mock exam</button>
+      <button onClick={restart} style={{ ...BUTTON_3D.primary, padding: '14px 28px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit', border: 'none' }}>
+        Pick another mock exam
+      </button>
     </div>
   );
 }

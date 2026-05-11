@@ -1,4 +1,4 @@
-// Custom line icons for Ralph Foulger's School of Real Estate.
+// Custom line icons for Ralph Foulger's Academy of Real Estate.
 // Stroke-based, currentColor, designed to sit next to Playfair Display headlines.
 // Replaces generic emoji usage per content style doctrine.
 

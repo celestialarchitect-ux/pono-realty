@@ -54,7 +54,7 @@ export function Header({ active }: { active?: string }) {
       }}>
         <span style={{ color: T.ocean, whiteSpace: 'nowrap' }}>RALPH FOULGER&apos;S</span>
         <span className="rf-header-brand-tagline" style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 600 }}>
-          SCHOOL OF REAL ESTATE
+          ACADEMY OF REAL ESTATE
         </span>
       </Link>
 
@@ -126,13 +126,13 @@ export function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 24, marginBottom: 32 }}>
           <FooterCol title="Study" links={[['Free Foundation', '/free'], ['Full Course', '/course'], ['Practice Exam', '/practice'], ['Flashcards', '/flashcards'], ['Math drills', '/math'], ['Glossary', '/glossary']]}/>
           <FooterCol title="Tools" links={[['AI Tutor (Live Chat)', '/tutor'], ['About the Tutor', '/tools'], ['Pricing', '/pricing']]}/>
-          <FooterCol title="Account" links={[['Sign up', '/signup'], ['Log in', '/login'], ['Dashboard', '/dashboard']]}/>
+          <FooterCol title="Account" links={[['My Profile', '/profile'], ['Sign up', '/signup'], ['Log in', '/login'], ['Dashboard', '/dashboard']]}/>
           <FooterCol title="Resources" links={[['Hawaii REC', 'https://cca.hawaii.gov/reb/'], ['PSI Exam Info', 'https://www.psiexams.com/'], ['HRS 467 (License Law)', 'https://www.capitol.hawaii.gov/hrs/'], ['Contact', '/contact']]}/>
           <FooterCol title="Legal" links={[['Terms', '/policies/terms'], ['Privacy', '/policies/privacy'], ['Disclaimer', '/policies/disclaimer']]}/>
         </div>
         <ReportProblem />
         <div style={{ paddingTop: 20, borderTop: `1px solid ${T.border}`, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.16em', color: T.textMute, textTransform: 'uppercase', textAlign: 'center' }}>
-          RALPH FOULGER&apos;S SCHOOL OF REAL ESTATE · NOT AFFILIATED WITH HAWAII REC · STUDY AID ONLY
+          RALPH FOULGER&apos;S ACADEMY OF REAL ESTATE · NOT AFFILIATED WITH HAWAII REC · STUDY AID ONLY
         </div>
       </div>
     </footer>
@@ -146,7 +146,7 @@ function ReportProblem() {
     const ua = navigator.userAgent;
     const subject = encodeURIComponent(`Site issue report: ${page}`);
     const body = encodeURIComponent(
-`Found something broken or confusing on the Ralph Foulger's School of Real Estate site.
+`Found something broken or confusing on the Ralph Foulger's Academy of Real Estate site.
 
 Page: ${window.location.href}
 Browser: ${ua}

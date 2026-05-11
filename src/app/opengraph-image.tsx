@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = "Ralph Foulger's School of Real Estate";
+export const alt = "Ralph Foulger's Academy of Real Estate";
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -100,7 +100,7 @@ export default async function OpengraphImage() {
                 color: '#0e1a26',
               }}
             >
-              RALPH FOULGER&apos;S SCHOOL OF REAL ESTATE
+              RALPH FOULGER&apos;S ACADEMY OF REAL ESTATE
             </div>
             <div style={{ fontSize: 20, color: '#6b7a8a', letterSpacing: 3, textTransform: 'uppercase' }}>
               Ralph Foulger, CPM · Past President HARES · Teaching since 1993

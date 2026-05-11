@@ -84,7 +84,7 @@ export default function Landing() {
               <Stat big="$300+" sub="average cost of every retake — and weeks lost" />
             </div>
             <p style={{ textAlign: 'center', fontSize: 15, color: T.textDim, maxWidth: 720, margin: '0 auto', lineHeight: 1.7 }}>
-              We built Ralph Foulger&apos;s School of Real Estate to fix that. Every tool below exists because we studied where students fall short &mdash; and we engineered the curriculum to close those gaps.
+              We built Ralph Foulger&apos;s Academy of Real Estate to fix that. Every tool below exists because we studied where students fall short &mdash; and we engineered the curriculum to close those gaps.
             </p>
             <div style={{ textAlign: 'center', marginTop: 8 }}>
               <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.textGhost, textTransform: 'uppercase' }}>
@@ -154,8 +154,11 @@ export default function Landing() {
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
                 Every tool you need to pass.
               </h2>
-              <p style={{ fontSize: 16, color: T.textDim, maxWidth: 640, margin: '20px auto 0', lineHeight: 1.7 }}>
-                {CURRICULUM.length} chapters. {totalHours}+ study hours. {totalTerms}+ key terms. {totalQ}+ exam-bank questions. All built around the official PSI Hawaii blueprint.
+              <p style={{ fontSize: 16, color: T.textDim, maxWidth: 680, margin: '20px auto 0', lineHeight: 1.7 }}>
+                {CURRICULUM.length} chapters. <strong style={{ color: T.text }}>60+ study hours</strong>. {totalTerms}+ key terms. {totalQ}+ exam-bank questions. All built around the official PSI Hawaii blueprint.
+              </p>
+              <p style={{ fontSize: 13, color: T.textMute, maxWidth: 640, margin: '12px auto 0', lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+                Hawaii state law requires <strong style={{ color: T.ocean }}>60 hours of pre-license study</strong> before you can sit the PSI exam. Our platform tracks every minute you spend in the curriculum — and your mock exam unlocks the moment you hit the threshold.
               </p>
             </div>
 
@@ -233,7 +236,7 @@ export default function Landing() {
                 Ralph Foulger has been a Hawaii real estate professional since November 1972 and a Hawaii broker since April 1987. He earned his Certified Property Manager (CPM) designation in 1985 and is one of the few instructors <strong style={{ color: T.text }}>certified by the State of Hawaii to teach all three license tracks</strong> &mdash; salesperson, broker, and continuing education.
               </p>
               <p style={{ marginBottom: 16 }}>
-                His teaching career began in 1993 as Principal &amp; Instructor of the Century 21 Real Estate School, where he ran pre-license, broker, and continuing-ed programs for thirteen years. In 1996 he founded <strong style={{ color: T.text }}>Ralph Foulger&apos;s School of Real Estate</strong> &mdash; now in its 30th year. He served as <strong style={{ color: T.text }}>President of the Hawaii Association of Real Estate Schools</strong> (HARES) in 1994 and 1995, President of NAIOP Hawaii (1991&ndash;92), President of IREM Hawaii Chapter (1993), and was named to the IREM <strong style={{ color: T.text }}>National Faculty</strong> in 1994.
+                His teaching career began in 1993 as Principal &amp; Instructor of the Century 21 Real Estate School, where he ran pre-license, broker, and continuing-ed programs for thirteen years. In 1996 he founded the school that today operates as <strong style={{ color: T.text }}>Ralph Foulger&apos;s Academy of Real Estate</strong> &mdash; now in its 30th year. He served as <strong style={{ color: T.text }}>President of the Hawaii Association of Real Estate Schools</strong> (HARES) in 1994 and 1995, President of NAIOP Hawaii (1991&ndash;92), President of IREM Hawaii Chapter (1993), and was named to the IREM <strong style={{ color: T.text }}>National Faculty</strong> in 1994.
               </p>
               <p style={{ marginBottom: 16 }}>
                 Outside the classroom, Ralph has managed some of the most demanding real estate in the state: <strong style={{ color: T.text }}>Asset Manager of Campbell Industrial Park</strong> (1,400 acres), property manager for The Gentry Companies portfolio (the Gentry Pacific Design Center, Gentry Business Park, the Sunpoint complex, Gentry&apos;s Kona Marina), 125 sub-leases at the International Market Place, and the 120,000 sq ft Kapiolani Building. The curriculum he teaches isn&apos;t academic &mdash; it&apos;s the same toolkit he&apos;s used in the trenches for five decades.
