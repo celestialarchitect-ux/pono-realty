@@ -209,18 +209,98 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Why Ralph</div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-                A household name in Hawaii real estate, modernized for 2026.
+                <em style={{ color: T.ocean, fontStyle: 'italic' }}>54 years.</em> One name in Hawaii real estate education.
               </h2>
             </div>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 28 }} data-stack-mobile="true">
+              <CredStat big="1972" sub="Predecessor school founded (Hawaiian School of Real Estate)" />
+              <CredStat big="45+" sub="Years Ralph in the Hawaii real estate industry" />
+              <CredStat big="28+" sub="Years operating Ralph Foulger's School of Real Estate" />
+              <CredStat big="3" sub="Locations historic: Kaneohe · Waikiki · Kauai" />
+            </div>
+
             <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, lineHeight: 1.8, fontSize: 16, color: T.textDim }}>
               <p style={{ marginBottom: 16 }}>
-                Ralph Foulger has spent decades placing agents into Hawaii&apos;s most demanding market &mdash; the one where the average home is over <strong style={{ color: T.text }}>$1M</strong>, where state-specific rules like leasehold disclosure and HARPTA trip up the unprepared, and where the local relationships matter more than the textbook.
+                Ralph Foulger has spent more than four decades placing agents into Hawaii&apos;s most demanding market &mdash; the one where the average home is over <strong style={{ color: T.text }}>$1M</strong>, where state-specific rules like leasehold disclosure and HARPTA trip up the unprepared, and where the local relationships matter more than the textbook. He took over the Hawaiian School of Real Estate (est. 1972) and ran it through the most consequential decades of Hawaii real estate history.
               </p>
               <p style={{ marginBottom: 16 }}>
-                When COVID closed classrooms, traditional in-person schools like Ralph&apos;s went quiet. Online behemoths absorbed the volume. <strong style={{ color: T.text }}>2026 is the comeback.</strong> Ralph is back &mdash; with the most technologically sophisticated platform Hawaii&apos;s real estate education has ever seen.
+                When COVID closed classrooms, in-person schools like Ralph&apos;s went quiet. Online behemoths absorbed the volume &mdash; but trained agents to mainland defaults that don&apos;t map to Hawaii&apos;s leasehold market, HARPTA withholdings, or HRS 514B condo law. <strong style={{ color: T.text }}>2026 is the return.</strong>
               </p>
               <p>
-                Every chapter narrated. Every concept testable. Every weak spot mapped. And a tireless AI tutor on standby, 24/7, ready to answer the question that&apos;s keeping you up at night.
+                Same Ralph. Same Hawaii-first curriculum. Now with the most technologically sophisticated platform Hawaii real estate education has ever seen &mdash; audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI tutor trained on the curriculum, the statutes, and a deep library of real estate references.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* AI ACCURACY PROMISE */}
+        <section data-mobile-padding style={{ padding: '72px 32px', maxWidth: 1100, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>The AI commitment</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 50px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.08, color: T.text }}>
+              Master AI tutor &mdash; <em style={{ color: T.ocean, fontStyle: 'italic' }}>human-audited for accuracy.</em>
+            </h2>
+            <p style={{ fontSize: 17, color: T.textDim, maxWidth: 720, margin: '20px auto 0', lineHeight: 1.7 }}>
+              Every answer the AI gives is grounded in our verified Hawaii curriculum, the official PSI exam content outline, and Hawaii Revised Statutes. We audit a sample of every week&apos;s conversations &mdash; if it says something wrong, we catch it, correct the model, and notify any affected student.
+            </p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            <Pillar
+              icon="🎯"
+              title="Grounded, not guessing"
+              body="The tutor pulls from our 20-chapter curriculum, the PSI Content Outline, HRS Title 16 (real estate law), and a verified library of real estate references. It cites where it found each answer."
+            />
+            <Pillar
+              icon="🛡️"
+              title="Hawaii vs national, always tagged"
+              body="Every answer leads with [National] or [Hawaii] so you know which portion of the PSI exam the topic falls under. No accidental confusion."
+            />
+            <Pillar
+              icon="👤"
+              title="Weekly human audit"
+              body="We sample student conversations every week. If the AI says something wrong, we flag it, retrain the prompt, and reach out personally to anyone who got bad info."
+            />
+            <Pillar
+              icon="🚫"
+              title="Refuses to cheat for you"
+              body="The tutor won&apos;t take graded exams for you, won&apos;t fabricate case citations, and won&apos;t answer live-exam questions. Real estate is a profession of fiduciary trust — your AI tutor models it."
+            />
+          </div>
+        </section>
+
+        {/* GRADUATION REWARD PACKAGE */}
+        <section style={{ background: `linear-gradient(180deg, ${T.bg} 0%, ${T.bgElevated} 100%)`, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '72px 32px' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>The graduation reward</div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
+                Pass on your first try? <em style={{ color: T.coral, fontStyle: 'italic' }}>You don&apos;t walk out alone.</em>
+              </h2>
+              <p style={{ fontSize: 17, color: T.textDim, maxWidth: 760, margin: '20px auto 0', lineHeight: 1.7 }}>
+                Other schools end at the certificate. We don&apos;t. Students who pass the PSI Hawaii Salesperson Exam <strong style={{ color: T.text }}>on their first attempt</strong> unlock the Graduation Reward Package &mdash; the actual infrastructure of a working Hawaii agent, included.
+              </p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
+              <Reward
+                tag="Unlocked at first-try pass"
+                title="Your Personal Agent Website"
+                body="A custom-designed, mobile-perfect real estate site at your own domain, branded to you. Lead capture wired in. We build it. We deploy it. You launch with infrastructure most agents take 2 years to assemble."
+              />
+              <Reward
+                tag="Unlocked at first-try pass"
+                title="Real Leads to Get You Started"
+                body="A curated lead packet to seed your pipeline in your first 90 days &mdash; buyer inquiries, FSBO contacts, and outreach scripts that work in the Hawaii market. Not a contact list bought in bulk &mdash; real warm leads to start producing."
+              />
+              <Reward
+                tag="Unlocked at first-try pass"
+                title="90-Day Career Onboarding"
+                body="Sponsoring broker introductions to vetted Hawaii brokerages. Hawaii contract templates pre-filled. Listing presentation deck. Vendor list (photographer, escrow, lender). A day-by-day playbook through your first quarter."
+              />
+            </div>
+            <div style={{ marginTop: 32, ...CARD, padding: '24px 28px', borderRadius: 14, borderLeftWidth: 3, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
+              <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, margin: 0 }}>
+                <strong style={{ color: T.text }}>Why first-try pass?</strong> Because that&apos;s the proof you did the work. We invest in students who invest in themselves. The Graduation Reward Package is real value &mdash; far more than the cost of any tier. We can deliver it because most students never get to claim it, and the ones who do represent the future of Ralph Foulger graduates.
               </p>
             </div>
           </div>
@@ -308,6 +388,35 @@ function Step({ number, title, body }: { number: string; title: string; body: st
     <div style={{ ...CARD, padding: '24px 22px', borderRadius: 14 }}>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 900, color: T.ocean, opacity: 0.5, lineHeight: 1, marginBottom: 12 }}>{number}</div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 19, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
+      <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
+    </div>
+  );
+}
+
+function CredStat({ big, sub }: { big: string; sub: string }) {
+  return (
+    <div style={{ ...CARD, padding: '20px 18px', borderRadius: 12, textAlign: 'center' }}>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 36, fontWeight: 900, color: T.ocean, lineHeight: 1, letterSpacing: '-0.02em', marginBottom: 6 }}>{big}</div>
+      <div style={{ fontSize: 12, lineHeight: 1.5, color: T.textMute }}>{sub}</div>
+    </div>
+  );
+}
+
+function Pillar({ icon, title, body }: { icon: string; title: string; body: string }) {
+  return (
+    <div style={{ ...CARD, padding: '24px 22px', borderRadius: 14 }}>
+      <div style={{ fontSize: 28, marginBottom: 12, lineHeight: 1 }}>{icon}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
+      <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
+    </div>
+  );
+}
+
+function Reward({ tag, title, body }: { tag: string; title: string; body: string }) {
+  return (
+    <div style={{ ...CARD, padding: '26px 24px', borderRadius: 16, borderColor: T.coral, borderWidth: 2 }}>
+      <div style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.coral, textTransform: 'uppercase', padding: '4px 8px', background: 'rgba(232,93,60,0.08)', borderRadius: 6, fontWeight: 700, display: 'inline-block', marginBottom: 14 }}>{tag}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 22, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 10, color: T.text, lineHeight: 1.2 }}>{title}</div>
       <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
     </div>
   );
