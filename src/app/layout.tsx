@@ -1,11 +1,22 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
+const SITE_URL = process.env.SITE_URL || 'https://ralphfoulger.com';
+const SITE_NAME = "Ralph Foulger's School of Real Estate";
+const DESCRIPTION = "Hawaii's most sophisticated real estate licensing system, built for 2026. 20-chapter PSI-aligned curriculum with full audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI Real Estate Tutor.";
+
 export const metadata: Metadata = {
-  title: "Ralph Foulger's School of Real Estate · Hawaii's Most Advanced Licensing Program",
-  description: "Hawaii's most sophisticated real estate licensing system, built for 2026. 20-chapter PSI-aligned curriculum with full audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI Real Estate Tutor.",
-  applicationName: "Ralph Foulger's School of Real Estate",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} · Hawaii's Most Advanced Licensing Program`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
   manifest: '/manifest.json',
+  alternates: {
+    canonical: '/',
+  },
   appleWebApp: {
     capable: true,
     title: "Ralph Foulger's",
@@ -24,16 +35,26 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "Ralph Foulger's School of Real Estate",
-    description: "Hawaii's most advanced licensing program. Pass the PSI exam the first time.",
-    siteName: "Ralph Foulger's School of Real Estate",
+    title: SITE_NAME,
+    description: "Hawaii's most advanced real estate licensing program. Pass the PSI exam the first time — guided by a veteran broker with a 54-year Hawaii lineage.",
+    siteName: SITE_NAME,
+    url: SITE_URL,
     type: 'website',
+    locale: 'en_US',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: SITE_NAME }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Ralph Foulger's School of Real Estate",
-    description: "Hawaii's most advanced licensing program. Pass the PSI exam the first time.",
+    title: SITE_NAME,
+    description: "Hawaii's most advanced real estate licensing program. Pass the PSI exam the first time.",
+    images: ['/opengraph-image'],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+  },
+  category: 'education',
 };
 
 export const viewport: Viewport = {
@@ -43,6 +64,68 @@ export const viewport: Viewport = {
   themeColor: '#fbf7f0',
 };
 
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'EducationalOrganization',
+      '@id': `${SITE_URL}/#school`,
+      name: SITE_NAME,
+      alternateName: 'Ralph Foulger Real Estate School',
+      description: 'Hawaii pre-licensing real estate education. PSI exam preparation built around a 20-chapter curriculum, an AI tutor, and a graduation reward package for first-attempt passers.',
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.svg`,
+      image: `${SITE_URL}/opengraph-image`,
+      foundingDate: '1972',
+      areaServed: {
+        '@type': 'State',
+        name: 'Hawaii',
+      },
+      knowsAbout: [
+        'Hawaii real estate licensing',
+        'PSI salesperson exam preparation',
+        'Hawaii Revised Statutes Chapter 467',
+        'Real estate continuing education',
+      ],
+      founder: {
+        '@type': 'Person',
+        name: 'Ralph Foulger',
+        description: '45+ year veteran Hawaii real estate broker and educator.',
+      },
+      sameAs: [] as string[],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: DESCRIPTION,
+      publisher: { '@id': `${SITE_URL}/#school` },
+      inLanguage: 'en-US',
+    },
+    {
+      '@type': 'Course',
+      name: 'Hawaii Real Estate Salesperson Pre-License (Standard)',
+      description: 'Full 20-chapter PSI-aligned curriculum with audiobook narration, smart flashcards, math drills, mock exams, and AI tutor access. Six months of access.',
+      provider: { '@id': `${SITE_URL}/#school` },
+      educationalCredentialAwarded: 'Hawaii Real Estate Salesperson Pre-License Completion',
+      offers: {
+        '@type': 'Offer',
+        price: '599',
+        priceCurrency: 'USD',
+        category: 'Education',
+        availability: 'https://schema.org/InStock',
+        url: `${SITE_URL}/pricing`,
+      },
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: 'PT60H',
+      },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -50,6 +133,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_SCHEMA) }}
+        />
       </head>
       <body style={{ margin: 0, padding: 0, fontFamily: "'Inter', system-ui, sans-serif" }}>
         {children}

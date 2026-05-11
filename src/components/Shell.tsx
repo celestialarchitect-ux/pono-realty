@@ -1,43 +1,120 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { T, SHADOW_3D, BUTTON_3D } from '@/lib/theme';
 
+const NAV_ITEMS: Array<[string, string]> = [
+  ['/free', 'Free Course'],
+  ['/course', 'Curriculum'],
+  ['/practice', 'Mock Exam'],
+  ['/tutor', 'AI Tutor'],
+  ['/pricing', 'Pricing'],
+];
+
 export function Header({ active }: { active?: string }) {
-  const link = (href: string, label: string) => {
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // Lock scroll while drawer is open
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.body.style.overflow = drawerOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [drawerOpen]);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setDrawerOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [drawerOpen]);
+
+  const link = (href: string, label: string, onClick?: () => void) => {
     const isActive = active === href;
     return (
-      <Link href={href} style={{
+      <Link key={href} href={href} onClick={onClick} style={{
         color: isActive ? T.text : T.textDim, fontSize: 14, fontWeight: 500,
         textDecoration: 'none', borderBottom: isActive ? `2px solid ${T.ocean}` : '2px solid transparent', paddingBottom: 4,
       }}>{label}</Link>
     );
   };
+
   return (
     <header style={{
-      padding: '18px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      padding: '18px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       borderBottom: `1px solid ${T.border}`, background: 'rgba(251,247,240,0.85)',
-      backdropFilter: 'blur(20px)', position: 'sticky', top: 0, zIndex: 100,
+      backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+      position: 'sticky', top: 0, zIndex: 100, gap: 12,
     }}>
-      <Link href="/" style={{
+      <Link href="/" className="rf-header-brand" style={{
         fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 800, letterSpacing: '0.02em',
         fontSize: 19, color: T.text, textShadow: SHADOW_3D.sm, textDecoration: 'none',
-        display: 'flex', alignItems: 'baseline', gap: 10, lineHeight: 1,
+        display: 'flex', alignItems: 'baseline', gap: 10, lineHeight: 1, flexShrink: 1, minWidth: 0,
       }}>
-        <span style={{ color: T.ocean }}>RALPH FOULGER&apos;S</span>
-        <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 600 }}>
+        <span style={{ color: T.ocean, whiteSpace: 'nowrap' }}>RALPH FOULGER&apos;S</span>
+        <span className="rf-header-brand-tagline" style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 600 }}>
           SCHOOL OF REAL ESTATE
         </span>
       </Link>
-      <nav style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-        {link('/free', 'Free Course')}
-        {link('/course', 'Curriculum')}
-        {link('/practice', 'Mock Exam')}
-        {link('/tutor', 'AI Tutor')}
-        {link('/pricing', 'Pricing')}
+
+      {/* Desktop nav */}
+      <nav className="rf-header-nav-desktop" style={{ gap: 18, alignItems: 'center' }}>
+        {NAV_ITEMS.map(([href, label]) => link(href, label))}
         <Link href="/free" style={{
-          ...BUTTON_3D.primary, padding: '9px 18px', borderRadius: 10,
+          ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
           fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
         }}>Start Free</Link>
       </nav>
+
+      {/* Mobile hamburger toggle */}
+      <button
+        type="button"
+        className="rf-header-nav-mobile-toggle"
+        aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={drawerOpen}
+        aria-controls="rf-mobile-drawer"
+        onClick={() => setDrawerOpen(o => !o)}
+        style={{
+          background: 'transparent', border: `1px solid ${T.border}`, borderRadius: 10,
+          width: 44, height: 44, padding: 0, alignItems: 'center', justifyContent: 'center',
+          color: T.text, cursor: 'pointer', flexShrink: 0,
+        }}
+      >
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          {drawerOpen ? (
+            <>
+              <line x1="5" y1="5" x2="17" y2="17" />
+              <line x1="17" y1="5" x2="5" y2="17" />
+            </>
+          ) : (
+            <>
+              <line x1="4" y1="7" x2="18" y2="7" />
+              <line x1="4" y1="11" x2="18" y2="11" />
+              <line x1="4" y1="15" x2="18" y2="15" />
+            </>
+          )}
+        </svg>
+      </button>
+
+      {/* Mobile drawer */}
+      <div
+        id="rf-mobile-drawer"
+        className={`rf-header-nav-mobile-drawer${drawerOpen ? ' open' : ''}`}
+        role="navigation"
+        aria-label="Mobile menu"
+      >
+        {NAV_ITEMS.map(([href, label]) => link(href, label, () => setDrawerOpen(false)))}
+        <Link
+          href="/free"
+          onClick={() => setDrawerOpen(false)}
+          style={{
+            ...BUTTON_3D.primary, padding: '14px 18px', borderRadius: 10,
+            fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+            textAlign: 'center', marginTop: 12,
+          }}
+        >Start Free</Link>
+      </div>
     </header>
   );
 }

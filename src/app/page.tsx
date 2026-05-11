@@ -28,7 +28,7 @@ export default function Landing() {
           <div className="rf-hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: 56, alignItems: 'center' }}>
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '8px 14px', borderRadius: 999, background: T.bgElevated, border: `1px solid ${T.border}`, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 20 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Hawaii · Built for 2026
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Hawaii · Since 1972 · Built for 2026
               </div>
               <h1 className="rf-hero-h1" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(44px, 6vw, 76px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.02, marginBottom: 22, color: T.text }}>
                 Pass Hawaii&apos;s real estate exam <em style={{ color: T.ocean, fontStyle: 'italic' }}>the first time.</em>
@@ -44,8 +44,15 @@ export default function Landing() {
                   See Pricing
                 </Link>
               </div>
-              <div style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>
-                One-time payment · No subscription · Pass guarantee on Plus tier
+              <div style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', display: 'flex', flexWrap: 'wrap', gap: '6px 14px', alignItems: 'center' }}>
+                <span>One-time payment</span>
+                <span style={{ color: T.textGhost }}>·</span>
+                <span>No subscription</span>
+                <span style={{ color: T.textGhost }}>·</span>
+                <span>Pass guarantee on Plus</span>
+              </div>
+              <div style={{ marginTop: 18, fontSize: 12, color: T.textGhost, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+                Kaneohe · Waikiki · Kauai · 28+ years under Ralph
               </div>
             </div>
             <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: SHADOW_3D.lg, aspectRatio: '4 / 5' }}>
