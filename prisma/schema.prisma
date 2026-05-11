@@ -3,7 +3,11 @@
 // (no `prisma migrate` in this stack).
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // Railway / Docker uses node:24-alpine which ships OpenSSL 3.x. Without
+  // these binary targets, the deployed Prisma engine fails to load
+  // libssl.so.1.1 and every DB call 500s.
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
