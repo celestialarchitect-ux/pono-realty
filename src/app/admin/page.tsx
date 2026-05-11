@@ -17,6 +17,7 @@ interface KPI {
   totalStudyHours: number;
   todayStudyHours: number;
   revenueUsd: number;
+  paymentCount: number;
   openTickets: number;
   unreadInbound: number;
 }
@@ -95,7 +96,7 @@ export default function AdminDashboard() {
         <Kpi label="Eligible (60h+)" value={data.kpi.eligibleCount.toLocaleString()} sub="PSI-ready" />
         <Kpi label="Signups today" value={data.kpi.signupsToday.toLocaleString()} sub={`${data.kpi.signups7d} this week · ${data.kpi.signups30d} this month`} />
         <Kpi label="Hours studied today" value={data.kpi.todayStudyHours.toFixed(1)} sub={`${data.kpi.totalStudyHours.toFixed(1)} h all-time`} />
-        <Kpi label="Gross revenue" value={`$${data.kpi.revenueUsd.toLocaleString()}`} sub="paid tiers (est.)" accent="coral" />
+        <Kpi label="Verified revenue" value={`$${data.kpi.revenueUsd.toLocaleString()}`} sub={data.kpi.paymentCount === 0 ? 'Stripe — no payments yet' : `${data.kpi.paymentCount} payment${data.kpi.paymentCount === 1 ? '' : 's'}`} accent="coral" />
       </div>
 
       {/* 30-DAY CHART */}

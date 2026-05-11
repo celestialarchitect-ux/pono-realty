@@ -48,6 +48,27 @@ model User {
   @@index([createdAt])
 }
 
+// Real money in. One row per Stripe charge that actually completed. The
+// admin dashboard's "Verified revenue" KPI sums amountCents from this
+// table — so a free comp (admin-set tier) does NOT inflate revenue.
+//
+// Refunds will be tracked as separate rows with negative amountCents once
+// we wire the refund webhook (TODO).
+model Payment {
+  id                   String   @id @default(cuid())
+  userId               String
+  stripeSessionId      String   @unique
+  stripePaymentIntent  String?
+  amountCents          Int      // total in cents — Stripe is the source of truth
+  currency             String   @default("usd")
+  tier                 String   // standard | plus | solo
+  status               String   @default("succeeded") // succeeded | refunded | partial_refund
+  createdAt            DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
 // Every email the academy sends OR receives is logged here. Outbound rows
 // are written from src/lib/email.ts in the sendMail() wrapper. Inbound rows
 // arrive via the /api/email/inbound webhook (Cloudflare Email Routing,

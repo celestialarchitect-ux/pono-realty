@@ -100,19 +100,17 @@ export async function GET() {
     });
   }
 
-  // Estimated revenue (USD) — sum of paid-tier prices. Stripe is the source
-  // of truth, but this gives an at-a-glance gross-revenue lower-bound until
-  // we wire a payments table.
-  const TIER_PRICE: Record<string, number> = { standard: 599, plus: 899, solo: 800 };
-  const tierCounts = await db.user.groupBy({
-    by: ['tier'],
+  // Real verified revenue from the Payment table — every row is a Stripe
+  // charge that actually completed. Manual tier comps via the admin Edit
+  // drawer do NOT inflate this number; only real money does. Returns 0
+  // until the Stripe webhook has fired at least once for a paid checkout.
+  const revenueAgg = await db.payment.aggregate({
+    where: { status: 'succeeded' },
+    _sum: { amountCents: true },
     _count: { _all: true },
   });
-  let revenueUsd = 0;
-  for (const t of tierCounts) {
-    const p = TIER_PRICE[t.tier] ?? 0;
-    revenueUsd += p * t._count._all;
-  }
+  const revenueUsd = Math.round((revenueAgg._sum.amountCents ?? 0) / 100);
+  const paidCount = revenueAgg._count._all;
 
   return NextResponse.json({
     kpi: {
@@ -126,6 +124,7 @@ export async function GET() {
       totalStudyHours: Math.round(((totalStudyAgg._sum.seconds ?? 0) / 3600) * 10) / 10,
       todayStudyHours: Math.round(((todayStudyAgg._sum.seconds ?? 0) / 3600) * 10) / 10,
       revenueUsd,
+      paymentCount: paidCount,
       openTickets,
       unreadInbound,
     },

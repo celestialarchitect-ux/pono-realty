@@ -32,21 +32,54 @@ export async function POST(req: NextRequest) {
   switch (event.type) {
     case 'checkout.session.completed': {
       const sess = event.data.object as Stripe.Checkout.Session;
-      const userId = (sess.metadata?.userId ?? '') as string;
-      const tier = (sess.metadata?.tier ?? '') as CheckoutTier | '';
-      if (!userId || (tier !== 'standard' && tier !== 'plus' && tier !== 'solo')) {
-        // Fall back to deriving tier from the price ID
+      let userId = (sess.metadata?.userId ?? '') as string;
+      let tier = (sess.metadata?.tier ?? '') as CheckoutTier | '';
+
+      // Fallback: derive tier from the price ID on the line item if metadata
+      // was stripped or missing for some reason.
+      if (!tier || (tier !== 'standard' && tier !== 'plus' && tier !== 'solo')) {
         const lineItems = await s.checkout.sessions.listLineItems(sess.id, { limit: 1 });
         const priceId = lineItems.data[0]?.price?.id;
         const derived = priceId ? tierFromPriceId(priceId) : null;
-        if (!userId || !derived) break;
-        await applyTier(userId, derived);
-      } else {
-        await applyTier(userId, tier);
+        if (derived) tier = derived;
       }
+      if (!userId || !tier) break;
+
+      const amountCents = sess.amount_total ?? 0;
+      const currency = sess.currency ?? 'usd';
+      const paymentIntent = typeof sess.payment_intent === 'string'
+        ? sess.payment_intent
+        : sess.payment_intent?.id ?? null;
+
+      // 1. Record the real payment so the admin "Verified revenue" KPI
+      //    reflects actual money in. Unique stripeSessionId prevents
+      //    double-counting if the webhook fires more than once for the
+      //    same session (Stripe's at-least-once delivery guarantee).
+      if (amountCents > 0) {
+        try {
+          await db.payment.create({
+            data: {
+              userId,
+              stripeSessionId: sess.id,
+              stripePaymentIntent: paymentIntent,
+              amountCents,
+              currency,
+              tier,
+              status: 'succeeded',
+            },
+          });
+        } catch {
+          // Most likely cause: duplicate stripeSessionId (idempotent replay).
+          // Safe to ignore — the original row already exists.
+        }
+      }
+
+      // 2. Update the user's tier + fire welcome email (idempotent).
+      await applyTier(userId, tier);
       break;
     }
-    // Future: handle refunds → downgrade tier, subscription events if we add recurring billing
+    // Future: handle 'charge.refunded' to write negative-amount Payment rows
+    // and downgrade tier when needed.
   }
 
   return NextResponse.json({ received: true });
