@@ -51,6 +51,17 @@ const nextConfig: NextConfig = {
       { source: '/example-website/', destination: '/example-website.html' },
     ];
   },
+  async redirects() {
+    return [
+      // www → apex canonical (SEO + single source of truth for cookies)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.ralphfoulger.com' }],
+        destination: 'https://ralphfoulger.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
