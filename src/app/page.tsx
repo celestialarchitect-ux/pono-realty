@@ -49,7 +49,7 @@ export default function Landing() {
                 <span style={{ color: T.textGhost }}>·</span>
                 <span>No subscription</span>
                 <span style={{ color: T.textGhost }}>·</span>
-                <span>Pass guarantee on Plus</span>
+                <span>Free agent website on Plus</span>
               </div>
               <div style={{ marginTop: 18, fontSize: 12, color: T.textGhost, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', textTransform: 'uppercase' }}>
                 CPM · Past President HARES · IREM National Faculty
@@ -167,7 +167,7 @@ export default function Landing() {
               <Feature icon="📝" title={`${totalQ}-question exam bank + full mock`} body="Practice with the same 80 + 50 PSI question split, same time pressure, same calibration. The mock exam predicts your real exam score within a few points." />
               <Feature icon="📚" title={`${totalTerms}-term searchable glossary`} body="Every key term — national + Hawaii — defined plainly, indexed, instantly searchable. Cross-linked to the chapters where it appears." />
               <Feature icon="📱" title="Mobile-first" body="Studied on the bus to Kahala? Phone in your hand at the beach? The platform is designed for that. Resume exactly where you left off, on any device." />
-              <Feature icon="🛡️" title="Pass-or-Pay-Zero (Plus tier)" body="Don't pass on your first attempt? Your second attempt prep is on us. We're betting on you because we've built the system that wins." />
+              <Feature icon="🌐" title="Free agent website (Plus tier)" body="Pass your PSI exam? Plus students unlock a custom Hawaii real estate site — your name on your own domain, CRM, lead capture, admin portal. Built and deployed for you." />
             </div>
           </div>
         </section>
@@ -279,38 +279,65 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* GRADUATION REWARD PACKAGE */}
+        {/* PLUS-TIER GRADUATION BUNDLE */}
         <section style={{ background: `linear-gradient(180deg, ${T.bg} 0%, ${T.bgElevated} 100%)`, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '72px 32px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>The graduation reward</div>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>Plus tier · The graduation bundle</div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
-                Pass on your first try? <em style={{ color: T.coral, fontStyle: 'italic' }}>You don&apos;t walk out alone.</em>
+                Pass the exam. <em style={{ color: T.coral, fontStyle: 'italic' }}>We hand you a working business.</em>
               </h2>
               <p style={{ fontSize: 17, color: T.textDim, maxWidth: 760, margin: '20px auto 0', lineHeight: 1.7 }}>
-                Other schools end at the certificate. We don&apos;t. Students who pass the PSI Hawaii Salesperson Exam <strong style={{ color: T.text }}>on their first attempt</strong> unlock the Graduation Reward Package &mdash; the actual infrastructure of a working Hawaii agent, included.
+                Other schools end at the certificate. We don&apos;t. <strong style={{ color: T.text }}>Plus-tier students who pass their PSI exam</strong> unlock a complete agent launch kit &mdash; the same infrastructure most new agents take two years to assemble.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
               <Reward
-                tag="Unlocked at first-try pass"
-                title="Your Personal Agent Website"
-                body="A custom-designed, mobile-perfect real estate site at your own domain, branded to you. Lead capture wired in. We build it. We deploy it. You launch with infrastructure most agents take 2 years to assemble."
+                tag="Plus tier · Post-exam"
+                title="Your Own Agent Website"
+                body="A custom-designed, mobile-perfect real estate site on your own domain (yourname.com). Hawaii-aware listings layout, bio, service area, contact. We build it. We deploy it."
               />
               <Reward
-                tag="Unlocked at first-try pass"
-                title="Real Leads to Get You Started"
-                body="A curated lead packet to seed your pipeline in your first 90 days &mdash; buyer inquiries, FSBO contacts, and outreach scripts that work in the Hawaii market. Not a contact list bought in bulk &mdash; real warm leads to start producing."
+                tag="Plus tier · Post-exam"
+                title="CRM + Lead Capture + Admin Portal"
+                body="Built-in CRM to track every lead from first touch to closing. Inquiry forms wired to your portal. A real admin dashboard, not a Squarespace template. The operational backbone most agents pay $200/mo for."
               />
               <Reward
-                tag="Unlocked at first-try pass"
-                title="90-Day Career Onboarding"
-                body="Sponsoring broker introductions to vetted Hawaii brokerages. Hawaii contract templates pre-filled. Listing presentation deck. Vendor list (photographer, escrow, lender). A day-by-day playbook through your first quarter."
+                tag="Plus tier · Post-exam"
+                title="Lead Packet + Launch Playbook"
+                body="A curated starter lead packet for your first 90 days, plus the playbook: broker intros, Hawaii contract templates, listing-presentation deck, vendor list (photographer, escrow, lender)."
               />
             </div>
-            <div style={{ marginTop: 32, ...CARD, padding: '24px 28px', borderRadius: 14, borderLeftWidth: 3, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
-              <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, margin: 0 }}>
-                <strong style={{ color: T.text }}>Why first-try pass?</strong> Because that&apos;s the proof you did the work. We invest in students who invest in themselves. The Graduation Reward Package is real value &mdash; far more than the cost of any tier. We can deliver it because most students never get to claim it, and the ones who do represent the future of Ralph Foulger graduates.
+
+            {/* SHAYNE EXAMPLE */}
+            <div style={{ marginTop: 36, ...CARD, padding: '32px 36px', borderRadius: 18, overflow: 'hidden' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.1fr)', gap: 32, alignItems: 'center' }} data-stack-mobile="true">
+                <div>
+                  <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Real graduate example</div>
+                  <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.15, color: T.text, marginBottom: 14 }}>
+                    Shayne M. Guthrie&apos;s broker site.
+                  </h3>
+                  <p style={{ fontSize: 15, lineHeight: 1.7, color: T.textDim, marginBottom: 16 }}>
+                    Licensed Hawaii broker (BC) operating out of the Ralph S. Foulger Brokerage in Kaneohe. Shayne&apos;s working real estate website &mdash; clean, mobile, search-indexed, lead-capture wired &mdash; is the same caliber of site Plus-tier graduates receive.
+                  </p>
+                  <Link href="/example-website" target="_blank" rel="noopener" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 14, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    View the live example →
+                  </Link>
+                </div>
+                <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', border: `1px solid ${T.border}`, boxShadow: SHADOW_3D.lg, aspectRatio: '16 / 11', background: T.bgElevated }}>
+                  <iframe
+                    src="/example-website"
+                    title="Live example: Shayne Guthrie broker website"
+                    loading="lazy"
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 28, ...CARD, padding: '24px 28px', borderRadius: 14, borderLeftWidth: 3, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
+              <p style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim, margin: 0 }}>
+                <strong style={{ color: T.text }}>Note on the bundle:</strong> the website, domain, CRM, and admin portal are built and delivered after you pass the PSI Hawaii exam. A standard monthly hosting &amp; maintenance fee applies to keep the site live (domain renewal, SSL, security patches, lead-capture infrastructure). Already licensed? See the <Link href="/pricing#solo" style={{ color: T.ocean, textDecoration: 'underline' }}>Solo Website Build</Link> tier &mdash; the same package, available a la carte.
               </p>
             </div>
           </div>
@@ -319,21 +346,38 @@ export default function Landing() {
         {/* PRICING TEASE */}
         <section style={{ padding: '72px 32px' }}>
           <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 48 }}>
+            <div style={{ textAlign: 'center', marginBottom: 32 }}>
               <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Choose your path</div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
-                Three paths. <em style={{ color: T.ocean, fontStyle: 'italic' }}>One-time payment.</em>
+                Three options. <em style={{ color: T.ocean, fontStyle: 'italic' }}>One-time payment.</em>
               </h2>
               <p style={{ fontSize: 15, color: T.textMute, marginTop: 14, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
-                No subscription · No surprises · Lifetime access on paid tiers
+                No subscription · No surprises
               </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-              <Tier name="Free Foundation" price="$0" tagline="Is real estate right for you?" features={['5-lesson preview', 'Hawaii market 101', 'Career fit assessment', 'Income reality check']} cta="Start Free" href="/free" />
-              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', '6-month access']} cta="Enroll" href="/pricing#standard" />
-              <Tier name="Plus" price="$899" tagline="With pass-or-pay-zero guarantee." featured features={['Everything in Standard', '🛡️ Pass-or-Pay-Zero guarantee', '12-month access window', 'Coach-graded mock review', 'Priority AI tutor lane', 'Exam-week intensive']} cta="Enroll" href="/pricing#plus" />
+
+            {/* FREE COURSE BANNER */}
+            <div style={{ marginBottom: 24, ...CARD, padding: '18px 24px', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', borderLeftWidth: 4, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: '1 1 320px' }}>
+                <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, whiteSpace: 'nowrap' }}>Free first</div>
+                <div style={{ fontSize: 15, color: T.text, lineHeight: 1.45 }}>
+                  <strong>Free Foundation web course.</strong> 5 lessons, Hawaii market 101, no signup tricks &mdash; decide if real estate is for you before you pay a cent.
+                </div>
+              </div>
+              <Link href="/free" style={{ ...BUTTON_3D.secondary, padding: '10px 18px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+                Start the free course →
+              </Link>
             </div>
-            <div style={{ textAlign: 'center', marginTop: 32 }}>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', '6-month access']} cta="Enroll" href="/pricing#standard" />
+              <Tier name="Plus" price="$899" tagline="Course + free agent website on graduation." featured features={['Everything in Standard', '🌐 Free agent website on passing', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', '12-month course access', 'Launch playbook + lead packet']} cta="Enroll" href="/pricing#plus" />
+              <Tier name="Solo Website Build" price="$800" tagline="Already licensed? Skip the course." features={['Custom-built Hawaii broker site', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', 'Built, deployed, branded to you', 'No course included (a la carte)', 'Monthly hosting & maintenance']} cta="Order Site" href="/pricing#solo" />
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>
+              Plus website &amp; Solo build include a monthly hosting / maintenance fee after launch (domain renewal, SSL, CRM uptime, security patches).
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 24 }}>
               <Link href="/pricing" style={{ fontSize: 14, color: T.ocean, textDecoration: 'none', fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
                 Full pricing comparison &rarr;
               </Link>

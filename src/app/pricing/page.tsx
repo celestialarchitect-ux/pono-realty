@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { T, BUTTON_3D, CARD } from '@/lib/theme';
+import { T, BUTTON_3D, CARD, SHADOW_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function PricingPage() {
@@ -15,37 +15,37 @@ export default function PricingPage() {
           <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(46px, 6.5vw, 80px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 20 }}>
             One-time payment. <em style={{ color: T.ocean, fontStyle: 'italic' }}>No subscription.</em>
           </h1>
-          <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.6, maxWidth: 720, margin: '0 auto 8px' }}>
-            Three paths. From a free taste of the field, to the full curriculum with the AI tutor, to the same plus a pass-or-pay-zero guarantee.
+          <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.6, maxWidth: 760, margin: '0 auto 8px' }}>
+            Three options. The full Hawaii licensing system, the same system bundled with a custom agent website on graduation, or a standalone website build for agents who are already licensed.
           </p>
           <p style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', marginTop: 16 }}>
-            All prices in USD · One-time payment · 6-month course window (12 on Plus)
+            All prices USD · One-time payment · Hosting / maintenance fee applies to websites
           </p>
+        </section>
+
+        {/* FREE BANNER */}
+        <section style={{ padding: '8px 32px 0', maxWidth: 1180, margin: '0 auto' }}>
+          <div style={{ ...CARD, padding: '18px 24px', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', borderLeftWidth: 4, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14, flex: '1 1 360px' }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, whiteSpace: 'nowrap' }}>Free first</div>
+              <div style={{ fontSize: 15, color: T.text, lineHeight: 1.45 }}>
+                <strong>Free Foundation web course.</strong> 5 lessons, Hawaii market 101 &mdash; try the platform before paying a cent.
+              </div>
+            </div>
+            <Link href="/free" style={{ ...BUTTON_3D.secondary, padding: '10px 18px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+              Start the free course →
+            </Link>
+          </div>
         </section>
 
         {/* THREE TIERS */}
         <section style={{ padding: '32px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
-            <BigTier
-              id="free"
-              name="Free Foundation"
-              price="$0"
-              tagline="Decide if real estate is for you."
-              features={[
-                '5-lesson preview course',
-                'Hawaii market 101',
-                'Career fit assessment',
-                'Income reality check',
-                'Day-1 essentials breakdown',
-              ]}
-              cta="Start Free"
-              href="/free"
-            />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }} data-stack-mobile="true">
             <BigTier
               id="standard"
               name="Standard"
               price="$599"
-              tagline="The complete prep system."
+              tagline="The complete Hawaii licensing prep system."
               features={[
                 'All 20 chapters (PSI-aligned)',
                 '🎧 Full audiobook narration',
@@ -56,6 +56,7 @@ export default function PricingPage() {
                 'Searchable glossary',
                 'School final exam (70% to certify)',
                 '6-month access window',
+                'No subscription, ever',
               ]}
               cta="Enroll"
               href="/signup?tier=standard"
@@ -64,20 +65,45 @@ export default function PricingPage() {
               id="plus"
               name="Plus"
               price="$899"
-              tagline="With Pass-or-Pay-Zero guarantee."
+              tagline="Standard course + your agent website on graduation."
               features={[
                 'Everything in Standard',
-                '🛡️ Pass-or-Pay-Zero guarantee',
-                '12-month extended access',
-                'Coach-graded mock exam review',
-                'Priority AI tutor lane',
-                'Exam-week intensive checklist',
-                'Personal weakness mapping',
+                '🌐 Free agent website on passing the PSI exam',
+                'Your own domain (yourname.com)',
+                'CRM + lead capture + admin portal',
+                'Launch playbook + curated lead packet',
+                'Hawaii contract templates pre-filled',
+                'Sponsoring-broker introductions',
+                '12-month course access',
+                'Monthly hosting / maintenance fee after launch',
               ]}
               cta="Enroll"
               href="/signup?tier=plus"
               featured
             />
+            <BigTier
+              id="solo"
+              name="Solo Website Build"
+              price="$800"
+              tagline="Already licensed? Just need the site."
+              features={[
+                'No course — site build only',
+                'Custom-built Hawaii broker site',
+                'Your own domain (yourname.com)',
+                'CRM + lead capture + admin portal',
+                'Branded to you (logo, colors, photo)',
+                'We build it, deploy it, hand you the keys',
+                'Monthly hosting / maintenance fee',
+                'Open to any licensed HI broker or salesperson',
+              ]}
+              cta="Order Site"
+              href="/signup?tier=solo"
+            />
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <Link href="/example-website" target="_blank" rel="noopener" style={{ fontSize: 14, color: T.ocean, textDecoration: 'underline', fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
+              See a live example (Shayne M. Guthrie) →
+            </Link>
           </div>
         </section>
 
@@ -85,24 +111,38 @@ export default function PricingPage() {
         <section style={{ background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '64px 32px' }}>
           <div style={{ maxWidth: 980, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Why we cost a little more</div>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Side-by-side</div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(30px, 4vw, 44px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-                Most Hawaii schools end at the textbook. We give you a study system.
+                What&apos;s in each option.
               </h2>
             </div>
-            <div style={{ ...CARD, padding: '32px 36px', borderRadius: 16, marginBottom: 20 }}>
-              <ValueRow label="Full audiobook narration of every chapter" included="Standard & Plus" elsewhere="Audio sold separately or absent" />
-              <ValueRow label="24/7 AI Real Estate Tutor" included="Standard & Plus" elsewhere="Not offered anywhere in Hawaii" />
-              <ValueRow label="Smart flashcards with spaced repetition" included="Standard & Plus" elsewhere="Static flashcards or none" />
-              <ValueRow label="Math drills with step-by-step worked examples" included="Standard & Plus" elsewhere="Calculation sections in textbook only" />
-              <ValueRow label="Adaptive review (auto-mapped weak spots)" included="Standard & Plus" elsewhere="Manual review only" />
-              <ValueRow label="Mobile-first platform" included="Standard & Plus" elsewhere="Desktop-first or PDFs" />
-              <ValueRow label="Pass-or-Pay-Zero guarantee" included="Plus only" elsewhere="Some offer same-content retake" />
-              <ValueRow label="One-time payment, no subscription" included="All tiers" elsewhere="Subscription common" />
-              <ValueRow label="Lifetime updates as Hawaii law changes" included="All paid tiers" elsewhere="Annual subscription typical" last />
+            <div style={{ ...CARD, padding: '24px 28px', borderRadius: 16, marginBottom: 20, overflowX: 'auto' }}>
+              <table style={{ width: '100%', minWidth: 640, borderCollapse: 'collapse', fontSize: 14 }}>
+                <thead>
+                  <tr style={{ borderBottom: `2px solid ${T.border}` }}>
+                    <th style={{ textAlign: 'left', padding: '12px 8px', fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>Feature</th>
+                    <th style={{ textAlign: 'center', padding: '12px 8px', fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>Standard</th>
+                    <th style={{ textAlign: 'center', padding: '12px 8px', fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700 }}>Plus ★</th>
+                    <th style={{ textAlign: 'center', padding: '12px 8px', fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>Solo Site</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <CompareRow label="20-chapter PSI curriculum" std plus />
+                  <CompareRow label="Audiobook narration of every chapter" std plus />
+                  <CompareRow label="24/7 AI Real Estate Tutor" std plus />
+                  <CompareRow label="Smart flashcards + math drills + mock exams" std plus />
+                  <CompareRow label="School final exam (70% to certify)" std plus />
+                  <CompareRow label="Course access window" std="6 months" plus="12 months" />
+                  <CompareRow label="Custom agent website (yourname.com)" plusConditional solo />
+                  <CompareRow label="CRM + lead capture + admin portal" plusConditional solo />
+                  <CompareRow label="Launch playbook + lead packet" plusConditional />
+                  <CompareRow label="Sponsoring-broker introductions" plusConditional />
+                  <CompareRow label="Monthly hosting / maintenance after launch" plusConditional solo last />
+                </tbody>
+              </table>
             </div>
-            <p style={{ fontSize: 14, color: T.textMute, textAlign: 'center', maxWidth: 660, margin: '0 auto', lineHeight: 1.7 }}>
-              Compared honestly across the 28 Hawaii REC-registered schools and major national platforms. Reflects publicly listed offerings as of 2026.
+            <p style={{ fontSize: 13, color: T.textMute, textAlign: 'center', maxWidth: 720, margin: '0 auto', lineHeight: 1.7 }}>
+              ★ Plus is the recommended path for first-time license candidates &mdash; you walk out with a license and a working business. Solo is for already-licensed agents who don&apos;t need the coursework.
             </p>
           </div>
         </section>
@@ -118,32 +158,48 @@ export default function PricingPage() {
               Hawaii&apos;s REC-approved schools all use a defined access window for one reason: <strong style={{ color: T.text }}>real estate knowledge decays when it sits unused.</strong> The window is there to keep you focused, finish you on time, and protect your readiness when you walk into the PSI exam.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Standard:</strong> 6 months from enrollment to complete the curriculum and pass our school final exam at 70% or above. Our recommendation: study 4&ndash;6 hours/week and you&apos;ll finish in 3&ndash;4 months with room to spare.
+              <strong style={{ color: T.text }}>Standard:</strong> 6 months from enrollment. Studying 4&ndash;6 hours/week, most students finish in 3&ndash;4 months.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Plus:</strong> 12 months &mdash; double the window for students balancing the course with full-time work or major life events.
+              <strong style={{ color: T.text }}>Plus:</strong> 12 months &mdash; double the window for students balancing the course with full-time work, family, or major life events.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 0 }}>
-              If you don&apos;t complete in your window, you can re-enroll at a discounted rate. Your school-completion certificate, once earned, is valid for two years per Hawaii REC rules.
+              If you don&apos;t finish in your window, re-enroll at a discounted alumni rate. Your school-completion certificate, once earned, is valid for two years per Hawaii REC rules.
             </p>
           </div>
         </section>
 
-        {/* GUARANTEE */}
-        <section style={{ padding: '0 32px 64px', maxWidth: 980, margin: '0 auto' }}>
+        {/* PLUS BUNDLE DETAIL */}
+        <section style={{ padding: '0 32px 32px', maxWidth: 980, margin: '0 auto' }}>
           <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, borderLeftWidth: 4, borderLeftColor: T.ocean, borderLeftStyle: 'solid' }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Plus-tier guarantee</div>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Plus tier · The graduation bundle</div>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 16 }}>
-              Pass-or-Pay-Zero
+              Pass the exam. We hand you a working business.
             </h2>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
-              Plus students who complete the full curriculum (all chapters watched/read, all quizzes passed at &ge;70%, full mock exam taken) and don&apos;t pass the PSI Hawaii Salesperson Exam on their first attempt get their second-attempt prep <strong style={{ color: T.text }}>completely free.</strong>
+              Plus students who pass the PSI Hawaii Salesperson Exam unlock a complete agent launch kit: a <strong style={{ color: T.text }}>custom Hawaii broker website on your own domain</strong>, integrated CRM and lead-capture forms, an admin portal, broker intros, contract templates, and a curated starter lead packet for your first 90 days.
             </p>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
-              Includes: another exam-week intensive review, fresh mock exams, priority AI tutor lane, and additional cohort coaching. No paperwork gymnastics, no fine print &mdash; we built the system that wins, and we&apos;re willing to bet on it.
+              Same caliber of site as the example below &mdash; built, branded to you, and deployed. <Link href="/example-website" target="_blank" rel="noopener" style={{ color: T.ocean, textDecoration: 'underline' }}>See the live example (Shayne M. Guthrie)</Link>.
             </p>
-            <p style={{ fontSize: 14, color: T.textMute, lineHeight: 1.6 }}>
-              Statewide first-attempt pass rate is 40&ndash;45% (Hawaii REC, 2025). With the full system, our students aim for the top of that distribution &mdash; not the middle.
+            <p style={{ fontSize: 14, color: T.textMute, lineHeight: 1.7 }}>
+              <strong style={{ color: T.text }}>Note:</strong> the website is delivered after you pass the PSI exam. A monthly hosting / maintenance fee applies once the site is live &mdash; domain renewal, SSL, CRM uptime, security patches, lead-capture infrastructure. Quoted at signup; transparent month-to-month, cancel anytime.
+            </p>
+          </div>
+        </section>
+
+        {/* SOLO WEBSITE DETAIL */}
+        <section style={{ padding: '0 32px 64px', maxWidth: 980, margin: '0 auto' }}>
+          <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, borderLeftWidth: 4, borderLeftColor: T.coral, borderLeftStyle: 'solid' }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Solo Website Build · For already-licensed agents</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 32, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 16 }}>
+              Already licensed? Skip the course. Get the site.
+            </h2>
+            <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
+              The same website build, CRM, lead capture, and admin portal that Plus students unlock on passing &mdash; available as a standalone purchase for Hawaii brokers and salespersons already in the field. <strong style={{ color: T.text }}>$800 one-time</strong> for the build, then a monthly hosting / maintenance fee to keep it running.
+            </p>
+            <p style={{ fontSize: 14, color: T.textMute, lineHeight: 1.7 }}>
+              Includes domain registration (yourname.com), branded design, listings layout, contact + inquiry forms wired to your CRM, mobile-perfect responsive, and search-indexed. We build, deploy, hand you the keys.
             </p>
           </div>
         </section>
@@ -157,13 +213,19 @@ export default function PricingPage() {
                 <b style={{ color: T.text }}>Hawaii license requirement:</b> All Hawaii salesperson candidates must complete a 60-hour pre-licensing course at a REC-approved school for license eligibility. This program is structured to meet that requirement plus exam mastery. Verify current requirements at cca.hawaii.gov/reb.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Plus website delivery:</b> the custom agent website, domain registration, CRM, and admin portal in the Plus tier are delivered after the student passes the PSI Hawaii Salesperson Exam. A monthly hosting &amp; maintenance fee applies once the site is live (quoted at delivery, transparent month-to-month).
+              </li>
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
+                <b style={{ color: T.text }}>Solo Website Build:</b> open to any Hawaii broker or salesperson with an active license. License verification required before site goes live. Same monthly hosting / maintenance terms apply.
+              </li>
+              <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
                 <b style={{ color: T.text }}>Not legal advice.</b> Hawaii statutes change. Verify against current Hawaii Revised Statutes and REC rules before relying on any material for a real transaction.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
                 <b style={{ color: T.text }}>Independent.</b> Not affiliated with the Hawaii Real Estate Commission, PSI, or any official body.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
-                <b style={{ color: T.text }}>One-time payment, no auto-renewal.</b> No subscription. Your access window is fixed at enrollment (6 months Standard, 12 months Plus). After expiration, re-enroll at a discounted alumni rate.
+                <b style={{ color: T.text }}>One-time payment, no auto-renewal on course tuition.</b> Hosting / maintenance for delivered websites is the only recurring charge, and only after the site is live.
               </li>
             </ul>
           </div>
@@ -185,10 +247,11 @@ function BigTier({ id, name, price, tagline, features, cta, href, featured }: {
       padding: '28px 26px', borderRadius: 18, position: 'relative',
       borderColor: featured ? T.ocean : undefined,
       borderWidth: featured ? 2 : 1,
+      boxShadow: featured ? SHADOW_3D.lg : CARD.boxShadow,
       transform: featured ? 'translateY(-4px)' : undefined,
     }}>
       {featured && (
-        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: T.ocean, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 6, fontWeight: 700 }}>
+        <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: T.ocean, color: T.white, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 6, fontWeight: 700, whiteSpace: 'nowrap' }}>
           Recommended
         </div>
       )}
@@ -210,18 +273,28 @@ function BigTier({ id, name, price, tagline, features, cta, href, featured }: {
   );
 }
 
-function ValueRow({ label, included, elsewhere, last }: { label: string; included: string; elsewhere: string; last?: boolean }) {
+function CompareRow({ label, std, plus, plusConditional, solo, last }: {
+  label: string;
+  std?: boolean | string;
+  plus?: boolean | string;
+  plusConditional?: boolean;
+  solo?: boolean;
+  last?: boolean;
+}) {
+  const cell = (val: boolean | string | undefined, conditional?: boolean, accent?: boolean) => {
+    if (val === true) return <span style={{ color: accent ? T.ocean : T.green, fontWeight: 700 }}>✓</span>;
+    if (typeof val === 'string') return <span style={{ color: T.text, fontWeight: 600, fontSize: 12 }}>{val}</span>;
+    if (conditional) return <span style={{ color: T.ocean, fontWeight: 700, fontSize: 12 }}>✓ on passing</span>;
+    return <span style={{ color: T.textGhost }}>—</span>;
+  };
+  // If plusConditional is set, treat plus as conditionally true
+  const plusCell = plusConditional ? cell(undefined, true, true) : cell(plus, false, true);
   return (
-    <div style={{
-      display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', gap: 20, padding: '12px 0',
-      borderBottom: last ? undefined : `1px solid ${T.border}`,
-      alignItems: 'center',
-    }}>
-      <div style={{ fontSize: 14, color: T.text, fontWeight: 500, lineHeight: 1.4 }}>{label}</div>
-      <div style={{ fontSize: 13, color: T.ocean, fontWeight: 600, lineHeight: 1.4 }}>
-        <span style={{ marginRight: 6 }}>✓</span>{included}
-      </div>
-      <div style={{ fontSize: 12, color: T.textMute, lineHeight: 1.4 }}>{elsewhere}</div>
-    </div>
+    <tr style={{ borderBottom: last ? undefined : `1px solid ${T.border}` }}>
+      <td style={{ padding: '12px 8px', fontSize: 14, color: T.text, fontWeight: 500, lineHeight: 1.4 }}>{label}</td>
+      <td style={{ padding: '12px 8px', textAlign: 'center' }}>{cell(std)}</td>
+      <td style={{ padding: '12px 8px', textAlign: 'center', background: 'rgba(20,131,123,0.04)' }}>{plusCell}</td>
+      <td style={{ padding: '12px 8px', textAlign: 'center' }}>{cell(solo)}</td>
+    </tr>
   );
 }

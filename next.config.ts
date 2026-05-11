@@ -47,6 +47,8 @@ const nextConfig: NextConfig = {
     return [
       { source: '/design-review', destination: '/design-review/index.html' },
       { source: '/design-review/', destination: '/design-review/index.html' },
+      { source: '/example-website', destination: '/example-website.html' },
+      { source: '/example-website/', destination: '/example-website.html' },
     ];
   },
 };

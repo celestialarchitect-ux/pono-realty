@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#7f1d1d" />
+<title>Shayne Guthrie · Hawaii Real Estate Broker</title>
+<meta name="description" content="Shayne Guthrie — licensed Hawaii Real Estate Broker (BC). Ralph S. Foulger brokerage, Kaneohe. Buyer and seller representation across Oahu." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%237f1d1d' rx='14'/%3E%3Cpath d='M30 70 L50 30 L70 70 Z' fill='%23fbbf24'/%3E%3C/svg%3E" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --crimson:#b91c1c;
+  --burgundy:#7f1d1d;
+  --burgundy-deep:#450a0a;
+  --rose-pale:#fee2e2;
+  --cream:#fef9f5;
+  --gold:#b8860b;
+  --gold-light:#d4af37;
+  --ink:#1c1917;
+  --muted:#78716c;
+  --dim:#a8a29e;
+  --border:#e7e5e4;
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100dvh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;border:0;cursor:pointer}
+
+nav.top{
+  position:fixed;top:0;left:0;right:0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(20px,4vw,40px);
+  background:rgba(254,249,245,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+nav.top .logo{display:flex;align-items:center;gap:12px;font-family:'Playfair Display',serif;font-weight:700;font-size:19px;color:var(--burgundy)}
+nav.top .logo .mark{
+  width:38px;height:38px;border-radius:6px;
+  background:linear-gradient(135deg,var(--crimson),var(--burgundy-deep));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-light);font-weight:700;font-size:20px;font-family:'Playfair Display',serif;
+}
+nav.top .logo .mark::before{content:'S'}
+nav.top .logo small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:2px}
+nav.top ul{display:flex;gap:24px;list-style:none}
+nav.top a{color:var(--muted);font-weight:500;font-size:14px}
+nav.top a:hover{color:var(--burgundy)}
+nav.top .call{
+  padding:11px 20px;background:linear-gradient(135deg,var(--crimson),var(--burgundy));
+  color:#fff;border-radius:6px;font-weight:600;font-size:13px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.04em;
+}
+@media(max-width:760px){nav.top ul{display:none}}
+
+.hero{
+  min-height:90dvh;
+  padding:140px clamp(20px,5vw,60px) 80px;
+  display:flex;align-items:center;
+  background:
+    radial-gradient(ellipse 70% 40% at 80% 20%,rgba(212,175,55,.1),transparent 60%),
+    radial-gradient(ellipse 70% 60% at 10% 90%,rgba(124,29,29,.06),transparent 70%),
+    var(--cream);
+}
+.hero .inner{max-width:1180px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
+@media(max-width:880px){.hero .inner{grid-template-columns:1fr;gap:36px}}
+.hero .portrait{
+  aspect-ratio:3/4;border-radius:6px;overflow:hidden;
+  background:url('/example-website-assets/shayne/marina.jpg?v=27') center 18%/cover;
+  box-shadow:0 30px 80px rgba(124,29,29,.18);
+  border:5px solid #fff;position:relative;
+}
+.hero .portrait::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:120px;
+  background:linear-gradient(180deg,transparent,rgba(124,29,29,.45));
+}
+.hero .portrait .ribbon{
+  position:absolute;bottom:18px;left:18px;right:18px;color:#fff;z-index:2;
+}
+.hero .portrait .ribbon b{display:block;font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:2px}
+.hero .portrait .ribbon span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:700}
+@media(max-width:880px){.hero .portrait{max-width:300px;margin:0 auto}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 16px;background:#fff;border:1px solid var(--rose-pale);border-radius:99px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--burgundy);font-weight:600;margin-bottom:28px;
+}
+.eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--crimson)}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,7vw,84px);line-height:1.05;letter-spacing:-.02em;font-weight:400;
+  color:var(--ink);max-width:880px;
+}
+.hero h1 b{font-weight:700}
+.hero h1 em{font-style:italic;color:var(--burgundy)}
+.hero .lede{
+  font-size:18px;color:var(--muted);margin-top:28px;max-width:640px;line-height:1.65;
+}
+.hero .ctas{margin-top:40px;display:flex;gap:12px;flex-wrap:wrap}
+.cta{
+  padding:16px 28px;border-radius:6px;font-weight:600;font-size:13px;letter-spacing:.04em;
+  font-family:'JetBrains Mono',monospace;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:10px;transition:transform .15s;
+}
+.cta:hover{transform:translateY(-1px)}
+.cta.primary{background:var(--crimson);color:#fff;box-shadow:0 6px 20px rgba(185,28,28,.25)}
+.cta.primary:hover{background:var(--burgundy)}
+.cta.ghost{background:#fff;border:1px solid var(--ink);color:var(--ink)}
+.cta.ghost:hover{background:var(--ink);color:#fff}
+
+section{padding:80px clamp(20px,5vw,60px)}
+.wrap{max-width:1100px;margin:0 auto}
+.snum{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--burgundy);
+  letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px;font-weight:600;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.snum::before{content:'';width:24px;height:1px;background:var(--burgundy)}
+.stitle{
+  font-family:'Playfair Display',serif;font-weight:400;
+  font-size:clamp(32px,4.5vw,52px);line-height:1.1;letter-spacing:-.02em;
+  margin-bottom:14px;color:var(--ink);
+}
+.stitle em{font-style:italic;color:var(--burgundy)}
+.stitle b{font-weight:700}
+.slede{font-size:16px;color:var(--muted);max-width:680px;line-height:1.65;margin-bottom:40px}
+
+.creds{background:var(--burgundy-deep);color:#fff}
+.creds .snum{color:var(--gold-light)}.creds .snum::before{background:var(--gold-light)}
+.creds .stitle,.creds .stitle b{color:#fff}.creds .stitle em{color:var(--gold-light)}
+.creds .slede{color:rgba(255,255,255,.7)}
+.cred-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:760px){.cred-grid{grid-template-columns:1fr}}
+.cred{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:28px;
+}
+.cred .lab{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:10px}
+.cred h4{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.cred p{font-size:14px;color:rgba(255,255,255,.7);line-height:1.65}
+.cred a{color:var(--gold-light);border-bottom:1px dashed rgba(212,175,55,.4)}
+
+.serve{background:#fff}
+.serve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.serve-grid{grid-template-columns:1fr}}
+.scard{
+  background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:32px;
+}
+.scard .ic{
+  width:44px;height:44px;border-radius:4px;
+  background:linear-gradient(135deg,var(--crimson),var(--burgundy));
+  color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.scard h3{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--ink);margin-bottom:10px;letter-spacing:-.01em}
+.scard p{font-size:14.5px;color:var(--muted);line-height:1.65}
+
+.contact{background:var(--ink);color:#fff;text-align:center}
+.contact .stitle,.contact .stitle b{color:#fff}.contact .stitle em{color:var(--gold-light)}
+.contact-card{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:4px;padding:40px;max-width:520px;margin:30px auto 0;text-align:left;
+}
+.contact-card .row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+}
+.contact-card .row:last-child{border-bottom:0}
+.contact-card .row .l{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.contact-card .row .v{color:#fff;font-weight:600}
+.contact-card .row .v a{color:var(--gold-light)}
+.contact-card .cta-row{padding-top:24px;margin-top:14px;border-top:1px solid rgba(255,255,255,.1);text-align:center}
+.contact-card .cta-call{
+  display:inline-block;padding:14px 28px;background:var(--gold-light);color:var(--burgundy-deep);
+  border-radius:4px;font-weight:700;font-size:13px;font-family:'JetBrains Mono',monospace;
+  letter-spacing:.04em;text-transform:uppercase;
+}
+
+footer{
+  padding:40px clamp(20px,5vw,60px);background:var(--ink);color:rgba(255,255,255,.5);
+  text-align:center;font-size:12px;border-top:1px solid rgba(255,255,255,.08);
+}
+footer .brand{font-family:'Playfair Display',serif;font-style:italic;font-size:24px;color:#fff;display:block;margin-bottom:8px;font-weight:400}
+footer .info{font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.9;color:rgba(255,255,255,.6);letter-spacing:.05em}
+footer .legal{margin-top:20px;font-size:10px;color:rgba(255,255,255,.35);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;line-height:1.7}
+footer .ehl{
+  display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:5px 12px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:3px;
+  font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:.15em;color:var(--gold-light);
+}
+footer .ehl::before{content:'⌂';color:var(--gold-light)}
+
+.ic{width:22px;height:22px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:780px){.approach-grid{grid-template-columns:1fr 1fr !important}}
+@media(max-width:600px){.hero{padding:120px 20px 60px}section{padding:60px 20px}.approach-grid{grid-template-columns:1fr !important}}
+</style>
+<style>
+.rfs-watermark{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:linear-gradient(180deg,#0e1a26 0%,#14837b 100%);
+  color:#fbf7f0;padding:9px clamp(14px,4vw,32px);
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.18);
+  box-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+.rfs-watermark a{color:#fbbf24;text-decoration:none;font-weight:700}
+.rfs-watermark a:hover{text-decoration:underline}
+.rfs-watermark .pill{background:rgba(255,255,255,.12);padding:3px 8px;border-radius:99px;margin-right:10px;font-size:9px}
+nav.top{top:38px !important}
+.hero{padding-top:178px !important}
+@media(max-width:600px){
+  .rfs-watermark{font-size:9px;padding:8px 10px;letter-spacing:.1em}
+  nav.top{top:34px !important}
+  .hero{padding-top:154px !important}
+}
+</style>
+</head>
+<body>
+
+<div class="rfs-watermark">
+  <span class="pill">RFS Example</span>
+  Live broker site of <a href="/" target="_top">Shayne M. Guthrie</a>, a Ralph Foulger graduate &middot; Plus-tier students unlock a site like this on passing
+</div>
+
+<nav class="top">
+  <a href="/" class="logo"><span class="mark"></span><span>Shayne Guthrie<small>Hawaii Real Estate</small></span></a>
+  <ul>
+    <li><a href="#creds">Credentials</a></li>
+    <li><a href="#serve">Services</a></li>
+    <li><a href="/" target="_top">Academy ↗</a></li>
+    <li><a href="#inquire">Inquire</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:8083722273" class="call">(808) 372-2273</a>
+</nav>
+
+<section class="hero">
+  <div class="inner">
+    <div>
+      <span class="eyebrow">Licensed Hawaii Broker · BC</span>
+      <h1><b>Shayne Guthrie.</b> <em>Hawaii real estate.</em></h1>
+      <p class="lede">Licensed Hawaii Real Estate Broker affiliated with Ralph S. Foulger brokerage in Kaneohe. Buyer and seller representation across Oahu.</p>
+      <div class="ctas">
+        <a href="tel:8083722273" class="cta primary">Call (808) 372-2273</a>
+        <a href="#contact" class="cta ghost">Office Info</a>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="ribbon">
+        <b>Shayne M. Guthrie</b>
+        <span>Hawaii Broker · BC · Kaneohe</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="creds" id="creds">
+  <div class="wrap">
+    <div class="snum">Credentials</div>
+    <h2 class="stitle">Verified, <em>local.</em></h2>
+    <p class="slede">Hawaii real estate is regulated by the DCCA Real Estate Commission under HRS 467. Verifiable credentials below.</p>
+    <div class="cred-grid">
+      <div class="cred">
+        <div class="lab">Designation</div>
+        <h4>Hawaii Broker · BC</h4>
+        <p>Licensed at the broker level under Hawaii's three-tier real estate licensing system. Listed on the Honolulu Board of REALTORS office directory.</p>
+      </div>
+      <div class="cred">
+        <div class="lab">Brokerage</div>
+        <h4>Ralph S. Foulger</h4>
+        <p>Affiliated with the Ralph S. Foulger brokerage. Principal broker: Ralph S. Foulger.</p>
+      </div>
+      <div class="cred">
+        <div class="lab">Education</div>
+        <h4>Ralph Foulger's Real Estate School of Hawaii</h4>
+        <p>Education completed at Ralph Foulger's Real Estate School of Hawaii — established 1972 — a Hawaii Real Estate Commission–approved instructor.</p>
+      </div>
+      <div class="cred">
+        <div class="lab">Office</div>
+        <h4>Kaneohe</h4>
+        <p>47-388 Hui Iwa Street, Suite 21-A · Kaneohe, HI 96744</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="serve" id="serve">
+  <div class="wrap">
+    <div class="snum">Services</div>
+    <h2 class="stitle">Buyer + seller<br/><em>representation.</em></h2>
+    <p class="slede">Standard residential brokerage services across Oahu. The first conversation is free and without obligation.</p>
+    <div class="serve-grid">
+      <div class="scard">
+        <div class="ic"><svg class="ic" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+        <h3>Buyer Representation</h3>
+        <p>Helping buyers identify, evaluate, and negotiate residential property purchases on Oahu.</p>
+      </div>
+      <div class="scard">
+        <div class="ic"><svg class="ic" viewBox="0 0 24 24"><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <h3>Seller Representation</h3>
+        <p>Listing, marketing, and negotiating the sale of residential property on Oahu.</p>
+      </div>
+      <div class="scard">
+        <div class="ic"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+        <h3>Free Initial Consultation</h3>
+        <p>Twenty-minute call or in-person conversation. No cost, no commitment, no pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--border)" id="approach">
+  <div class="wrap">
+    <div class="snum">The way I work</div>
+    <h2 class="stitle">Discretion, <em>local knowledge,</em><br/>multi-disciplinary background.</h2>
+    <p class="slede">Twenty-five years of practicing on Oahu means a network that runs deeper than any single industry. The way I represent clients reflects that.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px" class="approach-grid">
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">i.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">Response within one business day</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Every inquiry receives a personal response within twenty-four hours. No call centers, no auto-responders, no junior associate intercepting the conversation.</p>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">ii.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">A network that crosses industries</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Two-and-a-half decades as a practicing professional on Oahu means access to inspectors, contractors, lenders, and attorneys built on long working relationships, not transactional referrals.</p>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">iii.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">No pressure, no urgency tactics</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Real estate is a deliberate decision. Initial conversations carry no obligation. If the timing isn't right, the timing isn't right — there is no follow-up funnel designed to manufacture urgency.</p>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">iv.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">Discretion as standard</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Listings, financial details, and personal circumstances are treated as confidential by default. Any disclosure to third parties happens only with explicit written consent.</p>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">v.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">Trained in the Foulger tradition</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Ralph Foulger's School of Real Estate, founded in 1972, has trained generations of Hawaii agents in the fundamentals of fiduciary representation. That curriculum is the foundation of how I practice.</p>
+      </div>
+
+      <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:28px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--burgundy);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:10px">vi.</div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:var(--ink);letter-spacing:-.01em;margin-bottom:10px">Plain language, written records</h3>
+        <p style="font-size:14px;color:var(--muted);line-height:1.65">Every offer, counter, and contingency is explained in plain language before signing. Paper trail kept on every conversation that affects price, timeline, or representation.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:48px;padding:32px;background:linear-gradient(135deg,var(--burgundy),var(--burgundy-deep));color:#fff;border-radius:4px">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:14px">Verified affiliations</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;font-size:14px;line-height:1.7">
+        <div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:2px">License</span>Hawaii Real Estate Broker (BC) · Active</div>
+        <div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:2px">Brokerage</span>Ralph S. Foulger Brokerage · Kaneohe</div>
+        <div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:2px">Mentor lineage</span>Ralph Foulger's School of Real Estate · 1972</div>
+        <div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;display:block;margin-bottom:2px">Member</span>Honolulu Board of REALTORS®</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream)" id="inquire">
+  <div class="wrap" style="max-width:720px">
+    <div class="snum">Inquire</div>
+    <h2 class="stitle">Send <em>a note.</em></h2>
+    <p class="slede">Tell me a little about your situation. I'll respond within one business day.</p>
+    <form id="inqForm" onsubmit="submitInquiry(event)" style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:36px;box-shadow:0 4px 12px rgba(124,29,29,.06)">
+      <div id="ok" style="display:none;background:#dcfce7;border:1px solid #86efac;color:#166534;padding:14px;border-radius:4px;margin-bottom:16px;font-size:14px">Mahalo. I'll be in touch within one business day.</div>
+      <div id="err" style="display:none;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:14px;border-radius:4px;margin-bottom:16px;font-size:14px"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">Name *</label><input name="name" required maxlength="80" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream)" /></div>
+        <div><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">Email *</label><input name="email" type="email" required style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream)" /></div>
+        <div><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">Phone</label><input name="phone" type="tel" maxlength="20" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream)" /></div>
+        <div><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">I'm a</label><select name="kind" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream)"><option value="">—</option><option value="buyer">Buyer</option><option value="seller">Seller</option><option value="both">Both</option><option value="curious">Just exploring</option></select></div>
+      </div>
+      <div style="margin-top:14px"><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">Timeline</label><select name="timeline" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream)"><option value="">—</option><option value="now">Now / ASAP</option><option value="1-3mo">Within 3 months</option><option value="3-6mo">3-6 months</option><option value="6-12mo">6-12 months</option><option value="12+mo">12+ months</option></select></div>
+      <div style="margin-top:14px"><label style="display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600">Message</label><textarea name="message" maxlength="1000" rows="4" style="width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:4px;font-family:inherit;font-size:14px;background:var(--cream);resize:vertical"></textarea></div>
+      <label style="display:flex;gap:10px;align-items:flex-start;padding:14px;background:var(--cream);border:1px solid var(--border);border-radius:4px;margin:18px 0;font-size:13px;color:var(--muted);line-height:1.5;cursor:pointer"><input type="checkbox" name="consent_marketing" required style="margin-top:2px" /><span>Yes, contact me about my real estate inquiry. I can opt out anytime.</span></label>
+      <button type="submit" style="width:100%;padding:16px;background:var(--crimson);color:#fff;border-radius:4px;font-weight:700;font-size:13px;letter-spacing:.04em;font-family:'JetBrains Mono',monospace;text-transform:uppercase;transition:background .15s">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="snum" style="color:var(--gold-light)">Contact</div>
+    <h2 class="stitle"><em>Get in touch.</em></h2>
+    <div class="contact-card">
+      <div class="row"><span class="l">Phone</span><span class="v"><a href="tel:8083722273">(808) 372-2273</a></span></div>
+      <div class="row"><span class="l">Office</span><span class="v">47-388 Hui Iwa St #21-A</span></div>
+      <div class="row"><span class="l">City</span><span class="v">Kaneohe, HI 96744</span></div>
+      <div class="row"><span class="l">Brokerage</span><span class="v">Ralph S. Foulger</span></div>
+      <div class="row"><span class="l">Designation</span><span class="v">BC · Hawaii Broker</span></div>
+      <div class="cta-row">
+        <a href="tel:8083722273" class="cta-call">Call now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="brand">Shayne M. Guthrie</span>
+  <div class="info">
+    Hawaii Real Estate Broker · BC<br/>
+    Ralph S. Foulger Brokerage<br/>
+    47-388 Hui Iwa Street, Suite 21-A, Kaneohe, HI 96744<br/>
+    (808) 372-2273
+  </div>
+  <div class="ehl">EQUAL HOUSING OPPORTUNITY</div>
+  <div class="legal">© 2026 Shayne M. Guthrie · Licensed under Hawaii REC · HRS 467</div>
+  <div class="legal" style="margin-top:6px;color:#fbbf24;font-weight:600">Site built by Ralph Foulger&apos;s School of Real Estate &middot; Plus-tier graduate package &middot; <a href="/" target="_top" style="color:inherit;text-decoration:underline">ralphfoulger.com</a></div>
+</footer>
+
+<script>
+function submitInquiry(e){
+  e.preventDefault();
+  const err=document.getElementById('err');
+  err.textContent="This is an example website. Inquiries aren't sent — Plus-tier graduates receive a fully wired version with a working CRM and admin portal.";
+  err.style.display='block';
+  err.scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>

@@ -72,7 +72,7 @@ export default async function OpengraphImage() {
               maxWidth: 980,
             }}
           >
-            20-chapter PSI curriculum · Audiobook narration · 24/7 AI tutor · Pass guarantee
+            20-chapter PSI curriculum · Audiobook · 24/7 AI tutor · Free agent website on graduation
           </div>
         </div>
 
