@@ -12,6 +12,7 @@ import {
   hoursDecimal,
   STATE_LAW_HOURS_REQUIRED,
 } from '@/lib/time-tracking';
+import { isHapticsEnabled, setHapticsEnabled, tap } from '@/lib/haptics';
 
 const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
@@ -279,6 +280,9 @@ export default function ProfilePage() {
         </div>
       )}
 
+      {/* SETTINGS */}
+      <SettingsCard />
+
       {/* META */}
       <div style={{ ...CARD, padding: 22, borderLeft: `3px solid ${T.coral}` }}>
         <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 10 }}>How real-time tracking works</h3>
@@ -333,6 +337,64 @@ function Stat({ label, value, sub, accent = 'default', live = false }: { label: 
       <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 900, color: accentColor[accent], letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 4 }}>{value}</div>
       <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>{sub}</div>
       <style>{`@keyframes rfs-pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }`}</style>
+    </div>
+  );
+}
+
+function SettingsCard() {
+  const [hapticsOn, setHapticsOn] = useState<boolean | null>(null);
+  useEffect(() => { setHapticsOn(isHapticsEnabled()); }, []);
+  const toggle = () => {
+    setHapticsOn(curr => {
+      const next = !(curr ?? true);
+      setHapticsEnabled(next);
+      if (next) tap();   // demo the feedback on enable
+      return next;
+    });
+  };
+  if (hapticsOn === null) return null;
+  return (
+    <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.ocean}` }}>
+      <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 6 }}>Settings</h3>
+      <p style={{ fontSize: 12, color: T.textMute, lineHeight: 1.6, marginBottom: 14 }}>
+        Stored on this device. Sign in on another device to set it there too.
+      </p>
+      <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 14, cursor: 'pointer' }}>
+        <div>
+          <div style={{ fontSize: 14, color: T.text, fontWeight: 600, marginBottom: 2 }}>Haptic feedback</div>
+          <div style={{ fontSize: 12, color: T.textMute, lineHeight: 1.5 }}>
+            A subtle tap + tone on study-page interactions. Vibrates on mobile, soft click on desktop.
+          </div>
+        </div>
+        <span
+          role="switch"
+          aria-checked={hapticsOn}
+          onClick={toggle}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } }}
+          tabIndex={0}
+          style={{
+            position: 'relative',
+            width: 46, height: 26,
+            borderRadius: 999,
+            background: hapticsOn ? T.ocean : T.bgRaised,
+            border: `1px solid ${hapticsOn ? T.oceanDark : T.border}`,
+            cursor: 'pointer',
+            flexShrink: 0,
+            transition: 'background 0.18s',
+          }}
+        >
+          <span style={{
+            position: 'absolute',
+            top: 2,
+            left: hapticsOn ? 22 : 2,
+            width: 20, height: 20,
+            borderRadius: '50%',
+            background: '#fff',
+            transition: 'left 0.18s',
+            boxShadow: '0 1px 3px rgba(45,55,72,0.2)',
+          }} />
+        </span>
+      </label>
     </div>
   );
 }

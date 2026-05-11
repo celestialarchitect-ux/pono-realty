@@ -23,11 +23,13 @@ interface KPI {
 }
 
 interface DayRow { date: string; signups: number; seconds: number }
+interface HourRow { hour: number; signups: number; seconds: number; revenueCents: number }
 interface UserRow { id: string; email: string; name: string; tier: string; createdAt: string; emailVerifiedAt?: string | null }
 
 interface DashboardData {
   kpi: KPI;
   last30: DayRow[];
+  todayByHour: HourRow[];
   recentSignups: UserRow[];
   recentUpgrades: UserRow[];
 }
@@ -113,6 +115,9 @@ export default function AdminDashboard() {
         </div>
         <DailyChart rows={data.last30} peakSignups={peakSignups} peakSeconds={peakSeconds} />
       </div>
+
+      {/* HOURLY (TODAY) CHART */}
+      {data.todayByHour && data.todayByHour.length === 24 && <HourlyToday rows={data.todayByHour} />}
 
       {/* TWO-COLUMN FEEDS */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: 18, marginBottom: 22 }} data-stack-mobile="true">
@@ -209,6 +214,45 @@ function Legend({ color, label }: { color: string; label: string }) {
       <span style={{ width: 10, height: 10, borderRadius: 2, background: color }} />
       {label}
     </span>
+  );
+}
+
+function HourlyToday({ rows }: { rows: HourRow[] }) {
+  const peakSignups = Math.max(1, ...rows.map(r => r.signups));
+  const peakSeconds = Math.max(1, ...rows.map(r => r.seconds));
+  const currentHourUTC = new Date().getUTCHours();
+  return (
+    <div style={{ ...CARD, padding: 24, marginBottom: 22 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>Today · hour by hour (UTC)</div>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0 }}>Live pulse</h2>
+        </div>
+        <div style={{ display: 'flex', gap: 14, fontSize: 12, color: T.textDim }}>
+          <Legend color={T.ocean} label="Signups" />
+          <Legend color={T.coral} label="Study" />
+        </div>
+      </div>
+      <div style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 120, paddingBottom: 22, position: 'relative' }}>
+        {rows.map(r => {
+          const sPct = (r.signups / peakSignups) * 100;
+          const tPct = (r.seconds / peakSeconds) * 100;
+          const isNow = r.hour === currentHourUTC;
+          return (
+            <div key={r.hour} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, height: '100%', position: 'relative' }} title={`${r.hour.toString().padStart(2,'0')}:00 UTC · ${r.signups} signup${r.signups===1?'':'s'} · ${(r.seconds/3600).toFixed(1)}h study · $${Math.round(r.revenueCents/100)} rev`}>
+              <div style={{ flex: 1, width: '100%', display: 'flex', alignItems: 'flex-end', gap: 2 }}>
+                <div style={{ flex: 1, height: `${tPct}%`, background: T.coral, borderRadius: '3px 3px 0 0', minHeight: r.seconds > 0 ? 2 : 0, opacity: 0.85 }} />
+                <div style={{ flex: 1, height: `${sPct}%`, background: T.ocean, borderRadius: '3px 3px 0 0', minHeight: r.signups > 0 ? 2 : 0 }} />
+              </div>
+              {isNow && <span style={{ position: 'absolute', bottom: -20, fontSize: 9, color: T.ocean, fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, letterSpacing: '0.08em' }}>NOW</span>}
+              {r.hour % 6 === 0 && !isNow && (
+                <span style={{ position: 'absolute', bottom: -20, fontSize: 9, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>{r.hour.toString().padStart(2,'0')}</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
