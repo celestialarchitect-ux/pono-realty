@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { getSessionUser, authConfigured } from '@/lib/auth';
-import { pathToBucket } from '@/lib/time-tracking';
+import { pathToBucket, DAILY_HOURS_CAP } from '@/lib/time-tracking';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-// Server caps heartbeat granularity to prevent client abuse.
 const MAX_SECONDS_PER_HEARTBEAT = 10;
-// One heartbeat per user every 3s minimum.
 const HEARTBEAT_COOLDOWN_MS = 3_000;
 const lastHeartbeat = new Map<string, number>();
+
+function startOfTodayUTC(): Date {
+  const now = new Date();
+  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+}
 
 export async function POST(req: NextRequest) {
   if (!authConfigured() || !db) {
@@ -35,10 +38,33 @@ export async function POST(req: NextRequest) {
   }
   lastHeartbeat.set(user.id, now);
 
+  // Daily cap — server-side anti-cheat. Sum today's seconds, refuse if over.
+  // The cap is 12 hours/day; honest study almost never exceeds this and bot
+  // farming becomes obviously suspicious at higher values.
+  try {
+    const todayAgg = await db.timeEvent.aggregate({
+      where: { userId: user.id, createdAt: { gte: startOfTodayUTC() } },
+      _sum: { seconds: true },
+    });
+    const today = todayAgg._sum.seconds ?? 0;
+    if (today >= DAILY_HOURS_CAP * 3600) {
+      return NextResponse.json({ ok: false, error: 'daily_cap_reached', cap: DAILY_HOURS_CAP }, { status: 429 });
+    }
+  } catch {
+    // If the cap check fails, fall through and record — fail-open on read
+    // errors so a flaky DB doesn't lose study time, but the writeable check
+    // below still catches catastrophic failures.
+  }
+
   const bucket = pathToBucket(path);
   try {
     await db.timeEvent.create({
       data: { userId: user.id, path, bucket, seconds },
+    });
+    // Bump lastSeenAt so the admin "active now" view reflects this ping.
+    await db.user.update({
+      where: { id: user.id },
+      data: { lastSeenAt: new Date() },
     });
   } catch {
     return NextResponse.json({ error: 'db_write_failed' }, { status: 500 });

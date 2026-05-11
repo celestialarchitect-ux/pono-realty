@@ -31,7 +31,24 @@ Expected: `🚀 Your database is now in sync with your Prisma schema.`
 ### 1.4 Smoke test
 - `/signup` → create an admin-listed account with a 10+ char password
 - Redirects to `/profile` → should show 0.0 hours, source: server
-- Visit `/admin/users` → real student table appears with your row
+- Visit `/admin` → Shopify-style dashboard with KPIs + 30-day chart
+- Visit `/admin/users` → real student table with your row
+
+### 1.5 Creating the first admin via CLI (alternative to ADMIN_EMAILS)
+
+If you'd rather not go through the signup form, run:
+
+```bash
+cd ~/claude-dashboard/ralph-foulger-school
+railway run npm run create-admin -- you@email.com 'YourPassword123!' "Your Name"
+```
+
+This script:
+- Creates the user if they don't exist, with `isAdmin=true` and a verified email
+- Or promotes an existing user to admin if the email is already in the DB
+- Pass `--reset-password` to also rewrite the password for an existing user
+
+After it runs, visit `/login`, sign in, and you're dropped into `/admin`.
 
 ---
 

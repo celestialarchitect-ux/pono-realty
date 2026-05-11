@@ -10,31 +10,69 @@ import {
   IDLE_THRESHOLD_SECONDS,
 } from '@/lib/time-tracking';
 
-// Mounted once in the root layout. Counts active study time per pathname into
-// localStorage (always — visitor or authenticated). When authenticated, also
-// POSTs each tick to /api/time/heartbeat so the server has authoritative data
-// for the 60-hour gate and admin reporting.
+// Hawaii state-law-compliant study time tracker.
 //
-// Server failure modes (401, 503, network) downgrade gracefully — local
-// tracking keeps working so the user never loses time.
+// Time accrues only when ALL of these are true on each tick:
+//  1. Tab is visible (Page Visibility API)
+//  2. User has done an ENGAGEMENT action (scroll, keystroke, click, or touch)
+//     within the last IDLE_THRESHOLD_SECONDS — mousemove alone is not enough,
+//     because mouse-jigglers and idle hovering are common ways to fake hours.
+//  3. The route is a study route (skips /profile, /admin, etc.)
+//
+// When authenticated, each tick POSTs to /api/time/heartbeat where the server
+// enforces a per-day cap and re-derives the bucket from the path.
+//
+// Local accrual always runs as a per-device cache; server is authoritative
+// when wired.
 
-let serverEnabled: boolean | null = null; // memoized after first probe per page session
+let serverEnabled: boolean | null = null;
+
+// Routes where the timer should not run (meta / nav-only / admin)
+const NON_STUDY_PREFIXES = [
+  '/profile',
+  '/admin',
+  '/signup',
+  '/login',
+  '/forgot-password',
+  '/reset-password',
+  '/verify-email',
+  '/checkout',
+];
+
+function isStudyPath(path: string): boolean {
+  return !NON_STUDY_PREFIXES.some(p => path === p || path.startsWith(p + '/'));
+}
 
 export function TimeTracker() {
   const pathname = usePathname();
-  const lastActivity = useRef<number>(Date.now());
+  // Last meaningful engagement (scroll, keydown, click, touchstart, audio play)
+  const lastEngagement = useRef<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Activity signal listeners
+  // Engagement listeners — these signals are the gate. Pure mousemove does
+  // NOT count because it's the cheapest signal to fake.
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const bump = () => { lastActivity.current = Date.now(); };
-    const events = ['mousemove', 'mousedown', 'keydown', 'scroll', 'touchstart'];
+    const bump = () => { lastEngagement.current = Date.now(); };
+    const events = ['scroll', 'keydown', 'click', 'touchstart', 'wheel'] as const;
     events.forEach(ev => window.addEventListener(ev, bump, { passive: true }));
-    return () => events.forEach(ev => window.removeEventListener(ev, bump));
+
+    // Audio playback (Web Speech API or <audio>) counts as engagement so
+    // listening to the audiobook with focus elsewhere on the page still tracks.
+    const onPlay = () => { lastEngagement.current = Date.now(); };
+    document.addEventListener('play', onPlay, true);
+
+    // Seed an initial timestamp so we don't insta-idle when the user first
+    // lands on a page from /signup (which is a non-study path).
+    lastEngagement.current = Date.now();
+
+    return () => {
+      events.forEach(ev => window.removeEventListener(ev, bump));
+      document.removeEventListener('play', onPlay, true);
+    };
   }, []);
 
-  // Probe server auth status once
+  // Probe server auth state once per page session
   useEffect(() => {
     if (serverEnabled !== null) return;
     fetch('/api/auth/me')
@@ -43,17 +81,17 @@ export function TimeTracker() {
       .catch(() => { serverEnabled = false; });
   }, []);
 
-  // Tick — accrue locally + (when authenticated) POST to server
+  // Tick — accrue when engagement is recent AND tab is visible AND route counts
   useEffect(() => {
     if (typeof window === 'undefined' || !pathname) return;
     if (intervalRef.current) clearInterval(intervalRef.current);
 
     intervalRef.current = setInterval(async () => {
+      if (!isStudyPath(pathname)) return;
       const visible = document.visibilityState === 'visible';
-      const idleSeconds = (Date.now() - lastActivity.current) / 1000;
-      if (!visible || idleSeconds > IDLE_THRESHOLD_SECONDS) return;
-      // Skip self-referential paths
-      if (pathname.startsWith('/profile') || pathname.startsWith('/admin')) return;
+      if (!visible) return;
+      const idleSeconds = (Date.now() - lastEngagement.current) / 1000;
+      if (idleSeconds > IDLE_THRESHOLD_SECONDS) return;
 
       // Local accrual (always)
       const next = addSeconds(loadLog(), pathname, TICK_SECONDS);
@@ -69,10 +107,11 @@ export function TimeTracker() {
             keepalive: true,
           });
           if (res.status === 401 || res.status === 503) {
-            serverEnabled = false; // stop trying for the rest of this page session
+            serverEnabled = false;
           }
+          // 429 = daily cap hit; UI will surface this via the next summary fetch.
         } catch {
-          // Network blip — keep local cache, retry on next tick
+          // Network blip — local cache continues, retry next tick.
         }
       }
     }, TICK_SECONDS * 1000);

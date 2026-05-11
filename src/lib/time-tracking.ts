@@ -4,8 +4,13 @@
 
 export const STATE_LAW_HOURS_REQUIRED = 60;
 export const STORAGE_KEY = 'rfs:time-log:v1';
-export const IDLE_THRESHOLD_SECONDS = 120; // 2 min of no activity = idle
+// 60s of no engagement = idle. Stricter than the original 2 min because we
+// no longer count pure mousemove as an engagement signal — only scroll,
+// keystroke, click, touch, or audio play.
+export const IDLE_THRESHOLD_SECONDS = 60;
 export const TICK_SECONDS = 5;
+// Anti-cheat: server rejects heartbeats above this per UTC day.
+export const DAILY_HOURS_CAP = 12;
 
 export interface TimeLog {
   totalSeconds: number;
