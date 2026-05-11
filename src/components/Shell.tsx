@@ -13,8 +13,23 @@ const NAV_ITEMS: Array<[string, string]> = [
   ['/pricing', 'Pricing'],
 ];
 
+interface HeaderUser { firstName?: string; name?: string; isAdmin?: boolean }
+
 export function Header({ active }: { active?: string }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [user, setUser] = useState<HeaderUser | null | undefined>(undefined);
+
+  // Probe auth state once on mount. The CTA flips between "Log in" (anon)
+  // and "My Profile" (signed in). `undefined` = still loading (render nothing
+  // for the CTA to avoid flicker).
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(data => { if (!cancelled) setUser(data?.user ?? null); })
+      .catch(() => { if (!cancelled) setUser(null); });
+    return () => { cancelled = true; };
+  }, []);
 
   // Lock scroll while drawer is open
   useEffect(() => {
@@ -62,10 +77,26 @@ export function Header({ active }: { active?: string }) {
       {/* Desktop nav */}
       <nav className="rf-header-nav-desktop" style={{ gap: 18, alignItems: 'center' }}>
         {NAV_ITEMS.map(([href, label]) => link(href, label))}
-        <Link href="/free" style={{
-          ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
-          fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
-        }}>Start Free</Link>
+        {user === undefined ? (
+          // Auth probe in flight — reserve space so the layout doesn't jump
+          <span style={{ minWidth: 96, height: 36 }} aria-hidden />
+        ) : user ? (
+          <Link href="/profile" style={{
+            ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
+            fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+          }}>
+            <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,255,255,0.18)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800 }}>
+              {(user.firstName?.[0] ?? user.name?.[0] ?? '?').toUpperCase()}
+            </span>
+            My Profile
+          </Link>
+        ) : (
+          <Link href="/login" style={{
+            ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
+            fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+          }}>Log In</Link>
+        )}
       </nav>
 
       {/* Mobile hamburger toggle */}
@@ -106,15 +137,27 @@ export function Header({ active }: { active?: string }) {
         aria-label="Mobile menu"
       >
         {NAV_ITEMS.map(([href, label]) => link(href, label, () => setDrawerOpen(false)))}
-        <Link
-          href="/free"
-          onClick={() => setDrawerOpen(false)}
-          style={{
-            ...BUTTON_3D.primary, padding: '14px 18px', borderRadius: 10,
-            fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
-            textAlign: 'center', marginTop: 12,
-          }}
-        >Start Free</Link>
+        {user ? (
+          <Link
+            href="/profile"
+            onClick={() => setDrawerOpen(false)}
+            style={{
+              ...BUTTON_3D.primary, padding: '14px 18px', borderRadius: 10,
+              fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+              textAlign: 'center', marginTop: 12,
+            }}
+          >My Profile</Link>
+        ) : (
+          <Link
+            href="/login"
+            onClick={() => setDrawerOpen(false)}
+            style={{
+              ...BUTTON_3D.primary, padding: '14px 18px', borderRadius: 10,
+              fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+              textAlign: 'center', marginTop: 12,
+            }}
+          >Log In</Link>
+        )}
       </div>
     </header>
   );
