@@ -28,7 +28,7 @@ interface ProfileState {
   totalSeconds: number;
   byBucket: Record<string, number>;
   source: 'server' | 'local';
-  user: { name: string; email: string; tier: string; isAdmin: boolean } | null;
+  user: { name: string; email: string; tier: string; isAdmin: boolean; emailVerified?: boolean } | null;
   deviceId?: string;
   startedAt?: string;
 }
@@ -42,23 +42,27 @@ export default function ProfilePage() {
   useEffect(() => {
     let mounted = true;
     const refresh = async () => {
-      // Try server first
+      // Try server first — and fetch /me in parallel to pick up emailVerified flag
       try {
-        const res = await fetch('/api/time/summary', { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
+        const [sumRes, meRes] = await Promise.all([
+          fetch('/api/time/summary', { cache: 'no-store' }),
+          fetch('/api/auth/me', { cache: 'no-store' }),
+        ]);
+        if (sumRes.ok) {
+          const data = await sumRes.json();
+          const me = meRes.ok ? await meRes.json() : { user: null };
           if (mounted) {
             setState({
               totalSeconds: data.totalSeconds ?? 0,
               byBucket: data.byBucket ?? {},
               source: 'server',
-              user: data.user ?? null,
+              user: { ...(data.user ?? {}), emailVerified: me.user?.emailVerified ?? false },
             });
             setAuthConfigured(true);
           }
           return;
         }
-        if (res.status === 503) setAuthConfigured(false);
+        if (sumRes.status === 503) setAuthConfigured(false);
       } catch {
         // network blip — fall through to local
       }
@@ -108,6 +112,35 @@ export default function ProfilePage() {
   const isServer = state.source === 'server';
   const heading = state.user ? state.user.name : 'Your study profile';
 
+  function VerifyEmailBanner() {
+    const [sending, setSending] = useState(false);
+    const [msg, setMsg] = useState<string | null>(null);
+    const onResend = async () => {
+      setSending(true);
+      setMsg(null);
+      try {
+        const r = await fetch('/api/auth/resend-verify', { method: 'POST' });
+        if (r.ok) setMsg('Sent — check your inbox.');
+        else setMsg('Could not send right now.');
+      } catch { setMsg('Network error.'); }
+      finally { setSending(false); }
+    };
+    return (
+      <div style={{ ...CARD, padding: 18, marginBottom: 24, borderLeft: `3px solid ${T.coral}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <p style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6, margin: 0, flex: '1 1 320px' }}>
+          <strong style={{ color: T.text }}>Verify your email.</strong> We sent a confirmation link to <strong style={{ color: T.text }}>{state?.user?.email}</strong>. Open it to lock in your account. {msg && <span style={{ color: T.ocean, marginLeft: 8 }}>{msg}</span>}
+        </p>
+        <button
+          onClick={onResend}
+          disabled={sending}
+          style={{ ...BUTTON_3D.secondary, padding: '8px 16px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: sending ? 'wait' : 'pointer', fontFamily: 'inherit', opacity: sending ? 0.6 : 1 }}
+        >
+          {sending ? 'Sending…' : 'Resend link'}
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
       <Backgrounds />
@@ -153,6 +186,11 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
+
+          {/* EMAIL VERIFICATION BANNER */}
+          {isServer && state.user && state.user.emailVerified === false && (
+            <VerifyEmailBanner />
+          )}
 
           {/* AUTH-STATE BANNER */}
           {!isServer && (

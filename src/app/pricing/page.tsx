@@ -1,8 +1,44 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 import { T, BUTTON_3D, CARD, SHADOW_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
+type CheckoutTier = 'standard' | 'plus' | 'solo';
+
 export default function PricingPage() {
+  const [loadingTier, setLoadingTier] = useState<CheckoutTier | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const checkout = async (tier: CheckoutTier) => {
+    setLoadingTier(tier);
+    setError(null);
+    try {
+      const res = await fetch('/api/checkout/create-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tier }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.status === 401 && body.loginRedirect) {
+        window.location.href = `${body.loginRedirect}?next=/pricing%23${tier}`;
+        return;
+      }
+      if (!res.ok) {
+        setError(body.message ?? 'Checkout is not available yet. Try again shortly.');
+        return;
+      }
+      if (body.url) {
+        window.location.href = body.url;
+      }
+    } catch {
+      setError('Network error. Try again.');
+    } finally {
+      setLoadingTier(null);
+    }
+  };
+
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
       <Backgrounds />
@@ -58,8 +94,9 @@ export default function PricingPage() {
                 '3-month access window',
                 'No subscription, ever',
               ]}
-              cta="Enroll"
-              href="/signup?tier=standard"
+              cta={loadingTier === 'standard' ? 'Redirecting…' : 'Enroll'}
+              onClick={() => checkout('standard')}
+              disabled={loadingTier !== null}
             />
             <BigTier
               id="plus"
@@ -77,8 +114,9 @@ export default function PricingPage() {
                 '6-month course access',
                 'Monthly hosting / maintenance fee after launch',
               ]}
-              cta="Enroll"
-              href="/signup?tier=plus"
+              cta={loadingTier === 'plus' ? 'Redirecting…' : 'Enroll'}
+              onClick={() => checkout('plus')}
+              disabled={loadingTier !== null}
               featured
             />
             <BigTier
@@ -96,8 +134,9 @@ export default function PricingPage() {
                 'Monthly hosting / maintenance fee',
                 'Open to any licensed HI broker or salesperson',
               ]}
-              cta="Order Site"
-              href="/signup?tier=solo"
+              cta={loadingTier === 'solo' ? 'Redirecting…' : 'Order Site'}
+              onClick={() => checkout('solo')}
+              disabled={loadingTier !== null}
             />
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
@@ -105,6 +144,11 @@ export default function PricingPage() {
               See a live example (Shayne M. Guthrie) →
             </Link>
           </div>
+          {error && (
+            <div style={{ maxWidth: 720, margin: '20px auto 0', padding: '12px 16px', background: 'rgba(193,70,40,0.08)', border: `1px solid rgba(193,70,40,0.32)`, color: T.coralDark, borderRadius: 10, fontSize: 13, textAlign: 'center' }}>
+              {error}
+            </div>
+          )}
         </section>
 
         {/* COMPARISON */}
@@ -237,9 +281,9 @@ export default function PricingPage() {
   );
 }
 
-function BigTier({ id, name, price, tagline, features, cta, href, featured }: {
+function BigTier({ id, name, price, tagline, features, cta, onClick, disabled, featured }: {
   id: string; name: string; price: string; tagline: string; features: string[];
-  cta: string; href: string; featured?: boolean;
+  cta: string; onClick: () => void; disabled?: boolean; featured?: boolean;
 }) {
   return (
     <div id={id} style={{
@@ -266,9 +310,26 @@ function BigTier({ id, name, price, tagline, features, cta, href, featured }: {
           </li>
         ))}
       </ul>
-      <Link href={href} style={{ ...(featured ? BUTTON_3D.primary : BUTTON_3D.secondary), display: 'block', textAlign: 'center', padding: '12px 16px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+      <button
+        type="button"
+        onClick={onClick}
+        disabled={disabled}
+        style={{
+          ...(featured ? BUTTON_3D.primary : BUTTON_3D.secondary),
+          width: '100%',
+          padding: '12px 16px',
+          borderRadius: 10,
+          fontSize: 13,
+          fontWeight: 700,
+          letterSpacing: '0.04em',
+          cursor: disabled ? 'wait' : 'pointer',
+          fontFamily: 'inherit',
+          border: featured ? 'none' : undefined,
+          opacity: disabled ? 0.6 : 1,
+        }}
+      >
         {cta}
-      </Link>
+      </button>
     </div>
   );
 }

@@ -24,6 +24,7 @@ const STATIC_ROUTES: Array<{
   { path: '/free/lesson-4', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/free/lesson-5', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/profile', changeFrequency: 'weekly', priority: 0.5 },
+  { path: '/forgot-password', changeFrequency: 'yearly', priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

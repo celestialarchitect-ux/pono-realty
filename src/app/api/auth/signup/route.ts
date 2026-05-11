@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { authConfigured, hashPassword, setSessionCookie, isBootstrapAdminEmail } from '@/lib/auth';
+import { createEmailToken } from '@/lib/tokens';
+import { sendMail, verifyEmailTemplate } from '@/lib/email';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SITE = process.env.SITE_URL || 'https://ralphfoulger.com';
 
 export async function POST(req: NextRequest) {
   if (!authConfigured() || !db) {
@@ -43,5 +46,21 @@ export async function POST(req: NextRequest) {
   });
 
   await setSessionCookie(user.id, user.email);
+
+  // Issue + send email-verification link. If RESEND_API_KEY is not set, the
+  // email helper logs the link to the server console — sign up still works,
+  // emailVerifiedAt just stays null until you wire Resend.
+  try {
+    const issued = await createEmailToken(user.id, 'verify');
+    if (issued) {
+      const link = `${SITE}/verify-email?token=${issued.token}`;
+      const tpl = verifyEmailTemplate({ name: user.name, link });
+      await sendMail({ to: user.email, ...tpl });
+    }
+  } catch (err) {
+    // Verification email is non-fatal — account is still created
+    console.warn('signup: verify-email dispatch failed', err);
+  }
+
   return NextResponse.json({ user });
 }

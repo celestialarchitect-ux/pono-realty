@@ -93,6 +93,8 @@ export default function LoginPage() {
             </button>
             <p style={{ fontSize: 12, color: T.textMute, marginTop: 14, textAlign: 'center' }}>
               No account yet? <Link href="/signup" style={{ color: T.ocean, textDecoration: 'underline' }}>Create one</Link>
+              <span style={{ margin: '0 8px', color: T.textGhost }}>·</span>
+              <Link href="/forgot-password" style={{ color: T.ocean, textDecoration: 'underline' }}>Forgot password?</Link>
             </p>
           </form>
         </main>
