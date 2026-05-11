@@ -90,13 +90,30 @@ export async function GET() {
   // Last active = max createdAt
   const lastActiveAt = events.length > 0 ? events[events.length - 1].createdAt.toISOString() : null;
 
+  // Per-path totals — used by the /profile course-progress panel so every
+  // chapter row can show real minutes spent. Returns top 60 paths by seconds.
+  const pathAgg = await db.timeEvent.groupBy({
+    by: ['path'],
+    where: { userId: user.id },
+    _sum: { seconds: true },
+  });
+  const byPath: Record<string, number> = {};
+  for (const row of pathAgg) {
+    byPath[row.path] = (byPath[row.path] ?? 0) + (row._sum.seconds ?? 0);
+  }
+  // Most-recent path (regardless of timestamp) — surfaced in the
+  // 'Continue where you left off' card.
+  const lastPath = events.length > 0 ? events[events.length - 1].path : null;
+
   return NextResponse.json({
     totalSeconds,
     todaySeconds,
     streakDays: streak,
     last30,
     byBucket,
+    byPath,
     recentSessions: recent,
     lastActiveAt,
+    lastPath,
   });
 }

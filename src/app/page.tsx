@@ -4,7 +4,6 @@ import { GLOSSARY } from '@/lib/content/glossary';
 import { EXAM_BANK } from '@/lib/content/exam-bank';
 import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
-import { MotivationModal } from '@/components/MotivationModal';
 import { IconBadge, type IconKind } from '@/components/Icon';
 
 const HERO_IMG = 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=2400&q=85&auto=format&fit=crop';
@@ -19,7 +18,6 @@ export default function Landing() {
 
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
-      <MotivationModal />
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header active="/" />

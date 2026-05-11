@@ -13,6 +13,8 @@ import {
   STATE_LAW_HOURS_REQUIRED,
 } from '@/lib/time-tracking';
 import { isHapticsEnabled, setHapticsEnabled, tap } from '@/lib/haptics';
+import { MotivationModal } from '@/components/MotivationModal';
+import { CURRICULUM } from '@/lib/curriculum';
 
 const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
@@ -31,8 +33,10 @@ interface AnalyticsRes {
   streakDays: number;
   last30: { date: string; seconds: number }[];
   byBucket: Record<string, number>;
+  byPath?: Record<string, number>;
   recentSessions: { path: string; bucket: string; start: string; end: string; seconds: number }[];
   lastActiveAt: string | null;
+  lastPath?: string | null;
 }
 interface MeUser { name: string; email: string; tier: string; isAdmin: boolean; emailVerified?: boolean }
 
@@ -116,6 +120,7 @@ export default function ProfilePage() {
 
   return (
     <Shell>
+      <MotivationModal />
       {/* HEADER */}
       <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14 }}>
         <div>
@@ -259,6 +264,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* CONTINUE + COURSE PROGRESS */}
+      {isServer && <ContinueAndCourseProgress byPath={analytics.byPath ?? {}} lastPath={analytics.lastPath ?? null} />}
+
       {/* RECENT SESSIONS */}
       {isServer && analytics.recentSessions.length > 0 && (
         <div style={{ ...CARD, padding: 24, marginBottom: 22 }}>
@@ -338,6 +346,103 @@ function Stat({ label, value, sub, accent = 'default', live = false }: { label: 
       <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>{sub}</div>
       <style>{`@keyframes rfs-pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }`}</style>
     </div>
+  );
+}
+
+// Course-player feel on the profile page: surfaces "Continue where you
+// left off" + a chapter-by-chapter progress list. Per-chapter status is
+// derived from TimeEvent.path totals — no separate "completed" flag yet,
+// but minutes-spent is a load-bearing proxy and lines up with the
+// 60-hour state-law math.
+function ContinueAndCourseProgress({ byPath, lastPath }: { byPath: Record<string, number>; lastPath: string | null }) {
+  // The "continue" card prefers the most-recent path. If it's a chapter,
+  // we resolve to the chapter title. Otherwise we just label by bucket.
+  const continueChapter = lastPath ? CURRICULUM.find(c => lastPath === `/course/${c.slug}` || lastPath.startsWith(`/free/`)) : null;
+  const continueHref = lastPath ?? '/course';
+  const continueTitle = continueChapter
+    ? `Chapter ${continueChapter.number}: ${continueChapter.title}`
+    : (lastPath?.startsWith('/free/') ? 'Free Foundation lesson' : 'The curriculum');
+
+  return (
+    <>
+      {lastPath && (
+        <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeftWidth: 4, borderLeftStyle: 'solid', borderLeftColor: T.ocean, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Continue where you left off</div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, lineHeight: 1.2, margin: 0 }}>{continueTitle}</h2>
+          </div>
+          <Link href={continueHref} style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+            Resume →
+          </Link>
+        </div>
+      )}
+
+      <div style={{ ...CARD, padding: 28, marginBottom: 22 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 18, flexWrap: 'wrap', gap: 10 }}>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0 }}>My courses</h2>
+          <div style={{ fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>
+            {CURRICULUM.length} chapters · {CURRICULUM.filter(c => c.portion === 'national').length} national · {CURRICULUM.filter(c => c.portion === 'state').length} Hawaii
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {CURRICULUM.map(ch => {
+            const path = `/course/${ch.slug}`;
+            const seconds = byPath[path] ?? 0;
+            const minutes = Math.floor(seconds / 60);
+            const targetMinutes = ch.estimatedMinutes;
+            const pct = Math.min(100, Math.round((minutes / targetMinutes) * 100));
+            const started = seconds > 0;
+            const completedEnough = minutes >= targetMinutes;
+            const portionColor = ch.portion === 'state' ? T.coral : T.ocean;
+
+            return (
+              <Link key={ch.slug} href={path} style={{ display: 'block', textDecoration: 'none' }}>
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '32px minmax(0, 1fr) 100px 70px',
+                  gap: 14,
+                  alignItems: 'center',
+                  padding: '12px 14px',
+                  borderRadius: 10,
+                  background: started ? T.bgRaised : 'transparent',
+                  border: `1px solid ${started ? T.border : 'transparent'}`,
+                }} data-stack-mobile="true">
+                  <div style={{ width: 28, height: 28, borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: completedEnough ? T.green : (started ? portionColor : T.bgRaised), color: completedEnough || started ? '#fff' : T.textMute, fontSize: 11, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace" }}>
+                    {completedEnough ? '✓' : ch.number}
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 14, color: T.text, fontWeight: 600, marginBottom: 2, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{ch.title}</div>
+                    <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>
+                      <span style={{ color: portionColor, fontWeight: 700, textTransform: 'uppercase' }}>{ch.portion}</span>
+                      <span style={{ margin: '0 8px', color: T.textGhost }}>·</span>
+                      <span>{ch.examItems} exam items</span>
+                      <span style={{ margin: '0 8px', color: T.textGhost }}>·</span>
+                      <span>~{targetMinutes} min</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: T.textMute, marginBottom: 4, letterSpacing: '0.04em' }}>
+                      <span style={{ color: started ? T.text : T.textMute, fontWeight: 700 }}>{minutes}</span> / {targetMinutes} min
+                    </div>
+                    <div style={{ height: 4, background: T.bgRaised, borderRadius: 999, overflow: 'hidden', border: started ? 'none' : `1px dashed ${T.border}` }}>
+                      <div style={{ height: '100%', width: `${pct}%`, background: completedEnough ? T.green : portionColor, transition: 'width 0.4s' }} />
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right', fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: completedEnough ? T.green : (started ? T.ocean : T.textMute), letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 700 }}>
+                    {completedEnough ? 'Done' : started ? 'Active' : 'Open'}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        <p style={{ fontSize: 11, color: T.textGhost, marginTop: 14, lineHeight: 1.55, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+          Progress = active study time on the chapter page. ✓ = you&apos;ve met the suggested time. Hawaii state law: 60 total hours across all chapters before mock-exam eligibility.
+        </p>
+      </div>
+    </>
   );
 }
 

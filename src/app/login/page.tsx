@@ -1,14 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import { PasswordInput } from '@/components/PasswordInput';
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <Inner />
+    </Suspense>
+  );
+}
+
+function Inner() {
   const router = useRouter();
+  const sp = useSearchParams();
+  const next = sp.get('next') ?? '/profile';
+  // Only allow same-app paths as the post-login redirect target.
+  const safeNext = next.startsWith('/') && !next.startsWith('//') ? next : '/profile';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -36,7 +48,7 @@ export default function LoginPage() {
         }
         return;
       }
-      router.push('/profile');
+      router.push(safeNext);
     } catch {
       setError('Network error. Please try again.');
     } finally {

@@ -40,8 +40,12 @@ export function middleware(req: NextRequest) {
   const session = req.cookies.get(SESSION_COOKIE);
   if (session?.value) return NextResponse.next();
 
+  // Route returning visitors to /login (they already have an account); the
+  // login page links to /signup for first-time users. Previously this sent
+  // them straight to /signup which made expired-session users think they
+  // had to create a brand-new account.
   const url = req.nextUrl.clone();
-  url.pathname = '/signup';
+  url.pathname = '/login';
   url.search = '';
   url.searchParams.set('next', pathname + search);
   return NextResponse.redirect(url);
