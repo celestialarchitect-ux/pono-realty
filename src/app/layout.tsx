@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { TimeTracker } from '@/components/TimeTracker';
+import { GetStartedFab } from '@/components/GetStartedFab';
 
 const SITE_URL = process.env.SITE_URL || 'https://ralphfoulger.com';
 const SITE_NAME = "Ralph Foulger's Academy of Real Estate";
@@ -191,6 +192,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ margin: 0, padding: 0, fontFamily: "'Inter', system-ui, sans-serif" }}>
         <TimeTracker />
         {children}
+        <GetStartedFab />
       </body>
     </html>
   );

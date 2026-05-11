@@ -319,10 +319,10 @@ export default function Landing() {
                 <div>
                   <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>Real graduate example</div>
                   <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 800, letterSpacing: '-0.01em', lineHeight: 1.15, color: T.text, marginBottom: 14 }}>
-                    Shayne M. Guthrie&apos;s broker site.
+                    Shayne M. Guthrie, Realtor.
                   </h3>
                   <p style={{ fontSize: 15, lineHeight: 1.7, color: T.textDim, marginBottom: 16 }}>
-                    Licensed Hawaii broker (BC) operating out of the Ralph S. Foulger Brokerage in Kaneohe. Shayne&apos;s working real estate website &mdash; clean, mobile, search-indexed, lead-capture wired &mdash; is the same caliber of site Plus-tier graduates receive.
+                    Licensed Hawaii broker (BC) operating out of Ralph S. Foulger, Realtor in Kaneohe. Shayne&apos;s working real estate website &mdash; clean, mobile, search-indexed, lead-capture wired &mdash; is the same caliber of site Plus-tier graduates receive.
                   </p>
                   <Link href="/example-website" target="_blank" rel="noopener" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 14, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                     View the live example →
@@ -331,7 +331,7 @@ export default function Landing() {
                 <div style={{ position: 'relative', borderRadius: 14, overflow: 'hidden', border: `1px solid ${T.border}`, boxShadow: SHADOW_3D.lg, aspectRatio: '16 / 11', background: T.bgElevated }}>
                   <iframe
                     src="/example-website"
-                    title="Live example: Shayne Guthrie broker website"
+                    title="Live example: Shayne M. Guthrie, Realtor — broker website"
                     loading="lazy"
                     style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 0 }}
                   />

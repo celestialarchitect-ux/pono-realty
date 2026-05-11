@@ -141,7 +141,7 @@ export default function PricingPage() {
           </div>
           <div style={{ textAlign: 'center', marginTop: 24 }}>
             <Link href="/example-website" target="_blank" rel="noopener" style={{ fontSize: 14, color: T.ocean, textDecoration: 'underline', fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
-              See a live example (Shayne M. Guthrie) →
+              See a live example (Shayne M. Guthrie, Realtor) →
             </Link>
           </div>
           {error && (
@@ -224,7 +224,7 @@ export default function PricingPage() {
               Plus students who pass the PSI Hawaii Salesperson Exam unlock a complete agent launch kit: a <strong style={{ color: T.text }}>custom Hawaii broker website on your own domain</strong>, integrated CRM and lead-capture forms, an admin portal, broker intros, contract templates, and a curated starter lead packet for your first 90 days.
             </p>
             <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, marginBottom: 12 }}>
-              Same caliber of site as the example below &mdash; built, branded to you, and deployed. <Link href="/example-website" target="_blank" rel="noopener" style={{ color: T.ocean, textDecoration: 'underline' }}>See the live example (Shayne M. Guthrie)</Link>.
+              Same caliber of site as the example below &mdash; built, branded to you, and deployed. <Link href="/example-website" target="_blank" rel="noopener" style={{ color: T.ocean, textDecoration: 'underline' }}>See the live example (Shayne M. Guthrie, Realtor)</Link>.
             </p>
             <p style={{ fontSize: 14, color: T.textMute, lineHeight: 1.7 }}>
               <strong style={{ color: T.text }}>Note:</strong> the website is delivered after you pass the PSI exam. A monthly hosting / maintenance fee applies once the site is live &mdash; domain renewal, SSL, CRM uptime, security patches, lead-capture infrastructure. Quoted at signup; transparent month-to-month, cancel anytime.
