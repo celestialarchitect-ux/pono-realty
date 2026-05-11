@@ -3,20 +3,53 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
+import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function SignupPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  const submit = () => {
-    if (!email.includes('@') || !name) return;
+  const valid = name.trim().length >= 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && password.length >= 10;
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!valid || submitting) return;
+    setError(null);
+    setSubmitting(true);
     try {
-      localStorage.setItem('pono-user', JSON.stringify({ email, name, joinedAt: Date.now(), plan: 'free' }));
-    } catch {}
-    router.push('/dashboard');
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, name }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 503) {
+          setError('Account system not yet provisioned. Please try again later or email support@ralphfoulger.com.');
+        } else if (res.status === 409) {
+          setError('An account with that email already exists. Try logging in instead.');
+        } else if (body.message) {
+          setError(body.message);
+        } else if (body.error === 'weak_password') {
+          setError('Password must be at least 10 characters.');
+        } else if (body.error === 'invalid_email') {
+          setError('That doesn\'t look like a valid email address.');
+        } else {
+          setError('Could not create your account. Please try again.');
+        }
+        return;
+      }
+      router.push('/profile');
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -25,29 +58,59 @@ export default function SignupPage() {
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header />
         <main style={{ padding: '64px 32px', maxWidth: 480, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 44px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.1, marginBottom: 12 }}>
-              Start studying free.
+              Create your account.
             </h1>
             <p style={{ fontSize: 15, color: T.textDim, lineHeight: 1.55 }}>
-              First chapter full, sample flashcards, no card needed.
+              Your study hours sync across devices. Mock exam unlocks at the 60-hour Hawaii minimum.
             </p>
           </div>
 
-          <div style={{ ...CARD, padding: 32 }}>
+          <form onSubmit={submit} style={{ ...CARD, padding: 32 }}>
             <Field label="Your name">
-              <input value={name} onChange={e => setName(e.target.value)} placeholder="Kalani K." style={inputStyle} />
+              <input value={name} onChange={e => setName(e.target.value)} placeholder="Kalani K." autoComplete="name" style={inputStyle} />
             </Field>
             <Field label="Email">
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" style={inputStyle} />
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" autoComplete="email" style={inputStyle} />
             </Field>
-            <button onClick={submit} disabled={!email.includes('@') || !name} style={{ ...BUTTON_3D.primary, width: '100%', padding: '14px 22px', fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit', border: 'none', opacity: (!email.includes('@') || !name) ? 0.5 : 1 }}>
-              Create account
+            <Field label="Password (10+ characters)">
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••••" autoComplete="new-password" minLength={10} style={inputStyle} />
+            </Field>
+
+            {error && (
+              <div style={{ background: 'rgba(193,70,40,0.08)', border: `1px solid rgba(193,70,40,0.32)`, color: T.coralDark, padding: '10px 14px', borderRadius: 8, fontSize: 13, marginBottom: 14, lineHeight: 1.5 }}>
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={!valid || submitting}
+              style={{
+                ...BUTTON_3D.primary,
+                width: '100%',
+                padding: '14px 22px',
+                fontSize: 14,
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                borderRadius: 10,
+                cursor: valid && !submitting ? 'pointer' : 'not-allowed',
+                fontFamily: 'inherit',
+                border: 'none',
+                opacity: (!valid || submitting) ? 0.5 : 1,
+              }}
+            >
+              {submitting ? 'Creating account…' : 'Create account'}
             </button>
             <p style={{ fontSize: 12, color: T.textMute, marginTop: 14, textAlign: 'center' }}>
               Already have an account? <Link href="/login" style={{ color: T.ocean, textDecoration: 'underline' }}>Log in</Link>
             </p>
-          </div>
+          </form>
+
+          <p style={{ fontSize: 11, color: T.textGhost, marginTop: 18, textAlign: 'center', lineHeight: 1.6 }}>
+            By signing up you agree to the <Link href="/policies/terms" style={{ color: T.textMute, textDecoration: 'underline' }}>Terms</Link> and <Link href="/policies/privacy" style={{ color: T.textMute, textDecoration: 'underline' }}>Privacy Policy</Link>. We store your email, name, and hashed password. We never share your data.
+          </p>
         </main>
         <Footer />
       </div>
@@ -57,16 +120,21 @@ export default function SignupPage() {
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <label style={{ display: 'block', marginBottom: 16 }}>
-      <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{label}</span>
+    <div style={{ marginBottom: 14 }}>
+      <label style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.textMute, fontWeight: 600, marginBottom: 6 }}>{label}</label>
       {children}
-    </label>
+    </div>
   );
 }
 
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '12px 14px',
-  background: T.white, border: `1px solid ${T.border}`,
-  borderRadius: 8, color: T.text, fontSize: 14,
-  fontFamily: 'inherit', outline: 'none',
+  width: '100%',
+  padding: '12px 14px',
+  borderRadius: 10,
+  border: `1px solid ${T.border}`,
+  background: T.white,
+  color: T.text,
+  fontFamily: 'inherit',
+  fontSize: 16,
+  lineHeight: 1.4,
 };

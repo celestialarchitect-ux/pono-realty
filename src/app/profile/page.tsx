@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import {
@@ -10,10 +11,9 @@ import {
   formatDuration,
   hoursDecimal,
   STATE_LAW_HOURS_REQUIRED,
-  type TimeLog,
 } from '@/lib/time-tracking';
 
-const BUCKET_LABELS: Record<keyof TimeLog['byBucket'], string> = {
+const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
   flashcards: 'Flashcards',
   math: 'Math drills',
@@ -24,17 +24,71 @@ const BUCKET_LABELS: Record<keyof TimeLog['byBucket'], string> = {
   other: 'Other pages',
 };
 
-export default function ProfilePage() {
-  const [log, setLog] = useState<TimeLog | null>(null);
+interface ProfileState {
+  totalSeconds: number;
+  byBucket: Record<string, number>;
+  source: 'server' | 'local';
+  user: { name: string; email: string; tier: string; isAdmin: boolean } | null;
+  deviceId?: string;
+  startedAt?: string;
+}
 
+export default function ProfilePage() {
+  const router = useRouter();
+  const [state, setState] = useState<ProfileState | null>(null);
+  const [authConfigured, setAuthConfigured] = useState<boolean | null>(null);
+
+  // Initial load + 5s refresh
   useEffect(() => {
-    setLog(loadLog());
-    // Refresh every 5s so users see their time tick up while looking at the page
-    const id = setInterval(() => setLog(loadLog()), 5000);
-    return () => clearInterval(id);
+    let mounted = true;
+    const refresh = async () => {
+      // Try server first
+      try {
+        const res = await fetch('/api/time/summary', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (mounted) {
+            setState({
+              totalSeconds: data.totalSeconds ?? 0,
+              byBucket: data.byBucket ?? {},
+              source: 'server',
+              user: data.user ?? null,
+            });
+            setAuthConfigured(true);
+          }
+          return;
+        }
+        if (res.status === 503) setAuthConfigured(false);
+      } catch {
+        // network blip — fall through to local
+      }
+      // Server unavailable or unauthenticated — fall back to local
+      const log = loadLog();
+      if (mounted) {
+        setState({
+          totalSeconds: log.totalSeconds,
+          byBucket: log.byBucket as unknown as Record<string, number>,
+          source: 'local',
+          user: null,
+          deviceId: log.deviceId,
+          startedAt: log.startedAt,
+        });
+      }
+    };
+    refresh();
+    const id = setInterval(refresh, 5000);
+    return () => { mounted = false; clearInterval(id); };
   }, []);
 
-  if (!log) {
+  const onLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {/* ignore */}
+    router.refresh();
+    router.push('/');
+  };
+
+  if (!state) {
     return (
       <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
         <Backgrounds />
@@ -48,9 +102,11 @@ export default function ProfilePage() {
     );
   }
 
-  const p = progressTo60(log.totalSeconds);
-  const buckets = Object.entries(log.byBucket).sort((a, b) => b[1] - a[1]);
-  const totalBuckets = buckets.reduce((sum, [, sec]) => sum + sec, 0);
+  const p = progressTo60(state.totalSeconds);
+  const buckets = Object.entries(state.byBucket).sort((a, b) => (b[1] as number) - (a[1] as number));
+  const totalBuckets = buckets.reduce((sum, [, sec]) => sum + (sec as number), 0);
+  const isServer = state.source === 'server';
+  const heading = state.user ? state.user.name : 'Your study profile';
 
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
@@ -59,16 +115,57 @@ export default function ProfilePage() {
         <Header active="/profile" />
 
         <main style={{ padding: '48px 32px 64px', maxWidth: 980, margin: '0 auto' }}>
-          {/* HEADER CARD */}
-          <div style={{ marginBottom: 24 }}>
-            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Your study profile</div>
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(40px, 6vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 10 }}>
-              {hoursDecimal(log.totalSeconds).toFixed(1)} <em style={{ color: T.ocean, fontStyle: 'italic', fontWeight: 800 }}>study hours</em> logged
-            </h1>
-            <p style={{ fontSize: 16, color: T.textDim, lineHeight: 1.7, maxWidth: 720, marginBottom: 0 }}>
-              Hawaii state law requires <strong style={{ color: T.text }}>{STATE_LAW_HOURS_REQUIRED} hours</strong> of pre-license study before sitting the PSI Salesperson Exam. We track every active minute you spend in the platform &mdash; your mock exam unlocks the moment the counter hits {STATE_LAW_HOURS_REQUIRED}.
-            </p>
+          {/* HEADER */}
+          <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14 }}>
+            <div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
+                {state.user ? `Logged in · ${state.user.email}` : 'Visitor (per-device tracking)'}
+                {state.user?.isAdmin && <span style={{ marginLeft: 10, color: T.coral, fontWeight: 700 }}>Admin</span>}
+              </div>
+              <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5.5vw, 56px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, marginBottom: 8 }}>
+                {heading}
+              </h1>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 700, color: T.ocean, letterSpacing: '-0.01em' }}>
+                {hoursDecimal(state.totalSeconds).toFixed(1)} study hours logged
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              {state.user ? (
+                <>
+                  {state.user.isAdmin && (
+                    <Link href="/admin/users" style={{ ...BUTTON_3D.secondary, padding: '10px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+                      Admin →
+                    </Link>
+                  )}
+                  <button onClick={onLogout} style={{ ...BUTTON_3D.ghost, padding: '10px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/signup" style={{ ...BUTTON_3D.primary, padding: '10px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+                    Create account →
+                  </Link>
+                  <Link href="/login" style={{ ...BUTTON_3D.secondary, padding: '10px 16px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+                    Log in
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
+
+          {/* AUTH-STATE BANNER */}
+          {!isServer && (
+            <div style={{ ...CARD, padding: 18, marginBottom: 24, borderLeft: `3px solid ${T.coral}` }}>
+              <p style={{ fontSize: 13, color: T.textDim, lineHeight: 1.65, margin: 0 }}>
+                {authConfigured === false ? (
+                  <><strong style={{ color: T.text }}>Account system not yet provisioned.</strong> Your study time is being saved to this device only. The admin needs to set <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, background: T.bgRaised, padding: '0 5px', borderRadius: 3 }}>DATABASE_URL</code> + <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, background: T.bgRaised, padding: '0 5px', borderRadius: 3 }}>SESSION_SECRET</code> on the Railway service to enable cross-device sync.</>
+                ) : (
+                  <><strong style={{ color: T.text }}>Per-device tracking.</strong> Create a free account to sync your study hours across phone, tablet, and laptop. Your existing time stays — it just starts counting toward your real student record.</>
+                )}
+              </p>
+            </div>
+          )}
 
           {/* 60-HOUR PROGRESS */}
           <div style={{ ...CARD, padding: 28, marginBottom: 24, borderLeftWidth: 4, borderLeftStyle: 'solid', borderLeftColor: p.unlocked ? T.green : T.ocean }}>
@@ -95,8 +192,7 @@ export default function ProfilePage() {
             </div>
             <div style={{ height: 14, background: T.bgRaised, borderRadius: 999, overflow: 'hidden', border: `1px solid ${T.border}` }}>
               <div style={{
-                height: '100%',
-                width: `${p.pct}%`,
+                height: '100%', width: `${p.pct}%`,
                 background: p.unlocked
                   ? `linear-gradient(90deg, ${T.green} 0%, #1f6b46 100%)`
                   : `linear-gradient(90deg, ${T.ocean} 0%, ${T.oceanDark} 100%)`,
@@ -127,13 +223,14 @@ export default function ProfilePage() {
               <p style={{ fontSize: 14, color: T.textMute, margin: 0 }}>No study time logged yet. Open a curriculum chapter, flashcard deck, or math drill to start the clock.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {buckets.map(([key, seconds]) => {
+                {buckets.map(([key, secondsRaw]) => {
+                  const seconds = secondsRaw as number;
                   if (seconds === 0) return null;
                   const pct = totalBuckets > 0 ? (seconds / totalBuckets) * 100 : 0;
                   return (
                     <div key={key}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6, fontSize: 13 }}>
-                        <span style={{ color: T.text, fontWeight: 500 }}>{BUCKET_LABELS[key as keyof TimeLog['byBucket']]}</span>
+                        <span style={{ color: T.text, fontWeight: 500 }}>{BUCKET_LABELS[key] ?? key}</span>
                         <span style={{ color: T.textMute, fontFamily: "'JetBrains Mono', monospace", fontSize: 12 }}>{formatDuration(seconds, 'short')} · {pct.toFixed(0)}%</span>
                       </div>
                       <div style={{ height: 6, background: T.bgRaised, borderRadius: 999, overflow: 'hidden' }}>
@@ -146,7 +243,7 @@ export default function ProfilePage() {
             )}
           </div>
 
-          {/* META + DISCLOSURE */}
+          {/* META */}
           <div style={{ ...CARD, padding: 22, borderLeft: `3px solid ${T.coral}` }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 10 }}>How tracking works</h3>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -154,13 +251,15 @@ export default function ProfilePage() {
                 <strong style={{ color: T.text }}>Active time only.</strong> Time accrues only when the tab is visible and you&apos;ve recently interacted (mouse, keyboard, scroll). Leaving the tab open in the background does not count.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.65 }}>
-                <strong style={{ color: T.text }}>Per-device for now.</strong> Your study time is stored on this device until you sign in. After full account login is enabled, your time syncs across devices automatically.
+                <strong style={{ color: T.text }}>{isServer ? 'Cross-device sync.' : 'Per-device for now.'}</strong> {isServer
+                  ? 'Your study time is on the academy server and syncs across every device you sign in on. Server is the authoritative source.'
+                  : 'Your study time lives on this device. Create an account to keep it across phone, tablet, and laptop.'}
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.65 }}>
                 <strong style={{ color: T.text }}>Hawaii state law.</strong> The {STATE_LAW_HOURS_REQUIRED}-hour pre-license minimum is set by Hawaii REC. Our mock exam unlocks at the same threshold so your practice eligibility mirrors your real exam eligibility.
               </li>
               <li style={{ fontSize: 12, color: T.textMute, lineHeight: 1.6, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
-                Device ID: {log.deviceId} · Tracking since {new Date(log.startedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                Source: {isServer ? `server (user ${state.user?.email})` : `local device${state.deviceId ? ` (${state.deviceId})` : ''}`}
               </li>
             </ul>
           </div>
@@ -171,3 +270,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+

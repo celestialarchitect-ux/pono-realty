@@ -1,0 +1,44 @@
+// Ralph Foulger's Academy of Real Estate — data model.
+// Postgres on Railway. Migrations via `npx prisma db push` per project rules
+// (no `prisma migrate` in this stack).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Pre-license students + admins. One row per human; multiple TimeEvents per row.
+model User {
+  id            String      @id @default(cuid())
+  email         String      @unique
+  passwordHash  String
+  name          String
+  isAdmin       Boolean     @default(false)
+  tier          String      @default("free") // free | standard | plus | solo
+  passedExamAt  DateTime?
+  createdAt     DateTime    @default(now())
+  lastSeenAt    DateTime    @default(now())
+  timeEvents    TimeEvent[]
+
+  @@index([createdAt])
+}
+
+// One row per accrual tick from the client. Aggregated at read time for
+// per-section breakdowns and total-hours-toward-60.
+model TimeEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  path      String   // pathname like /free/lesson-1
+  bucket    String   // chapters | flashcards | math | glossary | quizzes | tutor | practice | other
+  seconds   Int      // bounded server-side to prevent abuse (max ~6s per heartbeat)
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, createdAt])
+  @@index([userId, bucket])
+}

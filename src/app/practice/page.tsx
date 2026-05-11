@@ -37,15 +37,30 @@ export default function PracticeExam() {
   const [unlocked, setUnlocked] = useState(false);
   const [studiedSeconds, setStudiedSeconds] = useState(0);
 
-  // Check the 60-hour gate on mount + when phase flips back to 'gate'
+  // Check the 60-hour gate on mount — prefer server data when authenticated,
+  // fall back to localStorage. Server is authoritative once auth is wired.
   useEffect(() => {
-    const log = loadLog();
-    const p = progressTo60(log.totalSeconds);
-    setStudiedSeconds(log.totalSeconds);
-    if (p.unlocked || hasUnlockOverride()) {
-      setUnlocked(true);
-      setPhase('pick');
-    }
+    const probe = async () => {
+      let totalSeconds = 0;
+      try {
+        const res = await fetch('/api/time/summary', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          totalSeconds = data.totalSeconds ?? 0;
+        } else {
+          totalSeconds = loadLog().totalSeconds;
+        }
+      } catch {
+        totalSeconds = loadLog().totalSeconds;
+      }
+      const p = progressTo60(totalSeconds);
+      setStudiedSeconds(totalSeconds);
+      if (p.unlocked || hasUnlockOverride()) {
+        setUnlocked(true);
+        setPhase('pick');
+      }
+    };
+    probe();
   }, []);
 
   // Timer

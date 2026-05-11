@@ -3,32 +3,122 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
+import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
-  const submit = () => { if (email.includes('@')) router.push('/dashboard'); };
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password || submitting) return;
+    setError(null);
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (res.status === 503) {
+          setError('Account system not yet provisioned. Please try again later.');
+        } else if (res.status === 429) {
+          setError(body.message ?? 'Too many login attempts. Try again in 15 minutes.');
+        } else {
+          setError(body.message ?? 'Email or password is incorrect.');
+        }
+        return;
+      }
+      router.push('/profile');
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header />
-        <main style={{ padding: '96px 32px', maxWidth: 440, margin: '0 auto' }}>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 40, fontWeight: 900, color: T.text, textAlign: 'center', marginBottom: 32, letterSpacing: '-0.025em' }}>Welcome back.</h1>
-          <div style={{ ...CARD, padding: 28 }}>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" style={{ width: '100%', padding: '12px 14px', marginBottom: 14, background: T.white, border: `1px solid ${T.border}`, borderRadius: 8, fontSize: 14, fontFamily: 'inherit', outline: 'none' }} />
-            <button onClick={submit} disabled={!email.includes('@')} style={{ ...BUTTON_3D.primary, width: '100%', padding: '14px 22px', fontSize: 14, fontWeight: 700, borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit', border: 'none', opacity: !email.includes('@') ? 0.5 : 1 }}>
-              Continue with magic link
-            </button>
-            <p style={{ textAlign: 'center', fontSize: 12, color: T.textMute, marginTop: 14 }}>
-              New here? <Link href="/signup" style={{ color: T.ocean, textDecoration: 'underline' }}>Sign up free</Link>
+        <main style={{ padding: '64px 32px', maxWidth: 480, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 44px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.1, marginBottom: 12 }}>
+              Welcome back.
+            </h1>
+            <p style={{ fontSize: 15, color: T.textDim, lineHeight: 1.55 }}>
+              Log in to continue your study clock.
             </p>
           </div>
+
+          <form onSubmit={submit} style={{ ...CARD, padding: 32 }}>
+            <Field label="Email">
+              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" autoComplete="email" required style={inputStyle} />
+            </Field>
+            <Field label="Password">
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••••" autoComplete="current-password" required style={inputStyle} />
+            </Field>
+
+            {error && (
+              <div style={{ background: 'rgba(193,70,40,0.08)', border: `1px solid rgba(193,70,40,0.32)`, color: T.coralDark, padding: '10px 14px', borderRadius: 8, fontSize: 13, marginBottom: 14, lineHeight: 1.5 }}>
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={!email || !password || submitting}
+              style={{
+                ...BUTTON_3D.primary,
+                width: '100%',
+                padding: '14px 22px',
+                fontSize: 14,
+                fontWeight: 700,
+                letterSpacing: '0.04em',
+                borderRadius: 10,
+                cursor: (email && password && !submitting) ? 'pointer' : 'not-allowed',
+                fontFamily: 'inherit',
+                border: 'none',
+                opacity: (!email || !password || submitting) ? 0.5 : 1,
+              }}
+            >
+              {submitting ? 'Signing in…' : 'Log in'}
+            </button>
+            <p style={{ fontSize: 12, color: T.textMute, marginTop: 14, textAlign: 'center' }}>
+              No account yet? <Link href="/signup" style={{ color: T.ocean, textDecoration: 'underline' }}>Create one</Link>
+            </p>
+          </form>
         </main>
         <Footer />
       </div>
     </div>
   );
 }
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <label style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.textMute, fontWeight: 600, marginBottom: 6 }}>{label}</label>
+      {children}
+    </div>
+  );
+}
+
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  padding: '12px 14px',
+  borderRadius: 10,
+  border: `1px solid ${T.border}`,
+  background: T.white,
+  color: T.text,
+  fontFamily: 'inherit',
+  fontSize: 16,
+  lineHeight: 1.4,
+};
