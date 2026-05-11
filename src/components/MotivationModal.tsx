@@ -3,22 +3,31 @@
 import { useEffect, useState } from 'react';
 import { T, BUTTON_3D } from '@/lib/theme';
 
-const STORAGE_KEY = 'ralph-school-commitment-acknowledged';
+const ACKED_KEY = 'ralph-school-commitment-acknowledged';
+// Set by the signup page right after a successful account creation. The
+// modal looks for this flag, shows itself once, then clears the flag so
+// it never reappears.
+export const SHOW_AFTER_SIGNUP_KEY = 'rfs:show-welcome-modal:v1';
 
 export function MotivationModal() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const seen = localStorage.getItem(STORAGE_KEY);
-    if (!seen) {
-      const timer = setTimeout(() => setOpen(true), 800);
-      return () => clearTimeout(timer);
-    }
+    const acked = localStorage.getItem(ACKED_KEY);
+    if (acked) return; // already seen + acknowledged at any point — never show again
+    const shouldShow = localStorage.getItem(SHOW_AFTER_SIGNUP_KEY) === '1';
+    if (!shouldShow) return;
+    // Small delay so the /profile page paints first, then the modal lands.
+    const timer = setTimeout(() => setOpen(true), 600);
+    return () => clearTimeout(timer);
   }, []);
 
   const acknowledge = () => {
-    localStorage.setItem(STORAGE_KEY, new Date().toISOString());
+    try {
+      localStorage.setItem(ACKED_KEY, new Date().toISOString());
+      localStorage.removeItem(SHOW_AFTER_SIGNUP_KEY);
+    } catch {/* ignore */}
     setOpen(false);
   };
 

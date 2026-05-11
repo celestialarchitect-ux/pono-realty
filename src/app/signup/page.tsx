@@ -7,6 +7,7 @@ import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import { PasswordInput } from '@/components/PasswordInput';
 import { loadLog, STORAGE_KEY } from '@/lib/time-tracking';
+import { SHOW_AFTER_SIGNUP_KEY } from '@/components/MotivationModal';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -82,6 +83,11 @@ export default function SignupPage() {
       } catch {
         // migration failure is non-fatal — user just keeps tracking from now on
       }
+
+      // Arm the post-signup motivation modal so it greets the new user on
+      // /profile. The modal clears this flag after acknowledge, so it only
+      // ever fires once per account / device.
+      try { localStorage.setItem(SHOW_AFTER_SIGNUP_KEY, '1'); } catch {/* ignore */}
 
       router.push('/profile');
     } catch {
