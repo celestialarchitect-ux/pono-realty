@@ -27,8 +27,8 @@ export async function GET() {
   const thirtyDaysAgo = new Date(todayStart.getTime() - 29 * 86400 * 1000);
   const sixtySecondsAgo = new Date(now.getTime() - 60 * 1000);
 
-  // KPI: total users, eligible (60h+) users, paid users
-  const [totalUsers, paidUsers, eligibleAgg, recentSignups, recentUpgrades] = await Promise.all([
+  // KPI: total users, eligible (60h+) users, paid users, open tickets, unread inbound
+  const [totalUsers, paidUsers, eligibleAgg, recentSignups, recentUpgrades, openTickets, unreadInbound] = await Promise.all([
     db.user.count(),
     db.user.count({ where: { tier: { in: ['standard', 'plus', 'solo'] } } }),
     db.timeEvent.groupBy({
@@ -46,6 +46,8 @@ export async function GET() {
       take: 12,
       select: { id: true, email: true, name: true, tier: true, createdAt: true },
     }),
+    db.supportTicket.count({ where: { status: { in: ['open', 'in_progress'] } } }),
+    db.message.count({ where: { direction: 'inbound', readAt: null } }),
   ]);
   const eligibleCount = eligibleAgg.filter(a => (a._sum.seconds ?? 0) >= 60 * 3600).length;
 
@@ -124,6 +126,8 @@ export async function GET() {
       totalStudyHours: Math.round(((totalStudyAgg._sum.seconds ?? 0) / 3600) * 10) / 10,
       todayStudyHours: Math.round(((todayStudyAgg._sum.seconds ?? 0) / 3600) * 10) / 10,
       revenueUsd,
+      openTickets,
+      unreadInbound,
     },
     last30,
     recentSignups,

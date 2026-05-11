@@ -86,7 +86,7 @@ export async function POST(req: NextRequest) {
     if (issued) {
       const link = `${SITE}/api/auth/verify?token=${issued.token}`;
       const tpl = verifyEmailTemplate({ name: user.firstName, link });
-      await sendMail({ to: user.email, ...tpl });
+      await sendMail({ to: user.email, ...tpl, category: 'verify', userId: user.id });
     }
   } catch (err) {
     console.warn('signup: verify-email dispatch failed', err);

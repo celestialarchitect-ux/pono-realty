@@ -27,7 +27,7 @@ export async function POST() {
   if (!issued) return NextResponse.json({ error: 'token_failed' }, { status: 500 });
   const link = `${SITE}/api/auth/verify?token=${issued.token}`;
   const tpl = verifyEmailTemplate({ name: user.name, link });
-  await sendMail({ to: user.email, ...tpl });
+  await sendMail({ to: user.email, ...tpl, category: 'verify', userId: user.id });
 
   return NextResponse.json({ ok: true });
 }

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { T, SHADOW_3D, BUTTON_3D } from '@/lib/theme';
+import { ReportProblemModal } from './ReportProblemModal';
 
 const NAV_ITEMS: Array<[string, string]> = [
   ['/free', 'Free Course'],
@@ -140,69 +141,50 @@ export function Footer() {
 }
 
 function ReportProblem() {
-  const onClick = () => {
-    if (typeof window === 'undefined') return;
-    const page = window.location.pathname + window.location.search;
-    const ua = navigator.userAgent;
-    const subject = encodeURIComponent(`Site issue report: ${page}`);
-    const body = encodeURIComponent(
-`Found something broken or confusing on the Ralph Foulger's Academy of Real Estate site.
-
-Page: ${window.location.href}
-Browser: ${ua}
-
-What went wrong:
-
-
-What I expected:
-
-
-Anything else (screenshots welcome):
-
-`
-    );
-    window.location.href = `mailto:support@ralphfoulger.com?subject=${subject}&body=${body}`;
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 12,
-      padding: '18px 0 22px', marginBottom: 8,
-      borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`,
-    }}>
-      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase' }}>
-        Found a bug or typo?
-      </span>
-      <button
-        type="button"
-        onClick={onClick}
-        style={{
-          background: 'transparent',
-          border: `1px solid ${T.border}`,
-          borderRadius: 999,
-          padding: '8px 16px',
-          fontSize: 13,
-          fontWeight: 600,
-          color: T.ocean,
-          fontFamily: "'Inter', system-ui, sans-serif",
-          letterSpacing: '0.02em',
-          cursor: 'pointer',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          transition: 'background 0.15s, border-color 0.15s',
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(20,131,123,0.06)'; e.currentTarget.style.borderColor = 'rgba(20,131,123,0.32)'; }}
-        onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = T.border; }}
-      >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <path d="M12 3l9 17H3z" />
-          <path d="M12 9v4" />
-          <circle cx="12" cy="16.5" r="0.9" fill="currentColor" />
-        </svg>
-        Report a problem
-      </button>
-    </div>
+    <>
+      <div style={{
+        display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 12,
+        padding: '18px 0 22px', marginBottom: 8,
+        borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`,
+      }}>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase' }}>
+          Found a bug or typo?
+        </span>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          style={{
+            background: 'transparent',
+            border: `1px solid ${T.border}`,
+            borderRadius: 999,
+            padding: '8px 16px',
+            fontSize: 13,
+            fontWeight: 600,
+            color: T.ocean,
+            fontFamily: "'Inter', system-ui, sans-serif",
+            letterSpacing: '0.02em',
+            cursor: 'pointer',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            transition: 'background 0.15s, border-color 0.15s',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(20,131,123,0.06)'; e.currentTarget.style.borderColor = 'rgba(20,131,123,0.32)'; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = T.border; }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M12 3l9 17H3z" />
+            <path d="M12 9v4" />
+            <circle cx="12" cy="16.5" r="0.9" fill="currentColor" />
+          </svg>
+          Report a problem
+        </button>
+      </div>
+      <ReportProblemModal open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
 

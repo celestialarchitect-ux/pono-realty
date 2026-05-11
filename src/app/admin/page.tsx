@@ -17,6 +17,8 @@ interface KPI {
   totalStudyHours: number;
   todayStudyHours: number;
   revenueUsd: number;
+  openTickets: number;
+  unreadInbound: number;
 }
 
 interface DayRow { date: string; signups: number; seconds: number }
@@ -125,12 +127,18 @@ export default function AdminDashboard() {
         )} />
       </div>
 
-      {/* LINK TO USERS TABLE */}
+      {/* NAV TO SUBPAGES */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
         <Link href="/admin/users" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
           All students →
         </Link>
-        <Link href="/profile" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+        <Link href="/admin/inbox" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          Inbox{data.kpi.unreadInbound > 0 && <span style={{ marginLeft: 8, padding: '2px 8px', background: T.coral, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{data.kpi.unreadInbound}</span>}
+        </Link>
+        <Link href="/admin/support" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          Support{data.kpi.openTickets > 0 && <span style={{ marginLeft: 8, padding: '2px 8px', background: T.coral, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{data.kpi.openTickets}</span>}
+        </Link>
+        <Link href="/profile" style={{ ...BUTTON_3D.ghost, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
           My profile
         </Link>
       </div>

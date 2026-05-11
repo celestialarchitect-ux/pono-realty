@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
       if (issued) {
         const link = `${SITE}/reset-password?token=${issued.token}`;
         const tpl = resetPasswordTemplate({ name: user.name, link });
-        await sendMail({ to: user.email, ...tpl });
+        await sendMail({ to: user.email, ...tpl, category: 'reset', userId: user.id });
       }
     } catch (err) {
       console.warn('forgot: dispatch failed', err);

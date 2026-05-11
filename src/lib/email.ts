@@ -3,9 +3,12 @@
 // can still test locally without a real Resend account.
 
 import { Resend } from 'resend';
+import { db } from './db';
 
 const FROM = process.env.EMAIL_FROM || 'Ralph Foulger Academy <noreply@ralphfoulger.com>';
 const REPLY_TO = process.env.EMAIL_REPLY_TO || 'support@ralphfoulger.com';
+
+export type MessageCategory = 'verify' | 'reset' | 'welcome' | 'support-reply' | 'broadcast' | 'inbound' | 'other';
 
 function client(): Resend | null {
   const key = process.env.RESEND_API_KEY;
@@ -22,22 +25,65 @@ interface SendArgs {
   subject: string;
   html: string;
   text: string;
+  category?: MessageCategory;
+  userId?: string | null;
+  ticketId?: string | null;
 }
 
-export async function sendMail({ to, subject, html, text }: SendArgs): Promise<{ ok: boolean; id?: string; reason?: string }> {
+// Sends transactional mail via Resend AND logs the message to the DB so
+// the admin inbox can show everything we ship out (verify, reset, welcome,
+// etc.). The DB log is best-effort — Resend send is the source of truth
+// for actual delivery.
+export async function sendMail({ to, subject, html, text, category = 'other', userId = null, ticketId = null }: SendArgs): Promise<{ ok: boolean; id?: string; reason?: string }> {
   const c = client();
+
+  // Pre-create a queued record so admin can see attempts even when Resend
+  // is unconfigured or the network fails.
+  let logId: string | null = null;
+  if (db) {
+    try {
+      const row = await db.message.create({
+        data: {
+          direction: 'outbound',
+          category,
+          fromAddr: FROM,
+          toAddr: to,
+          subject,
+          bodyText: text,
+          bodyHtml: html,
+          status: c ? 'queued' : 'unconfigured',
+          userId,
+          ticketId,
+        },
+        select: { id: true },
+      });
+      logId = row.id;
+    } catch {/* logging failure is non-fatal */}
+  }
+
   if (!c) {
-    // Dev / unprovisioned fallback — log to server so the developer can
-    // grab the verify/reset link from the deploy logs.
     console.warn(`[email:unconfigured] would send to=${to} subject="${subject}"\n${text}`);
     return { ok: false, reason: 'unconfigured' };
   }
+
   try {
     const res = await c.emails.send({ from: FROM, replyTo: REPLY_TO, to, subject, html, text });
-    if (res.error) return { ok: false, reason: res.error.message };
+    if (res.error) {
+      if (db && logId) {
+        try { await db.message.update({ where: { id: logId }, data: { status: 'bounced', errorMsg: res.error.message } }); } catch {/* ignore */}
+      }
+      return { ok: false, reason: res.error.message };
+    }
+    if (db && logId) {
+      try { await db.message.update({ where: { id: logId }, data: { status: 'sent', providerId: res.data?.id ?? null } }); } catch {/* ignore */}
+    }
     return { ok: true, id: res.data?.id };
   } catch (err) {
-    return { ok: false, reason: err instanceof Error ? err.message : 'unknown' };
+    const reason = err instanceof Error ? err.message : 'unknown';
+    if (db && logId) {
+      try { await db.message.update({ where: { id: logId }, data: { status: 'bounced', errorMsg: reason } }); } catch {/* ignore */}
+    }
+    return { ok: false, reason };
   }
 }
 

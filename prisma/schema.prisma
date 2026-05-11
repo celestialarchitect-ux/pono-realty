@@ -36,6 +36,68 @@ model User {
   @@index([createdAt])
 }
 
+// Every email the academy sends OR receives is logged here. Outbound rows
+// are written from src/lib/email.ts in the sendMail() wrapper. Inbound rows
+// arrive via the /api/email/inbound webhook (Cloudflare Email Routing,
+// Mailgun Routes, SendGrid Inbound Parse — any provider can post here).
+//
+// `category` lets the admin inbox tab into specific message types
+// (verify-email / reset-password / welcome / support-reply / etc.) without
+// pattern-matching subject lines.
+model Message {
+  id          String   @id @default(cuid())
+  direction   String   // 'outbound' | 'inbound'
+  category    String   @default("other") // verify | reset | welcome | support-reply | broadcast | inbound | other
+  fromAddr    String
+  toAddr      String
+  subject     String
+  bodyText    String
+  bodyHtml    String?
+  providerId  String?  // external message ID from Resend / inbound provider
+  status      String   @default("queued") // queued | sent | delivered | bounced | received | read | replied
+  errorMsg    String?
+  // Optional linking to a user (the recipient for outbound, the sender for inbound)
+  userId      String?
+  // For inbound: which ticket / conversation this is replying to (set by the
+  // webhook when subject contains a [RF-xxx] tag, or by manual admin link).
+  ticketId    String?
+  readAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([direction, createdAt])
+  @@index([category, createdAt])
+  @@index([userId])
+  @@index([ticketId])
+}
+
+// In-app support tickets surfaced on /admin/support. Created from the
+// Report-a-Problem control in the Footer; works for anonymous visitors
+// (captures their email + name inline) and signed-in users (linked via
+// userId so we can see their study history alongside the report).
+model SupportTicket {
+  id          String    @id @default(cuid())
+  userId      String?
+  // Anonymous reports capture identity inline (not linked to a User row).
+  reporterEmail String?
+  reporterName  String?
+  page        String    // pathname + search at time of report
+  url         String    // full URL (helps reproduce)
+  userAgent   String?
+  category    String    @default("bug") // bug | typo | confusing | feature | billing | other
+  description String
+  // Workflow state
+  status      String    @default("open") // open | in_progress | resolved | dismissed
+  adminNotes  String?
+  resolvedAt  DateTime?
+  resolvedBy  String?   // admin user id
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status, createdAt])
+  @@index([userId])
+  @@index([createdAt])
+}
+
 // Email-bound tokens for verify-email + forgot-password flows. Stored as a
 // hash so a DB leak does not yield live tokens. Single-use (usedAt set on
 // consume) and short-lived (verify = 24h, reset = 1h).

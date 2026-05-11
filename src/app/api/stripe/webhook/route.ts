@@ -61,7 +61,7 @@ async function applyTier(userId: string, tier: CheckoutTier) {
   });
   try {
     const tpl = welcomePaidTemplate({ name: user.name, tier });
-    await sendMail({ to: user.email, ...tpl });
+    await sendMail({ to: user.email, ...tpl, category: 'welcome', userId });
   } catch (err) {
     console.warn('webhook: welcome email failed', err);
   }
