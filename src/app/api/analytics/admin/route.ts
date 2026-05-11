@@ -112,7 +112,27 @@ export async function GET() {
   const revenueUsd = Math.round((revenueAgg._sum.amountCents ?? 0) / 100);
   const paidCount = revenueAgg._count._all;
 
+  // Hour-by-hour breakdown for today (24 UTC buckets). Powers the live
+  // 'pulse' chart so admin can see exactly when signups + study happen.
+  const todayUsers = await db.user.findMany({
+    where: { createdAt: { gte: todayStart } },
+    select: { createdAt: true },
+  });
+  const todayEvents = await db.timeEvent.findMany({
+    where: { createdAt: { gte: todayStart } },
+    select: { createdAt: true, seconds: true },
+  });
+  const todayPayments = await db.payment.findMany({
+    where: { createdAt: { gte: todayStart } },
+    select: { createdAt: true, amountCents: true },
+  });
+  const todayByHour = Array.from({ length: 24 }, (_, h) => ({ hour: h, signups: 0, seconds: 0, revenueCents: 0 }));
+  for (const u of todayUsers) todayByHour[u.createdAt.getUTCHours()].signups++;
+  for (const e of todayEvents) todayByHour[e.createdAt.getUTCHours()].seconds += e.seconds;
+  for (const p of todayPayments) todayByHour[p.createdAt.getUTCHours()].revenueCents += p.amountCents;
+
   return NextResponse.json({
+    todayByHour,
     kpi: {
       totalUsers,
       paidUsers,
