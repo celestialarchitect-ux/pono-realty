@@ -139,7 +139,7 @@ const ORGANIZATION_SCHEMA = {
     {
       '@type': 'Course',
       name: 'Hawaii Real Estate Salesperson Pre-License — Plus (with Graduation Website Bundle)',
-      description: 'Full Standard curriculum (20-chapter PSI prep, audiobook, AI tutor, mocks) PLUS a custom Hawaii agent website, domain, CRM, lead capture, and admin portal delivered on passing the PSI Hawaii exam. 12 months of course access.',
+      description: 'Full Standard curriculum (20-chapter PSI prep, audiobook, AI tutor, mocks) PLUS a custom Hawaii agent website, domain, CRM, lead capture, and admin portal delivered on passing the PSI Hawaii exam. 6 months of course access.',
       provider: { '@id': `${SITE_URL}/#school` },
       educationalCredentialAwarded: 'Hawaii Real Estate Salesperson Pre-License Completion + Agent Website Bundle (on passing)',
       offers: {

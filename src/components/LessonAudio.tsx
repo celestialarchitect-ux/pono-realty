@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { T, BUTTON_3D } from '@/lib/theme';
+import { Icon } from './Icon';
 
 interface AudioSegment {
   label: string;     // e.g., "Section 1: ..."
@@ -169,7 +170,7 @@ export function LessonAudio({ title, segments }: LessonAudioProps) {
         padding: '16px 20px', marginBottom: 28, fontSize: 13, color: T.textMute,
         display: 'flex', alignItems: 'center', gap: 10,
       }}>
-        <span>🎧</span>
+        <Icon kind="audiobook" size={18} />
         <span>Audio playback isn&apos;t supported in this browser. Try Safari, Chrome, or Edge.</span>
       </div>
     );
@@ -185,10 +186,10 @@ export function LessonAudio({ title, segments }: LessonAudioProps) {
           width: 44, height: 44, borderRadius: '50%',
           background: playing && !paused ? T.coral : T.ocean,
           color: T.white, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: 20, transition: 'background 0.2s',
+          transition: 'background 0.2s',
           animation: playing && !paused ? 'pulse 2s infinite' : 'none',
         }}>
-          🎧
+          <Icon kind="audiobook" size={22} strokeWidth={1.8} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
           <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 3, fontWeight: 600 }}>

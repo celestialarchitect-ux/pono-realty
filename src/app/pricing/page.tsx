@@ -48,14 +48,14 @@ export default function PricingPage() {
               tagline="The complete Hawaii licensing prep system."
               features={[
                 'All 20 chapters (PSI-aligned)',
-                '🎧 Full audiobook narration',
-                '🤖 24/7 AI Real Estate Tutor',
+                'Full audiobook narration',
+                '24/7 AI Real Estate Tutor',
                 'Smart flashcards (spaced repetition)',
                 'Math drills with worked examples',
                 '130-question mock exams',
                 'Searchable glossary',
                 'School final exam (70% to certify)',
-                '6-month access window',
+                '3-month access window',
                 'No subscription, ever',
               ]}
               cta="Enroll"
@@ -68,13 +68,13 @@ export default function PricingPage() {
               tagline="Standard course + your agent website on graduation."
               features={[
                 'Everything in Standard',
-                '🌐 Free agent website on passing the PSI exam',
+                'Free agent website on passing the PSI exam',
                 'Your own domain (yourname.com)',
                 'CRM + lead capture + admin portal',
                 'Launch playbook + curated lead packet',
                 'Hawaii contract templates pre-filled',
                 'Sponsoring-broker introductions',
-                '12-month course access',
+                '6-month course access',
                 'Monthly hosting / maintenance fee after launch',
               ]}
               cta="Enroll"
@@ -132,7 +132,7 @@ export default function PricingPage() {
                   <CompareRow label="24/7 AI Real Estate Tutor" std plus />
                   <CompareRow label="Smart flashcards + math drills + mock exams" std plus />
                   <CompareRow label="School final exam (70% to certify)" std plus />
-                  <CompareRow label="Course access window" std="6 months" plus="12 months" />
+                  <CompareRow label="Course access window" std="3 months" plus="6 months" />
                   <CompareRow label="Custom agent website (yourname.com)" plusConditional solo />
                   <CompareRow label="CRM + lead capture + admin portal" plusConditional solo />
                   <CompareRow label="Launch playbook + lead packet" plusConditional />
@@ -152,16 +152,16 @@ export default function PricingPage() {
           <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18 }}>
             <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>How the access window works</div>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 14 }}>
-              Six months on Standard. Twelve on Plus.
+              Three months on Standard. Six on Plus.
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
               Hawaii&apos;s REC-approved schools all use a defined access window for one reason: <strong style={{ color: T.text }}>real estate knowledge decays when it sits unused.</strong> The window is there to keep you focused, finish you on time, and protect your readiness when you walk into the PSI exam.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Standard:</strong> 6 months from enrollment. Studying 4&ndash;6 hours/week, most students finish in 3&ndash;4 months.
+              <strong style={{ color: T.text }}>Standard:</strong> 3 months from enrollment. Studying 5&ndash;7 hours/week, most students finish in 6&ndash;8 weeks &mdash; the 3-month window is the cushion, not the average.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Plus:</strong> 12 months &mdash; double the window for students balancing the course with full-time work, family, or major life events.
+              <strong style={{ color: T.text }}>Plus:</strong> 6 months &mdash; double the window for students balancing the course with full-time work, family, or major life events.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 0 }}>
               If you don&apos;t finish in your window, re-enroll at a discounted alumni rate. Your school-completion certificate, once earned, is valid for two years per Hawaii REC rules.

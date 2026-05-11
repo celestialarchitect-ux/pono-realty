@@ -75,7 +75,7 @@ export default function FreeFoundation() {
             <p style={{ fontSize: 16, lineHeight: 1.75, color: T.textDim, maxWidth: 600, margin: '0 auto 28px' }}>
               60 hours of state-required curriculum. {' '}
               <strong style={{ color: T.text }}>Every chapter narrated as audio.</strong>{' '}
-              Smart flashcards. Math drills. Full mock exams. Pass guarantee on Coached and VIP tiers.
+              Smart flashcards. Math drills. Full mock exams. Plus tier graduates earn a free agent website on their own domain.
             </p>
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/pricing" style={{ ...BUTTON_3D.primary, padding: '14px 28px', borderRadius: 12, fontSize: 15, fontWeight: 700, letterSpacing: '0.03em', textDecoration: 'none' }}>

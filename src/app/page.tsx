@@ -5,6 +5,7 @@ import { EXAM_BANK } from '@/lib/content/exam-bank';
 import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import { MotivationModal } from '@/components/MotivationModal';
+import { IconBadge, type IconKind } from '@/components/Icon';
 
 const HERO_IMG = 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=2400&q=85&auto=format&fit=crop';
 
@@ -159,15 +160,15 @@ export default function Landing() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
-              <Feature icon="🎧" title="Audiobook for every chapter" body="Listen in the car, on a hike, at the gym. Every chapter is professionally narrated so you can learn while you live your life." />
-              <Feature icon="🤖" title="24/7 AI Real Estate Tutor" body="Trained on the Hawaii curriculum and a deep library of real estate textbooks. Stuck at 11 PM? Ask anything. Get a clear answer in seconds." highlight />
-              <Feature icon="📖" title="Read → Study → Quiz" body="Each chapter teaches in three phases. Read the material, internalize the key terms, prove you got it before moving on. Knowledge sticks because the structure forces it to." />
-              <Feature icon="🃏" title={`${totalTerms}+ smart flashcards`} body="Spaced repetition built in — the cards you miss come back more often, the ones you nail recede. The system learns you and prioritizes your weak spots automatically." />
-              <Feature icon="🧮" title="Math drills (where most fail)" body="Prorations, commission splits, LTV, capitalization, GRM — with step-by-step worked examples. The single category that knocks the most candidates out, eliminated." />
-              <Feature icon="📝" title={`${totalQ}-question exam bank + full mock`} body="Practice with the same 80 + 50 PSI question split, same time pressure, same calibration. The mock exam predicts your real exam score within a few points." />
-              <Feature icon="📚" title={`${totalTerms}-term searchable glossary`} body="Every key term — national + Hawaii — defined plainly, indexed, instantly searchable. Cross-linked to the chapters where it appears." />
-              <Feature icon="📱" title="Mobile-first" body="Studied on the bus to Kahala? Phone in your hand at the beach? The platform is designed for that. Resume exactly where you left off, on any device." />
-              <Feature icon="🌐" title="Free agent website (Plus tier)" body="Pass your PSI exam? Plus students unlock a custom Hawaii real estate site — your name on your own domain, CRM, lead capture, admin portal. Built and deployed for you." />
+              <Feature icon="audiobook" title="Audiobook for every chapter" body="Listen in the car, on a hike, at the gym. Every chapter is professionally narrated so you can learn while you live your life." />
+              <Feature icon="tutor" title="24/7 AI Real Estate Tutor" body="Trained on the Hawaii curriculum and a deep library of real estate textbooks. Stuck at 11 PM? Ask anything. Get a clear answer in seconds." highlight />
+              <Feature icon="book" title="Read → Study → Quiz" body="Each chapter teaches in three phases. Read the material, internalize the key terms, prove you got it before moving on. Knowledge sticks because the structure forces it to." />
+              <Feature icon="flashcards" title={`${totalTerms}+ smart flashcards`} body="Spaced repetition built in — the cards you miss come back more often, the ones you nail recede. The system learns you and prioritizes your weak spots automatically." />
+              <Feature icon="calculator" title="Math drills (where most fail)" body="Prorations, commission splits, LTV, capitalization, GRM — with step-by-step worked examples. The single category that knocks the most candidates out, eliminated." />
+              <Feature icon="exam" title={`${totalQ}-question exam bank + full mock`} body="Practice with the same 80 + 50 PSI question split, same time pressure, same calibration. The mock exam predicts your real exam score within a few points." />
+              <Feature icon="library" title={`${totalTerms}-term searchable glossary`} body="Every key term — national + Hawaii — defined plainly, indexed, instantly searchable. Cross-linked to the chapters where it appears." />
+              <Feature icon="mobile" title="Mobile-first" body="Studied on the bus to Kahala? Phone in your hand at the beach? The platform is designed for that. Resume exactly where you left off, on any device." />
+              <Feature icon="website" title="Free agent website (Plus tier)" body="Pass your PSI exam? Plus students unlock a custom Hawaii real estate site — your name on your own domain, CRM, lead capture, admin portal. Built and deployed for you." />
             </div>
           </div>
         </section>
@@ -177,14 +178,14 @@ export default function Landing() {
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
             <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>How the program runs</div>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-              Six-month window. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Honest, focused, finish-able.</em>
+              Three to six months. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Honest, focused, finish-able.</em>
             </h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             <Step
               number="01"
               title="Enroll. Clock starts."
-              body="The moment you enroll, you have 6 months of full access — the same window every Hawaii REC-approved school provides. Plenty of time. Built to keep you focused."
+              body="Standard gives you 3 months of full access. Plus doubles that to 6 months for students balancing the course with work and family. Both windows match Hawaii REC norms."
             />
             <Step
               number="02"
@@ -205,7 +206,7 @@ export default function Landing() {
           <div style={{ ...CARD, padding: '28px 32px', borderRadius: 16, marginTop: 28, borderLeft: `3px solid ${T.coral}` }}>
             <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>If you don&apos;t finish in time</div>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, margin: 0 }}>
-              If 6 months pass and you haven&apos;t completed the curriculum &amp; final exam, you&apos;ll need to re-enroll at a discounted rate. We do this for the same reason every Hawaii school does: <strong style={{ color: T.text }}>retention drops sharply when material sits unstudied for too long</strong> &mdash; and walking into the PSI exam without recent practice is the fastest way to fail. The window is there to protect your investment.
+              If your access window closes before you&apos;ve completed the curriculum &amp; final exam, you can re-enroll at a discounted alumni rate. We do this for the same reason every Hawaii school does: <strong style={{ color: T.text }}>retention drops sharply when material sits unstudied for too long</strong> &mdash; and walking into the PSI exam without recent practice is the fastest way to fail. The window is there to protect your investment.
             </p>
           </div>
         </section>
@@ -257,22 +258,22 @@ export default function Landing() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
             <Pillar
-              icon="🎯"
+              icon="target"
               title="Grounded, not guessing"
               body="The tutor pulls from our 20-chapter curriculum, the PSI Content Outline, HRS Title 16 (real estate law), and a verified library of real estate references. It cites where it found each answer."
             />
             <Pillar
-              icon="🛡️"
+              icon="compass"
               title="Hawaii vs national, always tagged"
               body="Every answer leads with [National] or [Hawaii] so you know which portion of the PSI exam the topic falls under. No accidental confusion."
             />
             <Pillar
-              icon="👤"
+              icon="audit"
               title="Weekly human audit"
               body="We sample student conversations every week. If the AI says something wrong, we flag it, retrain the prompt, and reach out personally to anyone who got bad info."
             />
             <Pillar
-              icon="🚫"
+              icon="no-cheat"
               title="Refuses to cheat for you"
               body="The tutor won&apos;t take graded exams for you, won&apos;t fabricate case citations, and won&apos;t answer live-exam questions. Real estate is a profession of fiduciary trust — your AI tutor models it."
             />
@@ -370,8 +371,8 @@ export default function Landing() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', '6-month access']} cta="Enroll" href="/pricing#standard" />
-              <Tier name="Plus" price="$899" tagline="Course + free agent website on graduation." featured features={['Everything in Standard', '🌐 Free agent website on passing', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', '12-month course access', 'Launch playbook + lead packet']} cta="Enroll" href="/pricing#plus" />
+              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', '3-month access window']} cta="Enroll" href="/pricing#standard" />
+              <Tier name="Plus" price="$899" tagline="Course + free agent website on graduation." featured features={['Everything in Standard', 'Free agent website on passing', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', '6-month course access', 'Launch playbook + lead packet']} cta="Enroll" href="/pricing#plus" />
               <Tier name="Solo Website Build" price="$800" tagline="Already licensed? Skip the course." features={['Custom-built Hawaii broker site', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', 'Built, deployed, branded to you', 'No course included (a la carte)', 'Monthly hosting & maintenance']} cta="Order Site" href="/pricing#solo" />
             </div>
             <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>
@@ -422,7 +423,7 @@ function Stat({ big, sub, highlight }: { big: string; sub: string; highlight?: b
   );
 }
 
-function Feature({ icon, title, body, highlight }: { icon: string; title: string; body: string; highlight?: boolean }) {
+function Feature({ icon, title, body, highlight }: { icon: IconKind; title: string; body: string; highlight?: boolean }) {
   return (
     <div style={{
       ...CARD,
@@ -430,7 +431,7 @@ function Feature({ icon, title, body, highlight }: { icon: string; title: string
       borderColor: highlight ? T.ocean : undefined,
       background: highlight ? `linear-gradient(180deg, ${T.bg} 0%, rgba(20,131,123,0.06) 100%)` : T.bg,
     }}>
-      <div style={{ fontSize: 28, marginBottom: 12, lineHeight: 1 }}>{icon}</div>
+      <div style={{ marginBottom: 14 }}><IconBadge kind={icon} accent={highlight ? 'ocean' : 'ocean'} /></div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 19, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
       <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
     </div>
@@ -456,10 +457,10 @@ function CredStat({ big, sub }: { big: string; sub: string }) {
   );
 }
 
-function Pillar({ icon, title, body }: { icon: string; title: string; body: string }) {
+function Pillar({ icon, title, body, accent }: { icon: IconKind; title: string; body: string; accent?: 'ocean' | 'coral' | 'sand' }) {
   return (
     <div style={{ ...CARD, padding: '24px 22px', borderRadius: 14 }}>
-      <div style={{ fontSize: 28, marginBottom: 12, lineHeight: 1 }}>{icon}</div>
+      <div style={{ marginBottom: 14 }}><IconBadge kind={icon} accent={accent ?? 'ocean'} /></div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
       <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
     </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { T, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import { IconBadge, type IconKind } from '@/components/Icon';
 
 export default function AIAssistant() {
   return (
@@ -28,32 +29,32 @@ export default function AIAssistant() {
         <section style={{ padding: '24px 32px 56px', maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
             <Capability
-              icon="🎯"
+              icon="target"
               title="Hawaii-Specific Answers"
               body="Trained on Hawaii Revised Statutes 467, 514B, 521, the standard purchase contract, HARPTA, GET, leasehold disclosures, and Land Court vs. Regular System. Knows the difference between national rules and Hawaii's local twists."
             />
             <Capability
-              icon="🧮"
+              icon="calculator"
               title="Math, Worked Step by Step"
               body="Don't just get the answer — get the path to the answer. The tutor walks you through prorations, commission splits, LTV, capitalization, and GRM with every step explained until it clicks."
             />
             <Capability
-              icon="📖"
+              icon="book"
               title="Defines Any Term, In Context"
               body="Stuck on a vocabulary word? Ask. The tutor pulls the definition from the curriculum, gives you a real-world example, and tells you which chapter and which exam category it shows up in."
             />
             <Capability
-              icon="🤔"
+              icon="thinking"
               title="Explains Why You Got It Wrong"
               body="Miss a quiz question? Drop it into the tutor. It diagnoses the misconception, shows you the right reasoning, and links back to the chapter that covers it. No more guessing what went wrong."
             />
             <Capability
-              icon="📅"
+              icon="calendar"
               title="Quizzes You On Demand"
               body="Ask for 5 questions on agency law. 10 questions on Hawaii financing. A surprise mock for tomorrow's study session. The tutor generates questions calibrated to PSI difficulty and grades you instantly."
             />
             <Capability
-              icon="🏆"
+              icon="trophy"
               title="Exam-Week Cram Mode"
               body="The week before your real exam, the tutor switches into intensive review — daily question drills, weakness drilldowns, confidence pacing. Built specifically to get you over the line."
             />
@@ -101,10 +102,10 @@ export default function AIAssistant() {
   );
 }
 
-function Capability({ icon, title, body }: { icon: string; title: string; body: string }) {
+function Capability({ icon, title, body }: { icon: IconKind; title: string; body: string }) {
   return (
     <div style={{ ...CARD, padding: '26px 24px', borderRadius: 16 }}>
-      <div style={{ fontSize: 32, marginBottom: 12, lineHeight: 1 }}>{icon}</div>
+      <div style={{ marginBottom: 14 }}><IconBadge kind={icon} accent="ocean" size={48} /></div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 20, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 10, color: T.text, lineHeight: 1.2 }}>{title}</div>
       <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
     </div>
