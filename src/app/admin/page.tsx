@@ -130,8 +130,11 @@ export default function AdminDashboard() {
 
       {/* NAV TO SUBPAGES */}
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        <Link href="/admin/users" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          All students →
+        <Link href="/admin/prospects" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          Prospects →
+        </Link>
+        <Link href="/admin/users" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+          All students
         </Link>
         <Link href="/admin/inbox" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
           Inbox{data.kpi.unreadInbound > 0 && <span style={{ marginLeft: 8, padding: '2px 8px', background: T.coral, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{data.kpi.unreadInbound}</span>}
