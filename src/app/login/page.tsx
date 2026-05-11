@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
@@ -25,6 +25,18 @@ function Inner() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // If a live session already exists, skip the form entirely and drop the
+  // user on the dashboard (or wherever ?next pointed). Prevents the
+  // "I clicked login but I was already logged in" friction.
+  useEffect(() => {
+    let cancelled = false;
+    fetch('/api/auth/me', { cache: 'no-store' })
+      .then(r => r.json())
+      .then(d => { if (!cancelled && d?.user) router.replace(safeNext); })
+      .catch(() => {/* ignore — let the form render */});
+    return () => { cancelled = true; };
+  }, [router, safeNext]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
