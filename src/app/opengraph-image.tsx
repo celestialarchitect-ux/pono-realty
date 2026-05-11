@@ -35,7 +35,7 @@ export default async function OpengraphImage() {
           }}
         >
           <div style={{ width: 12, height: 12, borderRadius: 99, background: '#14837b' }} />
-          Hawaii · Since 1972
+          Hawaii licensed since 1972
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -103,7 +103,7 @@ export default async function OpengraphImage() {
               RALPH FOULGER&apos;S SCHOOL OF REAL ESTATE
             </div>
             <div style={{ fontSize: 20, color: '#6b7a8a', letterSpacing: 3, textTransform: 'uppercase' }}>
-              Kaneohe · Waikiki · Kauai · 28+ years under Ralph
+              Ralph Foulger, CPM · Past President HARES · Teaching since 1993
             </div>
           </div>
           <div

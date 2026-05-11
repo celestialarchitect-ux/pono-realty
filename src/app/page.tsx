@@ -28,7 +28,7 @@ export default function Landing() {
           <div className="rf-hero-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)', gap: 56, alignItems: 'center' }}>
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '8px 14px', borderRadius: 999, background: T.bgElevated, border: `1px solid ${T.border}`, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.2em', color: T.textMute, textTransform: 'uppercase', marginBottom: 20 }}>
-                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Hawaii · Since 1972 · Built for 2026
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: T.ocean }} /> Licensed since 1972 · Teaching since 1993 · Built for 2026
               </div>
               <h1 className="rf-hero-h1" style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(44px, 6vw, 76px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.02, marginBottom: 22, color: T.text }}>
                 Pass Hawaii&apos;s real estate exam <em style={{ color: T.ocean, fontStyle: 'italic' }}>the first time.</em>
@@ -52,7 +52,7 @@ export default function Landing() {
                 <span>Pass guarantee on Plus</span>
               </div>
               <div style={{ marginTop: 18, fontSize: 12, color: T.textGhost, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                Kaneohe · Waikiki · Kauai · 28+ years under Ralph
+                CPM · Past President HARES · IREM National Faculty
               </div>
             </div>
             <div style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: SHADOW_3D.lg, aspectRatio: '4 / 5' }}>
@@ -60,8 +60,8 @@ export default function Landing() {
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 50%, rgba(14,26,38,0.55) 100%)' }} />
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '28px 24px', color: '#fff' }}>
                 <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', opacity: 0.85, textTransform: 'uppercase', marginBottom: 6 }}>Founded by</div>
-                <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 800, letterSpacing: '-0.01em' }}>Ralph Foulger</div>
-                <div style={{ fontSize: 13, opacity: 0.85, marginTop: 4 }}>Veteran Hawaii broker · Decades of licensing &amp; training experience</div>
+                <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 800, letterSpacing: '-0.01em' }}>Ralph Foulger, CPM</div>
+                <div style={{ fontSize: 13, opacity: 0.9, marginTop: 4 }}>Licensed in Hawaii since 1972 · Broker since 1987 · Teaching since 1993</div>
               </div>
             </div>
           </div>
@@ -216,26 +216,29 @@ export default function Landing() {
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>Why Ralph</div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-                <em style={{ color: T.ocean, fontStyle: 'italic' }}>54 years.</em> One name in Hawaii real estate education.
+                54 years in Hawaii real estate. <em style={{ color: T.ocean, fontStyle: 'italic' }}>33 of them teaching it.</em>
               </h2>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 12, marginBottom: 28 }} data-stack-mobile="true">
-              <CredStat big="1972" sub="Predecessor school founded (Hawaiian School of Real Estate)" />
-              <CredStat big="45+" sub="Years Ralph in the Hawaii real estate industry" />
-              <CredStat big="28+" sub="Years operating Ralph Foulger's School of Real Estate" />
-              <CredStat big="3" sub="Locations historic: Kaneohe · Waikiki · Kauai" />
+              <CredStat big="1972" sub="Year Ralph earned his Hawaii salesperson license" />
+              <CredStat big="1987" sub="Year Ralph earned his Hawaii broker license" />
+              <CredStat big="33" sub="Years teaching pre-license, broker, &amp; continuing-ed candidates" />
+              <CredStat big="3×" sub="Past President: HARES · NAIOP Hawaii · IREM Hawaii" />
             </div>
 
             <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, lineHeight: 1.8, fontSize: 16, color: T.textDim }}>
               <p style={{ marginBottom: 16 }}>
-                Ralph Foulger has spent more than four decades placing agents into Hawaii&apos;s most demanding market &mdash; the one where the average home is over <strong style={{ color: T.text }}>$1M</strong>, where state-specific rules like leasehold disclosure and HARPTA trip up the unprepared, and where the local relationships matter more than the textbook. He took over the Hawaiian School of Real Estate (est. 1972) and ran it through the most consequential decades of Hawaii real estate history.
+                Ralph Foulger has been a Hawaii real estate professional since November 1972 and a Hawaii broker since April 1987. He earned his Certified Property Manager (CPM) designation in 1985 and is one of the few instructors <strong style={{ color: T.text }}>certified by the State of Hawaii to teach all three license tracks</strong> &mdash; salesperson, broker, and continuing education.
               </p>
               <p style={{ marginBottom: 16 }}>
-                When COVID closed classrooms, in-person schools like Ralph&apos;s went quiet. Online behemoths absorbed the volume &mdash; but trained agents to mainland defaults that don&apos;t map to Hawaii&apos;s leasehold market, HARPTA withholdings, or HRS 514B condo law. <strong style={{ color: T.text }}>2026 is the return.</strong>
+                His teaching career began in 1993 as Principal &amp; Instructor of the Century 21 Real Estate School, where he ran pre-license, broker, and continuing-ed programs for thirteen years. In 1996 he founded <strong style={{ color: T.text }}>Ralph Foulger&apos;s School of Real Estate</strong> &mdash; now in its 30th year. He served as <strong style={{ color: T.text }}>President of the Hawaii Association of Real Estate Schools</strong> (HARES) in 1994 and 1995, President of NAIOP Hawaii (1991&ndash;92), President of IREM Hawaii Chapter (1993), and was named to the IREM <strong style={{ color: T.text }}>National Faculty</strong> in 1994.
+              </p>
+              <p style={{ marginBottom: 16 }}>
+                Outside the classroom, Ralph has managed some of the most demanding real estate in the state: <strong style={{ color: T.text }}>Asset Manager of Campbell Industrial Park</strong> (1,400 acres), property manager for The Gentry Companies portfolio (the Gentry Pacific Design Center, Gentry Business Park, the Sunpoint complex, Gentry&apos;s Kona Marina), 125 sub-leases at the International Market Place, and the 120,000 sq ft Kapiolani Building. The curriculum he teaches isn&apos;t academic &mdash; it&apos;s the same toolkit he&apos;s used in the trenches for five decades.
               </p>
               <p>
-                Same Ralph. Same Hawaii-first curriculum. Now with the most technologically sophisticated platform Hawaii real estate education has ever seen &mdash; audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI tutor trained on the curriculum, the statutes, and a deep library of real estate references.
+                When COVID closed in-person classrooms, online behemoths absorbed the volume &mdash; but they teach mainland defaults that don&apos;t map to Hawaii&apos;s leasehold market, HARPTA withholdings, or HRS 514B condo law. <strong style={{ color: T.text }}>2026 is the return.</strong> Same Ralph. Same Hawaii-first curriculum. Now with audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI tutor grounded in the curriculum, the statutes, and the PSI exam outline.
               </p>
             </div>
           </div>

@@ -89,8 +89,21 @@ const ORGANIZATION_SCHEMA = {
       ],
       founder: {
         '@type': 'Person',
-        name: 'Ralph Foulger',
-        description: '45+ year veteran Hawaii real estate broker and educator.',
+        name: 'Ralph S. Foulger',
+        honorificSuffix: 'CPM',
+        jobTitle: 'Principal Broker & Real Estate Educator',
+        description:
+          'Hawaii real estate professional licensed since November 1972, Hawaii broker since April 1987. Certified Property Manager (CPM, 1985). State-certified instructor for salesperson, broker, and continuing-education candidates. Past President of the Hawaii Association of Real Estate Schools (HARES, 1994–95), NAIOP Hawaii (1991–92), and IREM Hawaii Chapter (1993). IREM National Faculty Member (1994). Founded Ralph Foulger’s School of Real Estate in 1996.',
+        alumniOf: {
+          '@type': 'CollegeOrUniversity',
+          name: 'Chaminade University of Honolulu',
+        },
+        hasCredential: [
+          { '@type': 'EducationalOccupationalCredential', name: 'Hawaii Real Estate Salesperson License (1972)' },
+          { '@type': 'EducationalOccupationalCredential', name: 'Hawaii Real Estate Broker License (1987)' },
+          { '@type': 'EducationalOccupationalCredential', name: 'Certified Property Manager (CPM), IREM (1985)' },
+          { '@type': 'EducationalOccupationalCredential', name: 'State of Hawaii Certified Real Estate Licensing Instructor (Salesperson, Broker, Continuing Education)' },
+        ],
       },
       sameAs: [] as string[],
     },
