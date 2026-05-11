@@ -28,6 +28,14 @@ model User {
   name             String
   phone            String?      // optional, E.164 or whatever the user types
   isAdmin          Boolean      @default(false)
+  // Granular role grants. Empty for plain students. `isAdmin=true` implies
+  // every role. The UI on /admin/users lets full admins toggle these for
+  // staff so each person sees only what they need.
+  //   'support'    — can read/triage support tickets + inbox
+  //   'instructor' — can view student progress + answer tutor questions
+  //   'finance'    — can see revenue + Stripe data
+  //   'content'    — can edit lessons, glossary (future)
+  roles            String[]     @default([])
   tier             String       @default("free") // free | standard | plus | solo
   emailVerifiedAt  DateTime?
   stripeCustomerId String?      @unique

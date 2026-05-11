@@ -16,7 +16,19 @@ export interface SessionUser {
   email: string;
   name: string;
   isAdmin: boolean;
+  roles: string[];
   tier: string;
+}
+
+export type RoleName = 'admin' | 'support' | 'instructor' | 'finance' | 'content';
+
+// Centralized permission check. `isAdmin=true` is a superuser flag that
+// implies every role. Other staff get scoped access via the roles array.
+export function hasRole(user: { isAdmin?: boolean; roles?: string[] } | null | undefined, required: RoleName): boolean {
+  if (!user) return false;
+  if (user.isAdmin) return true;
+  const roles = user.roles ?? [];
+  return roles.includes(required) || roles.includes('admin');
 }
 
 interface JwtPayload {
@@ -94,7 +106,7 @@ export async function getSessionUser(): Promise<SessionUser | null> {
     if (!payload?.sub) return null;
     const user = await db.user.findUnique({
       where: { id: payload.sub },
-      select: { id: true, email: true, name: true, isAdmin: true, tier: true },
+      select: { id: true, email: true, name: true, isAdmin: true, roles: true, tier: true },
     });
     return user;
   } catch {

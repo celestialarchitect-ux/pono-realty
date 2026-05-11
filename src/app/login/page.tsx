@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import { PasswordInput } from '@/components/PasswordInput';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function LoginPage() {
               <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" autoComplete="email" required style={inputStyle} />
             </Field>
             <Field label="Password">
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••••" autoComplete="current-password" required style={inputStyle} />
+              <PasswordInput value={password} onChange={setPassword} placeholder="Your password" autoComplete="current-password" required style={inputStyle} />
             </Field>
 
             {error && (

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { db } from '@/lib/db';
-import { getSessionUser, authConfigured } from '@/lib/auth';
+import { getSessionUser, authConfigured, hasRole } from '@/lib/auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,7 +13,7 @@ export async function GET() {
   }
   const session = await getSessionUser();
   if (!session) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (!session.isAdmin) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+  if (!hasRole(session, 'admin')) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   // Load all users (limit cap for safety as the academy grows)
   const users = await db.user.findMany({
@@ -25,6 +25,7 @@ export async function GET() {
       name: true,
       tier: true,
       isAdmin: true,
+      roles: true,
       createdAt: true,
       lastSeenAt: true,
       passedExamAt: true,

@@ -13,11 +13,21 @@ interface AdminUserRow {
   name: string;
   tier: string;
   isAdmin: boolean;
+  roles: string[];
   createdAt: string;
   lastSeenAt: string;
   passedExamAt: string | null;
   totalSeconds: number;
 }
+
+const ROLE_LABELS: Record<string, string> = {
+  admin: 'Full Admin',
+  support: 'Support',
+  instructor: 'Instructor',
+  finance: 'Finance',
+  content: 'Content',
+};
+const ALL_ROLES = Object.keys(ROLE_LABELS);
 
 type AuthState =
   | { kind: 'loading' }
@@ -159,7 +169,27 @@ function NotAdmin({ onLogout }: { onLogout: () => void }) {
 }
 
 function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; sortBy: 'recent' | 'hours' | 'name'; setSortBy: (s: 'recent' | 'hours' | 'name') => void; onLogout: () => void }) {
-  const sorted = [...users].sort((a, b) => {
+  const [editing, setEditing] = useState<AdminUserRow | null>(null);
+  const [rows, setRows] = useState(users);
+  useEffect(() => { setRows(users); }, [users]);
+
+  const updateUser = async (u: AdminUserRow, patch: Partial<AdminUserRow>) => {
+    const res = await fetch(`/api/admin/users/${u.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(patch),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert(err.message ?? 'Could not update user.');
+      return;
+    }
+    const data = await res.json();
+    setRows(curr => curr.map(r => r.id === u.id ? { ...r, ...data.user } : r));
+    setEditing(null);
+  };
+
+  const sorted = [...rows].sort((a, b) => {
     if (sortBy === 'hours') return b.totalSeconds - a.totalSeconds;
     if (sortBy === 'name') return a.name.localeCompare(b.name);
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -211,8 +241,10 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
                   <th style={{ ...th, textAlign: 'right' }}>Hours / 60</th>
                   <th style={{ ...th, textAlign: 'center' }}>Status</th>
                   <th style={th}>Tier</th>
+                  <th style={th}>Roles</th>
                   <th style={th}>Joined</th>
                   <th style={th}>Last seen</th>
+                  <th style={{ ...th, textAlign: 'right' }}>Manage</th>
                 </tr>
               </thead>
               <tbody>
@@ -247,8 +279,18 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
                         </span>
                       </td>
                       <td style={{ ...td, textTransform: 'capitalize' }}>{u.tier}</td>
+                      <td style={td}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                          {u.isAdmin && <RoleChip label="Full Admin" tone="coral" />}
+                          {(u.roles ?? []).filter(r => r !== 'admin').map(r => <RoleChip key={r} label={ROLE_LABELS[r] ?? r} tone="ocean" />)}
+                          {!u.isAdmin && (u.roles ?? []).length === 0 && <span style={{ fontSize: 11, color: T.textGhost }}>—</span>}
+                        </div>
+                      </td>
                       <td style={{ ...td, color: T.textMute, fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>{new Date(u.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })}</td>
                       <td style={{ ...td, color: T.textMute, fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>{formatDuration((Date.now() - new Date(u.lastSeenAt).getTime()) / 1000, 'short')} ago</td>
+                      <td style={{ ...td, textAlign: 'right' }}>
+                        <button onClick={() => setEditing(u)} style={{ ...BUTTON_3D.secondary, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', cursor: 'pointer', fontFamily: 'inherit' }}>Edit</button>
+                      </td>
                     </tr>
                   );
                 })}
@@ -257,7 +299,104 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
           </div>
         </div>
       )}
+      {editing && <EditUserDrawer user={editing} onClose={() => setEditing(null)} onSave={updateUser} />}
     </>
+  );
+}
+
+function RoleChip({ label, tone }: { label: string; tone: 'ocean' | 'coral' }) {
+  const c = tone === 'coral' ? { bg: 'rgba(232,93,60,0.10)', fg: T.coral } : { bg: 'rgba(20,131,123,0.10)', fg: T.ocean };
+  return (
+    <span style={{ fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700, padding: '2px 7px', borderRadius: 999, background: c.bg, color: c.fg, whiteSpace: 'nowrap' }}>{label}</span>
+  );
+}
+
+function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose: () => void; onSave: (u: AdminUserRow, patch: Partial<AdminUserRow>) => Promise<void> }) {
+  const [isAdmin, setIsAdmin] = useState(user.isAdmin);
+  const [roles, setRoles] = useState<string[]>(user.roles ?? []);
+  const [tier, setTier] = useState(user.tier);
+  const [saving, setSaving] = useState(false);
+
+  const toggleRole = (role: string) => {
+    setRoles(curr => curr.includes(role) ? curr.filter(r => r !== role) : [...curr, role]);
+  };
+
+  const save = async () => {
+    setSaving(true);
+    await onSave(user, { isAdmin, roles, tier });
+    setSaving(false);
+  };
+
+  return (
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(14,26,38,0.55)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', zIndex: 1000, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: 18, overflowY: 'auto' }}>
+      <div onClick={e => e.stopPropagation()} style={{ ...CARD, maxWidth: 520, width: '100%', padding: 28, marginTop: 60, borderRadius: 16 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>
+              Manage user
+            </div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, lineHeight: 1.2, margin: 0 }}>{user.name}</h2>
+            <div style={{ fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", marginTop: 4 }}>{user.email}</div>
+          </div>
+          <button onClick={onClose} aria-label="Close" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 22, color: T.textMute, lineHeight: 1 }}>×</button>
+        </div>
+
+        <Section title="Full admin">
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
+            <input type="checkbox" checked={isAdmin} onChange={e => setIsAdmin(e.target.checked)} style={{ width: 18, height: 18, cursor: 'pointer' }} />
+            <span style={{ fontSize: 14, color: T.text }}>Full admin (every permission, can manage roles)</span>
+          </label>
+        </Section>
+
+        <Section title="Scoped roles">
+          <p style={{ fontSize: 12, color: T.textMute, lineHeight: 1.6, marginBottom: 10, margin: 0 }}>
+            Give scoped admin access to staff. Full admins always have all scopes.
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 10 }} data-stack-mobile="true">
+            {ALL_ROLES.filter(r => r !== 'admin').map(r => (
+              <label key={r} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', padding: '8px 12px', border: `1px solid ${T.border}`, borderRadius: 10, background: roles.includes(r) ? 'rgba(20,131,123,0.06)' : 'transparent' }}>
+                <input type="checkbox" checked={roles.includes(r)} onChange={() => toggleRole(r)} style={{ width: 16, height: 16, cursor: 'pointer' }} />
+                <div>
+                  <div style={{ fontSize: 13, color: T.text, fontWeight: 600 }}>{ROLE_LABELS[r]}</div>
+                  <div style={{ fontSize: 11, color: T.textMute, marginTop: 1 }}>{ROLE_DESC[r]}</div>
+                </div>
+              </label>
+            ))}
+          </div>
+        </Section>
+
+        <Section title="Tier (paid status)">
+          <select value={tier} onChange={e => setTier(e.target.value)} style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.white, color: T.text, fontFamily: 'inherit', fontSize: 14 }}>
+            <option value="free">Free</option>
+            <option value="standard">Standard ($599)</option>
+            <option value="plus">Plus ($899)</option>
+            <option value="solo">Solo Website ($800)</option>
+          </select>
+          <p style={{ fontSize: 11, color: T.textGhost, marginTop: 6, lineHeight: 1.5 }}>Manually changing tier here doesn&apos;t charge them. Stripe webhook normally handles this on payment.</p>
+        </Section>
+
+        <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 18 }}>
+          <button onClick={onClose} style={{ ...BUTTON_3D.ghost, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
+          <button onClick={save} disabled={saving} style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', cursor: saving ? 'wait' : 'pointer', fontFamily: 'inherit', border: 'none', opacity: saving ? 0.6 : 1 }}>{saving ? 'Saving…' : 'Save changes'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ROLE_DESC: Record<string, string> = {
+  support: 'Triage tickets + inbox',
+  instructor: 'View student progress, answer questions',
+  finance: 'View revenue + Stripe data',
+  content: 'Edit lessons + glossary',
+};
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: 18 }}>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>{title}</div>
+      {children}
+    </div>
   );
 }
 

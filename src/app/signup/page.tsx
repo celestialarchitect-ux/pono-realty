@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import { PasswordInput } from '@/components/PasswordInput';
+import { loadLog, STORAGE_KEY } from '@/lib/time-tracking';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -62,6 +64,25 @@ export default function SignupPage() {
         }
         return;
       }
+      // Migrate any pre-signup study time the visitor accumulated in
+      // localStorage to their new server record (capped server-side at 4h
+      // to prevent abuse). Best-effort; failure is silent.
+      try {
+        const local = loadLog();
+        if (local.totalSeconds > 0 && Object.keys(local.byPath).length > 0) {
+          await fetch('/api/time/migrate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ byPath: local.byPath }),
+          });
+          // Clear local cache so the next session starts clean and the server
+          // is the single source of truth.
+          try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
+        }
+      } catch {
+        // migration failure is non-fatal — user just keeps tracking from now on
+      }
+
       router.push('/profile');
     } catch {
       setError('Network error. Please try again.');
@@ -136,11 +157,10 @@ export default function SignupPage() {
               />
             </Field>
             <Field label="Password (10+ characters)">
-              <input
-                type="password"
+              <PasswordInput
                 value={password}
-                onChange={e => setPassword(e.target.value)}
-                placeholder="••••••••••"
+                onChange={setPassword}
+                placeholder="At least 10 characters"
                 autoComplete="new-password"
                 minLength={10}
                 required

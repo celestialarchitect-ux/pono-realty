@@ -5,6 +5,7 @@ import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
+import { PasswordInput } from '@/components/PasswordInput';
 
 export default function ResetPasswordPage() {
   return (
@@ -78,11 +79,10 @@ function Inner() {
           ) : (
             <form onSubmit={submit} style={{ ...CARD, padding: 32 }}>
               <Field label="New password (10+ characters)">
-                <input
-                  type="password"
+                <PasswordInput
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="••••••••••"
+                  onChange={setPassword}
+                  placeholder="Pick a strong password"
                   autoComplete="new-password"
                   minLength={10}
                   required
@@ -90,11 +90,10 @@ function Inner() {
                 />
               </Field>
               <Field label="Confirm new password">
-                <input
-                  type="password"
+                <PasswordInput
                   value={confirm}
-                  onChange={e => setConfirm(e.target.value)}
-                  placeholder="••••••••••"
+                  onChange={setConfirm}
+                  placeholder="Type it again"
                   autoComplete="new-password"
                   minLength={10}
                   required
