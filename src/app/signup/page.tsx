@@ -8,13 +8,19 @@ import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function SignupPage() {
   const router = useRouter();
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const valid = name.trim().length >= 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && password.length >= 10;
+  const valid =
+    firstName.trim().length >= 1 &&
+    lastName.trim().length >= 1 &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
+    password.length >= 10;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +31,13 @@ export default function SignupPage() {
       const res = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, name }),
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          phone: phone.trim() || undefined,
+          email,
+          password,
+        }),
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -38,7 +50,13 @@ export default function SignupPage() {
         } else if (body.error === 'weak_password') {
           setError('Password must be at least 10 characters.');
         } else if (body.error === 'invalid_email') {
-          setError('That doesn\'t look like a valid email address.');
+          setError("That doesn't look like a valid email address.");
+        } else if (body.error === 'invalid_first_name') {
+          setError('First name is required.');
+        } else if (body.error === 'invalid_last_name') {
+          setError('Last name is required.');
+        } else if (body.error === 'invalid_phone') {
+          setError('Phone number looks invalid. Leave it blank or enter a real number.');
         } else {
           setError('Could not create your account. Please try again.');
         }
@@ -57,7 +75,7 @@ export default function SignupPage() {
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header />
-        <main style={{ padding: '64px 32px', maxWidth: 480, margin: '0 auto' }}>
+        <main style={{ padding: '64px 32px', maxWidth: 520, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 44px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.1, marginBottom: 12 }}>
               Create your account.
@@ -68,18 +86,81 @@ export default function SignupPage() {
           </div>
 
           <form onSubmit={submit} style={{ ...CARD, padding: 32 }}>
-            <Field label="Your name">
-              <input value={name} onChange={e => setName(e.target.value)} placeholder="Kalani K." autoComplete="name" style={inputStyle} />
-            </Field>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} data-stack-mobile="true">
+              <Field label="First name">
+                <input
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
+                  placeholder="Kalani"
+                  autoComplete="given-name"
+                  required
+                  style={inputStyle}
+                />
+              </Field>
+              <Field label="Last name">
+                <input
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
+                  placeholder="Kahale"
+                  autoComplete="family-name"
+                  required
+                  style={inputStyle}
+                />
+              </Field>
+            </div>
             <Field label="Email">
-              <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com" autoComplete="email" style={inputStyle} />
+              <input
+                type="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                placeholder="you@email.com"
+                autoComplete="email"
+                required
+                style={inputStyle}
+              />
+            </Field>
+            <Field
+              label={
+                <>
+                  Phone <span style={{ color: T.textGhost, textTransform: 'none', letterSpacing: 'normal', fontWeight: 500, marginLeft: 6 }}>(optional)</span>
+                </>
+              }
+            >
+              <input
+                type="tel"
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+                placeholder="(808) 555-0123"
+                autoComplete="tel"
+                style={inputStyle}
+              />
             </Field>
             <Field label="Password (10+ characters)">
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••••" autoComplete="new-password" minLength={10} style={inputStyle} />
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="••••••••••"
+                autoComplete="new-password"
+                minLength={10}
+                required
+                style={inputStyle}
+              />
             </Field>
 
             {error && (
-              <div style={{ background: 'rgba(193,70,40,0.08)', border: `1px solid rgba(193,70,40,0.32)`, color: T.coralDark, padding: '10px 14px', borderRadius: 8, fontSize: 13, marginBottom: 14, lineHeight: 1.5 }}>
+              <div
+                style={{
+                  background: 'rgba(193,70,40,0.08)',
+                  border: `1px solid rgba(193,70,40,0.32)`,
+                  color: T.coralDark,
+                  padding: '10px 14px',
+                  borderRadius: 8,
+                  fontSize: 13,
+                  marginBottom: 14,
+                  lineHeight: 1.5,
+                }}
+              >
                 {error}
               </div>
             )}
@@ -98,18 +179,29 @@ export default function SignupPage() {
                 cursor: valid && !submitting ? 'pointer' : 'not-allowed',
                 fontFamily: 'inherit',
                 border: 'none',
-                opacity: (!valid || submitting) ? 0.5 : 1,
+                opacity: !valid || submitting ? 0.5 : 1,
               }}
             >
               {submitting ? 'Creating account…' : 'Create account'}
             </button>
             <p style={{ fontSize: 12, color: T.textMute, marginTop: 14, textAlign: 'center' }}>
-              Already have an account? <Link href="/login" style={{ color: T.ocean, textDecoration: 'underline' }}>Log in</Link>
+              Already have an account?{' '}
+              <Link href="/login" style={{ color: T.ocean, textDecoration: 'underline' }}>
+                Log in
+              </Link>
             </p>
           </form>
 
           <p style={{ fontSize: 11, color: T.textGhost, marginTop: 18, textAlign: 'center', lineHeight: 1.6 }}>
-            By signing up you agree to the <Link href="/policies/terms" style={{ color: T.textMute, textDecoration: 'underline' }}>Terms</Link> and <Link href="/policies/privacy" style={{ color: T.textMute, textDecoration: 'underline' }}>Privacy Policy</Link>. We store your email, name, and hashed password. We never share your data.
+            By signing up you agree to the{' '}
+            <Link href="/policies/terms" style={{ color: T.textMute, textDecoration: 'underline' }}>
+              Terms
+            </Link>{' '}
+            and{' '}
+            <Link href="/policies/privacy" style={{ color: T.textMute, textDecoration: 'underline' }}>
+              Privacy Policy
+            </Link>
+            . We store your name, email, hashed password, and (if provided) phone. Phone is optional and is used only for support &amp; account-recovery contact.
           </p>
         </main>
         <Footer />
@@ -118,10 +210,23 @@ export default function SignupPage() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: React.ReactNode; children: React.ReactNode }) {
   return (
     <div style={{ marginBottom: 14 }}>
-      <label style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: T.textMute, fontWeight: 600, marginBottom: 6 }}>{label}</label>
+      <label
+        style={{
+          display: 'block',
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 10,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          color: T.textMute,
+          fontWeight: 600,
+          marginBottom: 6,
+        }}
+      >
+        {label}
+      </label>
       {children}
     </div>
   );

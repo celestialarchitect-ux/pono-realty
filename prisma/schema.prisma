@@ -16,7 +16,13 @@ model User {
   id               String       @id @default(cuid())
   email            String       @unique
   passwordHash     String
+  firstName        String
+  lastName         String
+  // `name` is kept as a composed display value (firstName + " " + lastName)
+  // for back-compat with everything that reads it (emails, admin table, etc.).
+  // The API populates it at write time; never write to it from outside.
   name             String
+  phone            String?      // optional, E.164 or whatever the user types
   isAdmin          Boolean      @default(false)
   tier             String       @default("free") // free | standard | plus | solo
   emailVerifiedAt  DateTime?
