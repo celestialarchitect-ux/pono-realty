@@ -187,6 +187,11 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
     const data = await res.json();
     setRows(curr => curr.map(r => r.id === u.id ? { ...r, ...data.user } : r));
     setEditing(null);
+
+    // Cross-tab signal so any open TierGate-protected page re-validates
+    // its auth-me state. Without this a stale tab keeps the old tier
+    // decision until reload. TierGate listens on window 'storage'.
+    try { window.localStorage.setItem('rfs:auth-bump', String(Date.now())); } catch {/* ignore */}
   };
 
   const sorted = [...rows].sort((a, b) => {
