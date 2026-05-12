@@ -43,7 +43,13 @@ export function TierGate({ require, children }: TierGateProps) {
     let cancelled = false;
     const check = async () => {
       try {
-        const res = await fetch('/api/auth/me', { cache: 'no-store' });
+        // Bust every possible cache layer — the tier can change at any
+        // moment (admin promote/demote, Stripe webhook, manual edit) and
+        // we want the next page-visit or tab-focus to reflect that.
+        const res = await fetch(`/api/auth/me?t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' },
+        });
         const data = (await res.json()) as AuthMeResponse;
 
         // Auth not yet provisioned — fall open for 'auth' so the marketing demo
@@ -88,7 +94,25 @@ export function TierGate({ require, children }: TierGateProps) {
       }
     };
     check();
-    return () => { cancelled = true; };
+
+    // Re-validate when the user returns to a stale tab — covers the case
+    // where they edited their own tier in /admin/users on another tab and
+    // then came back to a course page that was already rendered with the
+    // old tier. Without this, the only escape was a hard reload.
+    const onFocus = () => { void check(); };
+    const onVisible = () => { if (document.visibilityState === 'visible') void check(); };
+    // Cross-tab signal fired by /admin/users after a user edit.
+    const onStorage = (e: StorageEvent) => { if (e.key === 'rfs:auth-bump') void check(); };
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisible);
+    window.addEventListener('storage', onStorage);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisible);
+      window.removeEventListener('storage', onStorage);
+    };
   }, [require, router, pathname]);
 
   if (state === 'checking') {
