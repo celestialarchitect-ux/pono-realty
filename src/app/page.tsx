@@ -6,7 +6,9 @@ import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import { IconBadge, type IconKind } from '@/components/Icon';
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=2400&q=85&auto=format&fit=crop';
+// 1200w / q=72 in WebP is plenty for a 480px-rendered hero on 2x retina.
+// Was 2400w / q=85 = 585 KB. New URL is ~180 KB and indistinguishable on screen.
+const HERO_IMG = 'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=1200&q=72&auto=format&fit=crop&fm=webp';
 
 export default function Landing() {
   const totalQ = EXAM_BANK.length;

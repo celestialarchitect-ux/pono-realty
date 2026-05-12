@@ -37,6 +37,36 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
     return [
+      // Long-cache the static metadata files. They change rarely + the
+      // routes are versioned implicitly (icon.svg is content-hashed by Next,
+      // sitemap regenerates on deploy). 1 day for sitemap/robots, 1 year
+      // for the icon.
+      {
+        source: '/icon.svg',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/apple-icon.svg',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/manifest.json',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
+      },
+      {
+        source: '/sitemap.xml',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=3600, s-maxage=86400' }],
+      },
+      {
+        source: '/robots.txt',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
+      },
+      // Aggressive cache for the example-website static assets (Shayne's photos).
+      {
+        source: '/example-website-assets/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=2592000, immutable' }],
+      },
+      // Security headers everywhere.
       {
         source: '/:path*',
         headers: securityHeaders,
