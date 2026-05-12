@@ -66,6 +66,12 @@ const nextConfig: NextConfig = {
         source: '/example-website-assets/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=2592000, immutable' }],
       },
+      // Pre-recorded lesson MP3s — generated once via npm run gen-audio,
+      // hash-stable per slug. Browser + CDN cache 30 days.
+      {
+        source: '/audio/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=2592000, immutable' }],
+      },
       // Security headers everywhere.
       {
         source: '/:path*',

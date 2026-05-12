@@ -48,7 +48,7 @@ export default async function FreeLessonPage({ params }: { params: Promise<{ slu
             {lesson.summary}
           </p>
 
-          <LessonAudio title={lesson.title} segments={audioSegments} />
+          <LessonAudio title={lesson.title} segments={audioSegments} mp3Url={`/audio/${lesson.slug}.mp3`} />
         </section>
 
         {/* SECTIONS */}

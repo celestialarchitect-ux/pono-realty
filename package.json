@@ -9,7 +9,8 @@
     "postinstall": "prisma generate || true",
     "db:push": "prisma db push --skip-generate",
     "db:studio": "prisma studio",
-    "create-admin": "tsx scripts/create-admin.ts"
+    "create-admin": "tsx scripts/create-admin.ts",
+    "gen-audio": "node scripts/generate-lesson-audio.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
