@@ -181,19 +181,22 @@ export default function Landing() {
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
             <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>How the program runs</div>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-              Three to six months. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Honest, focused, finish-able.</em>
+              60 hours of study. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Two weeks if you go full-time.</em>
             </h2>
+            <p style={{ fontSize: 16, color: T.textDim, lineHeight: 1.7, maxWidth: 720, margin: '14px auto 0' }}>
+              Hawaii law requires 60 documented study hours. <strong style={{ color: T.text }}>That&apos;s the real timeline.</strong> Full-time students finish in ~2 weeks. The 3- and 6-month windows are the latest moment access ends &mdash; the safety net for life, not the expected pace. Your profile includes a built-in study planner that builds a daily schedule from any goal date you pick.
+            </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
             <Step
               number="01"
-              title="Enroll. Clock starts."
-              body="Standard gives you 3 months of full access. Plus doubles that to 6 months for students balancing the course with work and family. Both windows match Hawaii REC norms."
+              title="Enroll. Set your goal date."
+              body="Pick how fast you want to finish — 2 weeks, 6 weeks, 3 months, whenever. The study planner generates your daily time blocks. Standard gives you 3 months as a ceiling; Plus gives you 6."
             />
             <Step
               number="02"
               title="Move through 20 chapters."
-              body="Read or listen, drill the math, run the flashcards, take the chapter quizzes. The platform tracks your progress so you always know where you stand."
+              body="Read or listen, drill the math, run the flashcards, take the chapter quizzes. The platform tracks your progress against your plan so you always know if you&apos;re on pace."
             />
             <Step
               number="03"
@@ -207,9 +210,9 @@ export default function Landing() {
             />
           </div>
           <div style={{ ...CARD, padding: '28px 32px', borderRadius: 16, marginTop: 28, borderLeft: `3px solid ${T.coral}` }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>If you don&apos;t finish in time</div>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>If you hit the ceiling</div>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, margin: 0 }}>
-              If your access window closes before you&apos;ve completed the curriculum &amp; final exam, you can re-enroll at a discounted alumni rate. We do this for the same reason every Hawaii school does: <strong style={{ color: T.text }}>retention drops sharply when material sits unstudied for too long</strong> &mdash; and walking into the PSI exam without recent practice is the fastest way to fail. The window is there to protect your investment.
+              If you reach the end of your window without finishing: <strong style={{ color: T.text }}>Plus students</strong> can buy a one-time <strong style={{ color: T.text }}>$249.99 extension</strong> for 90 more days of full access. <strong style={{ color: T.text }}>Standard students</strong> re-enroll at the full Standard price for a fresh window. The window exists for the same reason every Hawaii school uses one &mdash; material decays when it sits unstudied &mdash; not to gate income out of you.
             </p>
           </div>
         </section>
@@ -374,8 +377,8 @@ export default function Landing() {
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', '3-month access window']} cta="Enroll" href="/pricing#standard" />
-              <Tier name="Plus" price="$899" tagline="Course + free agent website on graduation." featured features={['Everything in Standard', 'Free agent website on passing', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', '6-month course access', 'Launch playbook + lead packet']} cta="Enroll" href="/pricing#plus" />
+              <Tier name="Standard" price="$599" tagline="The complete prep system." features={['All 20 chapters + audiobook', 'Smart flashcards & math drills', '130-question mock exams', '24/7 AI Real Estate Tutor', 'School final exam', 'Built-in study planner', '3-month ceiling (most finish in 2-6 weeks)']} cta="Enroll" href="/pricing#standard" />
+              <Tier name="Plus" price="$899" tagline="Course + free agent website on graduation." featured features={['Everything in Standard', 'Free agent website on passing', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', '6-month ceiling + $249.99 extension', 'Launch playbook + lead packet']} cta="Enroll" href="/pricing#plus" />
               <Tier name="Solo Website Build" price="$800" tagline="Already licensed? Skip the course." features={['Custom-built Hawaii broker site', 'Your own domain (yourname.com)', 'CRM + lead capture + admin portal', 'Built, deployed, branded to you', 'No course included (a la carte)', 'Monthly hosting & maintenance']} cta="Order Site" href="/pricing#solo" />
             </div>
             <div style={{ textAlign: 'center', marginTop: 24, fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em' }}>

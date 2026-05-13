@@ -69,6 +69,9 @@ export default function PricingPage() {
           <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.6, maxWidth: 760, margin: '0 auto 8px' }}>
             Three options. The full Hawaii licensing system, the same system bundled with a custom agent website on graduation, or a standalone website build for agents who are already licensed.
           </p>
+          <p style={{ fontSize: 15, color: T.ocean, lineHeight: 1.6, maxWidth: 760, margin: '12px auto 0', fontWeight: 600 }}>
+            Hawaii requires 60 study hours. <strong style={{ color: T.text }}>Full-time students finish in about two weeks.</strong> The 3- and 6-month windows below are ceilings &mdash; the cushion for life, not the expected pace.
+          </p>
           <p style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', marginTop: 16 }}>
             All prices USD · One-time payment · Hosting / maintenance fee applies to websites
           </p>
@@ -120,7 +123,8 @@ export default function PricingPage() {
                 '130-question mock exams',
                 'Searchable glossary',
                 'School final exam (70% to certify)',
-                '3-month access window',
+                'Built-in study planner with goal-date scheduler',
+                '3-month access ceiling (full-time finishes in ~2 weeks)',
                 'No subscription, ever',
               ]}
               cta={loadingTier === 'standard' ? 'Redirecting…' : 'Enroll'}
@@ -140,7 +144,8 @@ export default function PricingPage() {
                 'Launch playbook + curated lead packet',
                 'Hawaii contract templates pre-filled',
                 'Sponsoring-broker introductions',
-                '6-month course access',
+                'Built-in study planner with goal-date scheduler',
+                '6-month access ceiling + $249.99 extension safety net',
                 'Monthly hosting / maintenance fee after launch',
               ]}
               cta={loadingTier === 'plus' ? 'Redirecting…' : 'Enroll'}
@@ -205,7 +210,7 @@ export default function PricingPage() {
                   <CompareRow label="24/7 AI Real Estate Tutor" std plus />
                   <CompareRow label="Smart flashcards + math drills + mock exams" std plus />
                   <CompareRow label="School final exam (70% to certify)" std plus />
-                  <CompareRow label="Course access window" std="3 months" plus="6 months" />
+                  <CompareRow label="Access ceiling (finish faster if you want)" std="3 months" plus="6 months" />
                   <CompareRow label="$249.99 extension (+90 days) at expiry" plus="Yes" />
                   <CompareRow label="Re-enrollment at full price after expiry" std="$599" plus="(if extension used up)" />
                   <CompareRow label="Custom agent website (yourname.com)" plusConditional solo />
@@ -225,18 +230,43 @@ export default function PricingPage() {
         {/* TIME WINDOW EXPLAINED */}
         <section style={{ padding: '64px 32px', maxWidth: 980, margin: '0 auto' }}>
           <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18 }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>How the access window works</div>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>How long this actually takes</div>
             <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 14 }}>
-              Three months on Standard. Six on Plus.
+              60 hours. That&apos;s the real number.
             </h2>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              Hawaii&apos;s REC-approved schools all use a defined access window for one reason: <strong style={{ color: T.text }}>real estate knowledge decays when it sits unused.</strong> The window is there to keep you focused, finish you on time, and protect your readiness when you walk into the PSI exam.
+              Hawaii REC requires 60 documented study hours before you&apos;re exam-eligible. <strong style={{ color: T.text }}>That&apos;s the whole timeline.</strong> Not three months. Not six. Sixty hours. How fast you cover them is up to you.
             </p>
+
+            <div style={{ background: T.bgRaised, borderRadius: 12, padding: 22, border: `1px solid ${T.border}`, marginBottom: 18 }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>What 60 hours looks like at different paces</div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                <li style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>
+                  <strong style={{ color: T.ocean }}>6 hrs/day, full-time:</strong> <strong style={{ color: T.text }}>~10 days.</strong> People do this. Career switchers between jobs, students on break.
+                </li>
+                <li style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>
+                  <strong style={{ color: T.ocean }}>4 hrs/day:</strong> <strong style={{ color: T.text }}>~15 days.</strong> Two solid weeks if you treat it like a job.
+                </li>
+                <li style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>
+                  <strong style={{ color: T.ocean }}>2 hrs/day after work:</strong> <strong style={{ color: T.text }}>~30 days.</strong> The classic month-long evenings-and-weekends plan.
+                </li>
+                <li style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>
+                  <strong style={{ color: T.ocean }}>1 hr/day:</strong> <strong style={{ color: T.text }}>~60 days.</strong> Two months at a relaxed pace.
+                </li>
+                <li style={{ fontSize: 14, color: T.text, lineHeight: 1.6 }}>
+                  <strong style={{ color: T.ocean }}>3 hrs/week:</strong> <strong style={{ color: T.text }}>~5 months.</strong> Whenever-you-can mode &mdash; this is when the Plus window matters.
+                </li>
+              </ul>
+              <p style={{ fontSize: 13, color: T.textMute, marginTop: 14, lineHeight: 1.6 }}>
+                Your profile has a <strong style={{ color: T.text }}>built-in study planner</strong> &mdash; pick a goal date, it generates your daily time blocks, you check off as you go.
+              </p>
+            </div>
+
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Standard ($599):</strong> 3 months from enrollment. Studying 5&ndash;7 hours/week, most students finish in 6&ndash;8 weeks &mdash; the 3-month window is the cushion, not the average. Your profile shows a <strong style={{ color: T.text }}>live countdown</strong> from the moment you pay.
+              <strong style={{ color: T.text }}>Standard ($599) gives you 3 months of access. Plus ($899) gives you 6.</strong> Those are ceilings &mdash; the latest moment access ends. They&apos;re not how long it should take. They exist so a hard week, a sick kid, or a busy season at work doesn&apos;t lock you out before you finish.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 0 }}>
-              <strong style={{ color: T.text }}>Plus ($899):</strong> 6 months &mdash; double the window for students balancing the course with full-time work, family, or major life events. Plus also unlocks the <strong style={{ color: T.text }}>$249.99 extension benefit</strong> (see below).
+              Pick Standard if you have the bandwidth to study most days. Pick Plus if your schedule is unpredictable, you want the agent-website bundle on graduation, or you simply want the bigger cushion <em>plus</em> the $249.99 extension safety net described below.
             </p>
           </div>
         </section>

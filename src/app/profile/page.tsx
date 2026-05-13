@@ -15,6 +15,8 @@ import {
 import { isHapticsEnabled, setHapticsEnabled, tap } from '@/lib/haptics';
 import { MotivationModal } from '@/components/MotivationModal';
 import { CURRICULUM } from '@/lib/curriculum';
+import { setPin as pwaSetPin, clearPin as pwaClearPin } from '@/components/PWAInstaller';
+import { StudyPlanner } from '@/components/StudyPlanner';
 
 const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
@@ -276,6 +278,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* STUDY PLANNER — goal-date scheduler with monthly calendar */}
+      {isServer && <StudyPlanner />}
+
       {/* CONTINUE + COURSE PROGRESS */}
       {isServer && <ContinueAndCourseProgress byPath={analytics.byPath ?? {}} lastPath={analytics.lastPath ?? null} />}
 
@@ -460,7 +465,22 @@ function ContinueAndCourseProgress({ byPath, lastPath }: { byPath: Record<string
 
 function SettingsCard() {
   const [hapticsOn, setHapticsOn] = useState<boolean | null>(null);
+  const [hasPin, setHasPin] = useState<boolean>(false);
+  const [pinFormOpen, setPinFormOpen] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState<string | null>(null);
+  const [pinSaving, setPinSaving] = useState(false);
+
   useEffect(() => { setHapticsOn(isHapticsEnabled()); }, []);
+
+  useEffect(() => {
+    // Ask the PWAInstaller bridge whether a PIN is already set.
+    const onState = (e: Event) => setHasPin(!!(e as CustomEvent).detail.hasPin);
+    window.addEventListener('rfa-pin-state', onState as EventListener);
+    window.dispatchEvent(new Event('rfa-pin-query'));
+    return () => window.removeEventListener('rfa-pin-state', onState as EventListener);
+  }, [pinFormOpen]);
+
   const toggle = () => {
     setHapticsOn(curr => {
       const next = !(curr ?? true);
@@ -469,6 +489,36 @@ function SettingsCard() {
       return next;
     });
   };
+
+  const onSavePin = async () => {
+    setPinError(null);
+    if (!/^\d{4}$/.test(pinInput)) {
+      setPinError('PIN must be exactly 4 digits.');
+      return;
+    }
+    setPinSaving(true);
+    try {
+      await pwaSetPin(pinInput);
+      setHasPin(true);
+      setPinFormOpen(false);
+      setPinInput('');
+      tap();
+    } catch (err) {
+      setPinError(err instanceof Error ? err.message : 'Could not save PIN.');
+    } finally {
+      setPinSaving(false);
+    }
+  };
+
+  const onRemovePin = () => {
+    if (typeof window !== 'undefined' && window.confirm('Remove app PIN? The app will launch without the lock screen.')) {
+      pwaClearPin();
+      setHasPin(false);
+      setPinFormOpen(false);
+      setPinInput('');
+    }
+  };
+
   if (hapticsOn === null) return null;
   return (
     <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.ocean}` }}>
@@ -512,6 +562,74 @@ function SettingsCard() {
           }} />
         </span>
       </label>
+
+      {/* APP PIN — only meaningful on installed PWA, but works in browser too */}
+      <div style={{ marginTop: 22, paddingTop: 22, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 14, flexWrap: 'wrap' }}>
+          <div style={{ flex: '1 1 240px' }}>
+            <div style={{ fontSize: 14, color: T.text, fontWeight: 600, marginBottom: 4 }}>
+              App PIN {hasPin && <span style={{ color: T.green, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', marginLeft: 8 }}>· SET</span>}
+            </div>
+            <div style={{ fontSize: 12, color: T.textMute, lineHeight: 1.55 }}>
+              A 4-digit PIN that locks the app when you open it from your home screen. Re-locks after 15 minutes in the background. <strong style={{ color: T.textDim }}>Not a replacement for your account password</strong> — it&apos;s a quick privacy gate for shared phones.
+            </div>
+          </div>
+          {hasPin ? (
+            <button onClick={onRemovePin} style={{ ...BUTTON_3D.ghost, padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit', color: T.coral }}>
+              Remove PIN
+            </button>
+          ) : (
+            <button onClick={() => setPinFormOpen(o => !o)} style={{ ...BUTTON_3D.secondary, padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>
+              {pinFormOpen ? 'Cancel' : 'Set PIN'}
+            </button>
+          )}
+        </div>
+        {pinFormOpen && !hasPin && (
+          <div style={{ marginTop: 14, padding: '14px 16px', background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.border}`, display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            <input
+              type="password"
+              inputMode="numeric"
+              autoComplete="off"
+              maxLength={4}
+              pattern="\d{4}"
+              value={pinInput}
+              onChange={(e) => setPinInput(e.target.value.replace(/\D/g, '').slice(0, 4))}
+              placeholder="••••"
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: 22,
+                letterSpacing: '0.4em',
+                textAlign: 'center',
+                padding: '10px 14px',
+                borderRadius: 8,
+                border: `1px solid ${T.border}`,
+                background: T.bg,
+                color: T.text,
+                width: 140,
+              }}
+            />
+            <button onClick={onSavePin} disabled={pinSaving || pinInput.length !== 4} style={{
+              ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em',
+              cursor: (pinSaving || pinInput.length !== 4) ? 'not-allowed' : 'pointer',
+              fontFamily: 'inherit', opacity: (pinSaving || pinInput.length !== 4) ? 0.5 : 1,
+            }}>
+              {pinSaving ? 'Saving…' : 'Save PIN'}
+            </button>
+            {pinError && <p style={{ fontSize: 12, color: T.coral, margin: 0, flexBasis: '100%' }}>{pinError}</p>}
+            <p style={{ fontSize: 11, color: T.textMute, margin: 0, flexBasis: '100%', lineHeight: 1.5 }}>
+              Stored locally on this device. Forget your PIN? Clear your site data in browser settings, or simply uninstall + reinstall the app.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* PWA install nudge */}
+      <div style={{ marginTop: 22, paddingTop: 22, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ fontSize: 14, color: T.text, fontWeight: 600, marginBottom: 4 }}>Save to your home screen</div>
+        <div style={{ fontSize: 12, color: T.textMute, lineHeight: 1.6 }}>
+          Tap your browser&apos;s share menu and pick <strong style={{ color: T.textDim }}>&ldquo;Add to Home Screen&rdquo;</strong> (iOS Safari) or use the <strong style={{ color: T.textDim }}>install</strong> option in your address bar (Chrome / Edge). The app launches straight into your profile with the RF icon — like a native app, no app store needed. The floating &ldquo;Install&rdquo; pill that appears when the browser detects you&apos;re eligible is the fastest way on Android.
+        </div>
+      </div>
     </div>
   );
 }
@@ -688,11 +806,14 @@ function AccessWindowCard({ user }: { user: MeUser }) {
         <div style={{ height: 6, background: T.bgRaised, borderRadius: 999, overflow: 'hidden' }}>
           <div style={{ height: '100%', width: `${dayPct}%`, background: accent, transition: 'width 0.4s' }} />
         </div>
+        <p style={{ fontSize: 12, color: T.textMute, marginTop: 12, lineHeight: 1.55 }}>
+          This is the ceiling, not the expected pace. Hawaii requires 60 study hours total &mdash; full-time students finish in about <strong style={{ color: T.text }}>two weeks</strong>. Use the Study Planner below to pick a goal date and generate a daily schedule.
+        </p>
         {days <= 14 && (
-          <p style={{ fontSize: 12, color: T.textDim, marginTop: 12, lineHeight: 1.55 }}>
+          <p style={{ fontSize: 12, color: T.textDim, marginTop: 8, lineHeight: 1.55 }}>
             {isPlus
-              ? <>Heads up: you have less than two weeks left. When this window ends you can extend for <strong style={{ color: T.text }}>$249.99 (90 more days)</strong> — the extension button will appear here automatically.</>
-              : <>Heads up: you have less than two weeks left. Standard doesn&apos;t include an extension &mdash; when this window ends, re-enrollment is at the full <strong style={{ color: T.text }}>$599</strong> Standard price.</>}
+              ? <>You have less than two weeks of your Plus window left. When this ends you can extend for <strong style={{ color: T.text }}>$249.99 (90 more days)</strong> &mdash; the extension button will appear here automatically.</>
+              : <>You have less than two weeks of your Standard window left. Standard doesn&apos;t include an extension &mdash; when this ends, re-enrollment is at the full <strong style={{ color: T.text }}>$599</strong> Standard price.</>}
           </p>
         )}
       </div>

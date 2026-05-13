@@ -3,6 +3,7 @@ import './globals.css';
 import { TimeTracker } from '@/components/TimeTracker';
 import { GetStartedFab } from '@/components/GetStartedFab';
 import { HapticController } from '@/components/HapticController';
+import { PWAInstaller } from '@/components/PWAInstaller';
 
 const SITE_URL = process.env.SITE_URL || 'https://ralphfoulger.com';
 const SITE_NAME = "Ralph Foulger's Academy of Real Estate";
@@ -142,7 +143,7 @@ const ORGANIZATION_SCHEMA = {
     {
       '@type': 'Course',
       name: 'Hawaii Real Estate Salesperson Pre-License — Plus (with Graduation Website Bundle)',
-      description: 'Full Standard curriculum (20-chapter PSI prep, audiobook, AI tutor, mocks) PLUS a custom Hawaii agent website, domain, CRM, lead capture, and admin portal delivered on passing the PSI Hawaii exam. 6 months of course access.',
+      description: 'Full Standard curriculum (20-chapter PSI prep, audiobook, AI tutor, mocks) PLUS a custom Hawaii agent website, domain, CRM, lead capture, and admin portal delivered on passing the PSI Hawaii exam. 6-month access ceiling with built-in study planner (full-time students finish in ~2 weeks) plus a $249.99 extension safety net.',
       provider: { '@id': `${SITE_URL}/#school` },
       educationalCredentialAwarded: 'Hawaii Real Estate Salesperson Pre-License Completion + Agent Website Bundle (on passing)',
       offers: {
@@ -193,6 +194,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body style={{ margin: 0, padding: 0, fontFamily: "'Inter', system-ui, sans-serif" }}>
         <TimeTracker />
         <HapticController />
+        <PWAInstaller />
         {children}
         <GetStartedFab />
       </body>

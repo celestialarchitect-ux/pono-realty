@@ -54,8 +54,31 @@ model User {
   lastSeenAt       DateTime     @default(now())
   timeEvents       TimeEvent[]
   emailTokens      EmailToken[]
+  studyPlan        StudyPlan?
 
   @@index([createdAt])
+}
+
+// Student study planner. One plan per user. The plan is a goal date the
+// student commits to; the daily schedule is computed at read time from
+// (60 - hoursStudied) / daysUntilGoal so it always reflects current
+// reality. Per-day overrides live in `overridesJson` (a JSON map from
+// YYYY-MM-DD → minutes) for students who want a non-uniform schedule
+// ("nothing on Sundays, double on Saturdays" etc.).
+model StudyPlan {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goalDate    DateTime
+  // Whether to schedule weekends as study days. Most users keep weekends,
+  // career-switchers between jobs often want them included.
+  includeWeekends Boolean @default(true)
+  // YYYY-MM-DD → minutes override. Empty {} means a uniform schedule.
+  overridesJson String  @default("{}")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
 }
 
 // Real money in. One row per Stripe charge that actually completed. The

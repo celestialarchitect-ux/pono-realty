@@ -1,14 +1,22 @@
 {
   "name": "Ralph Foulger's Academy of Real Estate",
-  "short_name": "Ralph Foulger's",
+  "short_name": "RF Academy",
   "description": "Hawaii's most advanced real estate licensing program — full PSI-aligned curriculum, audiobook narration, smart flashcards, math drills, and a 24/7 AI Real Estate Tutor.",
-  "start_url": "/",
+  "id": "/profile",
+  "start_url": "/profile?launch=pwa",
   "scope": "/",
   "display": "standalone",
+  "display_override": ["standalone", "fullscreen"],
   "orientation": "portrait-primary",
   "background_color": "#fbf7f0",
   "theme_color": "#14837b",
   "categories": ["education", "business", "productivity"],
+  "shortcuts": [
+    { "name": "Continue studying",  "url": "/profile",     "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "AI Tutor",           "url": "/tutor",       "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "Flashcards",         "url": "/flashcards",  "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
+    { "name": "Mock exam",          "url": "/practice",    "icons": [{ "src": "/icon.svg", "sizes": "any" }] }
+  ],
   "icons": [
     {
       "src": "/icon.svg",
