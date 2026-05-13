@@ -101,16 +101,31 @@ export default function QuestionDatabasePage() {
 
   return (
     <main style={{ padding: '40px 32px 64px', maxWidth: 1300, margin: '0 auto' }}>
-      <div style={{ marginBottom: 24 }}>
-        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>
-          Admin · Question database
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14, marginBottom: 24 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>
+            Admin · Question database
+          </div>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(34px, 5vw, 48px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, margin: 0 }}>
+            Every question, every <em style={{ color: T.ocean, fontStyle: 'italic' }}>variant.</em>
+          </h1>
+          <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6, marginTop: 10, maxWidth: 720 }}>
+            The full pool that powers chapter quizzes + mock exams. Search any term, expand any question to see all variants with their answer key, explanation, and per-variant attempt stats.
+          </p>
         </div>
-        <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(34px, 5vw, 48px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.05, margin: 0 }}>
-          Every question, every <em style={{ color: T.ocean, fontStyle: 'italic' }}>variant.</em>
-        </h1>
-        <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6, marginTop: 10, maxWidth: 720 }}>
-          The full pool that powers chapter quizzes + mock exams. Search any term, expand any question to see all variants with their answer key, explanation, and per-variant attempt stats.
-        </p>
+        <a
+          href="/api/admin/questions/export"
+          download
+          style={{
+            padding: '10px 18px', borderRadius: 10,
+            background: T.bgRaised, border: `1px solid ${T.border}`,
+            color: T.text, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em',
+            textTransform: 'uppercase', textDecoration: 'none',
+            fontFamily: "'JetBrains Mono', monospace",
+            display: 'inline-flex', alignItems: 'center', gap: 8, flexShrink: 0,
+          }}>
+          ⬇ Export CSV
+        </a>
       </div>
 
       {!data && <p style={{ color: T.textMute }}>Loading question database…</p>}
