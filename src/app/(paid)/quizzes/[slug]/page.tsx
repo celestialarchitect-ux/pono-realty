@@ -1,14 +1,16 @@
 'use client';
 
 import Link from 'next/link';
-import { use, useEffect, useState } from 'react';
+import { use, useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CURRICULUM, getChapter, neighbors } from '@/lib/curriculum';
+import { getChapter, neighbors } from '@/lib/curriculum';
 import { NATIONAL_CONTENT } from '@/lib/content/national';
 import { STATE_CONTENT } from '@/lib/content/state';
-import { loadProgress, markQuizComplete, getChapterProgress } from '@/lib/progress';
+import { markQuizComplete } from '@/lib/progress';
 import type { ChapterContent } from '@/lib/content/national';
-import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
+import { wrapAsVariantQuestions, pickVariant, mergeVariantPool } from '@/lib/content/question-variants';
+import { VARIANT_POOL } from '@/lib/content/variant-pool';
+import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
 export default function ChapterQuizPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -19,23 +21,74 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  // attemptSalt changes on every new run so retakes pull DIFFERENT
+  // variants from the pool, preventing rote memorization.
+  const [attemptSalt, setAttemptSalt] = useState<string>('');
 
-  useEffect(() => { setLoaded(true); }, [slug]);
+  useEffect(() => {
+    setLoaded(true);
+    // Salt is rotated only on mount or "Retake quiz" click below. Refreshes
+    // within a single attempt keep the same variants (so students don't
+    // lose their place if they hit reload mid-quiz).
+    setAttemptSalt(crypto.randomUUID());
+  }, [slug]);
+
+  // Build the variant-aware question list. The variant pool may contribute
+  // additional variants per question id; pickVariant chooses one per
+  // (questionId, attemptSalt) pair deterministically.
+  const presented = useMemo(() => {
+    if (!content) return [];
+    const base = wrapAsVariantQuestions(content.practice, slug);
+    const expanded = mergeVariantPool(base, VARIANT_POOL);
+    return expanded.map(q => {
+      const picked = pickVariant(q, attemptSalt);
+      return { id: q.id, variantIndex: picked.variantIndex, variant: picked.variant };
+    });
+  }, [content, slug, attemptSalt]);
 
   if (!loaded || !meta || !content) {
     return <div style={{ padding: 64, textAlign: 'center', fontFamily: 'Inter, sans-serif', color: T.text }}>Loading…</div>;
   }
 
   const accent = meta.portion === 'national' ? T.ocean : T.coral;
-  const total = content.practice.length;
-  const correct = content.practice.filter((q, i) => answers[i] === q.correctIndex).length;
+  const total = presented.length;
+  const correct = presented.filter((p, i) => answers[i] === p.variant.correctIndex).length;
   const pct = Math.round((correct / total) * 100);
   const { next } = neighbors(slug);
+
+  // Submit + record to DB (best-effort — local progress still saves even if
+  // the API call fails, so a student is never blocked).
+  const handleSubmit = async () => {
+    setSubmitted(true);
+    try {
+      await fetch('/api/quiz/attempt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'chapter',
+          context: slug,
+          answers: presented.map((p, i) => ({
+            questionId: p.id,
+            variantIndex: p.variantIndex,
+            selectedIndex: answers[i] ?? -1,
+            correctIndex: p.variant.correctIndex,
+            correct: answers[i] === p.variant.correctIndex,
+          })),
+        }),
+      });
+    } catch { /* non-fatal — the local progress write still happens below */ }
+  };
 
   const finalize = () => {
     markQuizComplete(slug, pct);
     if (next) router.push(`/quizzes/${next.slug}`);
     else router.push('/practice');
+  };
+
+  const retake = () => {
+    setAnswers({});
+    setSubmitted(false);
+    setAttemptSalt(crypto.randomUUID()); // fresh variants on retake
   };
 
   if (!submitted) {
@@ -60,13 +113,13 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
             </p>
 
             <div style={{ ...CARD, padding: 32, marginBottom: 24 }}>
-              {content.practice.map((q, i) => (
+              {presented.map((p, i) => (
                 <div key={i} style={{ marginBottom: i < total - 1 ? 24 : 0, paddingBottom: i < total - 1 ? 24 : 0, borderBottom: i < total - 1 ? `1px solid ${T.border}` : 'none' }}>
                   <p style={{ fontSize: 15, color: T.text, fontWeight: 600, marginBottom: 12, lineHeight: 1.5 }}>
-                    Q{i + 1}. {q.q}
+                    Q{i + 1}. {p.variant.q}
                   </p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {q.options.map((o, idx) => {
+                    {p.variant.options.map((o, idx) => {
                       const sel = answers[i] === idx;
                       return (
                         <button
@@ -91,7 +144,7 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
             </div>
 
             <button
-              onClick={() => setSubmitted(true)}
+              onClick={handleSubmit}
               disabled={Object.keys(answers).length < total}
               style={{
                 ...BUTTON_3D.primary, width: '100%', padding: '16px 22px', fontSize: 15, fontWeight: 700,
@@ -132,7 +185,8 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
 
           <div style={{ ...CARD, padding: 32, marginBottom: 24 }}>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, marginBottom: 16 }}>Review your answers</h3>
-            {content.practice.map((q, i) => {
+            {presented.map((p, i) => {
+              const q = p.variant;
               const userAns = answers[i];
               const isCorrect = userAns === q.correctIndex;
               return (
@@ -148,10 +202,10 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <button
-              onClick={() => { setAnswers({}); setSubmitted(false); }}
+              onClick={retake}
               style={{ ...BUTTON_3D.secondary, flex: '1 1 200px', padding: '14px 22px', fontSize: 14, fontWeight: 600, borderRadius: 10, cursor: 'pointer', fontFamily: 'inherit' }}
             >
-              Retake quiz
+              Retake quiz (new variants)
             </button>
             <button
               onClick={finalize}

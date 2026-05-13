@@ -55,6 +55,7 @@ model User {
   timeEvents       TimeEvent[]
   emailTokens      EmailToken[]
   studyPlan        StudyPlan?
+  quizAttempts     QuizAttempt[]
 
   @@index([createdAt])
 }
@@ -183,6 +184,56 @@ model EmailToken {
 
   @@index([userId])
   @@index([purpose, expiresAt])
+}
+
+// Per-quiz attempt. One row each time a student submits a chapter quiz
+// OR a mock exam. Used for the student grade calculation AND for the
+// admin quiz-analytics dossier (per-question right/wrong percentages,
+// hot-spot detection, retake patterns).
+model QuizAttempt {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // 'chapter' for /quizzes/[slug] runs; 'mock' for /practice runs.
+  kind          String        @default("chapter")
+  // For chapter quizzes: curriculum slug (e.g., 'laws-of-agency').
+  // For mock exams: 'mock-national' | 'mock-state' | 'mock-full'.
+  context       String
+  totalQuestions Int
+  correctCount   Int
+  scorePct       Int          // 0..100 rounded
+  // null until the quiz is fully graded; we always write it as finished now
+  // but kept nullable in case we add resumable attempts later.
+  completedAt   DateTime      @default(now())
+  createdAt     DateTime      @default(now())
+  answers       QuizAnswer[]
+
+  @@index([userId, completedAt])
+  @@index([context, completedAt])
+  @@index([kind, completedAt])
+}
+
+// One row per question answered. `questionId` is the stable identifier
+// across question variants — every variant of "what is the maximum
+// security deposit allowed in Hawaii" shares the same questionId, so the
+// analytics dossier can aggregate across variants. `variantIndex` records
+// which variant was actually shown.
+model QuizAnswer {
+  id            String      @id @default(cuid())
+  attemptId     String
+  attempt       QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  questionId    String      // stable across variants (e.g., 'hi-deposit-cap')
+  variantIndex  Int         // 0-based; 0 == original question
+  selectedIndex Int         // 0..3
+  correct       Boolean
+  // Snapshot of the right answer at the time of the attempt — preserved
+  // even if the question's answer key later gets edited.
+  correctIndex  Int
+  createdAt     DateTime    @default(now())
+
+  @@index([attemptId])
+  @@index([questionId])
+  @@index([questionId, correct])
 }
 
 // One row per accrual tick from the client. Aggregated at read time for

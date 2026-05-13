@@ -11,8 +11,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   return (
     <TierGate require="admin">
       <AdminEventBell />
-      <AdminNav />
-      {children}
+      {/* Desktop: sidebar grows the row, content fills the rest.
+          Mobile: sidebar becomes a sticky top strip via media-driven
+          variant inside <AdminNav />, so flex on the wrapper still works. */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', minHeight: '100vh' }}>
+        <AdminNav />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {children}
+        </div>
+      </div>
     </TierGate>
   );
 }

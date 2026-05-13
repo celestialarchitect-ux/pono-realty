@@ -172,6 +172,9 @@ export default function ProfilePage() {
       {/* VERIFY EMAIL BANNER */}
       {isServer && user && user.emailVerified === false && <VerifyEmailBanner email={user.email} />}
 
+      {/* ACADEMIC GRADE — composite score, locked until 5 study hours */}
+      {isServer && user && <GradeCard />}
+
       {/* ACCESS WINDOW — countdown timer + state-aware CTA */}
       {isServer && user && <AccessWindowCard user={user} />}
 
@@ -812,6 +815,98 @@ function AccessWindowCard({ user }: { user: MeUser }) {
   }
 
   return null;
+}
+
+// Composite-grade card. The formula is intentionally hidden from the
+// student (server returns letter + trend only — no numeric). Locked
+// until the student has logged the unlock threshold of study hours,
+// at which point the letter shows up with a trend arrow next to it.
+function GradeCard() {
+  interface GradeResponse {
+    unlocked: boolean;
+    hoursStudied: number;
+    hoursToUnlock: number;
+    letter: string | null;
+    trend: 'rising' | 'steady' | 'falling' | null;
+  }
+  const [g, setG] = useState<GradeResponse | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    const load = async () => {
+      try {
+        const r = await fetch('/api/grade', { cache: 'no-store' });
+        if (r.ok && mounted) setG(await r.json() as GradeResponse);
+      } catch { /* ignore */ }
+    };
+    load();
+    const id = setInterval(load, 60_000);
+    return () => { mounted = false; clearInterval(id); };
+  }, []);
+
+  if (!g) return null;
+
+  if (!g.unlocked) {
+    // Pre-unlock: pure "calculating" state. Don't reveal the threshold
+    // explicitly per Zach — just communicate "we need more data".
+    const pct = Math.max(0, Math.min(100, (g.hoursStudied / (g.hoursStudied + g.hoursToUnlock)) * 100));
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.textMute}` }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Academy grade</div>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.2 }}>
+              Your grade is <em style={{ color: T.ocean, fontStyle: 'italic' }}>updating.</em>
+            </h3>
+            <p style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6, margin: '8px 0 0', maxWidth: 540 }}>
+              Once we have enough study data, a letter grade will appear here. It updates continuously based on what you do.
+            </p>
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 56, fontWeight: 900, color: T.textGhost, letterSpacing: '-0.04em', lineHeight: 1 }}>
+            —
+          </div>
+        </div>
+        <div style={{ height: 4, background: T.bgRaised, borderRadius: 999, overflow: 'hidden', marginTop: 4 }}>
+          <div style={{ height: '100%', width: `${pct}%`, background: T.ocean, transition: 'width 0.4s' }} />
+        </div>
+      </div>
+    );
+  }
+
+  // Unlocked: show the letter + trend arrow.
+  const trendInfo = g.trend === 'rising'  ? { arrow: '↑', label: 'Trending up',   color: T.green }
+                  : g.trend === 'falling' ? { arrow: '↓', label: 'Trending down', color: T.coral }
+                  :                         { arrow: '→', label: 'Steady',        color: T.textMute };
+  const isHigh = ['A+','A','A-','B+'].includes(g.letter ?? '');
+  const isLow  = ['D','F'].includes(g.letter ?? '');
+  const gradeColor = isHigh ? T.green : isLow ? T.coral : T.text;
+
+  return (
+    <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${gradeColor}` }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Academy grade</div>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.2 }}>
+            Where you stand today.
+          </h3>
+          <p style={{ fontSize: 12, color: T.textMute, marginTop: 8, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', lineHeight: 1.5 }}>
+            Updates with every quiz, study session, and mock exam.
+          </p>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 76, fontWeight: 900, color: gradeColor, letterSpacing: '-0.05em', lineHeight: 0.9 }}>
+              {g.letter}
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+            <div style={{ fontSize: 28, color: trendInfo.color, fontWeight: 800, lineHeight: 1 }}>{trendInfo.arrow}</div>
+            <div style={{ fontSize: 10, color: trendInfo.color, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 700 }}>{trendInfo.label}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function VerifyEmailBanner({ email }: { email: string }) {
