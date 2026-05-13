@@ -10,6 +10,8 @@
 import { NextRequest } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
 import { buildSystemPrompt } from '@/lib/tutor-system-prompt';
+import { authConfigured, getSessionUser } from '@/lib/auth';
+import { db } from '@/lib/db';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -17,6 +19,39 @@ export const maxDuration = 60;
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+// AI tutor calls cost real money. Three gates protect against runaway bills:
+//   1. AUTH — must be a logged-in user with a paid tier (or admin).
+//   2. EXPIRY — if the user's accessExpiresAt has passed, the tutor is
+//      treated as no longer included in their plan.
+//   3. RATE LIMIT — at most 60 tutor calls per user per hour. Anyone
+//      hammering the endpoint hits this before they burn through the
+//      Anthropic budget.
+//
+// All three layers fail fast (auth before rate-limit, before any model call).
+
+const PAID_TIERS = new Set(['standard', 'plus']);
+const TUTOR_RATE_LIMIT_PER_HOUR = 60;
+
+// Module-level rate limit store. Resets on container restart, which is
+// acceptable for a tutor — at worst a malicious user gets a few extra
+// requests across a deploy. For stricter enforcement we'd back this with
+// Redis.
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(userId: string): { allowed: boolean; resetInSec: number } {
+  const now = Date.now();
+  const bucket = rateBuckets.get(userId);
+  if (!bucket || bucket.resetAt < now) {
+    rateBuckets.set(userId, { count: 1, resetAt: now + 60 * 60 * 1000 });
+    return { allowed: true, resetInSec: 3600 };
+  }
+  if (bucket.count >= TUTOR_RATE_LIMIT_PER_HOUR) {
+    return { allowed: false, resetInSec: Math.ceil((bucket.resetAt - now) / 1000) };
+  }
+  bucket.count++;
+  return { allowed: true, resetInSec: Math.ceil((bucket.resetAt - now) / 1000) };
 }
 
 export async function POST(req: NextRequest) {
@@ -30,6 +65,44 @@ export async function POST(req: NextRequest) {
       },
       { status: 503 }
     );
+  }
+
+  // Gate 1: auth.
+  if (!authConfigured() || !db) {
+    return Response.json({ error: 'auth_unavailable' }, { status: 503 });
+  }
+  const session = await getSessionUser();
+  if (!session) {
+    return Response.json({ error: 'unauthorized', message: 'Sign in to use the AI tutor.' }, { status: 401 });
+  }
+
+  // Gate 2: paid tier + non-expired access. Admins always have tutor.
+  const u = await db.user.findUnique({
+    where: { id: session.id },
+    select: { tier: true, isAdmin: true, accessExpiresAt: true },
+  });
+  if (!u) {
+    return Response.json({ error: 'unauthorized' }, { status: 401 });
+  }
+  const expired = !!u.accessExpiresAt && u.accessExpiresAt <= new Date();
+  if (!u.isAdmin && (!PAID_TIERS.has(u.tier) || expired)) {
+    return Response.json({
+      error: 'tier_required',
+      message: expired
+        ? 'Your course access window has ended. Re-enroll or extend (Plus only) to keep using the AI tutor.'
+        : 'The AI tutor is included with Standard and Plus tiers. Upgrade at /pricing.',
+      upgrade: '/pricing',
+    }, { status: 402 });
+  }
+
+  // Gate 3: rate limit. Per-user hourly cap so a runaway client can't
+  // drain the budget.
+  const limit = checkRateLimit(session.id);
+  if (!limit.allowed) {
+    return Response.json({
+      error: 'rate_limited',
+      message: `You've hit the hourly tutor limit. Try again in ${Math.ceil(limit.resetInSec / 60)} minutes.`,
+    }, { status: 429 });
   }
 
   let body: { messages?: ChatMessage[]; focusChapter?: string };
