@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T09:55:31.090Z via Claude Haiku.
+// Generated 2026-05-13T09:58:47.471Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -3054,6 +3054,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Brownfield describes properties hampered by environmental contamination or pollution concerns from previous industrial, commercial, or hazardous operations.",
     },
+    {
+      q: "In Hawaii real estate development, a property with prior industrial use and potential soil or groundwater contamination would be classified as a:",
+      options: ["Greenfield site suitable for immediate residential construction", "Brownfield requiring environmental assessment before redevelopment", "Conservation easement subject to preservation restrictions", "Wetland protected under the Clean Water Act"],
+      correctIndex: 1,
+      explain: "Brownfields are properties with actual or perceived contamination from prior industrial or commercial use, requiring environmental due diligence before redevelopment.",
+    },
+    {
+      q: "Which term describes real property that may have environmental liabilities from former manufacturing operations or commercial activities?",
+      options: ["A brownfield", "A timberland parcel", "An undeveloped greenfield", "A property in a tax increment district"],
+      correctIndex: 0,
+      explain: "Brownfield specifically refers to property with suspected or actual environmental contamination, typically from industrial or commercial historical use.",
+    },
+    {
+      q: "A developer is evaluating a property that previously housed a dry-cleaning facility. The property likely falls into which category?",
+      options: ["A designated wildlife refuge", "A brownfield site with potential contamination concerns", "An exempt agricultural property", "A historic preservation district"],
+      correctIndex: 1,
+      explain: "Former dry-cleaning facilities commonly leave environmental contamination, making such properties typical brownfields requiring remediation assessment.",
+    },
+    {
+      q: "Which of the following BEST describes a brownfield in the context of real estate transactions?",
+      options: ["Land in its natural state with no prior commercial development", "Industrial or commercial property with suspected or actual contamination requiring environmental review", "Farmland enrolled in a conservation easement program", "A residential property in a declining neighborhood market"],
+      correctIndex: 1,
+      explain: "Brownfields are characterized by potential environmental contamination from prior use, necessitating Phase I or Phase II environmental site assessments before acquisition or redevelopment.",
+    },
+    {
+      q: "In Hawaii real estate development, a site with historical industrial use and potential environmental liabilities is most accurately described as:",
+      options: ["A greenfield development opportunity", "A brownfield property requiring Phase I environmental assessment", "A wetland-restricted parcel", "An area zoned for conservation purposes"],
+      correctIndex: 1,
+      explain: "Brownfield refers to previously developed or industrial property with actual or suspected environmental contamination; Phase I assessment is a common first step in evaluating such sites for redevelopment potential.",
+    },
   ],
   "land-use-controls-q09": [
     {
@@ -3079,6 +3109,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Appeal for zoning variance", "Request inverse condemnation compensation", "File for escheat reversion", "Challenge police power authority"],
       correctIndex: 1,
       explain: "Inverse condemnation is the appropriate claim when regulatory action results in a de facto taking; the owner sues to recover just compensation rather than seeking permission to develop.",
+    },
+    {
+      q: "When a government agency's actions effectively deprive an owner of property use and value without filing a formal condemnation suit, the owner may pursue a claim for:",
+      options: ["Variance relief", "Inverse condemnation", "Police power regulation", "Escheat proceedings"],
+      correctIndex: 1,
+      explain: "Inverse condemnation allows a property owner to sue for compensation when government action substantially diminishes property value or use without initiating formal condemnation proceedings.",
+    },
+    {
+      q: "A regulatory restriction that amounts to a practical taking of property rights, despite the absence of formal condemnation, is best described as:",
+      options: ["Exercise of police power", "De facto taking or inverse condemnation", "Conditional use permit denial", "Eminent domain proceedings"],
+      correctIndex: 1,
+      explain: "Inverse condemnation (de facto taking) occurs when government action effectively seizes property use or value without the formal legal process of condemnation, allowing the owner to recover damages.",
+    },
+    {
+      q: "If a government action strips an owner of substantially all economically viable use of land without going through formal condemnation procedures, the owner may file suit for:",
+      options: ["Inverse condemnation damages", "Zoning variance", "Police power exemption", "Title escheat"],
+      correctIndex: 0,
+      explain: "Inverse condemnation is the legal remedy when a government action operates as a taking without formal condemnation, entitling the owner to compensation for the diminished property rights.",
+    },
+    {
+      q: "An owner claims that strict environmental regulations have rendered the property worthless and unusable, yet no condemnation notice was issued. This situation may constitute:",
+      options: ["Misuse of police power", "Regulatory non-compliance", "Inverse condemnation", "Adverse possession"],
+      correctIndex: 2,
+      explain: "Inverse condemnation allows an owner to recover compensation when regulatory restrictions or government actions effectively appropriate property value or use without formal condemnation proceedings.",
+    },
+    {
+      q: "When a property owner claims the government has effectively taken their land through regulatory restrictions without initiating formal eminent domain proceedings, the owner's legal remedy is known as:",
+      options: ["Escheat to the state", "Inverse condemnation", "Regulatory taking defense", "Police power enforcement"],
+      correctIndex: 1,
+      explain: "Inverse condemnation is the owner's lawsuit against government for compensation when regulatory or physical action amounts to a de facto taking without formal condemnation.",
     },
   ],
   "land-use-controls-q10": [
@@ -3106,6 +3166,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "FAR is the numerical ratio of total building floor area to lot area; it directly measures development intensity on the land.",
     },
+    {
+      q: "When a zoning code specifies a Floor Area Ratio of 2.0, what does this constraint primarily control?",
+      options: ["The maximum distance a structure must be positioned from the property line", "The total usable floor space relative to the size of the underlying land parcel", "The number of residential units permitted on the lot", "The maximum height of the building measured in feet"],
+      correctIndex: 1,
+      explain: "FAR directly limits the ratio of total building floor area to lot area, controlling overall development density on a property.",
+    },
+    {
+      q: "A developer is reviewing zoning restrictions for a commercial lot. Which regulation specifically addresses the relationship between the building's total floor area and the lot size?",
+      options: ["Height limitation ordinance", "Floor Area Ratio (FAR) requirement", "Parking ratio statute", "Frontage setback provision"],
+      correctIndex: 1,
+      explain: "FAR is the zoning tool that directly measures and limits the proportion of building floor area compared to total lot area.",
+    },
+    {
+      q: "In Hawaii zoning code, Floor Area Ratio functions to:",
+      options: ["Determine minimum side-yard distances between adjacent properties", "Regulate the intensity of development by capping building area relative to land area", "Establish the number of floors a building may contain", "Define the width of public right-of-way frontage"],
+      correctIndex: 1,
+      explain: "FAR controls development intensity by limiting how much total floor area can be built on a given parcel of land.",
+    },
+    {
+      q: "A property with 10,000 square feet is zoned with a 1.5 FAR limit. What does this primarily restrict?",
+      options: ["The building cannot exceed 50 feet in height", "The total floor area cannot exceed 15,000 square feet", "No more than three stories are permitted", "The building must be set back 15 feet from the street"],
+      correctIndex: 1,
+      explain: "FAR of 1.5 on a 10,000 sq ft lot means maximum total floor area is 15,000 sq ft (1.5 × 10,000), controlling overall building size.",
+    },
+    {
+      q: "A property developer is reviewing zoning restrictions for a commercial lot in Honolulu. The zoning code specifies an FAR of 2.5. What does this Floor Area Ratio restriction control?",
+      options: ["The maximum height the building structure can reach above grade", "The total usable floor space permitted relative to the land area beneath it", "The number of residential units allowed per floor level", "The minimum distance a building must be set back from property lines"],
+      correctIndex: 1,
+      explain: "FAR measures the relationship between total building floor area and the size of the lot; a 2.5 FAR means the building's total floors can be 2.5 times the lot area, controlling overall building mass.",
+    },
   ],
   "land-use-controls-q11": [
     {
@@ -3131,6 +3221,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["General variance from the city council", "Conditional use permit", "Spot zone amendment", "Grandfather clause for nonconforming uses"],
       correctIndex: 1,
       explain: "Conditional use permits are specifically prescribed in zoning ordinances and granted when an applicant meets established conditions, as opposed to variances (which require undue hardship) or spot zoning (which changes zone boundaries for a single parcel).",
+    },
+    {
+      q: "A property owner received approval to operate a residential care facility in a single-family residential district after submitting specific operational conditions to the zoning board. This approval is known as a:",
+      options: ["Nonconforming use exception", "Conditional use permit", "Variance from setback requirements", "Floating zone classification"],
+      correctIndex: 1,
+      explain: "A conditional use permit allows a use that is compatible with the zone if specific conditions are met and approved by the zoning authority.",
+    },
+    {
+      q: "When a commercial office is permitted in a residential neighborhood provided the owner agrees to limit hours and install soundproofing, the office operates under a:",
+      options: ["Spot zone", "Variance", "Conditional use permit", "Grandfathered nonconforming use"],
+      correctIndex: 2,
+      explain: "Conditional use permits allow otherwise prohibited uses within a zone when specific conditions and restrictions are satisfied and approved.",
+    },
+    {
+      q: "A bed-and-breakfast home business was approved in an area zoned exclusively for residential dwellings because the owner agreed to comply with traffic, parking, and occupancy restrictions. This approval mechanism is called a:",
+      options: ["De minimis variance", "Conditional use permit", "Zoning amendment", "Illegal nonconforming use"],
+      correctIndex: 1,
+      explain: "Conditional use permits grant permission for specific uses that are compatible with a zone when the applicant accepts and adheres to established conditions.",
+    },
+    {
+      q: "A small medical clinic operates in a residential zone after the zoning board approved its application with mandatory restrictions on signage and patient parking. The clinic's legal operating status is based on a:",
+      options: ["Comprehensive plan amendment", "Conditional use permit", "Variance waiver", "Nonconforming use establishment"],
+      correctIndex: 1,
+      explain: "Conditional use permits are granted by zoning authority when an otherwise incompatible use can operate safely within a zone if specific conditions are met.",
+    },
+    {
+      q: "A residential neighborhood allows a home-based counseling practice after the owner obtains approval from the zoning board and agrees to specific operational restrictions. This use is classified as a:",
+      options: ["Nonconforming use that existed before zoning", "Conditional use permit", "Variance from the residential zoning code", "Spot zone exemption"],
+      correctIndex: 1,
+      explain: "A conditional use permit allows a use that would normally be prohibited in a zone, but only when specific conditions and restrictions are met and approved by the zoning authority.",
     },
   ],
   "laws-of-agency-q00": [
@@ -5650,6 +5770,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Direct capitalization solves for value using the formula: Value = NOI ÷ Cap Rate, which equals $48,000 ÷ 0.08 = $600,000.",
     },
+    {
+      q: "An income-producing property in Honolulu has a net operating income of $48,000 annually. Using the income approach with a capitalization rate of 8%, what is the estimated property value?",
+      options: ["$600,000", "$384,000", "$720,000", "$960,000"],
+      correctIndex: 0,
+      explain: "The income approach formula is Value = NOI ÷ Cap Rate. Therefore, $48,000 ÷ 0.08 = $600,000.",
+    },
+    {
+      q: "A residential investment property generates $48,000 in NOI. If comparable properties in the market are trading at an 8% cap rate, what value should an appraiser assign using the direct capitalization method?",
+      options: ["$540,000", "$600,000", "$672,000", "$800,000"],
+      correctIndex: 1,
+      explain: "Direct capitalization divides NOI by the cap rate: $48,000 ÷ 0.08 = $600,000.",
+    },
+    {
+      q: "A multi-unit rental building produces $48,000 NOI annually. The prevailing market cap rate for similar properties is 8%. Using income capitalization, what is the property's indicated value?",
+      options: ["$384,000", "$480,000", "$600,000", "$750,000"],
+      correctIndex: 2,
+      explain: "Income capitalization value is calculated as NOI ÷ Cap Rate = $48,000 ÷ 0.08 = $600,000.",
+    },
+    {
+      q: "An investor is analyzing a property with $48,000 annual NOI. Market data shows an 8% cap rate for comparable properties. What value does the income capitalization approach support?",
+      options: ["$432,000", "$528,000", "$624,000", "$600,000"],
+      correctIndex: 3,
+      explain: "The income capitalization formula is Value = NOI ÷ Cap Rate, which equals $48,000 ÷ 0.08 = $600,000.",
+    },
+    {
+      q: "An investment property produces $48,000 in annual net operating income. Using a capitalization rate of 8%, what is the estimated property value?",
+      options: ["$720,000", "$600,000", "$384,000", "$528,000"],
+      correctIndex: 1,
+      explain: "Property value is calculated by dividing NOI by the cap rate: $48,000 ÷ 0.08 = $600,000. This fundamental appraisal approach determines value based on income-producing potential.",
+    },
   ],
   "valuation-market-analysis-q01": [
     {
@@ -5675,6 +5825,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Deterioration from age and wear", "Functional obsolescence", "Zoning restriction limitations", "Supply shortage of similar properties"],
       correctIndex: 1,
       explain: "Functional obsolescence stems from an inadequacy in the property's design or features (too few bathrooms) that makes it less desirable relative to modern market standards for the location.",
+    },
+    {
+      q: "A residential property has an outdated floor plan and single-bath configuration while comparable homes in the neighborhood feature modern open layouts with multiple bathrooms. What type of depreciation affects this property's value?",
+      options: ["Curable physical deterioration", "Functional obsolescence", "Locational obsolescence", "Incurable external obsolescence"],
+      correctIndex: 1,
+      explain: "Functional obsolescence refers to deficiencies in the property's design and usefulness relative to current standards—the single bathroom reflects poor internal design compared to market expectations for the area.",
+    },
+    {
+      q: "An appraiser notes that a home lacks adequate plumbing fixtures compared to all neighboring properties on the block. The deficiency originates from the home's interior layout and design rather than neighborhood factors. This is an example of:",
+      options: ["External obsolescence", "Functional obsolescence", "Structural depreciation", "Deferred maintenance"],
+      correctIndex: 1,
+      explain: "Functional obsolescence describes inherent design flaws or inadequate features within the structure itself—a single bathroom when homes around it have multiple is a design inadequacy of the subject property.",
+    },
+    {
+      q: "A property suffers a loss in value because its bathroom count and floor plan do not match what buyers expect given the current market in that neighborhood. What does this represent?",
+      options: ["Physical depreciation from wear and tear", "Economic obsolescence from market decline", "Functional obsolescence from inadequate design", "Technological depreciation from outdated systems"],
+      correctIndex: 2,
+      explain: "Functional obsolescence captures the loss in value due to outdated or inadequate design features within the property itself—here, insufficient bathrooms relative to modern home expectations and neighborhood standards.",
+    },
+    {
+      q: "In a neighborhood where homes typically include two or more bathrooms, a house with only one bathroom experiences reduced market appeal. The reduction in value is attributable to:",
+      options: ["Incurable external depreciation", "Functional obsolescence", "Deferred maintenance and repairs", "Obsolete building code violations"],
+      correctIndex: 1,
+      explain: "Functional obsolescence occurs when a property's internal design or features fall short of current market standards and expectations—a single bathroom in a two-bath neighborhood reflects insufficient design capacity.",
+    },
+    {
+      q: "A residential property features an open-concept kitchen-living area layout that is considered dated compared to the closed, compartmentalized floor plans typical of similar homes in the neighborhood. This property most likely suffers from:",
+      options: ["External obsolescence due to neighborhood decline", "Functional obsolescence from outdated design features", "Physical deterioration requiring structural repairs", "Locational obsolescence from zoning changes"],
+      correctIndex: 1,
+      explain: "Functional obsolescence refers to outdated or inadequate design and features within the property itself that reduce its utility compared to current market standards, regardless of external market conditions.",
     },
   ],
   "valuation-market-analysis-q02": [
@@ -5702,6 +5882,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "GRM divides the property's acquisition (sale) price by monthly gross rental income, providing a simple ratio for comparing income-producing properties.",
     },
+    {
+      q: "To determine the Gross Rent Multiplier of an investment property, you would divide:",
+      options: ["Monthly rental income by the net operating income", "The purchase price by the monthly rental income", "The annual rental income by the capitalization rate", "The monthly rental income by the debt service"],
+      correctIndex: 1,
+      explain: "The Gross Rent Multiplier formula is Sale Price ÷ Monthly Gross Rent, which directly compares property value to monthly rental income.",
+    },
+    {
+      q: "A property sold for $400,000 and generates $2,500 per month in gross rent. What is the GRM?",
+      options: ["160", "0.00625", "0.0075", "133.33"],
+      correctIndex: 0,
+      explain: "GRM = $400,000 ÷ $2,500 = 160. The GRM multiplies monthly rent to estimate property value or compares similar properties.",
+    },
+    {
+      q: "Which formula correctly represents the Gross Rent Multiplier method used in real estate valuation?",
+      options: ["NOI divided by capitalization rate", "Sales price divided by monthly gross rental income", "Annual gross rent multiplied by the price per unit", "Cash flow divided by mortgage balance"],
+      correctIndex: 1,
+      explain: "The GRM is specifically calculated as Sale Price ÷ Monthly Gross Rent, making it a quick comparison tool for income properties without adjusting for expenses.",
+    },
+    {
+      q: "When using the Gross Rent Multiplier approach, a broker needs to:",
+      options: ["Subtract operating expenses before dividing the price by monthly rent", "Divide the property's selling price by its monthly gross rental income", "Multiply the annual net income by market factor adjustments", "Apply depreciation schedules to the capitalized value"],
+      correctIndex: 1,
+      explain: "GRM = Price ÷ Monthly Gross Rent. Unlike cap rate analysis, GRM uses gross (not net) rental income, making it simpler but less precise.",
+    },
+    {
+      q: "A property sold for $450,000 and generates $3,000 in monthly rental income. What is the property's Gross Rent Multiplier?",
+      options: ["150", "12.5", "180", "0.0067"],
+      correctIndex: 0,
+      explain: "GRM is calculated by dividing the sale price by monthly gross rent: $450,000 ÷ $3,000 = 150. This multiplier indicates the property costs 150 times its monthly rent.",
+    },
   ],
   "valuation-market-analysis-q03": [
     {
@@ -5727,6 +5937,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Direct capitalization of rental income", "Extraction method using land-to-value ratios", "Comparative market analysis of recent arm's-length sales", "Abstraction of depreciation from replacement cost"],
       correctIndex: 2,
       explain: "Comparative market analysis (sales comparison approach) is most appropriate for residential listing because it directly uses prices paid for similar properties in the same market.",
+    },
+    {
+      q: "A residential appraiser is tasked with determining the fair market value of a three-bedroom home in a suburban Honolulu neighborhood. Which valuation method should take priority?",
+      options: ["Income capitalization approach", "Cost approach based on construction expenses", "Market data approach using recent comparable sales", "Replacement cost less depreciation"],
+      correctIndex: 2,
+      explain: "The market data (sales comparison) approach is the most reliable for single-family residences because abundant comparable sales data is typically available in residential markets.",
+    },
+    {
+      q: "When appraising a single-family home for financing purposes, which method typically provides the most credible valuation?",
+      options: ["Reproduction approach", "Comparable sales analysis", "Income approach assuming rental potential", "Construction cost method"],
+      correctIndex: 1,
+      explain: "Comparable sales analysis (sales comparison approach) is the preferred method for residential properties because similar properties trade frequently and provide reliable market evidence.",
+    },
+    {
+      q: "An appraiser is valuing a single-family dwelling on Oahu. Which of the following approaches would be MOST appropriate as the primary valuation method?",
+      options: ["Determining replacement value at current construction costs", "Analyzing recent arm's-length sales of similar properties", "Calculating net operating income and capitalizing it", "Estimating the structure's reproduction cost minus accrued depreciation"],
+      correctIndex: 1,
+      explain: "Sales comparison approach is most appropriate for residential properties because comparable market data from similar homes is typically abundant and reflects actual buyer preferences.",
+    },
+    {
+      q: "In residential appraisal practice, which valuation approach should generally receive the greatest weight?",
+      options: ["Cost approach", "Sales comparison approach", "Income approach", "Summation method"],
+      correctIndex: 1,
+      explain: "The sales comparison approach carries the most weight in residential appraisals because actual market transactions of comparable single-family properties provide direct evidence of value.",
+    },
+    {
+      q: "When appraising a typical owner-occupied home in Hawaii, which valuation method should a professional appraiser emphasize?",
+      options: ["The replacement cost of building materials and labor", "The net operating income capitalized at the market rate", "Recent arms-length sales of similar properties in the area", "The original cost adjusted for depreciation since construction"],
+      correctIndex: 2,
+      explain: "The sales comparison approach is the most reliable for single-family residences because comparable sales data is readily available and reflects actual market behavior.",
     },
   ],
   "valuation-market-analysis-q04": [
@@ -5754,6 +5994,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "DUST is the acronym for the four essential value characteristics: Demand (buyer desire), Utility (purpose/benefit), Scarcity (finite supply), and Transferability (legally conveyable).",
     },
+    {
+      q: "Which acronym identifies the four essential elements that create value in real property?",
+      options: ["Demand, Utility, Scarcity, Transferability", "Desirability, Utility, Supply, Tenure", "Deed, Use, Subdivision, Tax", "Development, Usability, Site, Title"],
+      correctIndex: 0,
+      explain: "DUST represents the four requisite characteristics of value: Demand (desire and ability to pay), Utility (usefulness), Scarcity (limited supply), and Transferability (ability to exchange ownership).",
+    },
+    {
+      q: "A property appraiser relies on DUST to evaluate whether a property has market value. What does this acronym stand for?",
+      options: ["Density, Use, Subdivision, Transfer", "Demand, Utility, Scarcity, Transferability", "Desirability, Unit cost, Supply, Title", "Distance, Utility, Setback, Tenure"],
+      correctIndex: 1,
+      explain: "DUST is the fundamental appraisal framework identifying four conditions necessary for value: Demand, Utility, Scarcity, and Transferability.",
+    },
+    {
+      q: "When explaining to a client why their property has value, a broker references the four characteristics known as DUST. Which combination is correct?",
+      options: ["Desirability, Use rights, Supply, Transaction", "Demand, Use, Survey, Title", "Demand, Utility, Scarcity, Transferability", "Development, Utility, Site conditions, Transfer rights"],
+      correctIndex: 2,
+      explain: "DUST represents the four essential elements of value: Demand (market desire), Utility (practical benefit), Scarcity (limited availability), and Transferability (marketability and ability to convey ownership).",
+    },
+    {
+      q: "In Hawaii real estate practice, understanding DUST helps agents recognize what makes property valuable. DUST stands for:",
+      options: ["Demand, Utility, Scarcity, Transferability", "Density, Usefulness, Subdivision, Title", "Desirability, Unit value, Supply constraint, Tenure", "Distance, Use type, Setback requirement, Transfer fee"],
+      correctIndex: 0,
+      explain: "DUST defines the four characteristics required for any property to have value: Demand, Utility, Scarcity, and Transferability.",
+    },
+    {
+      q: "Which acronym identifies the four essential elements that must be present for real property to have value?",
+      options: ["Demand, Utility, Scarcity, Transferability", "Depreciation, Usage, Site, Tax basis", "Deed, Usufruct, Subdivision, Title insurance", "Downpayment, Underwriting, Security, Terms"],
+      correctIndex: 0,
+      explain: "DUST represents the four characteristics of value: Demand (willingness to buy), Utility (usefulness), Scarcity (limited supply), and Transferability (ability to convey ownership).",
+    },
   ],
   "valuation-market-analysis-q05": [
     {
@@ -5779,6 +6049,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Physical depreciation that is easily curable", "Functional obsolescence due to poor layout", "External obsolescence stemming from neighborhood influences", "Economic loss recoverable through property improvements"],
       correctIndex: 2,
       explain: "External (economic) obsolescence results from negative external environmental, social, or zoning factors in the property's area that cannot be remedied by the property owner.",
+    },
+    {
+      q: "An industrial manufacturing facility is constructed adjacent to a residential property, negatively impacting its market value. What type of depreciation is this property experiencing?",
+      options: ["Deferred maintenance requiring roof repairs", "Structural design incompatibility with modern standards", "External obsolescence from nearby incompatible land use", "Loss due to outdated floor plan layout"],
+      correctIndex: 2,
+      explain: "External obsolescence results from factors outside the property's control, such as nearby incompatible uses that diminish desirability and value.",
+    },
+    {
+      q: "A property's value declines after a major airport expands its flight paths over the neighborhood. This loss in value represents which form of depreciation?",
+      options: ["Curable deterioration that can be corrected through renovation", "Economic obsolescence from external environmental conditions", "Functional obsolescence due to poor interior design", "Physical depreciation from deferred structural maintenance"],
+      correctIndex: 1,
+      explain: "Economic (external) obsolescence occurs when external conditions—such as increased noise and air traffic—reduce property value independent of the structure's physical condition.",
+    },
+    {
+      q: "Following the announcement of a landfill development near a residential community, property values in the area decline significantly. What best describes this situation?",
+      options: ["Curable physical depreciation", "Functional obsolescence from layout issues", "Incurable external obsolescence from surrounding conditions", "Accrued depreciation from age and wear"],
+      correctIndex: 2,
+      explain: "External obsolescence is incurable because it stems from external market factors and neighborhood conditions beyond the property owner's control.",
+    },
+    {
+      q: "A residential property loses market appeal after a commercial shopping mall is developed on adjacent land. Which type of depreciation best characterizes this loss?",
+      options: ["Physical deterioration correctable by repairs", "Functional inadequacy due to outdated room configuration", "External obsolescence from neighborhood change", "Reproduction cost depreciation"],
+      correctIndex: 2,
+      explain: "External obsolescence occurs when neighborhood or area changes (like incompatible land uses) reduce property value, regardless of the property's physical condition or design.",
+    },
+    {
+      q: "A residential property's market value declines significantly after the city announces plans to relocate a major industrial manufacturing facility nearby. What type of depreciation is this property experiencing?",
+      options: ["Deferred maintenance and curable deterioration", "External obsolescence", "Incurable functional deficiency", "Structural depreciation"],
+      correctIndex: 1,
+      explain: "External obsolescence (also called economic obsolescence) results from negative factors in the surrounding environment or neighborhood that are beyond the property owner's control, such as nearby industrial development or infrastructure changes.",
     },
   ],
   "valuation-market-analysis-q06": [

@@ -145,11 +145,12 @@ export default function AdminDashboard() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif', flex: 1, minWidth: 0 }}>
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
-        <Header />
-        <main style={{ padding: '48px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>{children}</main>
+        {/* Admin pages drop the public-site <Header /> — the sidebar
+            in admin/layout.tsx provides the academy wordmark + nav. */}
+        <main style={{ padding: '40px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>{children}</main>
         <Footer />
       </div>
     </div>

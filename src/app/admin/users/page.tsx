@@ -70,7 +70,7 @@ export default function AdminUsersPage() {
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif' }}>
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
-        <Header />
+        {/* sidebar replaces header */}
         <main style={{ padding: '48px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>
             Admin · Users
