@@ -17,6 +17,7 @@ import { MotivationModal } from '@/components/MotivationModal';
 import { CURRICULUM } from '@/lib/curriculum';
 import { setPin as pwaSetPin, clearPin as pwaClearPin } from '@/components/PWAInstaller';
 import { StudyPlanner } from '@/components/StudyPlanner';
+import { QuizHistory } from '@/components/QuizHistory';
 
 const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
@@ -283,6 +284,9 @@ export default function ProfilePage() {
 
       {/* STUDY PLANNER — goal-date scheduler with monthly calendar */}
       {isServer && <StudyPlanner />}
+
+      {/* QUIZ HISTORY — drill into past attempts + review wrong answers */}
+      {isServer && <QuizHistory />}
 
       {/* CONTINUE + COURSE PROGRESS */}
       {isServer && <ContinueAndCourseProgress byPath={analytics.byPath ?? {}} lastPath={analytics.lastPath ?? null} />}
