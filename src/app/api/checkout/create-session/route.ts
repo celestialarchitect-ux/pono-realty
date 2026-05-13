@@ -44,12 +44,34 @@ export async function POST(req: NextRequest) {
     await db.user.update({ where: { id: session.id }, data: { stripeCustomerId: customerId } });
   }
 
+  // Embedded checkout mode: we render Stripe's checkout INSIDE our own
+  // /checkout/[sku] page so the customer never leaves ralphfoulger.com.
+  // The page asks for ui_mode='embedded' explicitly. The legacy hosted
+  // flow is preserved as the default for any older client that calls
+  // without the embedded flag, so we don't break existing tests.
+  let embedded = false;
+  try {
+    const b = await req.clone().json();
+    embedded = b && typeof b === 'object' && b.embedded === true;
+  } catch { /* old clients send no body; default to hosted */ }
+
+  // Cast for ui_mode — older Stripe TS bundles don't enumerate 'embedded'
+  // in the SessionCreateParams union yet, but the API accepts it.
   const checkout = await s.checkout.sessions.create({
     mode: 'payment',
     customer: customerId,
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${SITE}/pricing`,
+    // Embedded uses return_url (single URL with {CHECKOUT_SESSION_ID}).
+    // Hosted uses success_url + cancel_url.
+    ...(embedded
+      ? ({
+          ui_mode: 'embedded',
+          return_url: `${SITE}/checkout/return?session_id={CHECKOUT_SESSION_ID}`,
+        } as Record<string, unknown>)
+      : {
+          success_url: `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+          cancel_url: `${SITE}/pricing`,
+        }),
     // sku is the modern field the webhook reads; tier kept for back-compat.
     metadata: { userId: session.id, sku: tier, tier },
     payment_intent_data: {
@@ -58,5 +80,8 @@ export async function POST(req: NextRequest) {
     allow_promotion_codes: true,
   });
 
+  if (embedded) {
+    return NextResponse.json({ clientSecret: checkout.client_secret, sessionId: checkout.id });
+  }
   return NextResponse.json({ url: checkout.url });
 }

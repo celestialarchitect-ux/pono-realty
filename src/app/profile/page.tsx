@@ -667,19 +667,10 @@ function AccessWindowCard({ user }: { user: MeUser }) {
   const onExtend = async () => {
     setExtendingPending(true);
     setExtendError(null);
-    try {
-      const r = await fetch('/api/checkout/extend', { method: 'POST' });
-      const j = await r.json() as { url?: string; error?: string; message?: string };
-      if (j.url) {
-        window.location.href = j.url;
-        return;
-      }
-      setExtendError(j.message || j.error || 'Could not start checkout.');
-    } catch {
-      setExtendError('Network error. Try again.');
-    } finally {
-      setExtendingPending(false);
-    }
+    // Embedded Checkout: send the buyer to /checkout/extension, which
+    // creates the session in embedded mode and renders the Stripe form
+    // inline on our domain.
+    window.location.href = '/checkout/extension';
   };
 
   // LIFETIME (admin or Solo): single calm card, no urgency.

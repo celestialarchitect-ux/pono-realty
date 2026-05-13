@@ -19,7 +19,7 @@ const SITE = process.env.SITE_URL || 'https://ralphfoulger.com';
 //   3. User's accessExpiresAt must be in the past (window has expired).
 //      An active Plus student can't buy an extension preemptively — that
 //      would be a weird purchase pattern and we'd rather they finish first.
-export async function POST(_req: NextRequest) {
+export async function POST(req: NextRequest) {
   if (!authConfigured() || !db) return NextResponse.json({ error: 'auth_unavailable' }, { status: 503 });
   if (!stripeConfigured()) return NextResponse.json({ error: 'stripe_unavailable', message: 'Checkout is not yet configured. Email support@ralphfoulger.com.' }, { status: 503 });
 
@@ -78,12 +78,25 @@ export async function POST(_req: NextRequest) {
     await db.user.update({ where: { id: user.id }, data: { stripeCustomerId: customerId } });
   }
 
+  let embedded = false;
+  try {
+    const b = await req.clone().json();
+    embedded = b && typeof b === 'object' && b.embedded === true;
+  } catch { /* default hosted */ }
+
   const checkout = await s.checkout.sessions.create({
     mode: 'payment',
     customer: customerId,
     line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}&kind=extension`,
-    cancel_url: `${SITE}/profile`,
+    ...(embedded
+      ? ({
+          ui_mode: 'embedded',
+          return_url: `${SITE}/checkout/return?session_id={CHECKOUT_SESSION_ID}&kind=extension`,
+        } as Record<string, unknown>)
+      : {
+          success_url: `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}&kind=extension`,
+          cancel_url: `${SITE}/profile`,
+        }),
     metadata: { userId: user.id, sku: 'extension', tier: 'plus' },
     payment_intent_data: {
       metadata: { userId: user.id, sku: 'extension', tier: 'plus' },
@@ -91,5 +104,8 @@ export async function POST(_req: NextRequest) {
     allow_promotion_codes: true,
   });
 
+  if (embedded) {
+    return NextResponse.json({ clientSecret: checkout.client_secret, sessionId: checkout.id });
+  }
   return NextResponse.json({ url: checkout.url });
 }

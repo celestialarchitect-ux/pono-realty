@@ -90,25 +90,25 @@ function tplCentered(post) {
   <div class="stage">
     <div class="ornament-bg"></div>
     ${CORNER_MARK}
-    <div style="position: absolute; top: 200px; left: 64px; right: 64px;">
-      <div class="pill ${post.accent}">${post.eyebrow}</div>
-      <h1 class="serif" style="font-size: ${headlineSize(post.headline)}px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.02; color: ${BRAND.text}; margin: 28px 0 28px;">
-        ${post.headline.replace(/<em>/g, `<em style="color:${BRAND.ocean};font-style:italic;">`)}
+    <div style="position: absolute; top: 180px; left: 64px; right: 64px;">
+      <div class="pill ${post.accent}" style="font-size: 14px; padding: 10px 20px;">${post.eyebrow}</div>
+      <h1 class="serif" style="font-size: ${headlineSize(post.headline)}px; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; color: ${BRAND.text}; margin: 36px 0 36px;">
+        ${post.headline.replace(/<em>/g, `<em style="color:${accentColor(post.accent)};font-style:italic;">`)}
       </h1>
-      <p style="font-size: 22px; line-height: 1.55; color: ${BRAND.textDim}; max-width: 920px;">
+      <p style="font-size: 32px; line-height: 1.45; color: ${BRAND.textDim}; max-width: 960px; font-weight: 500;">
         ${post.body}
       </p>
       ${post.proof && post.proof.length ? `
-        <div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px;">
+        <div style="margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px;">
           ${post.proof.map(p => `
-            <span style="padding: 10px 18px; border-radius: 10px; background: ${BRAND.bgRaised}; border: 1px solid ${BRAND.border}; color: ${BRAND.text}; font-size: 14px; font-weight: 600; letter-spacing: 0.02em;">
+            <span style="padding: 14px 24px; border-radius: 12px; background: ${BRAND.bgRaised}; border: 1px solid ${BRAND.border}; color: ${BRAND.text}; font-size: 19px; font-weight: 700; letter-spacing: 0.01em;">
               ${p}
             </span>
           `).join('')}
         </div>
       ` : ''}
       ${post.ctaLabel ? `
-        <div style="margin-top: 40px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 12px; background: ${accentBg(post.accent)}; color: white; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;">
+        <div style="margin-top: 48px; display: inline-flex; align-items: center; gap: 14px; padding: 22px 38px; border-radius: 14px; background: ${accentBg(post.accent)}; color: white; font-weight: 800; font-size: 22px; letter-spacing: 0.05em; text-transform: uppercase;">
           ${post.ctaLabel} →
         </div>
       ` : ''}
@@ -122,31 +122,31 @@ function tplStat(post) {
   <div class="stage">
     <div class="ornament-bg"></div>
     ${CORNER_MARK}
-    <div style="position: absolute; top: 188px; left: 64px; right: 64px;">
-      <div class="pill ${post.accent}">${post.eyebrow}</div>
+    <div style="position: absolute; top: 168px; left: 64px; right: 64px;">
+      <div class="pill ${post.accent}" style="font-size: 14px; padding: 10px 20px;">${post.eyebrow}</div>
     </div>
-    <div style="position: absolute; top: 244px; left: 64px; right: 64px; display: flex; align-items: flex-start; gap: 36px;">
+    <div style="position: absolute; top: 232px; left: 64px; right: 64px; display: flex; align-items: flex-start; gap: 42px;">
       <div style="flex: 0 0 auto;">
-        <div class="serif" style="font-size: 280px; font-weight: 900; line-height: 0.85; letter-spacing: -0.05em; color: ${accentColor(post.accent)};">
+        <div class="serif" style="font-size: 380px; font-weight: 900; line-height: 0.82; letter-spacing: -0.06em; color: ${accentColor(post.accent)};">
           ${post.bigNumber}
         </div>
-        <div class="mono" style="font-size: 16px; letter-spacing: 0.22em; color: ${BRAND.textMute}; text-transform: uppercase; margin-top: 6px;">
+        <div class="mono" style="font-size: 22px; letter-spacing: 0.24em; color: ${BRAND.textMute}; text-transform: uppercase; margin-top: 10px; font-weight: 700;">
           ${post.bigNumberUnit}
         </div>
       </div>
-      <div style="flex: 1 1 auto; padding-top: 8px;">
-        <h2 class="serif" style="font-size: 48px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.05; color: ${BRAND.text}; margin-bottom: 18px;">
+      <div style="flex: 1 1 auto; padding-top: 12px;">
+        <h2 class="serif" style="font-size: 70px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.0; color: ${BRAND.text}; margin-bottom: 26px;">
           ${post.headline.replace(/<em>/g, `<em style="color:${accentColor(post.accent)};font-style:italic;">`)}
         </h2>
-        <p style="font-size: 18px; line-height: 1.6; color: ${BRAND.textDim};">${post.body}</p>
+        <p style="font-size: 26px; line-height: 1.45; color: ${BRAND.textDim}; font-weight: 500;">${post.body}</p>
       </div>
     </div>
-    <div style="position: absolute; bottom: 156px; left: 64px; right: 64px;">
-      <div style="display: grid; grid-template-columns: repeat(${post.breakdown.length}, 1fr); gap: 10px;">
+    <div style="position: absolute; bottom: 152px; left: 64px; right: 64px;">
+      <div style="display: grid; grid-template-columns: repeat(${post.breakdown.length}, 1fr); gap: 12px;">
         ${post.breakdown.map(([k, v]) => `
-          <div style="background: ${BRAND.bgRaised}; border: 1px solid ${BRAND.border}; border-radius: 12px; padding: 18px 18px;">
-            <div class="mono" style="font-size: 11px; letter-spacing: 0.18em; color: ${BRAND.textMute}; text-transform: uppercase; margin-bottom: 6px;">${k}</div>
-            <div class="serif" style="font-size: 26px; font-weight: 900; color: ${BRAND.text}; letter-spacing: -0.01em; line-height: 1;">${v}</div>
+          <div style="background: ${BRAND.bgRaised}; border: 1px solid ${BRAND.border}; border-radius: 14px; padding: 22px 22px;">
+            <div class="mono" style="font-size: 13px; letter-spacing: 0.2em; color: ${BRAND.textMute}; text-transform: uppercase; margin-bottom: 10px; font-weight: 700;">${k}</div>
+            <div class="serif" style="font-size: 34px; font-weight: 900; color: ${BRAND.text}; letter-spacing: -0.01em; line-height: 1;">${v}</div>
           </div>
         `).join('')}
       </div>
@@ -158,44 +158,44 @@ function tplStat(post) {
 function tplSplit(post) {
   return `
   <div class="stage" style="display: grid; grid-template-columns: 1fr 1fr;">
-    <div style="background: ${accentBg(post.accent)}; padding: 64px 56px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; position: relative;">
+    <div style="background: ${accentBg(post.accent)}; padding: 64px 52px; display: flex; flex-direction: column; justify-content: space-between; color: #fff; position: relative;">
       <div>
         <div style="display: inline-flex; align-items: center; gap: 12px;">
           ${MONOGRAM_SVG}
           <div>
-            <div class="serif" style="font-size: 18px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.1; color: #fff;">Ralph Foulger&rsquo;s</div>
-            <div class="mono" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-top: 4px;">Academy of Real Estate</div>
+            <div class="serif" style="font-size: 20px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.1; color: #fff;">Ralph Foulger&rsquo;s</div>
+            <div class="mono" style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.78); margin-top: 4px;">Academy of Real Estate</div>
           </div>
         </div>
-        <div style="margin-top: 60px;">
-          <div class="mono" style="font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.86); font-weight: 700; margin-bottom: 24px;">${post.eyebrow}</div>
-          <h2 class="serif" style="font-size: 56px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.02; color: #fff;">
-            ${post.headline.replace(/<em>/g, '<em style="color:#fff;font-style:italic;opacity:0.85;">')}
+        <div style="margin-top: 56px;">
+          <div class="mono" style="font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.94); font-weight: 700; margin-bottom: 28px;">${post.eyebrow}</div>
+          <h2 class="serif" style="font-size: 76px; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; color: #fff;">
+            ${post.headline.replace(/<em>/g, '<em style="color:#fff;font-style:italic;opacity:0.86;">')}
           </h2>
         </div>
       </div>
       ${post.price ? `
         <div>
-          <div class="serif" style="font-size: 72px; font-weight: 900; line-height: 1; color: #fff;">${post.price}</div>
-          <div class="mono" style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-top: 8px;">${post.priceSub}</div>
+          <div class="serif" style="font-size: 104px; font-weight: 900; line-height: 0.95; color: #fff; letter-spacing: -0.03em;">${post.price}</div>
+          <div class="mono" style="font-size: 14px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-top: 12px; font-weight: 700;">${post.priceSub}</div>
         </div>
       ` : ''}
     </div>
-    <div style="background: ${BRAND.bg}; padding: 64px 56px; display: flex; flex-direction: column; justify-content: space-between; color: ${BRAND.text};">
+    <div style="background: ${BRAND.bg}; padding: 64px 52px; display: flex; flex-direction: column; justify-content: space-between; color: ${BRAND.text};">
       <div>
-        <p style="font-size: 19px; line-height: 1.6; color: ${BRAND.textDim}; margin-bottom: 28px;">${post.body}</p>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+        <p style="font-size: 24px; line-height: 1.5; color: ${BRAND.textDim}; margin-bottom: 32px; font-weight: 500;">${post.body}</p>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px;">
           ${(post.bullets || []).map(b => `
-            <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 16px; line-height: 1.4; color: ${BRAND.text};">
-              <span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: ${accentBg(post.accent)}; color: #fff; flex-shrink: 0; margin-top: 2px;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-12"/></svg>
+            <li style="display: flex; align-items: flex-start; gap: 14px; font-size: 22px; line-height: 1.35; color: ${BRAND.text};">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: ${accentBg(post.accent)}; color: #fff; flex-shrink: 0; margin-top: 2px;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-12"/></svg>
               </span>
-              <span><strong style="color: ${BRAND.text}; font-weight: 600;">${b}</strong></span>
+              <span style="font-weight: 600;">${b}</span>
             </li>
           `).join('')}
         </ul>
       </div>
-      <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: ${BRAND.textMute}; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 32px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: ${BRAND.textMute}; letter-spacing: 0.14em; text-transform: uppercase; margin-top: 32px;">
         <span>${post.handle}</span>
         <span style="color: ${BRAND.text}; font-weight: 700; letter-spacing: 0.08em;">${post.cta.replace(/^https?:\/\//, '')}</span>
       </div>
@@ -208,22 +208,22 @@ function tplEditorial(post) {
   <div class="stage">
     <div class="ornament-bg"></div>
     ${CORNER_MARK}
-    <div style="position: absolute; top: 188px; left: 64px; right: 64px;">
-      <div class="pill ${post.accent}">${post.eyebrow}</div>
-      <h2 class="serif" style="font-size: 56px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.04; color: ${BRAND.text}; margin: 24px 0 22px; max-width: 880px;">
+    <div style="position: absolute; top: 180px; left: 64px; right: 64px;">
+      <div class="pill ${post.accent}" style="font-size: 14px; padding: 10px 20px;">${post.eyebrow}</div>
+      <h2 class="serif" style="font-size: 82px; font-weight: 900; letter-spacing: -0.03em; line-height: 0.98; color: ${BRAND.text}; margin: 32px 0 28px; max-width: 940px;">
         ${post.headline.replace(/<em>/g, `<em style="color:${accentColor(post.accent)};font-style:italic;">`)}
       </h2>
-      <p style="font-size: 18px; line-height: 1.6; color: ${BRAND.textDim}; max-width: 920px;">${post.body}</p>
+      <p style="font-size: 24px; line-height: 1.5; color: ${BRAND.textDim}; max-width: 940px; font-weight: 500;">${post.body}</p>
     </div>
-    <div style="position: absolute; bottom: 156px; left: 64px; right: 64px;">
-      <div style="background: #fff; border: 1px solid ${BRAND.border}; border-radius: 18px; padding: 22px 24px; box-shadow: 0 8px 28px rgba(14,26,38,0.06);">
-        <div class="mono" style="font-size: 10px; letter-spacing: 0.22em; color: ${BRAND.textMute}; text-transform: uppercase; font-weight: 700; margin-bottom: 14px;">Today’s classes · Mon, May 14</div>
-        <div style="display: flex; flex-direction: column; gap: 8px;">
+    <div style="position: absolute; bottom: 144px; left: 64px; right: 64px;">
+      <div style="background: #fff; border: 1px solid ${BRAND.border}; border-radius: 20px; padding: 26px 28px; box-shadow: 0 8px 28px rgba(14,26,38,0.06);">
+        <div class="mono" style="font-size: 13px; letter-spacing: 0.22em; color: ${BRAND.textMute}; text-transform: uppercase; font-weight: 700; margin-bottom: 18px;">Today’s classes · Mon, May 14</div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
           ${post.scheduleSample.map((s, i) => `
-            <div style="display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 10px 14px; background: ${BRAND.bgRaised}; border-radius: 10px; border-left: 3px solid ${i === 0 ? accentColor(post.accent) : BRAND.borderHi};">
-              <div class="mono" style="font-size: 13px; color: ${BRAND.text}; font-weight: 700;">${s.time}</div>
-              <div style="font-size: 15px; color: ${BRAND.text}; font-weight: 600;">${s.label}</div>
-              <div class="mono" style="font-size: 11px; color: ${BRAND.textMute}; letter-spacing: 0.04em;">${i === 0 ? 'now' : ''}</div>
+            <div style="display: grid; grid-template-columns: 132px 1fr auto; gap: 18px; align-items: center; padding: 14px 18px; background: ${BRAND.bgRaised}; border-radius: 12px; border-left: 4px solid ${i === 0 ? accentColor(post.accent) : BRAND.borderHi};">
+              <div class="mono" style="font-size: 17px; color: ${BRAND.text}; font-weight: 700;">${s.time}</div>
+              <div style="font-size: 21px; color: ${BRAND.text}; font-weight: 600;">${s.label}</div>
+              <div class="mono" style="font-size: 13px; color: ${i === 0 ? accentColor(post.accent) : BRAND.textMute}; letter-spacing: 0.08em; font-weight: 700;">${i === 0 ? 'NOW' : ''}</div>
             </div>
           `).join('')}
         </div>
@@ -244,12 +244,14 @@ function accentBg(a) {
 }
 
 // Scale the headline font down a bit when copy is long so it never wraps awkwardly.
+// Bumped across the board so headlines fill more of the 1080x1080 canvas.
 function headlineSize(headline) {
   const len = headline.replace(/<[^>]+>/g, '').length;
-  if (len > 90) return 48;
-  if (len > 60) return 60;
-  if (len > 40) return 70;
-  return 80;
+  if (len > 90)  return 68;
+  if (len > 70)  return 78;
+  if (len > 50)  return 92;
+  if (len > 30)  return 104;
+  return 118;
 }
 
 const TPL = { centered: tplCentered, stat: tplStat, split: tplSplit, editorial: tplEditorial };

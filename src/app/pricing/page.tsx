@@ -35,23 +35,18 @@ export default function PricingPage() {
     setLoadingTier(tier);
     setError(null);
     try {
-      const res = await fetch('/api/checkout/create-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tier }),
-      });
-      const body = await res.json().catch(() => ({}));
-      if (res.status === 401 && body.loginRedirect) {
-        window.location.href = `${body.loginRedirect}?next=/pricing%23${tier}`;
+      // Pre-flight session check so we redirect to /login if the visitor
+      // is anonymous, instead of bouncing them through Stripe's hosted
+      // login screen. Keeps everything on our domain.
+      const meRes = await fetch('/api/auth/me', { cache: 'no-store' });
+      const meBody = await meRes.json().catch(() => ({}));
+      if (!meBody?.user) {
+        window.location.href = `/login?next=${encodeURIComponent(`/checkout/${tier}`)}`;
         return;
       }
-      if (!res.ok) {
-        setError(body.message ?? 'Checkout is not available yet. Try again shortly.');
-        return;
-      }
-      if (body.url) {
-        window.location.href = body.url;
-      }
+      // Embedded Checkout: the new /checkout/[sku] page renders Stripe's
+      // form inline on ralphfoulger.com. No more redirect to checkout.stripe.com.
+      window.location.href = `/checkout/${tier}`;
     } catch {
       setError('Network error. Try again.');
     } finally {
