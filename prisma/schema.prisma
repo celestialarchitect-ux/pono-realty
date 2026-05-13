@@ -73,6 +73,10 @@ model StudyPlan {
   // Whether to schedule weekends as study days. Most users keep weekends,
   // career-switchers between jobs often want them included.
   includeWeekends Boolean @default(true)
+  // When the daily class schedule starts, in 24-hour local time. The UI
+  // offers preset slots (6, 8, 10, 12, 14, 17, 19, 21) but the column
+  // accepts any 0-23 hour for future custom-time support.
+  startHour   Int      @default(9)
   // YYYY-MM-DD → minutes override. Empty {} means a uniform schedule.
   overridesJson String  @default("{}")
   createdAt   DateTime @default(now())

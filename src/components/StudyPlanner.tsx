@@ -16,6 +16,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
+import { Icon, type IconKind } from '@/components/Icon';
 
 interface Activity {
   type: 'chapter' | 'flashcards' | 'math' | 'quiz' | 'mock' | 'glossary' | 'review';
@@ -53,6 +54,7 @@ interface PlanResponse {
     id: string;
     goalDate: string;
     includeWeekends: boolean;
+    startHour: number;
     overrides: Record<string, number>;
   } | null;
   hoursStudied: number;
@@ -62,12 +64,28 @@ interface PlanResponse {
   schedule: ScheduleDay[];
 }
 
+// Preset start-time slots. Hour is 24-hour local time.
+const START_TIME_PRESETS: Array<{
+  hour: number;
+  label: string;
+  description: string;
+  icon: IconKind;
+}> = [
+  { hour: 6,  label: 'Early bird',  description: 'Start at 6 AM',    icon: 'sunrise' },
+  { hour: 8,  label: 'Morning',     description: 'Start at 8 AM',    icon: 'sunrise' },
+  { hour: 10, label: 'Late morning',description: 'Start at 10 AM',   icon: 'sun' },
+  { hour: 12, label: 'Lunch start', description: 'Start at 12 PM',   icon: 'sun' },
+  { hour: 14, label: 'Afternoon',   description: 'Start at 2 PM',    icon: 'sun' },
+  { hour: 17, label: 'After work',  description: 'Start at 5 PM',    icon: 'sunset' },
+  { hour: 19, label: 'Evening',     description: 'Start at 7 PM',    icon: 'sunset' },
+  { hour: 21, label: 'Night owl',   description: 'Start at 9 PM',    icon: 'moon' },
+];
+
 function ymd(d: Date): string { return d.toISOString().slice(0, 10); }
 function pad2(n: number): string { return n.toString().padStart(2, '0'); }
 
 // Compute start/end times so each activity reads like a class block.
-// firstStudyHour defaults to 9am — feel free to make this user-settable
-// in a future update.
+// firstStudyHour is taken from the user's plan; if missing, defaults to 9am.
 function fmtTimeBlocks(activities: Activity[], firstStudyHour = 9): Array<Activity & { startTime: string; endTime: string }> {
   let cursor = firstStudyHour * 60;
   const toLabel = (m: number) => {
@@ -92,6 +110,7 @@ export function StudyPlanner() {
   const [editing, setEditing] = useState(false);
   const [customDate, setCustomDate] = useState<string>('');
   const [includeWeekends, setIncludeWeekends] = useState(true);
+  const [startHour, setStartHour] = useState<number>(9);
   // Tab: 'today' | 'calendar' | 'upcoming'
   const [tab, setTab] = useState<'today' | 'calendar' | 'upcoming'>('today');
 
@@ -101,7 +120,10 @@ export function StudyPlanner() {
       if (!r.ok) { setState(null); return; }
       const j = (await r.json()) as PlanResponse;
       setState(j);
-      if (j.plan) setIncludeWeekends(j.plan.includeWeekends);
+      if (j.plan) {
+        setIncludeWeekends(j.plan.includeWeekends);
+        setStartHour(j.plan.startHour ?? 9);
+      }
     } catch {
       setState(null);
     }
@@ -113,14 +135,18 @@ export function StudyPlanner() {
     return () => clearInterval(id);
   }, []);
 
-  const savePlan = async (goalDate: string) => {
+  const savePlan = async (goalDate: string, overrideStartHour?: number) => {
     setLoading(true);
     setSaveError(null);
     try {
       const r = await fetch('/api/study-plan', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ goalDate, includeWeekends }),
+        body: JSON.stringify({
+          goalDate,
+          includeWeekends,
+          startHour: overrideStartHour ?? startHour,
+        }),
       });
       const j = await r.json();
       if (!r.ok) {
@@ -164,6 +190,8 @@ export function StudyPlanner() {
       hoursRemaining={state.hoursRemaining}
       includeWeekends={includeWeekends}
       setIncludeWeekends={setIncludeWeekends}
+      startHour={startHour}
+      setStartHour={setStartHour}
       onSave={savePlan}
       onCancel={editing ? () => setEditing(false) : undefined}
       loading={loading}
@@ -181,6 +209,14 @@ export function StudyPlanner() {
       setTab={setTab}
       onEditGoal={() => setEditing(true)}
       onClearPlan={clearPlan}
+      onChangeStartTime={async (hour) => {
+        setStartHour(hour);
+        // Re-save with the same goal date to persist the new start hour.
+        if (state.plan) {
+          const d = new Date(state.plan.goalDate);
+          await savePlan(ymd(d), hour);
+        }
+      }}
     />
   );
 }
@@ -191,11 +227,14 @@ export function StudyPlanner() {
 
 function SetupCard({
   hoursRemaining, includeWeekends, setIncludeWeekends,
+  startHour, setStartHour,
   onSave, onCancel, loading, saveError, customDate, setCustomDate,
 }: {
   hoursRemaining: number;
   includeWeekends: boolean;
   setIncludeWeekends: (b: boolean) => void;
+  startHour: number;
+  setStartHour: (h: number) => void;
   onSave: (date: string) => void;
   onCancel?: () => void;
   loading: boolean;
@@ -270,10 +309,48 @@ function SetupCard({
           Set goal
         </button>
       </div>
-      <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: T.textDim, cursor: 'pointer', marginBottom: 10 }}>
+      <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: T.textDim, cursor: 'pointer', marginBottom: 18 }}>
         <input type="checkbox" checked={includeWeekends} onChange={(e) => setIncludeWeekends(e.target.checked)} />
         <span>Schedule study time on weekends</span>
       </label>
+
+      {/* START-TIME PRESETS */}
+      <div style={{ marginBottom: 14, paddingTop: 14, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>
+          <Icon kind="clock" size={14} />
+          <span>When do you want your study day to start?</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 6 }}>
+          {START_TIME_PRESETS.map(p => {
+            const selected = startHour === p.hour;
+            return (
+              <button
+                key={p.hour}
+                onClick={() => setStartHour(p.hour)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 8,
+                  padding: '10px 12px', borderRadius: 10,
+                  background: selected ? T.ocean : T.bgRaised,
+                  color: selected ? '#fff' : T.text,
+                  border: `1px solid ${selected ? T.oceanDark : T.border}`,
+                  cursor: 'pointer',
+                  fontFamily: 'inherit', textAlign: 'left',
+                  transition: 'background 0.12s, color 0.12s, border-color 0.12s',
+                }}>
+                <Icon kind={p.icon} size={18} />
+                <div style={{ minWidth: 0 }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, lineHeight: 1.2 }}>{p.label}</div>
+                  <div style={{ fontSize: 10, opacity: 0.8, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', lineHeight: 1.2, marginTop: 2 }}>{p.description}</div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+        <p style={{ fontSize: 11, color: T.textGhost, lineHeight: 1.5, marginTop: 8, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+          Each day&apos;s class blocks start at this time. You can change it anytime later.
+        </p>
+      </div>
+
       {saveError && <p style={{ fontSize: 12, color: T.coral, margin: 0 }}>{saveError}</p>}
       {onCancel && (
         <button onClick={onCancel} style={{ ...BUTTON_3D.ghost, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, marginTop: 10, cursor: 'pointer', fontFamily: 'inherit' }}>
@@ -288,13 +365,15 @@ function SetupCard({
 // ACTIVE PLAN VIEW — tabbed: Today / Calendar / Upcoming
 // =========================================================================
 
-function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
+function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan, onChangeStartTime }: {
   state: PlanResponse;
   tab: 'today' | 'calendar' | 'upcoming';
   setTab: (t: 'today' | 'calendar' | 'upcoming') => void;
   onEditGoal: () => void;
   onClearPlan: () => void;
+  onChangeStartTime: (hour: number) => void;
 }) {
+  const [showStartTimePicker, setShowStartTimePicker] = useState(false);
   const goal = new Date(state.plan!.goalDate);
   const today = new Date();
   const todayStr = ymd(today);
@@ -303,6 +382,8 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
   const onPace = state.onPaceRatio ?? 1;
   const paceLabel = onPace >= 0.95 ? 'On pace' : onPace >= 0.7 ? 'Slightly behind' : 'Behind pace';
   const paceColor = onPace >= 0.95 ? T.green : onPace >= 0.7 ? T.amber : T.coral;
+  const startHour = state.plan!.startHour ?? 9;
+  const currentPreset = START_TIME_PRESETS.find(p => p.hour === startHour);
 
   return (
     <div style={{ ...CARD, padding: 28, marginBottom: 22 }}>
@@ -323,6 +404,10 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
           <span style={{ padding: '6px 12px', borderRadius: 999, fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', fontWeight: 700, color: '#fff', background: paceColor, textTransform: 'uppercase' }}>
             {paceLabel}
           </span>
+          <button onClick={() => setShowStartTimePicker(s => !s)} style={{ ...BUTTON_3D.secondary, padding: '8px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <Icon kind={currentPreset?.icon ?? 'clock'} size={14} />
+            <span>{currentPreset?.label ?? `${startHour}:00`}</span>
+          </button>
           <button onClick={onEditGoal} style={{ ...BUTTON_3D.secondary, padding: '8px 14px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>
             Change goal
           </button>
@@ -331,6 +416,39 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
           </button>
         </div>
       </div>
+
+      {showStartTimePicker && (
+        <div style={{ marginBottom: 18, padding: 16, background: T.bgRaised, borderRadius: 12, border: `1px solid ${T.border}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10, fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>
+            <Icon kind="clock" size={14} />
+            <span>When does your study day start?</span>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 6 }}>
+            {START_TIME_PRESETS.map(p => {
+              const selected = startHour === p.hour;
+              return (
+                <button
+                  key={p.hour}
+                  onClick={() => { onChangeStartTime(p.hour); setShowStartTimePicker(false); }}
+                  style={{
+                    display: 'flex', alignItems: 'center', gap: 8,
+                    padding: '10px 12px', borderRadius: 10,
+                    background: selected ? T.ocean : T.bg,
+                    color: selected ? '#fff' : T.text,
+                    border: `1px solid ${selected ? T.oceanDark : T.border}`,
+                    cursor: 'pointer', fontFamily: 'inherit', textAlign: 'left',
+                  }}>
+                  <Icon kind={p.icon} size={18} />
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, lineHeight: 1.2 }}>{p.label}</div>
+                    <div style={{ fontSize: 10, opacity: 0.8, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1.2, marginTop: 2 }}>{p.description}</div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* TAB STRIP */}
       <div style={{ display: 'flex', gap: 2, marginBottom: 18, background: T.bgRaised, padding: 4, borderRadius: 10, border: `1px solid ${T.border}`, flexWrap: 'wrap' }}>
@@ -352,7 +470,7 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
       </div>
 
       {tab === 'today' && (
-        <TodaysClassSchedule day={todayDay} hoursStudied={state.hoursStudied} hoursRequired={state.hoursRequired} />
+        <TodaysClassSchedule day={todayDay} hoursStudied={state.hoursStudied} hoursRequired={state.hoursRequired} startHour={startHour} />
       )}
 
       {tab === 'calendar' && (
@@ -369,7 +487,7 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
       )}
 
       {tab === 'upcoming' && (
-        <UpcomingDays schedule={state.schedule} todayStr={todayStr} />
+        <UpcomingDays schedule={state.schedule} todayStr={todayStr} startHour={startHour} />
       )}
     </div>
   );
@@ -379,12 +497,13 @@ function ActivePlanView({ state, tab, setTab, onEditGoal, onClearPlan }: {
 // TODAY'S CLASS SCHEDULE — each activity as a timed block
 // =========================================================================
 
-function TodaysClassSchedule({ day, hoursStudied, hoursRequired }: {
+function TodaysClassSchedule({ day, hoursStudied, hoursRequired, startHour }: {
   day: ScheduleDay | undefined;
   hoursStudied: number;
   hoursRequired: number;
+  startHour: number;
 }) {
-  const blocks = useMemo(() => day ? fmtTimeBlocks(day.activities, 9) : [], [day]);
+  const blocks = useMemo(() => day ? fmtTimeBlocks(day.activities, startHour) : [], [day, startHour]);
   if (!day) return <p style={{ fontSize: 13, color: T.textMute }}>No plan for today.</p>;
 
   if (day.status === 'rest') {
@@ -474,7 +593,7 @@ function ClassBlock({ block }: { block: Activity & { startTime: string; endTime:
       <div style={{ minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '3px 9px', borderRadius: 999, background: meta.bg, color: meta.color, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>
-            <span aria-hidden="true" style={{ fontSize: 11 }}>{meta.icon}</span>
+            <Icon kind={meta.icon} size={12} strokeWidth={2} />
             {meta.label}
           </span>
           <span style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: T.textMute, letterSpacing: '0.04em' }}>{block.minutes} min</span>
@@ -518,20 +637,20 @@ function CalendarGrid({ schedule }: { schedule: ScheduleDay[] }) {
   while (cells.length % 7 !== 0) cells.push(null);
   const weeks: Array<Array<ScheduleDay | null>> = [];
   for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
-  const dayLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4, marginBottom: 6 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6, marginBottom: 8 }}>
         {dayLabels.map((d, i) => (
-          <div key={i} style={{ fontSize: 10, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", textAlign: 'center', letterSpacing: '0.1em', fontWeight: 700 }}>
+          <div key={i} style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", textAlign: 'center', letterSpacing: '0.16em', fontWeight: 700 }}>
             {d}
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {weeks.map((week, wi) => (
-          <div key={wi} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 4 }}>
+          <div key={wi} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
             {week.map((day, di) => <CalendarCell key={di} day={day} />)}
           </div>
         ))}
@@ -541,43 +660,96 @@ function CalendarGrid({ schedule }: { schedule: ScheduleDay[] }) {
 }
 
 function CalendarCell({ day }: { day: ScheduleDay | null }) {
-  if (!day) return <div style={{ aspectRatio: '1 / 1', minHeight: 56, background: 'transparent' }} />;
+  if (!day) return <div style={{ minHeight: 96, background: 'transparent' }} />;
 
   const dayNum = Number(day.date.slice(-2));
+  const monthName = new Date(day.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short' });
   let bg: string = T.bgRaised;
   let border: string = T.border;
   let accent: string = T.textMute;
-  let label = '';
+  let topLabel = '';
+  let isToday = false;
 
-  if (day.status === 'past_done') { bg = 'rgba(45, 134, 89, 0.18)'; border = T.green; accent = T.green; label = `${day.actualMinutes}m`; }
-  else if (day.status === 'past_short') { bg = 'rgba(232, 93, 60, 0.12)'; border = T.coral; accent = T.coral; label = day.actualMinutes > 0 ? `${day.actualMinutes}m` : '–'; }
-  else if (day.status === 'today') { bg = 'rgba(20, 131, 123, 0.18)'; border = T.ocean; accent = T.ocean; label = `${day.actualMinutes}/${day.totalMinutes}m`; }
-  else if (day.status === 'rest') { bg = T.bgRaised; border = T.border; accent = T.textGhost; label = 'rest'; }
-  else { bg = T.bgRaised; border = T.border; accent = T.ocean; label = `${day.totalMinutes}m`; }
+  if (day.status === 'past_done')      { bg = 'rgba(45, 134, 89, 0.14)'; border = T.green; accent = T.green; topLabel = `${day.actualMinutes}m`; }
+  else if (day.status === 'past_short'){ bg = 'rgba(232, 93, 60, 0.10)';  border = T.coral; accent = T.coral; topLabel = day.actualMinutes > 0 ? `${day.actualMinutes}m` : 'missed'; }
+  else if (day.status === 'today')     { bg = 'rgba(20, 131, 123, 0.14)'; border = T.ocean; accent = T.ocean; topLabel = `${day.actualMinutes}/${day.totalMinutes}m`; isToday = true; }
+  else if (day.status === 'rest')      { bg = T.bgRaised; border = T.border; accent = T.textGhost; topLabel = 'rest'; }
+  else                                 { bg = T.bgRaised; border = T.border; accent = T.ocean; topLabel = `${day.totalMinutes}m`; }
 
-  // Chip preview: which chapter is this day starting?
-  const chip = day.startsChapter ? `Ch. ${day.startsChapter.number}` : day.isReviewWeek ? 'Mock' : null;
+  // Headline: which chapter this day starts, or "Final review" / "Mock" for review days.
+  // For days in the middle of a chapter (continuation), pick the first chapter activity.
+  let headline: string | null = null;
+  if (day.startsChapter) {
+    headline = `Ch. ${day.startsChapter.number}`;
+  } else if (day.isReviewWeek) {
+    headline = 'Review';
+  } else {
+    const firstChapterAct = day.activities.find(a => a.type === 'chapter');
+    if (firstChapterAct?.chapterNumber) headline = `Ch. ${firstChapterAct.chapterNumber}`;
+  }
+
+  // Subtitle: chapter title (truncated) or "Mock + Review" for review week.
+  const chapterTitle = day.startsChapter?.title
+    ?? day.activities.find(a => a.type === 'chapter')?.title?.replace(/^Chapter \d+:\s*/, '')
+    ?? null;
+  const activitySummary = day.isReviewWeek
+    ? day.activities.filter(a => a.type === 'mock' || a.type === 'review').map(a => a.type === 'mock' ? 'Mock' : 'Review').join(' + ') || 'Mock exam'
+    : chapterTitle ?? `${day.activities.length} activities`;
+
+  const headlineColor = day.isReviewWeek ? T.coral : isToday ? T.ocean : day.status === 'past_done' ? T.green : T.text;
 
   return (
     <div
       title={describeDay(day)}
       style={{
-        aspectRatio: '1 / 1', minHeight: 56, borderRadius: 8,
+        minHeight: 96, borderRadius: 10,
         background: bg, border: `1px solid ${border}`,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        padding: 3, gap: 2,
+        borderLeftWidth: isToday ? 4 : 1,
+        borderLeftColor: isToday ? T.ocean : border,
+        display: 'flex', flexDirection: 'column',
+        padding: '8px 10px', gap: 4,
+        position: 'relative', overflow: 'hidden',
       }}>
-      <span style={{ fontSize: 11, color: T.text, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 }}>
-        {dayNum}
-      </span>
-      {chip && (
-        <span style={{ fontSize: 9, color: day.isReviewWeek ? T.coral : T.ocean, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1, fontWeight: 700, letterSpacing: '0.02em', whiteSpace: 'nowrap' }}>
-          {chip}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 4 }}>
+        <div>
+          <span style={{ fontSize: 16, color: T.text, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 }}>
+            {dayNum}
+          </span>
+          {dayNum === 1 && (
+            <span style={{ fontSize: 9, color: T.textMute, marginLeft: 4, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', textTransform: 'uppercase' }}>{monthName}</span>
+          )}
+        </div>
+        <span style={{ fontSize: 9, color: accent, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1, letterSpacing: '0.04em', fontWeight: 700 }}>
+          {topLabel}
         </span>
+      </div>
+
+      {headline && (
+        <div style={{ fontSize: 11, fontWeight: 800, color: headlineColor, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', lineHeight: 1.1, marginTop: 2 }}>
+          {headline}
+        </div>
       )}
-      <span style={{ fontSize: 9, color: accent, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1, letterSpacing: '0.02em' }}>
-        {label}
-      </span>
+      {day.status !== 'rest' && activitySummary && (
+        <div style={{
+          fontSize: 10, color: T.textDim, lineHeight: 1.25,
+          overflow: 'hidden', textOverflow: 'ellipsis',
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+        }}>
+          {activitySummary}
+        </div>
+      )}
+      {day.status === 'rest' && (
+        <div style={{ fontSize: 10, color: T.textGhost, fontStyle: 'italic', marginTop: 2 }}>
+          Recovery
+        </div>
+      )}
+
+      {/* Activity-count footer */}
+      {day.activities.length > 0 && day.status !== 'rest' && (
+        <div style={{ marginTop: 'auto', fontSize: 9, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+          {day.activities.length} {day.activities.length === 1 ? 'activity' : 'activities'}
+        </div>
+      )}
     </div>
   );
 }
@@ -592,7 +764,7 @@ function describeDay(day: ScheduleDay): string {
 // UPCOMING DAYS — expandable accordion
 // =========================================================================
 
-function UpcomingDays({ schedule, todayStr }: { schedule: ScheduleDay[]; todayStr: string }) {
+function UpcomingDays({ schedule, todayStr, startHour }: { schedule: ScheduleDay[]; todayStr: string; startHour: number }) {
   const upcoming = schedule.filter(d => d.date >= todayStr);
   const [openIdx, setOpenIdx] = useState<number | null>(0); // today expanded by default
 
@@ -635,7 +807,7 @@ function UpcomingDays({ schedule, todayStr }: { schedule: ScheduleDay[]; todaySt
             </button>
             {open && day.status !== 'rest' && (
               <div style={{ padding: '0 16px 14px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {fmtTimeBlocks(day.activities, 9).map((b, i) => (
+                {fmtTimeBlocks(day.activities, startHour).map((b, i) => (
                   <UpcomingActivityRow key={i} block={b} />
                 ))}
               </div>
@@ -656,11 +828,13 @@ function UpcomingActivityRow({ block }: { block: Activity & { startTime: string;
       borderLeftWidth: 3, borderLeftColor: meta.color,
     }}>
       <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: T.textMute, letterSpacing: '0.02em' }}>{block.startTime}</div>
-      <div style={{ minWidth: 0 }}>
-        <div style={{ fontSize: 13, color: T.text, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          <span style={{ color: meta.color, marginRight: 6 }}>{meta.icon}</span>
+      <div style={{ minWidth: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ color: meta.color, flexShrink: 0, display: 'inline-flex' }}>
+          <Icon kind={meta.icon} size={14} strokeWidth={1.8} />
+        </span>
+        <span style={{ fontSize: 13, color: T.text, fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {block.title}
-        </div>
+        </span>
       </div>
       <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", color: T.textMute, whiteSpace: 'nowrap' }}>{block.minutes}m</div>
     </div>
@@ -680,13 +854,13 @@ function LegendDot({ color, label, bordered }: { color: string; label: string; b
   );
 }
 
-// Visual metadata per activity type. Color + icon + display label.
-const TYPE_META: Record<Activity['type'], { color: string; bg: string; label: string; icon: string }> = {
-  chapter:    { color: '#14837b', bg: 'rgba(20,131,123,0.12)',  label: 'Chapter',    icon: '📖' },
-  quiz:       { color: '#c08a2e', bg: 'rgba(192,138,46,0.14)',  label: 'Quiz',       icon: '📝' },
-  flashcards: { color: '#0d5e58', bg: 'rgba(13,94,88,0.14)',    label: 'Flashcards', icon: '🃏' },
-  math:       { color: '#2d5a3d', bg: 'rgba(45,90,61,0.14)',    label: 'Math',       icon: '🧮' },
-  mock:       { color: '#e85d3c', bg: 'rgba(232,93,60,0.14)',   label: 'Mock exam',  icon: '🎯' },
-  glossary:   { color: '#6b7a8a', bg: 'rgba(107,122,138,0.14)', label: 'Glossary',   icon: '📚' },
-  review:     { color: '#2d8659', bg: 'rgba(45,134,89,0.14)',   label: 'Review',     icon: '🔁' },
+// Visual metadata per activity type. Custom Icon kind + brand color + tinted bg.
+const TYPE_META: Record<Activity['type'], { color: string; bg: string; label: string; icon: IconKind }> = {
+  chapter:    { color: '#14837b', bg: 'rgba(20,131,123,0.12)',  label: 'Chapter',    icon: 'book' },
+  quiz:       { color: '#c08a2e', bg: 'rgba(192,138,46,0.14)',  label: 'Quiz',       icon: 'exam' },
+  flashcards: { color: '#0d5e58', bg: 'rgba(13,94,88,0.14)',    label: 'Flashcards', icon: 'flashcards' },
+  math:       { color: '#2d5a3d', bg: 'rgba(45,90,61,0.14)',    label: 'Math',       icon: 'calculator' },
+  mock:       { color: '#e85d3c', bg: 'rgba(232,93,60,0.14)',   label: 'Mock exam',  icon: 'target' },
+  glossary:   { color: '#6b7a8a', bg: 'rgba(107,122,138,0.14)', label: 'Glossary',   icon: 'library' },
+  review:     { color: '#2d8659', bg: 'rgba(45,134,89,0.14)',   label: 'Review',     icon: 'review' },
 };

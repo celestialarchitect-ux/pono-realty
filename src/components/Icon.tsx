@@ -21,7 +21,19 @@ export type IconKind =
   | 'flag'
   | 'thinking'
   | 'calendar'
-  | 'trophy';
+  | 'trophy'
+  // Added for the lesson-planner + start-time selector.
+  | 'review'      // cyclic arrows — spaced repetition / review days
+  | 'brain'       // memory / learning
+  | 'chart-up'    // mock-exam trending / progress
+  | 'sync'        // auto-rebalance arrows
+  | 'sunrise'     // early-bird preset
+  | 'sun'         // mid-day preset
+  | 'sunset'      // evening preset
+  | 'moon'        // night-owl preset
+  | 'clock'       // generic time preset
+  | 'install'     // PWA install pill (replaces 📱)
+  | 'lock';       // PIN settings (replaces lock emoji)
 
 interface IconProps {
   kind: IconKind;
@@ -210,6 +222,115 @@ export function Icon({ kind, size = 28, strokeWidth = 1.6 }: IconProps) {
           <path d="M10 13.5v3M14 13.5v3" />
           <path d="M8 19.5h8" />
           <path d="M9 17h6v2.5H9z" />
+        </svg>
+      );
+    case 'review':
+      // Two cyclic arrows for review / spaced repetition. The pair of
+      // half-circles with chevrons feels like "go back, then forward again".
+      return (
+        <svg {...common}>
+          <path d="M4 8a8 8 0 0 1 13.6-3.6L20 7" />
+          <path d="M20 4v4h-4" />
+          <path d="M20 16a8 8 0 0 1-13.6 3.6L4 17" />
+          <path d="M4 20v-4h4" />
+        </svg>
+      );
+    case 'brain':
+      // Stylized brain — two hemispheres with a center fold.
+      return (
+        <svg {...common}>
+          <path d="M9.5 4.5a3 3 0 0 0-3 3 3 3 0 0 0-1 5.6A3 3 0 0 0 8 18a3 3 0 0 0 4 1.5V4.5a3 3 0 0 0-2.5 0z" />
+          <path d="M14.5 4.5a3 3 0 0 1 3 3 3 3 0 0 1 1 5.6A3 3 0 0 1 16 18a3 3 0 0 1-4 1.5V4.5a3 3 0 0 1 2.5 0z" />
+          <path d="M12 4.5v15" />
+        </svg>
+      );
+    case 'chart-up':
+      // Bar chart with an upward trending arrow on top.
+      return (
+        <svg {...common}>
+          <path d="M3 20h18" />
+          <rect x="5" y="13" width="3" height="6" rx="0.5" />
+          <rect x="10.5" y="9" width="3" height="10" rx="0.5" />
+          <rect x="16" y="5" width="3" height="14" rx="0.5" />
+          <path d="M5.5 9l4-3 4 1.5 4.5-3.5" />
+          <path d="M14.5 4h3v3" />
+        </svg>
+      );
+    case 'sync':
+      // Two circular arrows for auto-rebalance / refresh.
+      return (
+        <svg {...common}>
+          <path d="M20 8a8 8 0 0 0-14.5-2" />
+          <path d="M4 4v4h4" />
+          <path d="M4 16a8 8 0 0 0 14.5 2" />
+          <path d="M20 20v-4h-4" />
+        </svg>
+      );
+    case 'sunrise':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="14" r="3.5" />
+          <path d="M3 18h18" />
+          <path d="M12 4v2.5" />
+          <path d="M5 8.5l1.6 1.6" />
+          <path d="M19 8.5l-1.6 1.6" />
+          <path d="M8.5 18l3.5-4 3.5 4" />
+        </svg>
+      );
+    case 'sun':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 3v2.5" />
+          <path d="M12 18.5V21" />
+          <path d="M3 12h2.5" />
+          <path d="M18.5 12H21" />
+          <path d="M5.5 5.5l1.7 1.7" />
+          <path d="M16.8 16.8l1.7 1.7" />
+          <path d="M5.5 18.5l1.7-1.7" />
+          <path d="M16.8 7.2l1.7-1.7" />
+        </svg>
+      );
+    case 'sunset':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="14" r="3.5" />
+          <path d="M3 18h18" />
+          <path d="M5 8.5l1.6 1.6" />
+          <path d="M19 8.5l-1.6 1.6" />
+          <path d="M12 4v2.5" />
+          <path d="M8.5 14l3.5 4 3.5-4" />
+        </svg>
+      );
+    case 'moon':
+      return (
+        <svg {...common}>
+          <path d="M20 14a8 8 0 1 1-10-10 6 6 0 0 0 10 10z" />
+        </svg>
+      );
+    case 'clock':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3.5 2.2" />
+        </svg>
+      );
+    case 'install':
+      // Download/install arrow into a phone-shaped tray.
+      return (
+        <svg {...common}>
+          <rect x="6.5" y="3" width="11" height="18" rx="2.4" />
+          <path d="M12 8v6" />
+          <path d="M9.5 11.5L12 14l2.5-2.5" />
+          <path d="M9.5 18h5" />
+        </svg>
+      );
+    case 'lock':
+      return (
+        <svg {...common}>
+          <rect x="5" y="10" width="14" height="10" rx="2" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+          <circle cx="12" cy="15" r="1" fill="currentColor" />
         </svg>
       );
   }

@@ -26,6 +26,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { Icon } from '@/components/Icon';
 
 const PIN_HASH_KEY = 'rfa-pin-hash-v1';
 const PIN_UNLOCKED_KEY = 'rfa-pin-unlocked-session';
@@ -166,7 +167,9 @@ function InstallPill({ onInstall, onDismiss }: { onInstall: () => void; onDismis
       border: '1px solid rgba(232,201,137,0.35)',
       maxWidth: 'calc(100vw - 32px)',
     }}>
-      <span style={{ fontSize: 18, lineHeight: 1 }} aria-hidden="true">📱</span>
+      <span style={{ display: 'inline-flex', color: '#e8c989' }} aria-hidden="true">
+        <Icon kind="install" size={18} />
+      </span>
       <span style={{ lineHeight: 1.3 }}>Save Ralph Foulger Academy to your home screen</span>
       <button onClick={onInstall} style={{
         background: '#14837b', color: '#fff', border: 'none',

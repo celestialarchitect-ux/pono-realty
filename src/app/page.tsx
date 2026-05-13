@@ -4,7 +4,7 @@ import { GLOSSARY } from '@/lib/content/glossary';
 import { EXAM_BANK } from '@/lib/content/exam-bank';
 import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
-import { IconBadge, type IconKind } from '@/components/Icon';
+import { Icon, IconBadge, type IconKind } from '@/components/Icon';
 
 // 1200w / q=72 in WebP is plenty for a 480px-rendered hero on 2x retina.
 // Was 2400w / q=85 = 585 KB. New URL is ~180 KB and indistinguishable on screen.
@@ -212,11 +212,11 @@ export default function Landing() {
 
               {/* Sample class blocks */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <MockClassBlock time="9:00 AM" minutes={60} typeLabel="Chapter" typeIcon="📖" color={T.ocean} title="Chapter 3: Valuation & Market Analysis" subtitle="National portion · 8 exam items · 24 key terms" />
-                <MockClassBlock time="10:05 AM" minutes={15} typeLabel="Quiz" typeIcon="📝" color="#c08a2e" title="Chapter 3 quiz" subtitle="End-of-chapter check · 8 questions" />
-                <MockClassBlock time="10:25 AM" minutes={70} typeLabel="Chapter" typeIcon="📖" color={T.ocean} title="Chapter 7: Contracts" subtitle="National portion · 10 exam items · 24 key terms" />
-                <MockClassBlock time="11:40 AM" minutes={15} typeLabel="Flashcards" typeIcon="🃏" color={T.oceanDark} title="Smart flashcards" subtitle="Today's chapter + spaced repetition" />
-                <MockClassBlock time="12:00 PM" minutes={15} typeLabel="Math" typeIcon="🧮" color="#2d5a3d" title="Math drill set" subtitle="Prorations, commissions, LTV · 10 problems" />
+                <MockClassBlock time="9:00 AM" minutes={60} typeLabel="Chapter" iconKind="book" color={T.ocean} title="Chapter 3: Valuation & Market Analysis" subtitle="National portion · 8 exam items · 24 key terms" />
+                <MockClassBlock time="10:05 AM" minutes={15} typeLabel="Quiz" iconKind="exam" color="#c08a2e" title="Chapter 3 quiz" subtitle="End-of-chapter check · 8 questions" />
+                <MockClassBlock time="10:25 AM" minutes={70} typeLabel="Chapter" iconKind="book" color={T.ocean} title="Chapter 7: Contracts" subtitle="National portion · 10 exam items · 24 key terms" />
+                <MockClassBlock time="11:40 AM" minutes={15} typeLabel="Flashcards" iconKind="flashcards" color={T.oceanDark} title="Smart flashcards" subtitle="Today's chapter + spaced repetition" />
+                <MockClassBlock time="12:00 PM" minutes={15} typeLabel="Math" iconKind="calculator" color="#2d5a3d" title="Math drill set" subtitle="Prorations, commissions, LTV · 10 problems" />
               </div>
 
               <div style={{ marginTop: 18, padding: '12px 16px', background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.border}`, fontSize: 12, color: T.textMute, lineHeight: 1.55, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
@@ -226,10 +226,10 @@ export default function Landing() {
 
             {/* Why this matters */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginTop: 36 }}>
-              <FeatureCard icon="🎯" title="Goal-driven, not time-driven" body="Set your exam date. The schedule works backward so you finish on time without panicking the last week." />
-              <FeatureCard icon="🧠" title="Spaced repetition built in" body="Daily flashcards on what you just learned + what you've forgotten. The actual mechanism that makes learning stick." />
-              <FeatureCard icon="📈" title="Mock-heavy in the home stretch" body="Last 30% of your timeline becomes review + mock exams — exactly what licensing schools have been doing for decades." />
-              <FeatureCard icon="🔁" title="Auto-rebalances" body="Behind one day? Studied extra? Took a Sunday off? The plan adjusts. No spreadsheets to re-do." />
+              <FeatureCard iconKind="target" title="Goal-driven, not time-driven" body="Set your exam date. The schedule works backward so you finish on time without panicking the last week." />
+              <FeatureCard iconKind="brain" title="Spaced repetition built in" body="Daily flashcards on what you just learned + what you've forgotten. The actual mechanism that makes learning stick." />
+              <FeatureCard iconKind="chart-up" title="Mock-heavy in the home stretch" body="Last 30% of your timeline becomes review + mock exams — exactly what licensing schools have been doing for decades." />
+              <FeatureCard iconKind="sync" title="Auto-rebalances" body="Behind one day? Studied extra? Took a Sunday off? The plan adjusts. No spreadsheets to re-do." />
             </div>
 
             <div style={{ textAlign: 'center', marginTop: 36 }}>
@@ -541,11 +541,11 @@ function Pillar({ icon, title, body, accent }: { icon: IconKind; title: string; 
 }
 
 // Class-schedule preview block on the homepage feature section.
-function MockClassBlock({ time, minutes, typeLabel, typeIcon, color, title, subtitle }: {
+function MockClassBlock({ time, minutes, typeLabel, iconKind, color, title, subtitle }: {
   time: string;
   minutes: number;
   typeLabel: string;
-  typeIcon: string;
+  iconKind: IconKind;
   color: string;
   title: string;
   subtitle: string;
@@ -563,7 +563,7 @@ function MockClassBlock({ time, minutes, typeLabel, typeIcon, color, title, subt
       </div>
       <div style={{ minWidth: 0 }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '2px 8px', borderRadius: 999, background: 'rgba(20,131,123,0.08)', color, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>
-          <span aria-hidden="true">{typeIcon}</span>
+          <Icon kind={iconKind} size={12} strokeWidth={2} />
           {typeLabel}
         </div>
         <div style={{ fontSize: 14, color: T.text, fontWeight: 600, lineHeight: 1.3 }}>{title}</div>
@@ -574,10 +574,12 @@ function MockClassBlock({ time, minutes, typeLabel, typeIcon, color, title, subt
 }
 
 // Small feature highlight under the schedule preview.
-function FeatureCard({ icon, title, body }: { icon: string; title: string; body: string }) {
+function FeatureCard({ iconKind, title, body }: { iconKind: IconKind; title: string; body: string }) {
   return (
     <div style={{ background: T.bg, borderRadius: 12, padding: 18, border: `1px solid ${T.border}` }}>
-      <div style={{ fontSize: 24, marginBottom: 8 }} aria-hidden="true">{icon}</div>
+      <div style={{ display: 'inline-flex', width: 44, height: 44, borderRadius: 12, background: 'rgba(20,131,123,0.10)', border: '1px solid rgba(20,131,123,0.22)', color: T.ocean, alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+        <Icon kind={iconKind} size={22} />
+      </div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 6, lineHeight: 1.25 }}>{title}</div>
       <div style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>{body}</div>
     </div>

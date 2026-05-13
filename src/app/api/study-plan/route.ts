@@ -172,6 +172,7 @@ export async function GET() {
       id: plan.id,
       goalDate: plan.goalDate.toISOString(),
       includeWeekends: plan.includeWeekends,
+      startHour: plan.startHour,
       overrides,
     },
     hoursStudied: +(totalSeconds / 3600).toFixed(2),
@@ -188,7 +189,7 @@ export async function POST(req: NextRequest) {
   const session = await getSessionUser();
   if (!session) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
-  let body: { goalDate?: string | null; includeWeekends?: boolean; overrides?: Record<string, number> };
+  let body: { goalDate?: string | null; includeWeekends?: boolean; startHour?: number; overrides?: Record<string, number> };
   try {
     body = await req.json();
   } catch {
@@ -217,6 +218,10 @@ export async function POST(req: NextRequest) {
   }
 
   const includeWeekends = typeof body.includeWeekends === 'boolean' ? body.includeWeekends : true;
+  // Clamp to 0..23 in case of bad input; default 9 (9am).
+  const startHour = typeof body.startHour === 'number' && Number.isFinite(body.startHour)
+    ? Math.max(0, Math.min(23, Math.floor(body.startHour)))
+    : 9;
   const overrides = body.overrides && typeof body.overrides === 'object' ? body.overrides : {};
   const overridesJson = JSON.stringify(overrides);
 
@@ -226,9 +231,10 @@ export async function POST(req: NextRequest) {
       userId: session.id,
       goalDate,
       includeWeekends,
+      startHour,
       overridesJson,
     },
-    update: { goalDate, includeWeekends, overridesJson },
+    update: { goalDate, includeWeekends, startHour, overridesJson },
   });
 
   return NextResponse.json({
@@ -237,6 +243,7 @@ export async function POST(req: NextRequest) {
       id: plan.id,
       goalDate: plan.goalDate.toISOString(),
       includeWeekends: plan.includeWeekends,
+      startHour: plan.startHour,
       overrides,
     },
   });
