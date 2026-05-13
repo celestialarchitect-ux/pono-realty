@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { T, BUTTON_3D, CARD, SHADOW_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
@@ -11,10 +10,16 @@ type CheckoutTier = 'standard' | 'plus' | 'solo';
 export default function PricingPage() {
   const [loadingTier, setLoadingTier] = useState<CheckoutTier | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const search = useSearchParams();
-  // ?reason=re_enroll → expired Standard user sent here from TierGate
-  // ?reason=upgrade → free user hit a paid page
-  const reason = search?.get('reason') ?? null;
+  // Read ?reason= from window.location instead of useSearchParams. Next 15
+  // requires useSearchParams to be wrapped in <Suspense> for static
+  // prerender, and the whole page is statically rendered. Reading from
+  // window is safer + keeps the page prerender-clean.
+  const [reason, setReason] = useState<string | null>(null);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const r = new URL(window.location.href).searchParams.get('reason');
+    setReason(r);
+  }, []);
   // Auto-scroll to expiration policy block for re-enroll context
   useEffect(() => {
     if (reason === 're_enroll' && typeof window !== 'undefined') {
