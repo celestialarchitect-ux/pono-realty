@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:22:17.830Z via Claude Haiku.
+// Generated 2026-05-13T10:25:34.283Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -5566,6 +5566,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "RESPA Section 8 prohibits undisclosed referral fees and kickbacks between service providers; secrecy about the arrangement is a core element of the violation.",
     },
+    {
+      q: "Which federal law prohibits a real estate broker from accepting hidden compensation from a title company in exchange for referring clients to that company?",
+      options: ["Fair Housing Act", "RESPA Section 8", "Equal Credit Opportunity Act", "Real Estate Settlement Procedures Act disclosure requirements"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 specifically prohibits kickbacks and undisclosed referral fees between settlement service providers and brokers.",
+    },
+    {
+      q: "A broker receives a payment from an appraisal company for steering transactions to them without disclosing this arrangement to clients. This violates:",
+      options: ["RESPA Section 8", "Regulation Z", "Hawaii Real Estate Commission compensation rules only", "The Dodd-Frank Act"],
+      correctIndex: 0,
+      explain: "RESPA Section 8 prohibits undisclosed referral fees and kickbacks between settlement service providers, including appraisers and brokers.",
+    },
+    {
+      q: "When a broker fails to disclose that they received compensation from a lender for referring a borrower, which law has most likely been violated?",
+      options: ["Truth in Lending Act", "Community Reinvestment Act", "RESPA Section 8", "Gramm-Leach-Bliley Act"],
+      correctIndex: 2,
+      explain: "RESPA Section 8 explicitly prohibits undisclosed kickbacks and referral fees paid by settlement service providers to brokers or other referral sources.",
+    },
+    {
+      q: "A settlement agent pays a broker a concealed fee for referrals without the client's knowledge. This practice violates:",
+      options: ["RESPA Section 8", "The Fair Credit Reporting Act", "Regulation B", "The Interstate Land Sales Full Disclosure Act"],
+      correctIndex: 0,
+      explain: "RESPA Section 8 bans undisclosed payments between settlement service providers and referral sources as unearned kickbacks.",
+    },
+    {
+      q: "Which federal statute is violated when a real estate broker secretly compensates a title company employee for referring business to that settlement service?",
+      options: ["Fair Housing Act", "RESPA Section 8", "Regulation Z", "Hawaii Residential Tenancies Law"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 explicitly prohibits kickbacks and unearned fees paid to settlement service providers for referrals, whether disclosed or undisclosed.",
+    },
   ],
   "practice-of-real-estate-q05": [
     {
@@ -5591,6 +5621,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Married individuals regardless of whether they have children", "Households with children under 18 and expectant mothers", "All senior citizens seeking affordable housing", "Couples without children who are unable to conceive"],
       correctIndex: 1,
       explain: "Familial status protection covers children under 18 and pregnant women; it does not protect based on marital status alone, age, or fertility status.",
+    },
+    {
+      q: "Under Hawaii's fair housing laws, which group receives explicit protection under the familial status classification?",
+      options: ["Couples without children regardless of marital status", "Families with minors under age 18 and expectant mothers", "Retirees and individuals over age 62", "Unmarried domestic partners with shared income"],
+      correctIndex: 1,
+      explain: "Familial status protection specifically covers households with children under 18 and pregnant individuals; age-based senior protections are limited to specific senior housing exemptions.",
+    },
+    {
+      q: "A landlord cannot discriminate based on familial status. This protection applies to:",
+      options: ["Tenants who are legally married", "Properties with at least one resident over age 55", "Prospective tenants who are pregnant or have children under 18", "Owner-occupied buildings with fewer than four units"],
+      correctIndex: 2,
+      explain: "Familial status discrimination protections extend to households with children under 18 and pregnant individuals; owner-occupied and certain senior housing have different exemptions.",
+    },
+    {
+      q: "Which scenario would constitute a violation of familial status protection under Hawaii fair housing law?",
+      options: ["Refusing to rent to an elderly couple over age 70", "Denying housing to a family with a child aged 12", "Excluding single applicants from a property", "Requiring higher income from unmarried applicants"],
+      correctIndex: 1,
+      explain: "Refusing housing based on the presence of a child under 18 violates familial status protections, which is the core definition of this protected class.",
+    },
+    {
+      q: "Familial status as a protected class in Hawaii real estate transactions covers:",
+      options: ["All individuals living in family-style arrangements", "Parents or guardians with dependent children under 18, plus pregnant women", "Households with combined family income above the state median", "Residents in multi-generational living situations"],
+      correctIndex: 1,
+      explain: "The familial status protection specifically targets discrimination against households with minor children under 18 and expectant mothers, excluding other family configurations.",
+    },
+    {
+      q: "Under Hawaii fair housing law, which of the following groups receives protection based on familial status?",
+      options: ["Unmarried cohabitating partners", "Families expecting a child or raising children younger than 18 years old", "Individuals age 55 and older in any residential setting", "Divorced parents without current custody arrangements"],
+      correctIndex: 1,
+      explain: "Familial status protection covers households with children under 18 and pregnant women; it does not protect based on marital status, age alone, or custody status except where children under 18 are present.",
     },
   ],
   "practice-of-real-estate-q06": [
@@ -5618,6 +5678,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Price-fixing discussions, even informal sharing of rates, breach antitrust law; commissions must remain independently determined.",
     },
+    {
+      q: "A broker asks you, \"What rate are most agents charging for their services in this market?\" How should you respond?",
+      options: ["\"Most agents charge between 5% and 6% in our area.\"", "\"Each broker sets their own commission structure; rates are negotiable.\"", "\"The typical market rate is around 6%, which is what we should all charge.\"", "\"I can tell you what competing brokers advertise online.\""],
+      correctIndex: 1,
+      explain: "Discussing what competitors charge or implying a standard rate constitutes potential antitrust violation; the correct approach is to explain that commissions are always negotiable between parties.",
+    },
+    {
+      q: "During a training session, an experienced agent states, \"New agents should know the prevailing commission in our area is 6%.\" What is your professional obligation?",
+      options: ["Agree and reinforce this as the standard going forward.", "Clarify that commission rates are subject to negotiation and not set by industry consensus.", "Ask the agent to email all staff the agreed-upon rate.", "Use this figure as the baseline for all future client negotiations."],
+      correctIndex: 1,
+      explain: "Commission rates cannot be standardized or agreed upon across the industry; they must remain freely negotiable between broker and client to comply with antitrust laws.",
+    },
+    {
+      q: "A client asks your broker, \"What do other real estate companies typically charge?\" The broker should respond:",
+      options: ["\"The market standard is 6%, though we occasionally negotiate down.\"", "\"Commission rates vary by brokerage and are open to negotiation; I'd be happy to discuss our fee structure.\"", "\"Most firms in Hawaii charge between 5% and 7% depending on the transaction type.\"", "\"That information is proprietary; just know our rate is competitive.\""],
+      correctIndex: 1,
+      explain: "Brokers must avoid discussing or implying industry-standard rates; instead, they should acknowledge that rates are individually negotiable and discuss only their own firm's structure.",
+    },
+    {
+      q: "At a broker meeting, agents discuss what fees they should quote to sellers. The safest legal response is:",
+      options: ["\"Let's establish a firm policy of 6% to stay competitive.\"", "\"Commission rates are determined individually with each client and are fully negotiable.\"", "\"We should match whatever the top brokerages in the area are charging.\"", "\"The Hawaii Real Estate Commission publishes a recommended rate we should follow.\""],
+      correctIndex: 1,
+      explain: "Establishing a uniform rate or matching competitors' rates violates antitrust principles; commissions must be negotiated independently with each client.",
+    },
+    {
+      q: "A broker asks you, \"What commission should I charge my clients?\" You should respond:",
+      options: ["\"Check what the local MLS reports as typical.\"", "\"Set your own rate—commissions are negotiable between broker and client.\"", "\"Use the standard 6% that most firms in Hawaii charge.\"", "\"Follow the rate card posted by the local Board of REALTORS®.\""],
+      correctIndex: 1,
+      explain: "Commissions must be individually negotiated; discussing or implying a \"standard\" or \"typical\" rate constitutes illegal price-fixing under antitrust law.",
+    },
   ],
   "practice-of-real-estate-q07": [
     {
@@ -5643,6 +5733,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Yes, all licensees in Hawaii must follow it", "Only if I choose to join NAR and become a REALTOR®", "Yes, the Real Estate Commission requires it", "No, it only applies to brokers, not salespersons"],
       correctIndex: 1,
       explain: "The NAR Code of Ethics applies only to those who voluntarily seek REALTOR® membership; it is not a mandatory requirement of state licensure.",
+    },
+    {
+      q: "Which statement accurately describes the relationship between the NAR Code of Ethics and Hawaii real estate licensing requirements?",
+      options: ["The NAR Code is mandatory for all Hawaii licensees regardless of membership status", "The NAR Code applies only to brokers, not salespersons", "Adherence to the NAR Code is required exclusively of those who hold the REALTOR® designation", "The NAR Code supersedes all state statutory provisions governing real estate conduct"],
+      correctIndex: 2,
+      explain: "The NAR Code of Ethics is a voluntary professional standard binding only REALTOR® members; state licensing law remains the mandatory baseline for all licensees.",
+    },
+    {
+      q: "A Hawaii licensee who is not a REALTOR® member would be bound by:",
+      options: ["The NAR Code of Ethics as a condition of their license", "State license law and rules set by the Hawaii Real Estate Commission, but not the NAR Code", "Only the NAR Code of Ethics, since it is the industry standard", "Both the NAR Code and state law equally, regardless of REALTOR® membership"],
+      correctIndex: 1,
+      explain: "Non-REALTOR® licensees must comply with state-mandated license law and REC rules; the NAR Code binds only those who voluntarily join NAR as REALTOR® members.",
+    },
+    {
+      q: "The NAR Code of Ethics differs from Hawaii real estate license law in that the Code:",
+      options: ["Is enforceable by the state through license suspension or revocation", "Applies voluntarily to REALTOR® members rather than being a state-mandated requirement for all licensees", "Establishes the minimum standards that satisfy Hawaii statutory requirements", "Takes precedence over state statutes and administrative rules"],
+      correctIndex: 1,
+      explain: "The NAR Code is a voluntary professional commitment for REALTOR® members only, whereas state license law is mandatory for all licensees; they are distinct regulatory frameworks.",
+    },
+    {
+      q: "When a Hawaii real estate licensee joins the National Association of REALTORS®, they become subject to:",
+      options: ["State license law only, which now incorporates NAR standards", "The NAR Code of Ethics in addition to their state licensing obligations", "The NAR Code instead of state license law, which is replaced upon membership", "Neither state law nor the NAR Code, as REALTOR® status exempts them from regulation"],
+      correctIndex: 1,
+      explain: "REALTOR® membership adds the voluntary NAR Code of Ethics to existing state-mandated compliance; it does not replace or exempt from state licensing requirements.",
+    },
+    {
+      q: "Which statement accurately describes the relationship between the National Association of REALTORS® Code of Ethics and Hawaii real estate licensure?",
+      options: ["All Hawaii real estate licensees must comply with NAR Code of Ethics as a condition of their license", "NAR Code of Ethics is a mandatory state regulatory requirement that supersedes HRS Chapter 467", "Membership in NAR and adherence to its Code of Ethics is an optional professional commitment for REALTOR® members", "The Hawaii Real Estate Commission enforces the NAR Code of Ethics as part of state licensing law"],
+      correctIndex: 2,
+      explain: "NAR Code of Ethics applies only to REALTOR® members who voluntarily join NAR; it is not mandatory state law for all licensees, and the REC enforces HRS Chapter 467, not the NAR Code.",
     },
   ],
   "practice-of-real-estate-q08": [
@@ -5670,6 +5790,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Monthly reconciliation of trust accounts is the standard regulatory requirement to ensure continuous monitoring and proper safeguarding of client funds.",
     },
+    {
+      q: "How frequently should a Hawaii real estate broker perform a reconciliation of client trust accounts?",
+      options: ["Every month, at minimum", "Only when a client requests it", "Twice per year during audit season", "At the broker's discretion, no set frequency"],
+      correctIndex: 0,
+      explain: "Hawaii REC rules require brokers to reconcile trust accounts on a monthly basis to ensure accuracy and compliance with fiduciary duties.",
+    },
+    {
+      q: "A broker maintains a client trust account. What is the standard requirement for reconciliation frequency?",
+      options: ["Annually, at fiscal year-end", "Each calendar month", "Every six months", "Only if there is a discrepancy discovered"],
+      correctIndex: 1,
+      explain: "Monthly reconciliation of trust accounts is the standard requirement in Hawaii to maintain proper accounting controls and fiduciary accountability.",
+    },
+    {
+      q: "According to Hawaii real estate regulations, trust account reconciliation should occur:",
+      options: ["Quarterly, as part of standard business practice", "Annually, with certified public accountant verification", "On a monthly basis", "When the broker determines it is necessary"],
+      correctIndex: 2,
+      explain: "Hawaii's trust account rules mandate monthly reconciliation to verify that account balances match client records and prevent misappropriation of funds.",
+    },
+    {
+      q: "Which statement accurately describes the reconciliation schedule for broker-maintained client trust accounts in Hawaii?",
+      options: ["Reconciliation is required annually with a third-party auditor", "Monthly reconciliation is the typical requirement", "Reconciliation only occurs when a broker application is reviewed", "Reconciliation frequency is determined by each brokerage firm independently"],
+      correctIndex: 1,
+      explain: "Hawaii regulation requires brokers to reconcile trust accounts typically on a monthly basis to ensure proper accounting and protection of client funds.",
+    },
+    {
+      q: "How frequently should a Hawaii real estate broker perform reconciliation of their escrow trust account to ensure compliance with REC regulations?",
+      options: ["Semiannually, at minimum", "On a monthly basis", "Whenever a transaction closes", "Only upon audit request by the REC"],
+      correctIndex: 1,
+      explain: "Hawaii REC rules require brokers to reconcile trust accounts monthly to maintain accurate records and detect discrepancies promptly. This standard protects client funds and ensures regulatory compliance.",
+    },
   ],
   "practice-of-real-estate-q09": [
     {
@@ -5695,6 +5845,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Competitive interference under antitrust statutes", "Unauthorized practice of law", "License suspension under the general duty to transact fairly", "Breach of fiduciary duty to competing agents"],
       correctIndex: 1,
       explain: "Composing original legal provisions—rather than merely completing or selecting from approved forms—constitutes the unauthorized practice of law and is beyond a broker's authorized scope.",
+    },
+    {
+      q: "When a real estate broker creates original contractual language to adjust the terms of a purchase agreement, this action most likely constitutes:",
+      options: ["A standard brokerage practice covered by the broker's license", "Unauthorized practice of law", "A fiduciary duty owed to the buyer", "Compliance with Hawaii Real Estate Commission rules"],
+      correctIndex: 1,
+      explain: "Drafting novel legal language and contract modifications is the practice of law, which requires a law license. Brokers may only fill in blanks on pre-approved forms.",
+    },
+    {
+      q: "A broker receives a request from a client to write a special rider that changes key contract provisions not covered in the standard form. The broker should:",
+      options: ["Proceed, as this falls within the broker's fiduciary duty", "Refer the client to an attorney, as drafting custom legal language exceeds broker authority", "Complete the rider under the brokerage's general real estate license", "File the custom rider with the Hawaii Real Estate Commission for approval"],
+      correctIndex: 1,
+      explain: "Customizing legal language in contracts is the practice of law and requires attorney involvement. Brokers lack authority to draft original legal provisions.",
+    },
+    {
+      q: "Which of the following best describes the legal boundary between a broker's permissible contract work and unauthorized practice of law?",
+      options: ["Brokers may modify any standard form if they include a disclaimer", "Brokers may complete pre-printed forms but cannot draft original contractual language", "Brokers may draft addenda only if approved by the Hawaii Real Estate Commission", "Brokers may create custom contract terms if the transaction amount is under $500,000"],
+      correctIndex: 1,
+      explain: "The legal boundary is clear: brokers fill blanks and use pre-approved forms, but creating novel legal language crosses into the unauthorized practice of law.",
+    },
+    {
+      q: "A sales associate asks a broker whether she can prepare a custom amendment to modify specific performance obligations in a standard purchase contract. The broker's correct response should be:",
+      options: ["Yes, provided the associate has been licensed for more than two years", "No, this requires legal expertise and the client should consult an attorney", "Yes, this is part of normal brokerage operations under the real estate license", "Yes, but only if the amendment is filed with the seller's broker first"],
+      correctIndex: 1,
+      explain: "Drafting custom legal modifications is unauthorized practice of law; the broker must direct the associate to refer clients to attorneys for contract language that is not pre-approved.",
+    },
+    {
+      q: "A real estate broker creates new contract language to replace provisions in the seller's standard purchase agreement. This practice is most likely to constitute:",
+      options: ["Unauthorized practice of law", "A permitted broker duty under HI license law", "An antitrust violation if done competitively", "A required broker function in all transactions"],
+      correctIndex: 0,
+      explain: "Composing novel contract provisions is the practice of law; brokers may only use pre-approved forms or direct clients to legal counsel. Creating custom legal language exceeds broker authority.",
     },
   ],
   "practice-of-real-estate-q10": [
@@ -5722,6 +5902,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Both broker and agent licenses can be revoked as a result of the broker's supervisory failure and the agent's underlying violation.",
     },
+    {
+      q: "Under Hawaii real estate law, when a broker fails to properly supervise a salesperson who commits a violation, which licenses are subject to revocation?",
+      options: ["The salesperson's license only", "Both the broker's and salesperson's licenses", "The broker's license only, never the salesperson's", "Neither license can be revoked for supervisory failures"],
+      correctIndex: 1,
+      explain: "Both the broker and the salesperson face potential license revocation; the broker for inadequate supervision and the salesperson for the underlying conduct violation.",
+    },
+    {
+      q: "A Hawaii Real Estate Commission investigation reveals that a broker failed to adequately oversee an agent's unlicensed practice activities. What are the possible licensing consequences?",
+      options: ["Revocation of the agent's license exclusively", "Revocation of both the broker's and agent's licenses", "Revocation of the broker's license exclusively", "No license revocations are possible in supervisory violations"],
+      correctIndex: 1,
+      explain: "Both parties can face revocation: the broker for failing its supervisory duty and the agent for the underlying unlicensed practice.",
+    },
+    {
+      q: "If the Hawaii REC determines that a managing broker failed to supervise, resulting in violations by licensed agents under the broker, what is the maximum scope of license revocation?",
+      options: ["The managing broker's license only", "Agent licenses only; the broker cannot be held responsible", "The managing broker's license and the violating agents' licenses", "No revocations are warranted in cases of inadequate supervision"],
+      correctIndex: 2,
+      explain: "Both the broker and agents can have licenses revoked; the broker faces sanctions for supervisory negligence while agents face sanctions for their underlying violations.",
+    },
+    {
+      q: "A salesperson engages in fraudulent conduct while the sponsoring broker neglects to implement proper oversight. Which license(s) could the Hawaii REC revoke?",
+      options: ["Only the sponsoring broker's license for negligence", "The salesperson's license for fraud only; the broker cannot be penalized", "Both the broker's and the salesperson's licenses", "Neither license, as revocation requires willful misconduct, not negligence"],
+      correctIndex: 2,
+      explain: "The REC may revoke both licenses: the broker for failure to supervise and the salesperson for the fraudulent act itself.",
+    },
+    {
+      q: "Under Hawaii real estate licensing law, when a broker fails to properly supervise a licensee who commits a violation, which licenses are subject to disciplinary revocation?",
+      options: ["The agent's license only, since they committed the underlying violation", "The broker's license only, as the supervisory entity responsible", "Both the broker's and the agent's licenses may be revoked", "Neither license can be revoked; only fines apply"],
+      correctIndex: 2,
+      explain: "The Hawaii REC can revoke both licenses—the broker for inadequate supervision and the agent for the underlying misconduct; they face separate culpability for their respective failures.",
+    },
   ],
   "practice-of-real-estate-q11": [
     {
@@ -5747,6 +5957,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Religion and creed in all property dealings", "Race in all property transactions", "Handicap status in commercial properties", "Parental status and familial relationships"],
       correctIndex: 1,
       explain: "The 1866 Act is the earliest federal fair housing law and covers race categorically in all property transactions without exception.",
+    },
+    {
+      q: "Which protected class is addressed by the Civil Rights Act of 1866 without any carve-outs or exceptions?",
+      options: ["Disability status in residential transactions", "Race in all property sales and transfers", "National origin in commercial leases", "Color in owner-occupied properties only"],
+      correctIndex: 1,
+      explain: "The 1866 Act provides comprehensive protection against discrimination based on race in ALL property transactions with no exceptions, unlike later fair housing laws.",
+    },
+    {
+      q: "A broker in Hawaii must understand that the Civil Rights Act of 1866 specifically prohibits discrimination based on:",
+      options: ["Gender in rental transactions", "Race when buying, selling, or leasing any property", "Marital status in real estate contracts", "Veteran status in property conveyances"],
+      correctIndex: 1,
+      explain: "The 1866 Act covers race in all property transactions nationwide; it is the broadest civil rights protection for this protected class in real estate.",
+    },
+    {
+      q: "Under the Civil Rights Act of 1866, which statement most accurately describes the scope of protection?",
+      options: ["Religion is protected in all residential communities", "Race is protected across all property transactions without limitation", "Handicap is protected in mortgage lending only", "Sex is protected in commercial property sales"],
+      correctIndex: 1,
+      explain: "The 1866 Act's protection against racial discrimination applies uniformly to all property transactions with no carved-out exceptions or conditions.",
+    },
+    {
+      q: "When advising clients about fair housing law, a real estate professional should know the Civil Rights Act of 1866 addresses:",
+      options: ["Familial status in all property dealings", "Race in every form of property transaction", "Religion exclusively in residential leases", "National origin in subdivisions and developments"],
+      correctIndex: 1,
+      explain: "The 1866 Act provides the most comprehensive protection for race in all property transactions, predating and encompassing both residential and commercial property.",
+    },
+    {
+      q: "Under the Civil Rights Act of 1866, which protected class is explicitly covered in property sales nationwide?",
+      options: ["National origin and disability", "Race across all real property transactions", "Gender and marital status", "Age and veteran status"],
+      correctIndex: 1,
+      explain: "The 1866 Act specifically prohibits racial discrimination in all property transactions with no carve-outs or exceptions; it predates modern fair housing legislation.",
     },
   ],
   "property-ownership-q00": [
@@ -6446,6 +6686,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 3,
       explain: "The lot area of 50,000 sq ft (200 × 250) divided by 43,560 sq ft per acre equals approximately 1.15 acres.",
     },
+    {
+      q: "A rectangular parcel measures 250 feet by 200 feet. How many acres does this represent?",
+      options: ["2.30 acres", "1.15 acres", "0.92 acres", "1.50 acres"],
+      correctIndex: 1,
+      explain: "Total square footage is 250 × 200 = 50,000 sq ft. Dividing by 43,560 sq ft per acre yields approximately 1.15 acres.",
+    },
+    {
+      q: "A property owner receives a survey showing a parcel that is 200 feet in length and 250 feet in width. What is the approximate acreage?",
+      options: ["0.75 acres", "2.05 acres", "1.15 acres", "1.80 acres"],
+      correctIndex: 2,
+      explain: "The lot contains 50,000 square feet (200 ft × 250 ft), which converts to approximately 1.15 acres when divided by the standard 43,560 sq ft per acre.",
+    },
+    {
+      q: "If a Hawaiian residential lot has dimensions of 200 feet × 250 feet, the total acreage is most nearly:",
+      options: ["1.10 acres", "0.85 acres", "2.25 acres", "1.15 acres"],
+      correctIndex: 3,
+      explain: "Multiplying 200 × 250 gives 50,000 square feet, which when divided by 43,560 equals approximately 1.15 acres.",
+    },
+    {
+      q: "A developer examines a land parcel that spans 250 feet in one direction and 200 feet in the perpendicular direction. The acreage is closest to:",
+      options: ["1.25 acres", "0.95 acres", "1.15 acres", "1.65 acres"],
+      correctIndex: 2,
+      explain: "The area is 50,000 square feet (200 × 250), and dividing by 43,560 square feet per acre results in approximately 1.15 acres.",
+    },
+    {
+      q: "A residential parcel measures 250 feet by 200 feet. How many acres does this property contain?",
+      options: ["2.30 acres", "0.92 acres", "1.15 acres", "1.50 acres"],
+      correctIndex: 2,
+      explain: "The property contains 50,000 square feet (250 ft × 200 ft), which converts to approximately 1.15 acres when divided by the conversion factor of 43,560 square feet per acre.",
+    },
   ],
   "real-estate-calculations-q01": [
     {
@@ -6471,6 +6741,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$9,600", "$4,800", "$15,360", "$19,200"],
       correctIndex: 0,
       explain: "Total commission = $320,000 × 0.06 = $19,200. Each broker receives 50% of total: $19,200 ÷ 2 = $9,600.",
+    },
+    {
+      q: "A property sells for $320,000 with a 6% commission rate. The listing and selling brokers split the commission equally. How much does each broker earn?",
+      options: ["$9,600", "$19,200", "$6,400", "$12,800"],
+      correctIndex: 0,
+      explain: "Commission is $320,000 × 0.06 = $19,200. Split 50/50 between brokers yields $19,200 ÷ 2 = $9,600 per broker.",
+    },
+    {
+      q: "Under a 50/50 broker split arrangement, a $320,000 transaction generates $19,200 in total commission at 6%. What is each broker's share?",
+      options: ["$8,000", "$12,800", "$9,600", "$11,200"],
+      correctIndex: 2,
+      explain: "With equal division of the $19,200 total commission, each broker receives $19,200 ÷ 2 = $9,600.",
+    },
+    {
+      q: "A real estate transaction closes at $320,000. The commission rate is 6%, and both the listing broker and the selling broker receive equal compensation. What does each broker get paid?",
+      options: ["$11,200", "$6,400", "$16,000", "$9,600"],
+      correctIndex: 3,
+      explain: "Total commission = $320,000 × 0.06 = $19,200. Divided equally between two brokers: $19,200 ÷ 2 = $9,600 each.",
+    },
+    {
+      q: "In a 50/50 broker split transaction, the sales price is $320,000 and the agreed commission is 6%. Calculate each broker's gross commission.",
+      options: ["$9,600", "$7,200", "$19,200", "$14,400"],
+      correctIndex: 0,
+      explain: "Total commission is $320,000 × 0.06 = $19,200. With a 50/50 split, each broker receives $9,600.",
+    },
+    {
+      q: "A property sells for $320,000 with a 6% commission split equally between the listing broker and selling broker. How much does each broker's office receive?",
+      options: ["$9,600", "$12,800", "$19,200", "$6,400"],
+      correctIndex: 0,
+      explain: "Total commission is $320,000 × 0.06 = $19,200. Split 50/50 between brokers gives $19,200 ÷ 2 = $9,600 per broker.",
     },
   ],
   "real-estate-calculations-q02": [
