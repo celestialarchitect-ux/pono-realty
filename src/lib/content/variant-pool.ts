@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:28:41.208Z via Claude Haiku.
+// Generated 2026-05-13T10:32:02.111Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -7358,6 +7358,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Co-op residents hold both corporate stock (evidence of ownership in the corporation) and a proprietary lease (evidence of right to occupy their specific unit).",
     },
+    {
+      q: "What is the legal interest a cooperative resident actually holds?",
+      options: ["A fee simple estate in their unit", "Corporate stock combined with a proprietary lease agreement", "A life estate that reverts to the cooperative upon death", "An equitable interest but no legal title"],
+      correctIndex: 1,
+      explain: "Co-op ownership consists of two components: shares in the cooperative corporation and a lease granting exclusive use of the unit. This is distinct from fee ownership.",
+    },
+    {
+      q: "Which statement best describes what a cooperative member receives when they purchase their unit?",
+      options: ["Full title to real property in their own name", "Stock in the cooperative corporation and a proprietary lease to occupy a specific unit", "A ground lease from the land trust with an option to purchase", "Only the right to occupy the unit as a month-to-month tenant"],
+      correctIndex: 1,
+      explain: "Co-op residents receive shares representing ownership in the corporation that owns the building, plus a proprietary lease that grants them exclusive occupancy rights to their unit.",
+    },
+    {
+      q: "In a Hawaii cooperative, a resident's ownership structure includes:",
+      options: ["Condominium-style fee ownership with shared common areas", "Both an ownership interest in the corporation and a lease interest in the unit", "Rental control protections as a statutory tenant", "Beneficial interest held in trust by the cooperative board"],
+      correctIndex: 1,
+      explain: "The co-op resident owns shares of the corporation that owns the property and simultaneously holds a proprietary lease granting exclusive use of their unit.",
+    },
+    {
+      q: "How does a cooperative resident's interest differ from a condominium owner's interest?",
+      options: ["The co-op resident has better legal protections and title insurance", "The condo owner holds fee title; the co-op resident holds shares plus a proprietary lease", "The co-op resident owns real property directly; the condo owner is a tenant", "There is no material difference in Hawaii real estate law"],
+      correctIndex: 1,
+      explain: "Condo owners hold fee title to their individual units; co-op residents own corporate shares and a lease interest, not direct real property ownership.",
+    },
+    {
+      q: "What form of ownership does a cooperatives resident actually hold?",
+      options: ["A deed to the individual unit as real property", "Stock certificates in the co-op corporation and a proprietary lease agreement", "Joint tenancy with other residents in the entire building", "A rental agreement that grants use rights only"],
+      correctIndex: 1,
+      explain: "In a cooperative, the resident owns personal property (corporate shares) plus a lease to occupy their unit; they do not own real property interest in the unit itself.",
+    },
   ],
   "specialty-areas-q01": [
     {
@@ -7383,6 +7413,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Base rent and a proportionate share of property taxes only", "Base rent, property taxes, casualty insurance, and building maintenance expenses", "Base rent negotiated to cover all operating expenses automatically", "Base rent plus utilities, but no property-level taxes or insurance"],
       correctIndex: 1,
       explain: "The three nets in a NNN lease are property taxes, insurance, and maintenance—all of which become the tenant's financial responsibility in addition to base rent.",
+    },
+    {
+      q: "Under a triple-net lease structure, which of the following does the tenant assume responsibility for paying?",
+      options: ["Base rent and property taxes only", "Base rent, property taxes, insurance, and CAM expenses", "Base rent, property taxes, insurance, and maintenance costs", "All operating expenses except mortgage principal"],
+      correctIndex: 2,
+      explain: "A triple-net lease obligates the tenant to pay the three nets: property taxes, insurance, and maintenance, in addition to base rent. CAM and mortgage principal are separate concepts not part of the standard NNN definition.",
+    },
+    {
+      q: "When a commercial tenant signs a triple-net lease, the landlord's obligation to cover building expenses is typically limited to:",
+      options: ["Mortgage payments and major structural repairs", "All property operating costs including utilities", "The mortgage and insurance premiums only", "Minimal responsibility; most costs pass to the tenant"],
+      correctIndex: 3,
+      explain: "In a NNN lease, the landlord retains minimal financial responsibility because the tenant pays the three nets (property taxes, insurance, and maintenance), shifting the bulk of operating expenses to the tenant.",
+    },
+    {
+      q: "A property manager reviewing lease terms notes that the tenant will pay rent, property tax assessments, casualty insurance, and building upkeep. This lease structure is best described as:",
+      options: ["A gross lease with tenant reimbursements", "A triple-net lease", "A modified lease with shared expenses", "A percentage lease with additional duties"],
+      correctIndex: 1,
+      explain: "The combination of rent plus the three expense categories—property taxes, insurance, and maintenance—is the defining characteristic of a triple-net (NNN) lease.",
+    },
+    {
+      q: "Compared to a gross lease, a triple-net lease requires the tenant to directly pay for:",
+      options: ["Utilities and janitorial services only", "Property taxes, insurance, and maintenance expenses in addition to rent", "Common area maintenance and parking fees", "Real estate commissions and lease administration costs"],
+      correctIndex: 1,
+      explain: "A triple-net lease shifts the three nets—property taxes, insurance, and maintenance—to the tenant, whereas a gross lease typically includes these costs in the rent paid to the landlord.",
+    },
+    {
+      q: "Under a triple-net (NNN) lease structure, which of the following expenses does the tenant assume responsibility for paying?",
+      options: ["Base rent and property management fees only", "Base rent, property taxes, insurance, and common area maintenance", "Property taxes and insurance, but not maintenance costs", "All operating expenses except utilities and janitorial services"],
+      correctIndex: 1,
+      explain: "A triple-net lease obligates the tenant to pay base rent plus three nets: property taxes, insurance, and maintenance/repairs, shifting these operating costs from the landlord to the tenant.",
     },
   ],
   "specialty-areas-q02": [
@@ -7410,6 +7470,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "PUD owners receive a deed reflecting fee title to their individual lot plus an undivided interest in the community's common areas, not HOA shares or covenant-only rights.",
     },
+    {
+      q: "In a planned unit development, what property interest does an individual lot owner typically hold?",
+      options: ["A leasehold interest renewable every 30 years", "Fee simple title to their lot and a pro-rata share of common property", "Beneficial interest only in a land trust", "Membership units in a homeowners association corporation"],
+      correctIndex: 1,
+      explain: "PUD owners hold fee simple to their individual lot plus an undivided interest (usually as tenants in common) in shared common areas.",
+    },
+    {
+      q: "Which statement best describes the ownership structure in a PUD?",
+      options: ["Residents own only the interior of their unit; the building is owned by an HOA", "Each resident owns their parcel in fee and shares ownership of common facilities with other residents", "All property is held in trust by a corporate board of directors", "Individual ownership is limited to a 99-year leasehold on the land"],
+      correctIndex: 1,
+      explain: "PUD ownership combines individual lot fee ownership with shared undivided interest in common areas, distinguishing it from condominium or leasehold models.",
+    },
+    {
+      q: "What type of ownership rights does a PUD resident receive for both their lot and the community amenities?",
+      options: ["Exclusive title to the lot; lease rights to amenities", "Fee ownership of the lot combined with undivided interest in common areas", "Stock or share certificates in the development corporation", "Condominium-style airspace ownership only"],
+      correctIndex: 1,
+      explain: "PUD owners receive fee simple title to their individual parcel and hold an undivided tenancy-in-common interest in all shared common property.",
+    },
+    {
+      q: "A buyer purchasing a lot in a planned unit development acquires:",
+      options: ["Only the improvements on the lot, not the land itself", "Their lot in fee simple plus a proportional share of commonly-owned areas", "A percentage ownership stake represented by certificates or shares", "A renewable ground lease with rights to use common facilities"],
+      correctIndex: 1,
+      explain: "PUD purchasers obtain fee ownership of their lot and hold an undivided interest (usually as tenants in common) in roads, recreation areas, and other common elements.",
+    },
+    {
+      q: "In a planned unit development (PUD), what property interest does an individual owner typically receive?",
+      options: ["A membership interest in a homeowners association corporation", "Fee simple title to their lot combined with a fractional ownership stake in shared facilities", "Exclusive airspace rights only, with no land ownership", "A long-term lease on both their unit and common property"],
+      correctIndex: 1,
+      explain: "PUD owners receive fee simple ownership of their individual lot plus an undivided interest in common areas, distinguishing them from condo owners (who own airspace) and leaseholders.",
+    },
   ],
   "specialty-areas-q03": [
     {
@@ -7435,6 +7525,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["0.625", "2.10", "1.60", "1.15"],
       correctIndex: 2,
       explain: "DSCR = $80,000 NOI ÷ $50,000 Annual Debt Service = 1.60, representing how many times over the property's income covers its debt obligations.",
+    },
+    {
+      q: "A commercial property generates net operating income of $120,000 annually. The investor's annual loan payments total $75,000. What is the debt service coverage ratio?",
+      options: ["0.625", "1.60", "2.30", "1.20"],
+      correctIndex: 1,
+      explain: "DSCR = NOI ÷ Annual Debt Service = $120,000 ÷ $75,000 = 1.60.",
+    },
+    {
+      q: "An investor owns an apartment complex with a net operating income of $95,000 per year. If annual debt service obligations are $59,375, the debt service coverage ratio equals:",
+      options: ["1.75", "0.625", "1.60", "2.15"],
+      correctIndex: 2,
+      explain: "DSCR = $95,000 ÷ $59,375 = 1.60, the standard ratio indicating adequate cash flow to cover debt obligations.",
+    },
+    {
+      q: "When evaluating a rental property, you determine the NOI is $64,000 and the annual mortgage payments plus other debt service total $40,000. The debt service coverage ratio is:",
+      options: ["2.05", "0.625", "1.60", "1.45"],
+      correctIndex: 2,
+      explain: "DSCR = $64,000 ÷ $40,000 = 1.60, indicating the property generates $1.60 in income for every $1.00 of debt service.",
+    },
+    {
+      q: "A lender reviews a loan application for an income-producing property. The property has NOI of $88,000 annually, with annual debt service of $55,000. Calculate the DSCR:",
+      options: ["1.60", "0.78", "2.20", "1.10"],
+      correctIndex: 0,
+      explain: "DSCR = $88,000 ÷ $55,000 = 1.60, the ratio lenders use to assess the borrower's ability to service debt from operating income.",
+    },
+    {
+      q: "A residential income property generates net operating income of $125,000 annually. The owner pays $78,125 per year in mortgage payments and other debt obligations. What is the property's debt service coverage ratio?",
+      options: ["0.625", "1.60", "2.05", "1.25"],
+      correctIndex: 1,
+      explain: "DSCR is calculated by dividing NOI by annual debt service: $125,000 ÷ $78,125 = 1.60. This indicates the property generates $1.60 in NOI for every $1.00 of debt service owed.",
     },
   ],
   "specialty-areas-q04": [
@@ -7462,6 +7582,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A percentage lease uniquely combines base rent with a percentage of tenant sales, providing the landlord with both guaranteed income and revenue participation.",
     },
+    {
+      q: "Under a percentage lease structure, a store operator's monthly obligation typically includes which combination of charges?",
+      options: ["A fixed rental amount plus a percentage of the store's gross receipts", "Only a percentage of gross sales with no base rent component", "A triple net arrangement with no percentage participation", "A graduated rent schedule that increases annually without sales contingency"],
+      correctIndex: 0,
+      explain: "Percentage leases combine a minimum base rent with a percentage of tenant sales above a negotiated threshold, creating shared risk between landlord and tenant.",
+    },
+    {
+      q: "A shopping center owner leases space to a clothing retailer using a percentage lease. The landlord receives rent based on:",
+      options: ["Base rent only, calculated on square footage", "The greater of base rent or base rent plus a percentage of sales revenue", "Variable rent tied exclusively to the consumer price index", "A flat fee per square foot adjusted annually for inflation"],
+      correctIndex: 1,
+      explain: "Percentage leases ensure the landlord receives at least the base rent, but may receive additional compensation if sales exceed thresholds, providing upside participation.",
+    },
+    {
+      q: "In negotiating a percentage lease for a restaurant tenant, what rental structure would typically be proposed?",
+      options: ["A net lease requiring the tenant to pay all operating expenses separately", "A minimum guaranteed rent plus a percentage of food and beverage sales", "Only a percentage of revenue with no minimum floor payment", "A gross lease covering all property taxes, insurance, and maintenance"],
+      correctIndex: 1,
+      explain: "Percentage leases protect the landlord with a baseline minimum rent while allowing participation in tenant sales performance above that threshold.",
+    },
+    {
+      q: "When a commercial tenant signs a percentage lease, the landlord's income stream consists of:",
+      options: ["Variable revenue that fluctuates entirely with the tenant's monthly sales", "A fixed base rent combined with contingent percentage payments when sales targets are met", "Operating expense reimbursement plus a percentage markup on utilities", "Straight rent divided equally across all percentage lease properties"],
+      correctIndex: 1,
+      explain: "Percentage leases provide landlords with guaranteed base rent income plus additional rent if tenant sales exceed agreed-upon thresholds, creating a hybrid compensation model.",
+    },
+    {
+      q: "Under a typical percentage lease arrangement, a commercial tenant's monthly rental obligation consists of which combination?",
+      options: ["A fixed minimum rent amount only, regardless of tenant sales performance", "A guaranteed minimum rent plus a percentage of gross receipts exceeding a specified sales volume", "Operating expense reimbursement and CAM charges with no base rent component", "A variable rent tied solely to the tenant's net profit margin"],
+      correctIndex: 1,
+      explain: "Percentage leases combine a base (minimum) rent with a percentage of sales above a threshold, protecting the landlord's income floor while allowing upside participation in tenant success.",
+    },
   ],
   "specialty-areas-q05": [
     {
@@ -7487,6 +7637,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Ground leases always include the existing structures as part of the rental agreement", "The tenant is responsible for constructing buildings on vacant or improved land owned by the lessor", "Ground leases are limited to commercial properties only", "The tenant cannot improve or modify the property in any way"],
       correctIndex: 1,
       explain: "A ground lease specifically involves the tenant leasing land and bearing the responsibility and cost of constructing or maintaining buildings and improvements on that leased parcel.",
+    },
+    {
+      q: "In a ground lease arrangement, what does the tenant typically acquire rights to, and what does the tenant construct?",
+      options: ["The tenant acquires the building and rents the surrounding land", "The tenant acquires the land only and constructs any buildings or improvements", "The tenant acquires both land and building for a fixed 12-month period", "The tenant acquires mineral rights and is prohibited from erecting structures"],
+      correctIndex: 1,
+      explain: "A ground lease grants the tenant exclusive use of the land; the tenant is responsible for constructing and owning any buildings or improvements on that land.",
+    },
+    {
+      q: "Which statement best describes the primary characteristic of a ground lease?",
+      options: ["The lessor retains ownership of all structures built on the property", "The lessee has the right to use and improve the land, with the lessee owning improvements made during the lease term", "The lease automatically includes ownership of existing buildings and fixtures", "The lease duration is restricted to one year with no renewal options"],
+      correctIndex: 1,
+      explain: "Ground leases allow tenants to build and own their own structures on the lessor's land, with the tenant retaining ownership of those improvements throughout the lease.",
+    },
+    {
+      q: "A developer leases a parcel of land from a property owner under a ground lease. What is the developer's responsibility and ownership?",
+      options: ["The developer maintains the land only; the owner must construct all buildings", "The developer constructs buildings and improvements on the land and owns those structures during the lease term", "The developer leases both land and existing structures for a period not to exceed 12 months", "The developer gains fee simple ownership of the underlying land after 5 years"],
+      correctIndex: 1,
+      explain: "In a ground lease, the developer (tenant) builds and owns improvements on the leased land; the owner retains title to the underlying real property.",
+    },
+    {
+      q: "How does a ground lease differ from a standard commercial lease in terms of what the tenant controls?",
+      options: ["A ground lease includes the building structure, while a commercial lease does not", "A ground lease allows the tenant to develop and own improvements on vacant land, whereas a standard commercial lease typically involves an existing building", "A ground lease cannot be transferred, while commercial leases are freely assignable", "A ground lease is limited to agricultural use only"],
+      correctIndex: 1,
+      explain: "Ground leases are development leases where tenants improve vacant land and own those improvements; standard commercial leases usually involve existing improved properties.",
+    },
+    {
+      q: "Under a ground lease arrangement, which statement best describes the tenant's rights and responsibilities?",
+      options: ["The tenant owns the building and improvements but leases the underlying land from the landlord", "The tenant receives a deed to both land and any existing structures on the property", "The tenant has a short-term occupancy right limited to one calendar year with no renewal options", "The tenant may not transfer or sublease the lease without the landlord's written consent in perpetuity"],
+      correctIndex: 0,
+      explain: "A ground lease grants the tenant use of land only; the tenant constructs and owns the improvements while the landlord retains land ownership. The tenant typically may assign with landlord approval.",
     },
   ],
   "specialty-areas-q06": [
@@ -7514,6 +7694,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "ILSA is the federal law designed to regulate and require disclosure for the interstate sale of unimproved lots in subdivisions to protect buyers.",
     },
+    {
+      q: "Which of the following transactions would be subject to Interstate Land Sales Full Disclosure Act requirements?",
+      options: ["A developer marketing vacant residential lots across state lines as part of a 100-unit subdivision", "A real estate broker selling an improved single-family home in Hawaii to an out-of-state buyer", "A commercial real estate firm leasing office space in a multi-state portfolio", "Any real estate transaction involving parties from different states"],
+      correctIndex: 0,
+      explain: "ILSA specifically applies to cross-state marketing of unimproved lots in subdivisions of a certain size; improved homes and commercial leases fall outside the Act's scope.",
+    },
+    {
+      q: "A Hawaii developer is promoting raw land parcels to out-of-state investors through a multi-state marketing campaign for a 250-unit subdivision. Which federal disclosure law would apply?",
+      options: ["The Fair Housing Act only", "The Interstate Land Sales Full Disclosure Act", "The Real Estate Settlement Procedures Act (RESPA)", "State-level conveyance tax statutes exclusively"],
+      correctIndex: 1,
+      explain: "ILSA applies to interstate subdivision sales of unimproved lots; it requires specific disclosures when marketing raw land across state lines.",
+    },
+    {
+      q: "A real estate company markets beach lots in a 50-lot development to residents in multiple states. What federal regulation governs the required disclosures?",
+      options: ["Regulation Z (Truth in Lending)", "The Interstate Land Sales Full Disclosure Act", "The Americans with Disabilities Act (ADA)", "The Gramm-Leach-Bliley Act"],
+      correctIndex: 1,
+      explain: "ILSA requires disclosure of property information when developers market unimproved lots in interstate subdivisions to protect consumers.",
+    },
+    {
+      q: "Under federal law, which type of transaction requires compliance with Interstate Land Sales Full Disclosure Act regulations?",
+      options: ["Marketing improved residential homes to out-of-state purchasers", "Offering undeveloped land parcels across state lines as part of a subdivision offering", "Selling investment securities backed by real estate mortgages", "Leasing agricultural land within a single state"],
+      correctIndex: 1,
+      explain: "ILSA applies to cross-state subdivision marketing of unimproved lots; improved properties, securities, and single-state transactions are not covered.",
+    },
+    {
+      q: "Which type of property transaction would fall under the Interstate Land Sales Full Disclosure Act requirements?",
+      options: ["A developer marketing raw land parcels across state lines as part of a 100-lot subdivision", "A homeowner selling their single-family residence to a buyer in another state", "A corporation purchasing improved commercial real estate in multiple states", "An investor acquiring a rental property within their home state"],
+      correctIndex: 0,
+      explain: "ILSA applies specifically to developers marketing unimproved lots in subdivisions across state lines, requiring disclosure statements before lot sales in multi-state developments.",
+    },
   ],
   "specialty-areas-q07": [
     {
@@ -7539,6 +7749,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The property is generating excess income available for distribution", "The property's net operating income cannot fully service the debt obligations", "The owner has successfully paid off all loan balances", "The property's cap rate has risen above prevailing market rates"],
       correctIndex: 1,
       explain: "DSCR < 1.0 signals that NOI is insufficient to meet full debt service requirements, creating a cash flow deficiency.",
+    },
+    {
+      q: "When a property's Debt Service Coverage Ratio falls below 1.0, what does this indicate about the investment's cash flow position?",
+      options: ["The property's net operating income exceeds annual debt obligations", "The property's net operating income is inadequate to cover debt payments", "The loan-to-value ratio has been reduced below market standards", "The property is generating positive cash-on-cash returns"],
+      correctIndex: 1,
+      explain: "A DSCR below 1.0 means the NOI cannot fully cover the debt service payments, creating a shortfall rather than surplus cash flow.",
+    },
+    {
+      q: "A lender reviews a property with a DSCR of 0.85. What concern does this ratio raise?",
+      options: ["The property is debt-free and requires no servicing", "Annual debt service payments exceed the property's net operating income", "The gross rent multiplier is too high for the market", "Operating expenses are lower than industry standards"],
+      correctIndex: 1,
+      explain: "A DSCR of 0.85 indicates that the property's NOI is only 85% of what is needed to cover debt service, creating a coverage shortfall.",
+    },
+    {
+      q: "Which scenario best describes a property with a DSCR of 0.90?",
+      options: ["Income exceeds debt obligations by 10%", "Income falls short of debt obligations by 10%", "The property has paid off 90% of its mortgage balance", "Operating expenses are 90% of gross rental income"],
+      correctIndex: 1,
+      explain: "A DSCR of 0.90 means the property generates only 90 cents of NOI for every dollar of debt service owed, indicating insufficient income coverage.",
+    },
+    {
+      q: "If a commercial property shows a DSCR below 1.0, what does this reveal about its debt servicing capacity?",
+      options: ["The property has reserves sufficient to cover maintenance costs", "The property does not generate enough income to fully service its debt obligations", "The debt-to-equity ratio meets conventional financing standards", "The property's appreciation rate exceeds the interest rate"],
+      correctIndex: 1,
+      explain: "A DSCR below 1.0 means the property's net operating income is insufficient to cover all debt payments, indicating weak debt servicing capacity.",
+    },
+    {
+      q: "A property has a Debt Service Coverage Ratio of 0.85. What does this indicate about the property's financial performance?",
+      options: ["Annual net operating income exceeds annual debt obligations by 15%", "Net operating income falls short of annual debt service requirements", "The property is free and clear with no mortgage financing", "The capitalization rate is lower than market average"],
+      correctIndex: 1,
+      explain: "DSCR of 0.85 (below 1.0) means NOI is insufficient to fully cover debt service payments, indicating financial stress for the borrower.",
     },
   ],
   "specialty-areas-q08": [
@@ -7566,6 +7806,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The most common approach compensates property managers as a percentage of collected rents, creating an incentive structure aligned with successful rent collection.",
     },
+    {
+      q: "When negotiating a property management agreement, what fee structure is a property manager most likely to propose?",
+      options: ["A fixed monthly retainer regardless of occupancy rates", "A commission based on rental income received", "A salary tied to years of experience in the industry", "An ownership percentage in the managed property"],
+      correctIndex: 1,
+      explain: "Property managers typically earn a percentage of actual rents collected (usually 6-10% for residential), which aligns their incentives with the owner's revenue.",
+    },
+    {
+      q: "Under which compensation model do property managers most commonly operate in Hawaii and nationwide?",
+      options: ["Revenue sharing as co-owners of the property", "A percentage of the gross rents actually collected from tenants", "Time-based billing at an hourly rate established quarterly", "A bonus structure paid annually based on property appreciation"],
+      correctIndex: 1,
+      explain: "The percentage-of-rents-collected model is the industry standard because it ties the manager's earnings directly to the rental income they help generate and collect.",
+    },
+    {
+      q: "A property owner is evaluating compensation proposals from three different property management companies. Which fee arrangement should the owner expect to be the most common industry practice?",
+      options: ["A per-unit annual fee plus tenant screening charges", "A percentage deduction from the total rents collected each month", "A flat guaranteed fee payable whether or not units are leased", "A performance bonus tied to property market value increase"],
+      correctIndex: 1,
+      explain: "Percentage of rents collected is the standard property management fee structure, typically ranging 6-10%, because it creates mutual incentive between manager and owner to maximize occupancy and collect rent.",
+    },
+    {
+      q: "How are property managers in Hawaii typically compensated for their services?",
+      options: ["Through a base salary plus health insurance benefits", "By retaining a portion of rental income received from tenants", "Via hourly wages calculated from a negotiated rate schedule", "By acquiring a fractional interest in the managed property"],
+      correctIndex: 1,
+      explain: "The standard compensation model is a percentage of rents collected, which incentivizes effective property management and maintains alignment between the manager's income and the owner's cash flow.",
+    },
+    {
+      q: "When a property manager negotiates a management agreement with a residential landlord, what fee structure is considered industry standard?",
+      options: ["A fixed monthly retainer regardless of occupancy", "A commission based on the gross rental income collected", "An annual flat fee paid quarterly in advance", "A percentage ownership interest in the property"],
+      correctIndex: 1,
+      explain: "Property managers typically earn a percentage-based fee (usually 6-10% for residential) tied to actual rents collected, aligning their incentives with occupancy and rent collection performance.",
+    },
   ],
   "specialty-areas-q09": [
     {
@@ -7591,6 +7861,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["NOI remains stable because the property's potential income is unchanged", "NOI drops because effective gross income is reduced by the lost rental revenue", "NOI improves due to deductions for maintenance on empty units", "NOI is only affected if the vacancy is due to tenant eviction"],
       correctIndex: 1,
       explain: "Vacant units generate zero rental income; this loss reduces effective gross income, which directly lowers NOI regardless of whether other expenses change.",
+    },
+    {
+      q: "When an investment property has unoccupied units, how is net operating income typically affected?",
+      options: ["It increases due to reduced maintenance costs", "It decreases because effective gross income falls", "It remains unchanged if operating expenses stay constant", "It is only affected if the vacancy rate exceeds 10%"],
+      correctIndex: 1,
+      explain: "Vacant units generate no rental income, lowering effective gross income and therefore reducing NOI, regardless of maintenance savings.",
+    },
+    {
+      q: "A property manager notices a 15% vacancy rate in the apartment complex. Which statement correctly describes the NOI impact?",
+      options: ["NOI improves because fewer units require utilities and repairs", "NOI declines because potential rental income is lost", "NOI is unaffected; vacancy only impacts capital expenditures", "NOI increases until the units are re-leased"],
+      correctIndex: 1,
+      explain: "Lost rental revenue from vacant units directly reduces effective gross income, which is a key component of the NOI calculation.",
+    },
+    {
+      q: "During an appraisal, a real estate appraiser accounts for vacancies when calculating income. This adjustment affects which metric most directly?",
+      options: ["Gross potential income, with no impact on NOI", "Effective gross income, thereby reducing NOI", "Operating expense ratio, which is independent of NOI", "Cash flow reserves, which are separate from NOI"],
+      correctIndex: 1,
+      explain: "Vacancy reduces effective gross income (potential rent minus vacancy loss), which is subtracted from by operating expenses to arrive at NOI.",
+    },
+    {
+      q: "An investor is evaluating a commercial building with 20% occupancy. How does the vacancy level factor into the net operating income calculation?",
+      options: ["It does not—NOI is based on theoretical maximum rent regardless of actual occupancy", "It lowers effective gross income, which directly reduces the resulting NOI", "It affects only the debt service coverage ratio, not NOI itself", "It decreases NOI only if combined with rising property taxes"],
+      correctIndex: 1,
+      explain: "Vacancy is converted to lost rental income, reducing effective gross income and therefore lowering the NOI figure used in property valuation and analysis.",
+    },
+    {
+      q: "When rental units sit empty, how does this vacancy factor into the calculation of net operating income?",
+      options: ["It decreases effective gross income, thereby lowering NOI", "It has no impact on NOI since fixed costs remain constant", "It increases NOI by reducing maintenance expenses", "It only affects the property's assessed value for tax purposes"],
+      correctIndex: 0,
+      explain: "Vacant units generate zero rental income, which directly reduces effective gross income and consequently reduces NOI; vacancy loss is a key component of the income approach.",
     },
   ],
   "transfer-of-title-q00": [
