@@ -8,6 +8,9 @@ export const dynamic = 'force-dynamic';
 
 const SITE = process.env.SITE_URL || 'https://ralphfoulger.com';
 
+// Tier-purchase endpoint. The Plus 90-day extension lives at
+// /api/checkout/extend so it can enforce its own gating (Plus-only, expired
+// only). This route handles fresh tier purchases and Standard re-enrollment.
 export async function POST(req: NextRequest) {
   if (!authConfigured() || !db) return NextResponse.json({ error: 'auth_unavailable' }, { status: 503 });
   if (!stripeConfigured()) return NextResponse.json({ error: 'stripe_unavailable', message: 'Checkout is not yet configured. Email support@ralphfoulger.com.' }, { status: 503 });
@@ -47,9 +50,10 @@ export async function POST(req: NextRequest) {
     line_items: [{ price: priceId, quantity: 1 }],
     success_url: `${SITE}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${SITE}/pricing`,
-    metadata: { userId: session.id, tier },
+    // sku is the modern field the webhook reads; tier kept for back-compat.
+    metadata: { userId: session.id, sku: tier, tier },
     payment_intent_data: {
-      metadata: { userId: session.id, tier },
+      metadata: { userId: session.id, sku: tier, tier },
     },
     allow_promotion_codes: true,
   });

@@ -38,7 +38,16 @@ interface AnalyticsRes {
   lastActiveAt: string | null;
   lastPath?: string | null;
 }
-interface MeUser { name: string; email: string; tier: string; isAdmin: boolean; emailVerified?: boolean }
+interface MeUser {
+  name: string;
+  email: string;
+  tier: string;
+  isAdmin: boolean;
+  emailVerified?: boolean;
+  accessExpiresAt?: string | null;
+  accessMsRemaining?: number | null;
+  accessStatus?: 'active' | 'expired_plus' | 'expired_standard' | 'lifetime' | 'none';
+}
 
 interface ProfileState {
   source: 'server' | 'local';
@@ -160,6 +169,9 @@ export default function ProfilePage() {
 
       {/* VERIFY EMAIL BANNER */}
       {isServer && user && user.emailVerified === false && <VerifyEmailBanner email={user.email} />}
+
+      {/* ACCESS WINDOW — countdown timer + state-aware CTA */}
+      {isServer && user && <AccessWindowCard user={user} />}
 
       {/* SOURCE BANNER WHEN NOT SERVER */}
       {!isServer && (
@@ -502,6 +514,192 @@ function SettingsCard() {
       </label>
     </div>
   );
+}
+
+// Top-of-profile access banner. Renders one of four states:
+//   active           — live countdown, color escalates as expiry approaches
+//   expired_plus     — "Buy $249.99 extension" CTA (Plus-only benefit)
+//   expired_standard — "Re-enroll at $599" CTA (no extension available)
+//   lifetime         — Solo build / admin (no expiry)
+//   none             — free user, never paid — gentle pricing nudge
+//
+// The countdown re-renders every 30 seconds. A second useEffect re-fetches
+// /api/auth/me every 60 seconds so that mid-session admin tier changes or
+// freshly-completed extension purchases reflect without a page reload.
+function AccessWindowCard({ user }: { user: MeUser }) {
+  const [tick, setTick] = useState(0);
+  const [extendingPending, setExtendingPending] = useState(false);
+  const [extendError, setExtendError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  // Derive remaining time from the server-supplied accessExpiresAt so that
+  // the timer is monotonic even if the client clock drifts. The `tick`
+  // dependency forces a re-render every 30 seconds.
+  const status = user.accessStatus ?? 'none';
+  const expiresAt = user.accessExpiresAt ? new Date(user.accessExpiresAt) : null;
+  const msRemaining = expiresAt ? expiresAt.getTime() - Date.now() : null;
+  // Reference the tick state in a no-op expression so the linter doesn't drop
+  // it from the dep list — and so the rendered values update every interval.
+  void tick;
+
+  const onExtend = async () => {
+    setExtendingPending(true);
+    setExtendError(null);
+    try {
+      const r = await fetch('/api/checkout/extend', { method: 'POST' });
+      const j = await r.json() as { url?: string; error?: string; message?: string };
+      if (j.url) {
+        window.location.href = j.url;
+        return;
+      }
+      setExtendError(j.message || j.error || 'Could not start checkout.');
+    } catch {
+      setExtendError('Network error. Try again.');
+    } finally {
+      setExtendingPending(false);
+    }
+  };
+
+  // LIFETIME (admin or Solo): single calm card, no urgency.
+  if (status === 'lifetime') {
+    const reason = user.isAdmin ? 'Admin access' : 'Solo Website Build';
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.green}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.green, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Access · No expiration</div>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 800, color: T.text, margin: 0 }}>{reason}</h3>
+        </div>
+      </div>
+    );
+  }
+
+  // NONE — free user. Show a soft enroll prompt, not a doom timer.
+  if (status === 'none') {
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.ocean}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Free tier · Foundation only</div>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 18, fontWeight: 800, color: T.text, margin: 0, marginBottom: 4 }}>Unlock the full 60-hour course</h3>
+          <p style={{ fontSize: 13, color: T.textDim, margin: 0, lineHeight: 1.55 }}>
+            Standard is 3 months. Plus is 6 months plus the agent-website bundle on graduation.
+          </p>
+        </div>
+        <Link href="/pricing" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', whiteSpace: 'nowrap' }}>
+          See pricing →
+        </Link>
+      </div>
+    );
+  }
+
+  // EXPIRED PLUS — extension CTA.
+  if (status === 'expired_plus') {
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.coral}` }}>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Plus access · Window expired</div>
+        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, marginBottom: 8 }}>
+          Get another 90 days for $249.99
+        </h3>
+        <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.65, margin: 0, marginBottom: 14 }}>
+          Your six-month Plus window has ended. The <strong style={{ color: T.text }}>$249.99 extension</strong> is a Plus-only benefit that gives you another <strong style={{ color: T.text }}>90 days of full course access</strong> &mdash; a second attempt at finishing the curriculum and passing the PSI exam. Your study progress and the agent-website bundle on graduation are preserved.
+        </p>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <button
+            onClick={onExtend}
+            disabled={extendingPending}
+            style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', cursor: extendingPending ? 'wait' : 'pointer', fontFamily: 'inherit', opacity: extendingPending ? 0.6 : 1 }}
+          >
+            {extendingPending ? 'Opening checkout…' : 'Extend my access — $249.99'}
+          </button>
+          <Link href="/pricing" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+            Review pricing
+          </Link>
+        </div>
+        {extendError && (
+          <p style={{ fontSize: 12, color: T.coral, marginTop: 10, lineHeight: 1.5 }}>{extendError}</p>
+        )}
+      </div>
+    );
+  }
+
+  // EXPIRED STANDARD — must re-enroll. No extension available.
+  if (status === 'expired_standard') {
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.coral}` }}>
+        <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>Standard access · Window expired</div>
+        <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, marginBottom: 8 }}>
+          Re-enroll at the full Standard price
+        </h3>
+        <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.65, margin: 0, marginBottom: 14 }}>
+          Your three-month Standard window has ended. Standard does not include the $249.99 extension &mdash; that benefit is reserved for the Plus tier. To continue, re-enroll at <strong style={{ color: T.text }}>$599</strong> for a fresh 3-month window, or upgrade to <strong style={{ color: T.text }}>Plus ($899)</strong> for a 6-month window plus the agent-website bundle on graduation.
+        </p>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          <Link href="/pricing?reason=re_enroll" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+            Re-enroll →
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // ACTIVE — show the live countdown.
+  if (status === 'active' && msRemaining !== null && expiresAt) {
+    const days = Math.floor(msRemaining / (24 * 60 * 60 * 1000));
+    const hours = Math.floor((msRemaining / (60 * 60 * 1000)) % 24);
+    const minutes = Math.floor((msRemaining / (60 * 1000)) % 60);
+
+    // Color escalates as expiry approaches.
+    const accent =
+      days >= 30 ? T.green :
+      days >= 7  ? T.ocean :
+      days >= 2  ? T.coral :
+                   T.coral;
+    const isPlus = user.tier === 'plus';
+    const totalDays = isPlus ? 180 : 90;
+    const dayPct = Math.max(0, Math.min(100, (days / totalDays) * 100));
+
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `4px solid ${accent}` }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12, marginBottom: 12 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: accent, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>
+              {isPlus ? 'Plus' : 'Standard'} access · Active
+            </div>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.15 }}>
+              {days > 0
+                ? <>{days} day{days === 1 ? '' : 's'}<span style={{ color: T.textMute, fontWeight: 700, fontSize: 16, marginLeft: 8 }}>{hours}h {minutes}m</span></>
+                : hours > 0
+                  ? <>{hours} hour{hours === 1 ? '' : 's'} {minutes} min</>
+                  : <>{minutes} minute{minutes === 1 ? '' : 's'} left</>}
+            </h3>
+            <p style={{ fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em', margin: '6px 0 0' }}>
+              Window ends {expiresAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at {expiresAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
+            </p>
+          </div>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              of {totalDays} total
+            </div>
+          </div>
+        </div>
+        <div style={{ height: 6, background: T.bgRaised, borderRadius: 999, overflow: 'hidden' }}>
+          <div style={{ height: '100%', width: `${dayPct}%`, background: accent, transition: 'width 0.4s' }} />
+        </div>
+        {days <= 14 && (
+          <p style={{ fontSize: 12, color: T.textDim, marginTop: 12, lineHeight: 1.55 }}>
+            {isPlus
+              ? <>Heads up: you have less than two weeks left. When this window ends you can extend for <strong style={{ color: T.text }}>$249.99 (90 more days)</strong> — the extension button will appear here automatically.</>
+              : <>Heads up: you have less than two weeks left. Standard doesn&apos;t include an extension &mdash; when this window ends, re-enrollment is at the full <strong style={{ color: T.text }}>$599</strong> Standard price.</>}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  return null;
 }
 
 function VerifyEmailBanner({ email }: { email: string }) {

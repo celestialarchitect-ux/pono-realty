@@ -13,6 +13,9 @@ interface AuthMeUser {
   isAdmin: boolean;
   tier: string;
   emailVerified?: boolean;
+  accessExpiresAt?: string | null;
+  accessMsRemaining?: number | null;
+  accessStatus?: 'active' | 'expired_plus' | 'expired_standard' | 'lifetime' | 'none';
 }
 
 interface AuthMeResponse {
@@ -20,7 +23,22 @@ interface AuthMeResponse {
   authConfigured: boolean;
 }
 
+// Tiers that grant course access. Solo doesn't (website-build SKU only) but
+// admins frequently have tier=plus or tier=admin for testing — the gate
+// trusts accessStatus from the server, which already accounts for that.
 const PAID_TIERS = new Set(['standard', 'plus', 'solo']);
+
+// Server tells us whether course access is currently valid. We trust it.
+function hasActiveCourseAccess(user: AuthMeUser): boolean {
+  if (user.isAdmin) return true;
+  const status = user.accessStatus;
+  if (status === 'active' || status === 'lifetime') return true;
+  // Fallback for older /api/auth/me responses that don't include accessStatus:
+  // accept any paid tier and treat it as active. The new code path will catch
+  // expired users via accessStatus before reaching this fallback.
+  if (!status) return PAID_TIERS.has(user.tier);
+  return false;
+}
 
 interface TierGateProps {
   require: Requirement;
@@ -80,10 +98,21 @@ export function TierGate({ require, children }: TierGateProps) {
           return;
         }
 
-        if (require === 'paid' && !PAID_TIERS.has(data.user.tier)) {
+        if (require === 'paid' && !hasActiveCourseAccess(data.user)) {
           if (cancelled) return;
           setState('denied');
-          router.push(`/pricing?reason=upgrade&next=${encodeURIComponent(pathname)}`);
+          // Route by reason so the destination is actually useful:
+          //  - expired Plus → /profile (where the "Buy $249.99 extension" CTA lives)
+          //  - expired Standard → /pricing (must re-enroll at $599)
+          //  - never paid → /pricing
+          const status = data.user.accessStatus;
+          if (status === 'expired_plus') {
+            router.push(`/profile?reason=expired_plus`);
+          } else if (status === 'expired_standard') {
+            router.push(`/pricing?reason=re_enroll&next=${encodeURIComponent(pathname)}`);
+          } else {
+            router.push(`/pricing?reason=upgrade&next=${encodeURIComponent(pathname)}`);
+          }
           return;
         }
 

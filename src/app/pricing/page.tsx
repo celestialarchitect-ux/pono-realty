@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { T, BUTTON_3D, CARD, SHADOW_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
@@ -10,6 +11,20 @@ type CheckoutTier = 'standard' | 'plus' | 'solo';
 export default function PricingPage() {
   const [loadingTier, setLoadingTier] = useState<CheckoutTier | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const search = useSearchParams();
+  // ?reason=re_enroll → expired Standard user sent here from TierGate
+  // ?reason=upgrade → free user hit a paid page
+  const reason = search?.get('reason') ?? null;
+  // Auto-scroll to expiration policy block for re-enroll context
+  useEffect(() => {
+    if (reason === 're_enroll' && typeof window !== 'undefined') {
+      // Small delay so the page has painted
+      setTimeout(() => {
+        const el = document.getElementById('expiration-policy');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    }
+  }, [reason]);
 
   const checkout = async (tier: CheckoutTier) => {
     setLoadingTier(tier);
@@ -58,6 +73,20 @@ export default function PricingPage() {
             All prices USD · One-time payment · Hosting / maintenance fee applies to websites
           </p>
         </section>
+
+        {/* RE-ENROLL BANNER (visible when expired Standard hits /pricing) */}
+        {reason === 're_enroll' && (
+          <section style={{ padding: '8px 32px 0', maxWidth: 1180, margin: '0 auto' }}>
+            <div style={{ ...CARD, padding: '18px 24px', borderRadius: 14, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', borderLeftWidth: 4, borderLeftColor: T.coral, borderLeftStyle: 'solid' }}>
+              <div style={{ flex: '1 1 360px' }}>
+                <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, whiteSpace: 'nowrap', marginBottom: 6 }}>Your Standard window has expired</div>
+                <div style={{ fontSize: 15, color: T.text, lineHeight: 1.55 }}>
+                  Re-enroll at the full <strong>$599</strong> Standard price for a fresh 3-month window, or upgrade to <strong>Plus ($899)</strong> for 6 months plus the agent-website bundle on graduation. Standard doesn&apos;t include the $249.99 extension &mdash; that&apos;s a Plus-only benefit. <a href="#expiration-policy" style={{ color: T.coral, textDecoration: 'underline' }}>Why is that?</a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* FREE BANNER */}
         <section style={{ padding: '8px 32px 0', maxWidth: 1180, margin: '0 auto' }}>
@@ -177,6 +206,8 @@ export default function PricingPage() {
                   <CompareRow label="Smart flashcards + math drills + mock exams" std plus />
                   <CompareRow label="School final exam (70% to certify)" std plus />
                   <CompareRow label="Course access window" std="3 months" plus="6 months" />
+                  <CompareRow label="$249.99 extension (+90 days) at expiry" plus="Yes" />
+                  <CompareRow label="Re-enrollment at full price after expiry" std="$599" plus="(if extension used up)" />
                   <CompareRow label="Custom agent website (yourname.com)" plusConditional solo />
                   <CompareRow label="CRM + lead capture + admin portal" plusConditional solo />
                   <CompareRow label="Launch playbook + lead packet" plusConditional />
@@ -202,13 +233,49 @@ export default function PricingPage() {
               Hawaii&apos;s REC-approved schools all use a defined access window for one reason: <strong style={{ color: T.text }}>real estate knowledge decays when it sits unused.</strong> The window is there to keep you focused, finish you on time, and protect your readiness when you walk into the PSI exam.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Standard:</strong> 3 months from enrollment. Studying 5&ndash;7 hours/week, most students finish in 6&ndash;8 weeks &mdash; the 3-month window is the cushion, not the average.
-            </p>
-            <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 14 }}>
-              <strong style={{ color: T.text }}>Plus:</strong> 6 months &mdash; double the window for students balancing the course with full-time work, family, or major life events.
+              <strong style={{ color: T.text }}>Standard ($599):</strong> 3 months from enrollment. Studying 5&ndash;7 hours/week, most students finish in 6&ndash;8 weeks &mdash; the 3-month window is the cushion, not the average. Your profile shows a <strong style={{ color: T.text }}>live countdown</strong> from the moment you pay.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 0 }}>
-              If you don&apos;t finish in your window, re-enroll at a discounted alumni rate. Your school-completion certificate, once earned, is valid for two years per Hawaii REC rules.
+              <strong style={{ color: T.text }}>Plus ($899):</strong> 6 months &mdash; double the window for students balancing the course with full-time work, family, or major life events. Plus also unlocks the <strong style={{ color: T.text }}>$249.99 extension benefit</strong> (see below).
+            </p>
+          </div>
+        </section>
+
+        {/* EXPIRATION POLICY — what happens at end of window */}
+        <section id="expiration-policy" style={{ padding: '0 32px 32px', maxWidth: 980, margin: '0 auto', scrollMarginTop: 80 }}>
+          <div style={{ ...CARD, padding: '36px 40px', borderRadius: 18, borderLeftWidth: 4, borderLeftColor: T.coral, borderLeftStyle: 'solid' }}>
+            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>What happens when your window ends</div>
+            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 28, fontWeight: 800, letterSpacing: '-0.02em', color: T.text, marginBottom: 16 }}>
+              Two different policies. Read this before you pick a tier.
+            </h2>
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, marginBottom: 18 }}>
+              Your profile shows the exact <strong style={{ color: T.text }}>day, hour, and minute</strong> remaining in your window. We don&apos;t hide it, don&apos;t bury it, and won&apos;t silently revoke access without warning &mdash; the timer escalates from green &rarr; blue &rarr; orange as expiry approaches.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginBottom: 14 }}>
+              <div style={{ background: T.bgRaised, borderRadius: 12, padding: 22, border: `1px solid ${T.border}` }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>Standard · 3 months</div>
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 19, fontWeight: 800, color: T.text, marginBottom: 10, lineHeight: 1.25 }}>
+                  At expiration, re-enroll at the full $599 Standard price.
+                </h3>
+                <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.7, margin: 0 }}>
+                  Standard does <strong style={{ color: T.coral }}>not</strong> include the $249.99 extension &mdash; that benefit is reserved for the Plus tier. If your 3-month window ends before you finish, the only path forward is a fresh Standard enrollment (or upgrade to Plus). Your study history, quiz scores, and 60-hour state-law progress are preserved on your account.
+                </p>
+              </div>
+
+              <div style={{ background: T.bgRaised, borderRadius: 12, padding: 22, border: `1px solid ${T.ocean}` }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>Plus · 6 months + extension</div>
+                <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 19, fontWeight: 800, color: T.text, marginBottom: 10, lineHeight: 1.25 }}>
+                  At expiration, you can buy 90 more days for $249.99.
+                </h3>
+                <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.7, margin: 0 }}>
+                  Plus students who don&apos;t finish in their 6-month window get a Plus-only safety net: a one-time <strong style={{ color: T.text }}>$249.99 extension</strong> that unlocks <strong style={{ color: T.text }}>90 additional days</strong> of full course access &mdash; a fair second attempt at the curriculum and the PSI exam. The extension button only appears in your profile <strong style={{ color: T.text }}>after</strong> your window expires; you can&apos;t buy it preemptively. Your graduation-bundle agent website stays attached to your account.
+                </p>
+              </div>
+            </div>
+
+            <p style={{ fontSize: 13, color: T.textMute, lineHeight: 1.7, margin: '14px 0 0' }}>
+              <strong style={{ color: T.text }}>Why this design?</strong> Real estate licensing is a serious commitment. Open-ended access encourages procrastination; the window keeps you finishing. The Plus extension exists for people whose life genuinely got in the way of a 6-month plan &mdash; not as a discount on procrastination. Standard students who need more cushion are exactly who Plus is designed for, which is why Standard re-enrolls at full price rather than offering an extension.
             </p>
           </div>
         </section>

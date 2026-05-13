@@ -37,6 +37,16 @@ model User {
   //   'content'    — can edit lessons, glossary (future)
   roles            String[]     @default([])
   tier             String       @default("free") // free | standard | plus | solo
+  // When the user's course-access window ends. NULL means no expiration
+  // applies (free tier hasn't purchased yet; solo is a website build, not a
+  // course). Set by the Stripe webhook on payment:
+  //   standard → +90 days
+  //   plus     → +180 days
+  //   extension→ +90 days from current accessExpiresAt (Plus-only, after expiry)
+  //   solo     → left NULL (no course component)
+  // A non-NULL value in the past = expired; gates revoke access. A non-NULL
+  // value in the future = active; gates allow.
+  accessExpiresAt  DateTime?
   emailVerifiedAt  DateTime?
   stripeCustomerId String?      @unique
   passedExamAt     DateTime?
