@@ -25,6 +25,8 @@ const STATIC_ROUTES: Array<{
   { path: '/free/lesson-5', changeFrequency: 'monthly', priority: 0.75 },
   { path: '/profile', changeFrequency: 'weekly', priority: 0.5 },
   { path: '/certificate', changeFrequency: 'monthly', priority: 0.5 },
+  // Public verifier — sponsoring brokers and the REC will share this URL.
+  { path: '/verify-certificate', changeFrequency: 'yearly', priority: 0.5 },
   { path: '/forgot-password', changeFrequency: 'yearly', priority: 0.3 },
   // Legal pages — Google will discover them via Footer links too, but
   // including in the sitemap gets them indexed faster.
