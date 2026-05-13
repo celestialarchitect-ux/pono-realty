@@ -29,6 +29,7 @@ const ITEMS: NavItem[] = [
   { href: '/admin/prospects', label: 'Prospects',     icon: 'target' },
   { href: '/admin/users',     label: 'All students',  icon: 'graduate' },
   { href: '/admin/quizzes',   label: 'Quiz analytics',icon: 'exam' },
+  { href: '/admin/questions', label: 'Question bank', icon: 'library' },
   { href: '/admin/inbox',     label: 'Inbox',         icon: 'tutor',   badgeKey: 'unreadInbound' },
   { href: '/admin/support',   label: 'Support',       icon: 'audit',   badgeKey: 'openTickets' },
   { href: '/profile',         label: 'My profile',    icon: 'calendar' },

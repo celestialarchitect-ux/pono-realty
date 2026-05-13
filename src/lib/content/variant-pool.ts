@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:38:45.968Z via Claude Haiku.
+// Generated 2026-05-13T10:48:44.586Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -1376,6 +1376,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The Deposit Receipt Offer and Acceptance (DROA) legally documents the offer to purchase, holds the earnest money deposit, and becomes the binding contract upon acceptance in Hawaii residential sales.",
     },
+    {
+      q: "When a real estate licensee in Hawaii presents a buyer's offer to purchase residential property, which document form is typically used?",
+      options: ["Condominium Declaration and Rules", "Deposit Receipt Offer and Acceptance", "Comprehensive Property Report", "Title Commitment and Transfer"],
+      correctIndex: 1,
+      explain: "The DROA is the standard form used in Hawaii for residential purchase transactions to document the buyer's offer and the seller's acceptance.",
+    },
+    {
+      q: "Which of the following is the recognized standard contract document for residential real estate transactions in the State of Hawaii?",
+      options: ["Title Commitment and Transfer", "Covenants, Conditions & Restrictions Statement", "Deposit Receipt Offer and Acceptance", "Property Condition Report"],
+      correctIndex: 2,
+      explain: "The DROA (Deposit Receipt Offer and Acceptance) is Hawaii's standard residential purchase contract form recognized by the real estate commission.",
+    },
+    {
+      q: "A seller in Hawaii receives a written offer to purchase their residential home. The document containing this offer and acceptance is most likely to be:",
+      options: ["A Property Condition Disclosure", "A Deposit Receipt Offer and Acceptance", "A Covenant and Restriction Document", "A Title Commitment Letter"],
+      correctIndex: 1,
+      explain: "The DROA is the standard Hawaii residential purchase contract form where buyer offers and seller acceptance are documented and executed.",
+    },
+    {
+      q: "In Hawaii real estate practice, what is the proper name of the standard form contract used to bind a buyer and seller to a residential property purchase?",
+      options: ["Residential Purchase and Finance Agreement", "Deposit Receipt Offer and Acceptance", "Real Estate Sales Contract Addendum", "Countersigned Property Agreement"],
+      correctIndex: 1,
+      explain: "The DROA is Hawaii's standard residential purchase contract that formalizes the offer from the buyer and acceptance by the seller.",
+    },
+    {
+      q: "When a buyer in Hawaii makes an offer to purchase residential real estate, the document used to record the offer, earnest money deposit, and seller's acceptance is called:",
+      options: ["TCT", "DROA", "CC&R", "CPR"],
+      correctIndex: 1,
+      explain: "The Deposit Receipt Offer and Acceptance (DROA) is Hawaii's standard form for residential purchase contracts, combining the earnest money receipt, buyer's offer, and space for seller acceptance in one document.",
+    },
   ],
   "hi-contracts-addenda-q01": [
     {
@@ -1401,6 +1431,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Pest control treatment guarantee", "Lead-paint disclosure form and EPA educational brochure", "Underground storage tank removal certification", "Asbestos survey and remediation plan"],
       correctIndex: 1,
       explain: "Pre-1978 residential properties fall under federal lead-paint disclosure requirements, which mandate both a disclosure addendum and the official EPA pamphlet be given to the buyer.",
+    },
+    {
+      q: "A property built in 1972 is being sold to a family with young children. Which disclosure document is legally required before closing?",
+      options: ["CPR certification declaration", "Lead-based paint disclosure and federal EPA information pamphlet", "Homeowners association architectural guidelines", "Mold remediation certificate"],
+      correctIndex: 1,
+      explain: "Federal law requires lead-paint disclosure and EPA pamphlet for all homes built before 1978, regardless of buyer age or family composition.",
+    },
+    {
+      q: "An agent lists a home constructed in 1963. Prior to marketing, the seller must acknowledge receipt of:",
+      options: ["Lead-paint disclosure form and EPA-approved educational materials", "Flood zone notification letter", "Solar easement waiver", "Timeshare exit counseling notice"],
+      correctIndex: 0,
+      explain: "All pre-1978 residential properties require federal lead-paint disclosure and EPA consumer information pamphlet before sale or listing.",
+    },
+    {
+      q: "When representing a buyer on a 1975 home purchase, which federally mandated document must be provided during the transaction?",
+      options: ["Homeowners insurance binder", "EPA lead-based paint pamphlet with disclosure addendum", "Radon testing report", "Private mortgage insurance disclosure"],
+      correctIndex: 1,
+      explain: "Pre-1978 housing sales federally require lead-paint disclosure and EPA pamphlet; this applies to all transactions regardless of condition.",
+    },
+    {
+      q: "A seller has owned a 1969-built single-family home for 15 years and is now selling. Which disclosure is non-waivable?",
+      options: ["Lead-paint addendum and EPA informational pamphlet", "Neighborhood crime statistics form", "Energy efficiency audit report", "Homeowner association master deed"],
+      correctIndex: 0,
+      explain: "Lead-paint disclosure and EPA pamphlet are federal requirements for pre-1978 homes and cannot be waived by buyer or seller agreement.",
+    },
+    {
+      q: "A property constructed in 1972 is being sold to a new owner. Which disclosure document is federally mandated before the buyer commits to the purchase?",
+      options: ["Mold inspection certification", "Lead-based paint disclosure and EPA educational pamphlet", "Homeowners association financial statement", "Asbestos remediation report"],
+      correctIndex: 1,
+      explain: "All pre-1978 residential properties must provide lead-based paint disclosure and the EPA pamphlet 'Protect Your Family from Lead in Your Home' before the buyer is obligated to purchase.",
     },
   ],
   "hi-contracts-addenda-q02": [
@@ -1428,6 +1488,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Written informed consent from both parties is a prerequisite to dual agency; proceeding without documented consent violates Hawaii's fiduciary standards.",
     },
+    {
+      q: "Under Hawaii real estate law, when a broker intends to represent both the buyer and seller in the same transaction, what documentation is legally required?",
+      options: ["A signed dual agency acknowledgment form from the broker alone", "Written consent executed by both the buyer and the seller", "Oral acknowledgment recorded at the closing table", "Commission disclosure to the MLS satisfies the requirement"],
+      correctIndex: 1,
+      explain: "HRS 467-14 mandates written informed consent from all parties to a dual agency arrangement; oral consent or broker-only acknowledgment is insufficient.",
+    },
+    {
+      q: "A Hawaii real estate licensee discovers mid-transaction that she will be representing both parties. To comply with state law, she must immediately obtain:",
+      options: ["The seller's verbal approval only", "A written disclosure of dual agency signed by both the buyer and seller", "Management approval from the broker's compliance department", "A waiver of liability from the MLS"],
+      correctIndex: 1,
+      explain: "Hawaii law requires written informed consent from both parties before a licensee can lawfully act as a dual agent; verbal approval does not satisfy legal requirements.",
+    },
+    {
+      q: "Which of the following best describes the consent requirement for dual agency representation in Hawaii?",
+      options: ["The broker may proceed with dual agency if the sales commission is fully transparent", "Both the buyer and seller must provide written, informed consent before the dual agency relationship begins", "The listing agent's verbal agreement is sufficient if the transaction is expedited", "Dual agency requires only a broker's internal memorandum filed with the Hawaii REC"],
+      correctIndex: 1,
+      explain: "Hawaii statute requires written consent from all parties involved in a dual agency; transparency of commission alone or broker documentation does not fulfill this mandate.",
+    },
+    {
+      q: "A broker in Hawaii proposes to represent both sides of a residential sale. To ensure legal compliance, the broker must secure:",
+      options: ["A single written consent document signed by the seller and initialed by the buyer", "Separate written consent from each party disclosing the dual agency arrangement", "Oral assent from both parties, followed by email confirmation", "A notarized statement that the broker is acting impartially"],
+      correctIndex: 1,
+      explain: "HRS 467 requires written informed consent from each party acknowledging the dual agency before representation begins; email confirmation or notarized impartiality statements do not satisfy this requirement.",
+    },
+    {
+      q: "When a Hawaii real estate licensee represents both the buyer and seller in the same transaction, what documentation must be obtained?",
+      options: ["Oral acknowledgment from the broker that the transaction is authorized", "Documented written consent signed by both the buyer and the seller", "A single signed disclosure form submitted only to the Hawaii Real Estate Commission", "Email confirmation from either party indicating awareness of the dual representation"],
+      correctIndex: 1,
+      explain: "Hawaii law (HRS 467) and Hawaii REC rules mandate written informed consent from both parties before a licensee may act as a dual agent; oral or email-only agreements do not satisfy this requirement.",
+    },
   ],
   "hi-contracts-addenda-q03": [
     {
@@ -1453,6 +1543,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The consumer should have signed the purchase agreement", "The Mandatory Agency Disclosure form should have been delivered", "The title commitment should have been reviewed", "The appraisal contingency should have been waived"],
       correctIndex: 1,
       explain: "Before any substantive interaction such as discussing market values, property features, or negotiation terms, the Mandatory Agency Disclosure must be provided to the consumer.",
+    },
+    {
+      q: "When must a real estate licensee present the Mandatory Agency Disclosure form to a prospective buyer or seller?",
+      options: ["During the final walk-through inspection", "Prior to any meaningful business discussion or property showing", "Upon receipt of a fully executed purchase contract", "Only when the consumer requests clarification about agency"],
+      correctIndex: 1,
+      explain: "The disclosure must be provided before substantive interaction begins, including before showing properties or discussing representation.",
+    },
+    {
+      q: "A licensee is meeting with a potential client for the first time. At what point is the Mandatory Agency Disclosure form legally required to be given?",
+      options: ["Before any substantive discussion or property tour takes place", "Within 24 hours after the initial meeting", "At the time of contract execution", "Only if the consumer indicates interest in making an offer"],
+      correctIndex: 0,
+      explain: "Hawaii law requires delivery before substantive interaction, which means before showings, negotiations, or detailed business discussions commence.",
+    },
+    {
+      q: "Which statement best describes when the Mandatory Agency Disclosure must be delivered under Hawaii real estate law?",
+      options: ["After a written offer has been accepted by the seller", "Before any substantive interaction, including property showings or representation discussions", "At the time of closing, along with other final documents", "When requested by the consumer during the transaction process"],
+      correctIndex: 1,
+      explain: "The disclosure requirement is triggered before substantive interaction—showings and negotiations qualify as substantive interaction requiring prior disclosure.",
+    },
+    {
+      q: "A consumer calls a licensee to schedule a showing of a residential property. The licensee must deliver the Mandatory Agency Disclosure form:",
+      options: ["At the property before entering to view the inside", "Before beginning to discuss representation or show properties", "After the consumer decides to make an offer on a property", "Only if the consumer asks what agency relationship will be provided"],
+      correctIndex: 1,
+      explain: "The timing requirement is before any substantive interaction occurs, which includes scheduling and conducting property showings or discussing agency matters.",
+    },
+    {
+      q: "When must a licensee provide the Mandatory Agency Disclosure to a prospective buyer or seller?",
+      options: ["During the closing meeting", "Prior to any meaningful discussion about property or representation", "Once a purchase agreement has been executed", "At the consumer's request only"],
+      correctIndex: 1,
+      explain: "Hawaii real estate law requires the Mandatory Agency Disclosure be given before substantive interaction, which includes property showings, price discussions, or representation negotiations.",
     },
   ],
   "hi-contracts-addenda-q04": [
@@ -1480,6 +1600,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "A counter-offer is both a rejection of the original offer and a new offer made by the counter-offering party; the original offer is no longer available for acceptance.",
     },
+    {
+      q: "When a seller presents a counter-offer to a buyer's initial proposal, what is the legal effect on the original offer?",
+      options: ["The original offer remains active until the counter-offer is signed", "The original offer is terminated and superseded by the counter-offer", "Both offers exist simultaneously and the buyer must choose one", "The original offer is suspended but can be revived if the counter is rejected"],
+      correctIndex: 1,
+      explain: "A counter-offer extinguishes the original offer by operation of law; only the counter becomes the active, live offer on the table.",
+    },
+    {
+      q: "During contract negotiations, the buyer's agent submits a revised offer with different terms than the seller's initial proposal. This revised offer:",
+      options: ["Modifies the original terms while keeping the offer alive", "Constitutes a rejection of the original offer and creates a new offer", "Requires written approval from the listing agent before it terminates the original", "Maintains both the original and new terms in a combined contract"],
+      correctIndex: 1,
+      explain: "A counteroffer is a rejection of the original offer and the presentation of new terms; the original offer ceases to exist once the counter is communicated.",
+    },
+    {
+      q: "In Hawaii real estate negotiations, when a seller responds to a purchase offer with modified terms, the original offer's status becomes:",
+      options: ["Accepted conditionally pending the buyer's review", "Dead—it no longer exists and is replaced by the counter-offer", "Held in escrow until both parties agree on final terms", "Binding on the buyer unless they formally withdraw within 24 hours"],
+      correctIndex: 1,
+      explain: "Counter-offers automatically terminate the prior offer; the prior offer cannot be accepted once a counter has been made because it no longer exists as a live option.",
+    },
+    {
+      q: "A seller receives an offer from a buyer and provides a written response with revised price and closing terms. Regarding the buyer's initial offer, it is now:",
+      options: ["Enforceable as a backup in case the counter-offer fails", "Extinguished and replaced by the seller's counter-proposal", "Temporarily suspended while the counter-offer is negotiated", "Valid and may be accepted by the seller at any time during the transaction"],
+      correctIndex: 1,
+      explain: "The counter-offer legally destroys the original offer; once made, the original cannot be revived or accepted because it no longer exists as a valid offer.",
+    },
+    {
+      q: "When a seller presents a counter-offer to a buyer's original proposal, what is the legal effect on the buyer's initial offer?",
+      options: ["It remains active and binding until the seller formally withdraws it in writing", "It is terminated and superseded by the counter-offer as the new negotiating position", "It is suspended but can be revived if the counter-offer is rejected within 24 hours", "It becomes part of a binding contract once acknowledged by either party"],
+      correctIndex: 1,
+      explain: "A counter-offer operates as a rejection of the original offer and creates a new offer from the seller; the original buyer offer no longer exists as a live proposition.",
+    },
   ],
   "hi-contracts-addenda-q05": [
     {
@@ -1506,6 +1656,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "The Condominium Public Report is the required disclosure document for new condo sales in Hawaii that details the condominium project and its legal/financial structure.",
     },
+    {
+      q: "When a developer offers a newly constructed condominium unit for sale in Hawaii, what document must be delivered to prospective purchasers?",
+      options: ["Condominium Public Report", "Builder's warranty certificate", "Subdivision Map approval", "Property condition disclosure form"],
+      correctIndex: 0,
+      explain: "Hawaii law requires developers to furnish the Condominium Public Report to all buyers of new condo units before purchase.",
+    },
+    {
+      q: "A buyer is interested in purchasing a brand-new condominium unit from the developer. Which of the following disclosures is specifically mandated by the Hawaii Real Estate Commission for this transaction?",
+      options: ["Historic property certification", "Condominium Public Report", "Homeowners' association fee estimate", "Seller's statutory disclosure notice"],
+      correctIndex: 1,
+      explain: "The Condominium Public Report is a required disclosure document issued by the developer for new condominium sales in Hawaii.",
+    },
+    {
+      q: "Prior to closing on a newly developed condominium project, the developer must provide the buyer with which mandatory disclosure?",
+      options: ["Title insurance commitment", "Condominium Public Report", "Mortgage pre-approval letter", "Environmental site assessment"],
+      correctIndex: 1,
+      explain: "New condo sales in Hawaii require the developer to deliver the Condominium Public Report to inform buyers of the project's status and terms.",
+    },
+    {
+      q: "Which document is legally required to accompany the sale of a newly constructed condominium unit in Hawaii?",
+      options: ["Condominium Public Report", "Flood zone determination letter", "Homeowners' insurance policy", "Community association bylaws only"],
+      correctIndex: 0,
+      explain: "Developers must provide buyers with the Condominium Public Report for all new condo unit sales as a mandatory disclosure requirement.",
+    },
+    {
+      q: "When a developer sells a newly constructed condominium unit in Hawaii, which document must be provided to inform the buyer about the project's registration status and key details?",
+      options: ["Property Tax Assessment Notice", "Condominium Public Report", "Estoppel Certificate from the HOA", "Title Insurance Commitment"],
+      correctIndex: 1,
+      explain: "Hawaii law requires developers to furnish the Condominium Public Report to prospective purchasers of new condominiums to disclose essential project information and regulatory status.",
+    },
   ],
   "hi-contracts-addenda-q06": [
     {
@@ -1531,6 +1711,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["HRS 521", "HRS 480E", "HRS 508D", "HRS 467"],
       correctIndex: 1,
       explain: "HRS 480E is the statute that provides distressed property conveyance protections, establishing buyer obligations and seller safeguards in financially distressed transactions.",
+    },
+    {
+      q: "Under Hawaii law, regulations governing the sale of distressed properties are primarily found in which statute?",
+      options: ["HRS 521 (Condominium Property Regimes)", "HRS 480E (Unfair or Deceptive Acts in Trade or Commerce)", "HRS 467 (Real Estate Commission)", "HRS 508D (Mortgage Servicer Conduct)"],
+      correctIndex: 1,
+      explain: "HRS 480E contains Hawaii's distressed property conveyance protections and unfair/deceptive trade practice provisions.",
+    },
+    {
+      q: "A real estate licensee in Hawaii must be familiar with distressed property conveyance rules. These statutory protections are codified in:",
+      options: ["Chapter 467 of the Hawaii Revised Statutes", "Chapter 480E of the Hawaii Revised Statutes", "Chapter 508D of the Hawaii Revised Statutes", "Chapter 521 of the Hawaii Revised Statutes"],
+      correctIndex: 1,
+      explain: "HRS 480E establishes the legal framework for distressed property conveyance protections in Hawaii.",
+    },
+    {
+      q: "Which of the following Hawaii Revised Statutes sections addresses protections for homeowners in distressed property situations?",
+      options: ["HRS 508D", "HRS 521", "HRS 480E", "HRS 467"],
+      correctIndex: 2,
+      explain: "HRS 480E is the Hawaii statute that specifically covers distressed property conveyance protections and related consumer safeguards.",
+    },
+    {
+      q: "When counseling a client about distressed property transactions in Hawaii, you should reference the statutory requirements found in:",
+      options: ["HRS 467 (Hawaii Real Estate Commission Authority)", "HRS 521 (Condominium Regimes)", "HRS 480E (Consumer Protection Laws)", "HRS 508D (Mortgage Servicer Regulations)"],
+      correctIndex: 2,
+      explain: "HRS 480E contains the distressed property conveyance protections that licensees must follow in Hawaii.",
+    },
+    {
+      q: "Under Hawaii law, which statute specifically governs the sale of distressed properties and establishes protections for vulnerable sellers?",
+      options: ["HRS 521 (Residential Tenancies)", "HRS 480E (Unfair and Deceptive Practices)", "HRS 467 (Real Estate Commission)", "HRS 508D (Mortgage Foreclosure)"],
+      correctIndex: 1,
+      explain: "HRS 480E contains Hawaii's distressed property conveyance protections, which regulate transactions involving properties in financial distress and establish buyer disclosure requirements.",
     },
   ],
   "hi-escrow-closing-q00": [
@@ -1688,6 +1898,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Under an Agreement of Sale, the seller retains legal title throughout the installment payment period as security; title transfers to the buyer only after full payment is made.",
     },
+    {
+      q: "Under a Hawaii Agreement of Sale (land contract), who retains ownership of the property during the payment period?",
+      options: ["The buyer holds legal title subject to a mortgage", "The seller maintains legal title until final payment is made", "The title company holds the deed in trust", "The buyer receives equitable title only, not legal title"],
+      correctIndex: 1,
+      explain: "In an Agreement of Sale, the seller retains legal title as security until the buyer completes all payments; the buyer has equitable title and possession rights.",
+    },
+    {
+      q: "Which statement correctly describes title ownership in an installment land contract?",
+      options: ["Title transfers to the buyer upon signing the contract", "The buyer receives full legal title when the first payment is made", "Legal title remains with the seller until all payments are received", "Both buyer and seller hold joint legal title during the contract period"],
+      correctIndex: 2,
+      explain: "An installment land contract (Agreement of Sale) is structured so the seller keeps legal title as security and only transfers it upon final payment by the buyer.",
+    },
+    {
+      q: "A buyer enters into an Agreement of Sale to purchase raw land in Hawaii. Before the buyer makes the final payment, legal title is held by:",
+      options: ["The buyer, who has both legal and equitable title", "A neutral third-party escrow agent on behalf of the buyer", "The seller, pending full satisfaction of the contract terms", "The primary lender as security for the purchase loan"],
+      correctIndex: 2,
+      explain: "In an Agreement of Sale, the seller retains legal title until the buyer completes all contractual obligations and full payment is made.",
+    },
+    {
+      q: "Under a typical Agreement of Sale in Hawaii, what is the status of legal title while the buyer is making installment payments?",
+      options: ["Title is held by the buyer with a lien in favor of the seller", "Title transfers gradually to the buyer with each payment made", "Title remains vested in the seller as security for payment", "Title is held by the Hawaii Department of Land and Natural Resources"],
+      correctIndex: 2,
+      explain: "The seller retains legal title throughout the payment period as a security mechanism; title passes to the buyer only upon satisfaction of all contract obligations.",
+    },
+    {
+      q: "Under a Hawaii installment land contract, when does the seller's equitable interest in the property terminate?",
+      options: ["Upon execution of the contract by both parties", "Only after the buyer completes all payments and the deed is delivered", "When the buyer obtains financing from a lender", "Immediately when the buyer takes possession of the property"],
+      correctIndex: 1,
+      explain: "In an installment land contract (Agreement of Sale), the seller retains legal title as security until the buyer fulfills all payment obligations; title passes only upon final payment and delivery of the deed.",
+    },
   ],
   "hi-financing-q01": [
     {
@@ -1818,6 +2058,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "The LUC's four state land use districts are Agricultural, Urban, Rural, and Conservation, which form the legal framework for all land use planning in Hawaii.",
     },
+    {
+      q: "According to Hawaii's Land Use Commission, land in the state is divided into how many primary districts, and which of the following correctly lists all of them?",
+      options: ["Five districts: Residential, Commercial, Industrial, Agricultural, and Conservation", "Four districts: Urban, Rural, Agricultural, and Conservation", "Three districts: Urban, Agricultural, and Conservation", "Four districts: Honolulu County, Hawaii County, Maui County, and Kalawao County"],
+      correctIndex: 1,
+      explain: "Hawaii's Land Use Commission statute establishes exactly four state land use districts: Urban, Rural, Agricultural, and Conservation.",
+    },
+    {
+      q: "A real estate professional in Hawaii must understand the state's foundational land classification system. Which of the following accurately describes Hawaii's land use district framework?",
+      options: ["Rural, Suburban, Agricultural, and Environmental", "Urban, Rural, Agricultural, and Conservation", "Residential, Agricultural, Commercial, and Mixed-Use", "County-based districts aligned with the four major islands"],
+      correctIndex: 1,
+      explain: "The Hawaii Land Use Commission classifies all state land into four statutory districts: Urban, Rural, Agricultural, and Conservation.",
+    },
+    {
+      q: "When reviewing property zoning in Hawaii, an agent must reference the state's primary land use classification system. What are the four state land use districts?",
+      options: ["Agricultural, Conservation, Urban, and Rural", "Residential, Commercial, Industrial, and Public", "Single-Family, Multi-Family, Business, and Protected", "Coastal, Inland, Plantation, and Preservation"],
+      correctIndex: 0,
+      explain: "Hawaii's Land Use Commission divides all state land into four districts—Agricultural, Conservation, Urban, and Rural—regardless of county or zoning overlay.",
+    },
+    {
+      q: "The Hawaii Revised Statutes establish a statewide land use classification system. Which set of districts comprises this foundational framework?",
+      options: ["Urban, Rural, Agricultural, and Conservation", "Residential, Vacation, Commercial, and Protected", "State Parks, Forestry, Agricultural Reserves, and Urban Zones", "Developable, Semi-Protected, Protected, and Restricted"],
+      correctIndex: 0,
+      explain: "Hawaii's Land Use Commission statute establishes four state land use districts: Urban, Rural, Agricultural, and Conservation as the primary classification system.",
+    },
+    {
+      q: "Under Hawaii's Land Use Commission framework, which classification system divides the state's land into four primary categories?",
+      options: ["Zoning by county (Honolulu, Maui, Hawaii, Kalawao)", "Urban, Rural, Agricultural, and Conservation districts", "Residential, Commercial, Industrial, and Recreational zones", "Density-based categories: Low, Medium, High, and Preservation"],
+      correctIndex: 1,
+      explain: "Hawaii's Land Use Commission established four state-level districts: Urban, Rural, Agricultural, and Conservation to regulate land use statewide.",
+    },
   ],
   "hi-land-utilization-q01": [
     {
@@ -1843,6 +2113,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["AOAO zone", "CPR sector", "TMK classification", "Special Management Area"],
       correctIndex: 3,
       explain: "Special Management Area (SMA) is Hawaii's coastal zone designation requiring permits for development. AOAO applies to condominiums; CPR and TMK are unrelated to coastal development permit requirements.",
+    },
+    {
+      q: "Which designation applies to Hawaii coastal properties requiring environmental review and special development authorization?",
+      options: ["Tax Map Key", "Special Management Area", "Condominium Property Regime", "Association of Apartment Owners"],
+      correctIndex: 1,
+      explain: "Special Management Area (SMA) is the Hawaii coastal-zone overlay that mandates permit approval for development activities in environmentally sensitive coastal regions.",
+    },
+    {
+      q: "A buyer is informed that her oceanfront property falls within a coastal overlay zone requiring a specific permit before construction. The zone is known as:",
+      options: ["AOAO designation", "TMK classification", "SMA zone", "CPR overlay"],
+      correctIndex: 2,
+      explain: "The Special Management Area (SMA) is Hawaii's coastal management tool that requires permits for development, modifications, and land use changes in designated coastal zones.",
+    },
+    {
+      q: "Under Hawaii land-use law, what acronym represents the coastal protection area where development permits are mandatory?",
+      options: ["CPR", "SMA", "AOAO", "TMK"],
+      correctIndex: 1,
+      explain: "SMA (Special Management Area) is the Hawaii regulatory designation for coastal zones where development activities require state and/or county permit approval.",
+    },
+    {
+      q: "A real estate licensee explains to her client that the beachfront parcel requires approval from the state because it is located in a Special Management Area. This acronym is:",
+      options: ["TMK", "CPR", "SMA", "AOAO"],
+      correctIndex: 2,
+      explain: "SMA stands for Special Management Area, the Hawaii coastal-overlay designation requiring environmental review and development permits for qualifying land uses and construction activities.",
+    },
+    {
+      q: "Under Hawaii law, which designation identifies a zone where environmental review and a special permit are required before development can proceed?",
+      options: ["Tax Map Key", "Special Management Area", "Association of Apartment Owners", "Coastal Property Registry"],
+      correctIndex: 1,
+      explain: "An SMA (Special Management Area) is a Hawaii coastal zone requiring an SMA permit for development activities. TMK is a parcel identifier, AOAO is a condominium association type, and CPR is not a Hawaii zoning designation.",
     },
   ],
   "hi-land-utilization-q02": [
@@ -1870,6 +2170,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "The Honolulu Land Use Ordinance (LUO) is the definitive municipal source for zoning designations, permitted uses, and land use restrictions in Honolulu.",
     },
+    {
+      q: "Which regulatory framework establishes zoning classifications and land use restrictions within the City and County of Honolulu?",
+      options: ["General Excise Tax Code", "Honolulu Land Use Ordinance", "Hawaii Revised Statutes Chapter 521", "Transfer Certificate of Title requirements"],
+      correctIndex: 1,
+      explain: "The Honolulu Land Use Ordinance (LUO) is the local municipal code that controls zoning designations and permitted uses for properties in Honolulu.",
+    },
+    {
+      q: "A real estate agent in Honolulu advises a client that their residential property cannot be converted to commercial use. What document would the agent cite as the basis for this zoning restriction?",
+      options: ["HRS 521", "The Honolulu Land Use Ordinance", "Hawaii Transfer Certificate of Title Act", "Honolulu General Excise Tax Ordinance"],
+      correctIndex: 1,
+      explain: "The Honolulu Land Use Ordinance (LUO) is the county-level zoning regulation that determines which land uses are permitted in specific zoning districts.",
+    },
+    {
+      q: "When a broker needs to determine whether a parcel in Honolulu is zoned for a particular use, which document should be consulted?",
+      options: ["Transfer Certificate of Title", "Honolulu Land Use Ordinance", "Hawaii Revised Statutes 521", "County General Excise Tax regulations"],
+      correctIndex: 1,
+      explain: "The Honolulu Land Use Ordinance (LUO) contains the local zoning codes and permitted uses for different zoning classifications in the City and County of Honolulu.",
+    },
+    {
+      q: "What is the primary source of zoning authority for properties located in Honolulu?",
+      options: ["Hawaii Revised Statutes Chapter 521", "The City and County of Honolulu Land Use Ordinance", "State Transfer Certificate of Title statutes", "Hawaii General Excise Tax Code"],
+      correctIndex: 1,
+      explain: "The Honolulu Land Use Ordinance (LUO) is the municipal ordinance that serves as the definitive source for all zoning regulations and land use controls in Honolulu.",
+    },
+    {
+      q: "Which legal instrument establishes zoning classifications and land use restrictions for the City and County of Honolulu?",
+      options: ["Hawaii Revised Statutes Chapter 205", "Honolulu Land Use Ordinance", "State Land Use Commission Order", "General Excise Tax Code"],
+      correctIndex: 1,
+      explain: "The Honolulu Land Use Ordinance (LUO) is the municipal code that governs all zoning and land use regulations within Honolulu's jurisdiction. HRS 205 applies to statewide land use districts, not county zoning.",
+    },
   ],
   "hi-land-utilization-q03": [
     {
@@ -1895,6 +2225,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Only a county building permit is necessary for Conservation district development", "A Conservation District Use Permit from DLNR is essential before proceeding with development plans", "State Legislature pre-approval is the only requirement in Conservation areas", "Local county zoning variance replaces all state-level permitting requirements"],
       correctIndex: 1,
       explain: "The CDUP issued by the Department of Land and Natural Resources is the mandatory state-level permit that must be secured before any development activity can legally occur in a Conservation district.",
+    },
+    {
+      q: "When a property owner wants to undertake any land use activity in Hawaii's Conservation district, which authorization is mandatory?",
+      options: ["State Environmental Impact Statement approval", "Conservation District Use Permit from the Department of Land and Natural Resources", "Municipal zoning board conditional use permit", "County Planning Commission recommendation letter"],
+      correctIndex: 1,
+      explain: "The DLNR issues Conservation District Use Permits (CDUP) for any use or development in Conservation districts; this is the required state-level authorization.",
+    },
+    {
+      q: "A developer proposes a project in Hawaii's Conservation district. Which permit type is the primary requirement before any construction or land alteration can occur?",
+      options: ["Grading and excavation permit from Public Works", "Conservation District Use Permit issued by DLNR", "Special Management Area permit from the county", "Environmental waiver from the State Attorney General"],
+      correctIndex: 1,
+      explain: "Development in Conservation districts requires a CDUP from the Department of Land and Natural Resources as the controlling state permit for conservation lands.",
+    },
+    {
+      q: "Which state agency must approve activities in Hawaii's Conservation district through a specific permit process?",
+      options: ["Hawaii Board of Real Estate", "Department of Land and Natural Resources via Conservation District Use Permit", "County Building and Planning Department", "State Department of Transportation"],
+      correctIndex: 1,
+      explain: "DLNR administers Conservation district land and requires a CDUP before any development, use change, or significant land alteration may proceed.",
+    },
+    {
+      q: "If a property is located within Hawaii's Conservation district, what is the prerequisite approval mechanism for proposed improvements or land use changes?",
+      options: ["Automatic approval upon filing with the county assessor", "Conservation District Use Permit obtained from DLNR", "Standard building permit with no additional state review", "County historic preservation exemption letter"],
+      correctIndex: 1,
+      explain: "Conservation District Use Permits from DLNR are the mandatory gatekeeping authorization for any development or use modification in Conservation-zoned lands.",
+    },
+    {
+      q: "Before a property owner can undertake any land use activity in Hawaii's Conservation district, which approval is mandatory?",
+      options: ["A zoning variance from the county planning department", "A Conservation District Use Permit (CDUP) from the Department of Land and Natural Resources", "Only a standard building permit from the county", "An environmental impact statement filed with the state legislature"],
+      correctIndex: 1,
+      explain: "The Department of Land and Natural Resources (DLNR) administers Conservation districts and requires a CDUP for any use or development activity in these protected areas.",
     },
   ],
   "hi-land-utilization-q04": [
@@ -1922,6 +2282,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "Farm-dwelling requirements in agricultural zones typically mandate that residential occupants participate in legitimate agricultural or pastoral activities on the property.",
     },
+    {
+      q: "A property owner in Hawaii's Agricultural district wants to build a residential home. Which of the following best describes what zoning regulations typically require?",
+      options: ["The home must be located within 500 feet of an active orchard or pasture", "Proof of actual farming operations or farm dwelling eligibility may be needed", "Residential construction is automatically permitted without condition in Ag zones", "The property must be assessed as commercial land for tax purposes"],
+      correctIndex: 1,
+      explain: "Agricultural-district residential homes may be subject to farm dwelling requirements, meaning owners must demonstrate genuine farm-related activity or qualify under farm dwelling provisions depending on the specific county regulations.",
+    },
+    {
+      q: "Under Hawaii zoning law, a residential dwelling in an Agricultural district:",
+      options: ["Is prohibited unless the landowner operates a commercial agricultural business", "May be contingent upon meeting farm dwelling criteria or demonstrated agricultural use", "Receives the same tax treatment as properties in Urban districts", "Is permitted by right without any special conditions or requirements"],
+      correctIndex: 1,
+      explain: "Many Agricultural-zoned residential properties must satisfy farm dwelling requirements, which typically involve proof of actual or intended farm activity to maintain residential use in that zoning classification.",
+    },
+    {
+      q: "What is a common regulatory consideration for homeowners constructing a residence on Agricultural-zoned land in Hawaii?",
+      options: ["The property will automatically be rezoned to Residential upon building completion", "Agricultural dwellings may be subject to genuine farm-activity requirements or farm dwelling status", "No difference exists between Ag-district and Urban-district residential restrictions", "A separate industrial use permit is required for any residential occupancy"],
+      correctIndex: 1,
+      explain: "Residential properties in Agricultural districts often trigger farm dwelling requirements that obligate owners to maintain agricultural operations or qualify under specific farm dwelling exemptions to legally occupy the home.",
+    },
+    {
+      q: "A real estate agent is counseling a buyer interested in purchasing a residential home zoned Agricultural in Hawaii. What should the agent explain about potential restrictions?",
+      options: ["The buyer will face penalties if any farming activity occurs on the property", "The property may impose farm dwelling obligations requiring actual agricultural use or exemption status", "Agricultural-zoned residential properties are entirely unrestricted compared to other zones", "The buyer must immediately convert the zoning to Residential or lose homeownership rights"],
+      correctIndex: 1,
+      explain: "Agricultural-district residential homes may carry farm dwelling requirements—conditions that necessitate demonstrated farm activity or eligibility under farm dwelling provisions—which licensees must disclose to buyers.",
+    },
+    {
+      q: "A residential property located in Hawaii's agricultural district may be subject to which of the following requirements?",
+      options: ["Conversion to commercial use within five years of purchase", "Demonstration of bona fide agricultural operations or farm-dwelling qualification", "Mandatory participation in the state's soil conservation program", "Reclassification to urban zoning upon first resale"],
+      correctIndex: 1,
+      explain: "Agricultural-district residential dwellings may require documentation of genuine farm-related activity or qualification as a farm dwelling under Hawaii's land-use regulations.",
+    },
   ],
   "hi-land-utilization-q05": [
     {
@@ -1947,6 +2337,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["8 counties corresponding to the major islands", "4 counties with independent zoning authority", "2 counties that share zoning responsibilities", "1 statewide zoning commission"],
       correctIndex: 1,
       explain: "The State of Hawaii is organized into four counties—Honolulu, Hawaii, Maui, and Kauai—each with autonomous zoning authority.",
+    },
+    {
+      q: "Which statement accurately reflects the number of counties in Hawaii that exercise independent zoning authority?",
+      options: ["Hawaii is divided into 8 separate zoning jurisdictions, one per island.", "Only Honolulu County has the power to establish and enforce zoning ordinances.", "Four counties—Honolulu, Hawaii, Maui, and Kauai—each maintain their own zoning codes.", "Hawaii operates under a statewide zoning system with no county-level zoning authority."],
+      correctIndex: 2,
+      explain: "Hawaii's four counties (Honolulu, Hawaii, Maui, and Kauai) each have independent zoning authority and maintain separate zoning codes.",
+    },
+    {
+      q: "When a Hawaii real estate agent must research zoning restrictions for a property, how many different county zoning jurisdictions might they need to consult?",
+      options: ["One—all zoning is administered statewide.", "Two—East and West zoning regions.", "Four—corresponding to the four counties.", "Six—based on the number of major islands."],
+      correctIndex: 2,
+      explain: "Each of Hawaii's four counties (Honolulu, Hawaii, Maui, and Kauai) independently administers its own zoning regulations.",
+    },
+    {
+      q: "How many separate zoning ordinances exist at the county level in the State of Hawaii?",
+      options: ["12—one for residential, commercial, and agricultural per county.", "4—one enacted and enforced by each county government.", "1—Hawaii operates under unified state zoning standards.", "8—two separate codes per island group."],
+      correctIndex: 1,
+      explain: "Honolulu, Hawaii, Maui, and Kauai counties each independently adopt and enforce their own zoning ordinances.",
+    },
+    {
+      q: "A property owner in Maui County wants to understand the zoning regulations that apply to their land. Which county's zoning code would NOT be the controlling authority?",
+      options: ["Maui County", "Hawaii County", "Honolulu County", "Kauai County"],
+      correctIndex: 1,
+      explain: "Hawaii County's zoning would not apply to property in Maui County; each of the four counties (Honolulu, Hawaii, Maui, and Kauai) has independent zoning jurisdiction.",
+    },
+    {
+      q: "Which of the following correctly identifies the number of separate zoning jurisdictions in Hawaii?",
+      options: ["Three counties manage zoning authority", "Four counties exercise independent zoning control", "Five counties share zoning responsibilities", "Two counties handle all zoning matters statewide"],
+      correctIndex: 1,
+      explain: "Hawaii's four counties—Honolulu, Hawaii, Maui, and Kauai—each maintain their own zoning ordinances and authority over land use within their jurisdictions.",
     },
   ],
   "hi-material-facts-q00": [
@@ -2950,6 +3370,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "HRS 521-44 specifies that security deposits must be returned within 14 calendar days of move-out, and any deductions must be itemized and provided to the tenant.",
     },
+    {
+      q: "Under Hawaii Revised Statutes Chapter 521, what is the maximum timeframe a property owner has to refund a tenant's security deposit following the tenant's vacating the rental unit?",
+      options: ["Within 21 days, with written notice of any deductions", "Within 14 days, with an itemized accounting of deductions if applicable", "Within 30 days, regardless of whether deductions are claimed", "Within 45 days, provided the landlord submits a formal inspection report"],
+      correctIndex: 1,
+      explain: "HRS 521-42 requires landlords to return security deposits within 14 days of move-out, and if deductions are made, they must provide an itemized statement of those deductions.",
+    },
+    {
+      q: "A tenant in Honolulu moves out of an apartment on the first of the month. By what date must the landlord return the full security deposit or provide a detailed accounting of deductions?",
+      options: ["By the 8th of the same month", "By the 15th of the same month", "By the end of the following month", "By the 21st of the same month"],
+      correctIndex: 1,
+      explain: "Hawaii law (HRS 521) establishes a 14-day deadline from move-out for return of security deposits; if the deposit cannot be fully returned, the landlord must provide an itemized breakdown of deductions within this period.",
+    },
+    {
+      q: "If a Hawaii rental property manager receives a move-out notice from a tenant, what is the statutory deadline for either returning the security deposit in full or submitting written documentation of any claimed deductions?",
+      options: ["10 business days after the tenant vacates", "Two weeks from the date of move-out", "One full month from the lease termination date", "Within 30 calendar days, with optional supplemental notice"],
+      correctIndex: 1,
+      explain: "HRS 521-42 mandates that landlords return security deposits within 14 days (two weeks) of move-out; any deductions must be itemized and documented within this same 14-day window.",
+    },
+    {
+      q: "A landlord in Hawaii intends to make deductions from a tenant's security deposit for damages. What is the deadline for returning the remaining balance and providing the tenant with an itemized list of deductions?",
+      options: ["7 days from move-out", "14 days from move-out", "45 days from move-out, pending inspection completion", "60 days from move-out, pending insurance claim resolution"],
+      correctIndex: 1,
+      explain: "Under HRS 521, landlords must return the security deposit (or remaining balance after itemized deductions) and provide written documentation of any deductions within 14 days of the tenant's move-out date.",
+    },
+    {
+      q: "Under Hawaii Revised Statutes Chapter 521, if a tenant vacates a rental unit, by what deadline must the landlord deliver the security deposit refund or provide a written accounting of deductions?",
+      options: ["Within 21 days of the move-out date", "Within 14 days of the move-out date", "Within 30 days of the move-out date", "Within 10 business days of the move-out date"],
+      correctIndex: 1,
+      explain: "HRS 521-42 requires landlords to return the security deposit within 14 days, or provide an itemized statement of any lawful deductions within that timeframe.",
+    },
   ],
   "hi-property-management-q01": [
     {
@@ -2975,6 +3425,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Security deposits may equal up to 3 months' rent in high-value properties", "The security deposit limit is one month's rent, though pet deposits can be collected separately", "Landlords may collect 1.5 months' rent as a standard security deposit", "Security deposits are unlimited if specified in a written lease agreement"],
       correctIndex: 1,
       explain: "Hawaii law strictly limits security deposits to one month's rent, with pet deposits as a separate permissible charge.",
+    },
+    {
+      q: "Under Hawaii rental law, what is the legal limit on the initial security deposit a landlord may collect from a tenant?",
+      options: ["Up to 60 days' rent plus a pet fee", "Not to exceed one month's rent", "Two months' rent if the unit is furnished", "Whatever amount the lease agreement specifies"],
+      correctIndex: 1,
+      explain: "Hawaii law caps security deposits at one month's rent; any additional deposits for pets must be handled separately and are not counted toward this limit.",
+    },
+    {
+      q: "A property manager in Hawaii is preparing a lease for a residential rental unit. How much can the landlord legally require as a security deposit at move-in?",
+      options: ["Three months' rent if the property is in a high-demand area", "One month's rent maximum", "Half a month's rent plus a damage reserve", "Two months' rent for a multi-year lease"],
+      correctIndex: 1,
+      explain: "Hawaii REC regulations limit security deposits to one month's rent regardless of location, lease term, or market conditions.",
+    },
+    {
+      q: "When a tenant applies for a rental property in Hawaii, the landlord may collect a security deposit not to exceed:",
+      options: ["45 days of monthly rent", "One full month of rent", "Two full months of rent", "One month of rent plus an additional pet deposit fee"],
+      correctIndex: 1,
+      explain: "The statutory cap is one month's rent; pet deposits are separate and allowed in addition, but the base security deposit is limited to one month.",
+    },
+    {
+      q: "Which statement correctly describes Hawaii's security deposit requirements for residential leases?",
+      options: ["Deposits may be increased to two months' rent if the property has a pool or ocean view", "The maximum deposit is limited to one month's rent", "Deposits can total up to three months' rent when combined with all optional fees", "Hawaii allows unlimited deposits if documented in writing by both parties"],
+      correctIndex: 1,
+      explain: "Hawaii law strictly caps the security deposit at one month's rent; other terms or conditions cannot override this statutory maximum.",
+    },
+    {
+      q: "Under Hawaii residential tenancy law, what is the statutory limit a landlord may collect as a security deposit from a tenant at lease signing?",
+      options: ["Up to 60 days' rent plus a pet deposit", "Not to exceed one month's rent, with pet deposits handled separately", "A maximum of 45 days' rent regardless of lease duration", "Two months' rent if the property is furnished"],
+      correctIndex: 1,
+      explain: "Hawaii law caps residential security deposits at one month's rent; any pet deposit is a separate, additional charge and does not count toward this limit.",
     },
   ],
   "hi-property-management-q02": [
@@ -3002,6 +3482,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Self-help eviction through lock-out or removal of belongings is illegal in Hawaii; the landlord must obtain a court order through summary possession.",
     },
+    {
+      q: "A landlord in Hawaii wants to remove a tenant immediately by installing new locks and changing the door codes. What is the legal status of this action?",
+      options: ["Permitted if the landlord provides written notice 24 hours in advance", "Prohibited; the landlord must obtain a court order through summary possession proceedings", "Allowed only when the tenant has violated lease terms", "Valid as long as the landlord compensates the tenant for inconvenience"],
+      correctIndex: 1,
+      explain: "Hawaii law prohibits self-help eviction; landlords must follow judicial eviction procedures and obtain a court order for summary possession to legally remove a tenant.",
+    },
+    {
+      q: "Which statement correctly describes Hawaii's position on landlords using self-help remedies such as removing a tenant's belongings or locking them out?",
+      options: ["Self-help is legal if conducted during business hours", "Self-help remedies are permitted without court involvement in cases of lease violations", "Self-help eviction methods are illegal; formal summary possession through the courts is required", "Self-help is allowed if the tenant is more than 30 days behind on rent"],
+      correctIndex: 2,
+      explain: "Hawaii law strictly prohibits self-help eviction and requires landlords to pursue the formal summary possession judicial process to legally evict a tenant.",
+    },
+    {
+      q: "A landlord in Honolulu changes the locks on a rental unit to force out a non-paying tenant. Is this action lawful in Hawaii?",
+      options: ["Yes, because non-payment of rent justifies immediate self-help removal", "Yes, if the landlord has given the tenant a 3-day notice to vacate", "No; this is an illegal self-help eviction and violates Hawaii landlord-tenant law", "Yes, provided the landlord files for eviction within 10 days of the lock change"],
+      correctIndex: 2,
+      explain: "Changing locks without a court order is illegal self-help eviction in Hawaii; landlords must use the legal summary possession process through the courts regardless of the reason for eviction.",
+    },
+    {
+      q: "Under Hawaii real estate law, can a property manager lawfully exclude a tenant by removing locks and personal property without going to court?",
+      options: ["Yes, if the property manager acts on behalf of the owner", "No; summary possession through judicial proceedings is the only legal eviction method in Hawaii", "Yes, after providing a 5-day cure period", "Yes, in cases where the lease contains a self-help eviction clause"],
+      correctIndex: 1,
+      explain: "Hawaii law prohibits all forms of self-help eviction, including by property managers; courts must order the eviction through summary possession proceedings.",
+    },
+    {
+      q: "A Hawaii property manager discovers a tenant has abandoned the rental unit. The manager changes the locks and removes the tenant's belongings to regain possession. This action is:",
+      options: ["Permissible under Hawaii's self-help remedy doctrine", "Valid only if the tenant owes rent", "A violation of law requiring court-ordered summary possession instead", "Allowed as long as written notice was provided beforehand"],
+      correctIndex: 2,
+      explain: "Hawaii law prohibits self-help eviction regardless of circumstances; landlords must obtain a court judgment through summary possession proceedings to lawfully regain possession.",
+    },
   ],
   "hi-property-management-q03": [
     {
@@ -3027,6 +3537,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["3 weeks advance written notice", "45 days advance written notice", "1 month oral notice followed by written confirmation", "2 weeks written notice before the next rent due date"],
       correctIndex: 1,
       explain: "Hawaii law mandates 45 days advance written notice as the minimum period for rent increases on month-to-month leases.",
+    },
+    {
+      q: "Under Hawaii law, how much advance notice must a landlord provide before implementing a rent increase on a month-to-month tenancy?",
+      options: ["60 days written notice", "45 days written notice", "30 days written notice", "21 days written notice"],
+      correctIndex: 1,
+      explain: "Hawaii law requires 45 days advance written notice for any rent increase on a month-to-month lease agreement.",
+    },
+    {
+      q: "A landlord in Hawaii wants to raise rent on a tenant with a month-to-month agreement. What notice period applies?",
+      options: ["10 business days", "45 calendar days", "30 calendar days", "90 calendar days"],
+      correctIndex: 1,
+      explain: "45 days advance written notice is the statutory requirement for rent increases on month-to-month tenancies in Hawaii.",
+    },
+    {
+      q: "Which notice requirement applies when a landlord seeks to increase monthly rent on a periodic tenancy in Hawaii?",
+      options: ["30 days notice to vacate required", "45 days written notice required", "14 days verbal notice allowed", "60 days notice with 30-day cure period"],
+      correctIndex: 1,
+      explain: "Hawaii landlord-tenant law mandates 45 days advance written notice before any rent increase takes effect on a month-to-month lease.",
+    },
+    {
+      q: "A property manager represents a landlord with a month-to-month tenant. Before notifying the tenant of a rent increase, how far in advance must written notice be delivered?",
+      options: ["At least 28 days before the increase effective date", "At least 45 days before the increase effective date", "At least 60 days before the increase effective date", "At least 14 days before the increase effective date"],
+      correctIndex: 1,
+      explain: "45 days advance written notice is required by Hawaii law before a rent increase on a month-to-month tenancy can become effective.",
+    },
+    {
+      q: "A landlord in Hawaii wishes to modify the rental rate on a month-to-month tenancy. What advance notice period must be provided to the tenant in writing?",
+      options: ["30 days prior to the effective date", "45 days prior to the effective date", "60 days prior to the effective date", "21 days prior to the effective date"],
+      correctIndex: 1,
+      explain: "Hawaii law requires 45 days advance written notice for any rent increase on a month-to-month lease. This longer notice period protects tenants from sudden rent changes.",
     },
   ],
   "hi-property-management-q04": [
@@ -3054,6 +3594,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Hawaii uses the specific statutory term 'summary possession' for its formal eviction process, which is the state's designated procedure under Hawaii Revised Statutes.",
     },
+    {
+      q: "Under Hawaii law, when a landlord seeks to remove a tenant through the court system, the legal action is known as:",
+      options: ["Suit for ejectment", "Summary possession", "Forcible detainer", "Unlawful detainer action"],
+      correctIndex: 1,
+      explain: "Hawaii's statutory eviction procedure is termed \"summary possession,\" which is the formal court process for removing a tenant from rental property.",
+    },
+    {
+      q: "A Hawaii property owner who needs judicial relief to recover possession of a rental unit from a non-paying tenant would file an action for:",
+      options: ["Quiet title action", "Forcible detainer", "Summary possession", "Declaratory judgment"],
+      correctIndex: 2,
+      explain: "Hawaii uses the term \"summary possession\" to describe the statutory eviction remedy available to landlords seeking court-ordered removal of tenants.",
+    },
+    {
+      q: "Which of the following correctly identifies Hawaii's primary statutory mechanism for evicting a tenant through the courts?",
+      options: ["Summary possession", "Suit for ejectment", "Forcible detainer", "Replevin action"],
+      correctIndex: 0,
+      explain: "Hawaii's formal eviction procedure is called \"summary possession,\" which is the established legal term used in Hawaii eviction statutes and court practice.",
+    },
+    {
+      q: "A landlord in Hawaii who wishes to initiate a court-ordered eviction of a defaulting tenant would pursue what type of legal action?",
+      options: ["Forcible detainer", "Unlawful detainer", "Summary possession", "Suit for specific performance"],
+      correctIndex: 2,
+      explain: "\"Summary possession\" is Hawaii's specific legal term for the formal eviction proceeding that allows a landlord to recover rental property through judicial action.",
+    },
+    {
+      q: "Which of the following legal actions is the proper Hawaii term for initiating a landlord's formal court proceeding to remove a tenant?",
+      options: ["Suit for ejectment", "Summary possession", "Forcible detainer", "Unlawful detainer action"],
+      correctIndex: 1,
+      explain: "Hawaii uses the term \"summary possession\" as the formal eviction procedure under Hawaii law, rather than the terms used in other states.",
+    },
   ],
   "hi-property-management-q05": [
     {
@@ -3079,6 +3649,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The tenant must provide at least two weeks' notice, which may be given at any time during the month", "The tenant must provide at least 28 days' notice before the end of the rental period", "The tenant may terminate immediately upon oral notice to the landlord", "The tenant must provide notice 45 days before the intended move-out date"],
       correctIndex: 1,
       explain: "Hawaii law mandates that a month-to-month tenant provide written notice of at least 28 days before the end of any rental period to effect a lawful termination.",
+    },
+    {
+      q: "Under Hawaii law, how much advance notice must a month-to-month tenant provide to the landlord when ending the tenancy?",
+      options: ["21 days prior to the end of the rental period", "28 days prior to the end of the rental period", "14 days prior to the end of the rental period", "30 days prior to the end of the rental period"],
+      correctIndex: 1,
+      explain: "Hawaii law requires a month-to-month tenant to provide 28 days' written notice to terminate the lease, which must be given prior to the end of the rental period.",
+    },
+    {
+      q: "A landlord receives notice from a month-to-month tenant on the 1st of the month requesting to vacate. What is the minimum notice period the tenant must provide?",
+      options: ["The tenant must vacate by the 15th of that month", "The tenant must vacate by the 29th of that month", "The tenant must vacate by the last day of the following month", "The tenant must vacate within 14 days of notice"],
+      correctIndex: 2,
+      explain: "A month-to-month tenant in Hawaii must provide 28 days' notice to terminate, which typically means the tenant cannot vacate until at least 28 days have passed, often extending into the following month.",
+    },
+    {
+      q: "Which statement accurately describes the notice requirement for terminating a month-to-month residential lease in Hawaii?",
+      options: ["Either party may terminate with 7 days' written notice", "The tenant must provide at least 28 days' written notice", "A verbal notice of 30 days is sufficient for termination", "The tenant may terminate immediately if 14 days' written notice is given"],
+      correctIndex: 1,
+      explain: "Hawaii law mandates that a month-to-month tenant provide at least 28 days' written notice before the tenancy will terminate.",
+    },
+    {
+      q: "A property manager in Hawaii is managing a month-to-month rental property. A tenant submits written notice on June 1st to end the tenancy. Assuming no special lease provisions, when is the earliest date the tenant's occupancy will terminate?",
+      options: ["June 14", "June 29", "July 1", "June 30"],
+      correctIndex: 2,
+      explain: "With 28 days' notice required and notice given on June 1st, the tenant must remain until approximately July 1st, as the 28-day period extends into the following month.",
+    },
+    {
+      q: "Under Hawaii law, how many days' written notice must a month-to-month tenant provide to their landlord to end the tenancy?",
+      options: ["21 days before the end of the rental period", "30 days before the end of the rental period", "28 days before the end of the rental period", "14 days before the end of the rental period"],
+      correctIndex: 2,
+      explain: "Hawaii law requires a month-to-month tenant to provide 28 days' written notice to terminate the lease; this is the statutory requirement for tenancy termination in month-to-month agreements.",
     },
   ],
   "hi-property-management-q06": [
@@ -3106,6 +3706,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Property management for compensation is a broker function in Hawaii and cannot be performed under a salesperson license or through association affiliation alone.",
     },
+    {
+      q: "A real estate professional accepts a fee to manage rental properties on behalf of an owner. What licensing requirement must be satisfied?",
+      options: ["A salesperson license with property management endorsement", "A broker license", "Registration with the Hawaii Department of Commerce and Consumer Affairs only", "No real estate license if the manager is an employee of the owner"],
+      correctIndex: 1,
+      explain: "Property management services provided for compensation require a broker license under Hawaii real estate law, regardless of employment status or other registrations.",
+    },
+    {
+      q: "Which licensing credential is mandatory for an individual who charges fees to oversee tenant relations, collect rents, and maintain rental properties?",
+      options: ["Broker license", "Salesperson license", "Property manager certificate from the Hawaii Real Estate Commission", "Business tax license only"],
+      correctIndex: 0,
+      explain: "In Hawaii, any person receiving compensation for property management must hold a broker license; a salesperson license or business tax license alone is insufficient.",
+    },
+    {
+      q: "A property owner hires a professional to handle leasing, maintenance coordination, and rent collection for multiple residential units in exchange for a monthly management fee. What is required?",
+      options: ["A general real estate salesperson license", "A broker license", "An escrow account license", "No real estate license if the owner provides written authorization"],
+      correctIndex: 1,
+      explain: "Property management for compensation in Hawaii requires a broker license; written owner authorization does not exempt the manager from licensing requirements.",
+    },
+    {
+      q: "Under Hawaii real estate law, if a property manager receives compensation for managing residential or commercial properties, which licensing requirement applies?",
+      options: ["Broker license only", "Salesperson license only", "Either a broker or salesperson license at the manager's discretion", "No real estate license is required if the manager is bonded"],
+      correctIndex: 0,
+      explain: "Hawaii REC regulations mandate that paid property managers must hold a broker license; a salesperson license or bonding does not satisfy this requirement.",
+    },
+    {
+      q: "A property manager in Hawaii who receives a fee for managing rental properties on behalf of an owner must hold which type of license?",
+      options: ["A salesperson license with property management endorsement", "A broker license", "Only a general business permit from the city", "No real estate license if bonded and insured"],
+      correctIndex: 1,
+      explain: "Hawaii law requires a broker license to engage in property management for compensation; a salesperson license is insufficient, and general business permits do not satisfy real estate licensing requirements.",
+    },
   ],
   "hi-property-management-q07": [
     {
@@ -3131,6 +3761,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Provide proper notice of lease termination intent", "Make timely rent payment", "Disclose a roommate moving into the unit", "Complete a required annual safety inspection"],
       correctIndex: 1,
       explain: "The 5-day notice period in Hawaii is statutory for non-payment of rent; it is the landlord's first formal step in the eviction process for this specific breach.",
+    },
+    {
+      q: "Under Hawaii residential tenancy law, when a landlord issues a notice requiring the tenant to cure or quit within 5 days, the most common reason is:",
+      options: ["Failure to maintain the property's exterior appearance", "Failure to remit monthly rent payment", "Advance notice of lease expiration", "Scheduling a routine property walkthrough"],
+      correctIndex: 1,
+      explain: "A 5-day cure or quit notice in Hawaii is typically used for non-payment of rent, giving the tenant 5 days to pay or vacate.",
+    },
+    {
+      q: "A landlord serves a tenant with a 5-day notice. Which of the following is the primary breach being addressed?",
+      options: ["Unauthorized alterations to the leased premises", "Delinquent rent obligation", "Required annual safety inspection", "Damage from normal wear and tear"],
+      correctIndex: 1,
+      explain: "The 5-day notice period in Hawaii residential tenancy is the standard cure-or-quit timeframe for rent default situations.",
+    },
+    {
+      q: "If a tenant receives a 5-day notice to cure or quit, what tenant conduct most likely triggered it?",
+      options: ["Keeping a pet without written permission", "Not paying rent on the due date", "Requesting repairs to plumbing", "Providing 30 days' notice of intent to move"],
+      correctIndex: 1,
+      explain: "The 5-day notice is the statutory period given to tenants to remedy rent arrearages before eviction proceedings can commence.",
+    },
+    {
+      q: "A Hawaii property manager issues a 5-day notice to a residential tenant. This action is most commonly associated with:",
+      options: ["Tenant's lease term reaching its natural expiration date", "Tenant's failure to meet a rental payment obligation", "Landlord's need to conduct a mandatory annual inspection", "Landlord's request for voluntary lease renewal discussion"],
+      correctIndex: 1,
+      explain: "Under Hawaii law, a 5-day notice is the required cure-or-quit period for non-payment of rent before formal eviction action.",
+    },
+    {
+      q: "Under Hawaii rental law, when a landlord provides a tenant with a 5-day notice, what is the landlord most likely addressing?",
+      options: ["Failure to pay the monthly rent obligation", "Termination of the lease agreement at expiration", "Scheduling a required annual property inspection", "Performance of necessary repairs to common areas"],
+      correctIndex: 0,
+      explain: "A 5-day notice in Hawaii rental law is the statutory notice period for non-payment of rent, giving the tenant 5 days to cure the delinquency before eviction proceedings may commence.",
     },
   ],
   "hi-property-management-q08": [
@@ -3158,6 +3818,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Hawaii regulations mandate that client funds be held in a separate trust account to protect these funds from broker liability and ensure proper accounting and return of deposits.",
     },
+    {
+      q: "Under Hawaii real estate law, where should a broker deposit rental security funds received from a tenant?",
+      options: ["In the broker's general operating or business account", "In a segregated trust or escrow account maintained separately from broker funds", "In a money market account under the tenant's name", "In the broker's personal safe deposit box at a financial institution"],
+      correctIndex: 1,
+      explain: "Hawaii law requires security deposits to be held in a trust account separate and distinct from the broker's operating funds to protect tenant money.",
+    },
+    {
+      q: "A broker receives a security deposit from a tenant for a rental property. Which account is the legally correct place to deposit these funds?",
+      options: ["A trust account separate from all broker business accounts", "The broker's escrow account used for earnest money only", "The broker's regular business checking account", "A joint account with the property owner and broker"],
+      correctIndex: 0,
+      explain: "Security deposits must be held in a segregated trust account kept separate from the broker's operating accounts and other client funds.",
+    },
+    {
+      q: "When a property manager collects security deposits from tenants, these funds must be placed in:",
+      options: ["The property owner's personal bank account", "A dedicated trust account maintained separately from the broker's business funds", "The broker's escrow account combined with earnest money deposits", "A certificate of deposit in the property owner's name"],
+      correctIndex: 1,
+      explain: "Security deposits are trust funds that must be held in a separate trust account to maintain segregation and protect tenant deposits from broker operations.",
+    },
+    {
+      q: "A real estate broker in Hawaii receives tenant security deposits. According to licensing law, these funds must NOT be:",
+      options: ["Placed in a trust account separate from operating funds", "Kept in a segregated account away from broker business money", "Deposited in the broker's general operating account", "Maintained in an account clearly designated for client funds"],
+      correctIndex: 2,
+      explain: "Security deposits must be held in a separate trust account and cannot be commingled with the broker's operating or business accounts.",
+    },
+    {
+      q: "Under Hawaii real estate law, where should a broker deposit funds collected from a tenant as a security deposit?",
+      options: ["In the broker's general operating account mixed with other business funds", "In a designated trust or escrow account kept separate from the broker's own money", "In a money market account registered under the tenant's name", "In the broker's personal safe deposit box at a local bank"],
+      correctIndex: 1,
+      explain: "Hawaii law requires brokers to maintain security deposits in a separate trust account, not commingled with broker operating funds, to protect tenant money from broker liability.",
+    },
   ],
   "hi-title-conveyances-q00": [
     {
@@ -3183,6 +3873,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Statutory Warranty Deed form", "Transfer Certificate of Title", "Recorded Plat and subdivision map", "Homestead Declaration filing"],
       correctIndex: 1,
       explain: "The TCT is the exclusive Land Court document that evidences and records ownership of registered land parcels in Hawaii.",
+    },
+    {
+      q: "Which document serves as the official proof of ownership for property registered through Hawaii's Land Court system?",
+      options: ["Warranty deed", "Transfer Certificate of Title", "General Excise Tax certificate", "Condominium Property Regime agreement"],
+      correctIndex: 1,
+      explain: "The Transfer Certificate of Title (TCT) is the official document issued by Land Court that evidences registered ownership of real property in Hawaii.",
+    },
+    {
+      q: "A buyer receives documentation from Land Court showing ownership of a parcel. This evidence of title would be a:",
+      options: ["TCT", "Declaration of covenants", "Special warranty deed", "Native Hawaiian registry"],
+      correctIndex: 0,
+      explain: "Land Court registration is evidenced by a Transfer Certificate of Title (TCT), which is the definitive document of ownership in the Land Court system.",
+    },
+    {
+      q: "When property is registered in Land Court, the owner receives which document as evidence of their registered ownership?",
+      options: ["Affidavit of title", "Recorded deed copy", "Transfer Certificate of Title", "Survey certification"],
+      correctIndex: 2,
+      explain: "The Transfer Certificate of Title (TCT) is the conclusive evidence of ownership issued by Land Court upon registration of a parcel.",
+    },
+    {
+      q: "A parcel subject to Land Court registration is legally evidenced by which of the following?",
+      options: ["Notarized grant deed", "Plat of subdivision", "TCT issued by Land Court", "Property tax assessment notice"],
+      correctIndex: 2,
+      explain: "A Transfer Certificate of Title (TCT) is the official proof of ownership for land registered in the Land Court system in Hawaii.",
+    },
+    {
+      q: "When a property owner receives formal documentation from Land Court proving ownership of a registered parcel in Hawaii, what document is issued?",
+      options: ["CPR certification", "Transfer Certificate of Title", "Warranty deed with survey attachment", "Statutory plat endorsement"],
+      correctIndex: 1,
+      explain: "The Transfer Certificate of Title (TCT) is the official document issued by the Land Court of Hawaii to evidence ownership of a land-court-registered parcel and serves as proof of title.",
     },
   ],
   "hi-title-conveyances-q01": [
@@ -3210,6 +3930,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "HRS 507 is the statutory chapter governing mechanic's and materialman's liens in Hawaii, allowing suppliers and contractors to file liens for unpaid services or materials.",
     },
+    {
+      q: "Which Hawaii Revised Statute specifically addresses liens filed by contractors and suppliers for unpaid work or materials on real property?",
+      options: ["HRS 521 (Residential Tenancies)", "HRS 507 (Mechanic's and Materialman's Liens)", "HRS 514B (Condominium Property Ownership)", "HRS 467 (Real Estate Commission)"],
+      correctIndex: 1,
+      explain: "HRS 507 is Hawaii's statutory framework governing mechanic's and materialman's liens, which protect contractors and suppliers by allowing them to file liens against property.",
+    },
+    {
+      q: "A general contractor in Hawaii is unable to collect payment from a homeowner for construction work completed. Under which statute can the contractor file a lien against the property?",
+      options: ["HRS 514B", "HRS 467", "HRS 507", "HRS 521"],
+      correctIndex: 2,
+      explain: "HRS 507 provides the legal mechanism for contractors and materialmen to file liens on real property when they are not paid for labor or materials supplied.",
+    },
+    {
+      q: "Real estate licensees should be familiar with Hawaii's mechanic's lien law found in:",
+      options: ["HRS 467", "HRS 514B", "HRS 521", "HRS 507"],
+      correctIndex: 3,
+      explain: "HRS 507 is the controlling statute for mechanic's and materialman's liens in Hawaii, essential knowledge for agents handling property transactions.",
+    },
+    {
+      q: "Which of the following Hawaii statutes would a title company review to determine if a contractor's lien might attach to a property?",
+      options: ["HRS 521 (Residential Tenancies Law)", "HRS 514B (Condominium Law)", "HRS 507 (Mechanic's and Materialman's Liens)", "HRS 467 (Real Estate Commission Rules)"],
+      correctIndex: 2,
+      explain: "HRS 507 governs mechanic's and materialman's liens, which title companies must examine during a property search to ensure clear marketable title.",
+    },
+    {
+      q: "A contractor in Hawaii files a claim against a property owner for unpaid labor and materials supplied during a renovation project. Under which Hawaii Revised Statute can this lien be properly recorded?",
+      options: ["HRS 521 (Residential Tenancies)", "HRS 507 (Mechanic's and Materialman's Liens)", "HRS 514B (Condominiums)", "HRS 467 (Property Tax Assessment)"],
+      correctIndex: 1,
+      explain: "HRS 507 is the controlling statute that establishes the rights and procedures for mechanic's and materialman's liens in Hawaii, allowing contractors and suppliers to file liens for unpaid work and materials.",
+    },
   ],
   "hi-title-conveyances-q02": [
     {
@@ -3235,6 +3985,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["HRS 521", "HRS 514B", "HRS 467", "HRS 667"],
       correctIndex: 3,
       explain: "HRS 667 is Hawaii's primary statute governing non-judicial foreclosure procedures, including all notice, timing, and conduct requirements for power-of-sale foreclosures.",
+    },
+    {
+      q: "Which Hawaii Revised Statute establishes the framework for power-of-sale foreclosures?",
+      options: ["HRS 514B", "HRS 667", "HRS 521", "HRS 480"],
+      correctIndex: 1,
+      explain: "HRS 667 contains Hawaii's foreclosure statutes, including procedures for power-of-sale and non-judicial foreclosures.",
+    },
+    {
+      q: "A lender seeking to conduct a foreclosure sale without court involvement must comply with requirements under:",
+      options: ["HRS 467 and HRS 514B", "HRS 667", "HRS 521", "HRS 480 and HRS 508"],
+      correctIndex: 1,
+      explain: "HRS 667 is the controlling statute for all Hawaii foreclosure procedures, including non-judicial foreclosures conducted through power-of-sale provisions.",
+    },
+    {
+      q: "When a mortgagee exercises a power-of-sale clause without filing in court, the applicable Hawaii statute is:",
+      options: ["HRS 521", "HRS 480", "HRS 667", "HRS 514B"],
+      correctIndex: 2,
+      explain: "HRS 667 governs all foreclosure procedures in Hawaii, including non-judicial foreclosures executed under power-of-sale authority.",
+    },
+    {
+      q: "A foreclosure conducted by a mortgagee outside the judicial system must follow the procedures outlined in:",
+      options: ["HRS 514B", "HRS 667", "HRS 521", "HRS 508"],
+      correctIndex: 1,
+      explain: "HRS 667 is Hawaii's comprehensive foreclosure statute that regulates both judicial and non-judicial foreclosure procedures.",
+    },
+    {
+      q: "A residential mortgage lender in Hawaii initiates a foreclosure action without judicial court proceedings. Which statute provides the legal framework for this type of foreclosure?",
+      options: ["HRS 514B", "HRS 667", "HRS 521", "HRS 480"],
+      correctIndex: 1,
+      explain: "HRS 667 is the Hawaii statute that establishes the procedures and requirements for non-judicial foreclosures in Hawaii.",
     },
   ],
   "hi-title-conveyances-q03": [
@@ -3262,6 +4042,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "MFDR (Mortgage Foreclosure Dispute Resolution) is the Hawaii statutory alternative dispute mechanism that must be offered to owner-occupants before a foreclosure action proceeds.",
     },
+    {
+      q: "Under Hawaii Revised Statutes Chapter 667, what is the required dispute resolution process before a lender can proceed with foreclosure on a principal residence?",
+      options: ["CPR (Cyber Property Rights)", "MFDR (Mortgage Foreclosure Dispute Resolution)", "HARPTA (Hawaii Anti-Deficiency Residential Property Tax Act)", "TMK (Tax Map Key) arbitration"],
+      correctIndex: 1,
+      explain: "MFDR is the statutory alternative dispute resolution mechanism mandated by HRS 667 for owner-occupied residential foreclosures in Hawaii before judicial action can commence.",
+    },
+    {
+      q: "A homeowner in Hawaii receives a notice of intent to foreclose on her primary residence. Which pre-litigation resolution process must the lender offer before initiating foreclosure proceedings?",
+      options: ["TMK identification and assessment review", "HARPTA compliance certification", "MFDR (Mortgage Foreclosure Dispute Resolution)", "CPR (Commercial Property Recordation)"],
+      correctIndex: 2,
+      explain: "MFDR is Hawaii's mandatory alternative dispute resolution process that lenders must provide to owner-occupants before foreclosing on residential property under HRS 667.",
+    },
+    {
+      q: "Which of the following is Hawaii's statutory alternative dispute resolution requirement for residential mortgage foreclosures?",
+      options: ["MFDR", "HARPTA", "TMK verification process", "CPR dispute filing"],
+      correctIndex: 0,
+      explain: "MFDR (Mortgage Foreclosure Dispute Resolution) is the required pre-foreclosure alternative dispute mechanism established in HRS Chapter 667 for owner-occupied residential properties.",
+    },
+    {
+      q: "A lender seeks to foreclose on an owner-occupied dwelling in Hawaii. Prior to filing a judicial foreclosure action, the lender must comply with which mandatory alternative dispute process?",
+      options: ["HARPTA mediation and notice requirements", "Mortgage Foreclosure Dispute Resolution (MFDR)", "CPR (Consumer Property Rights) hearing", "TMK reassessment and grievance procedure"],
+      correctIndex: 1,
+      explain: "MFDR, codified in HRS 667, is Hawaii's required alternative dispute resolution process that must occur before a lender can proceed with foreclosure on a principal residence.",
+    },
+    {
+      q: "When an owner-occupant in Hawaii faces potential foreclosure, which statutory mechanism provides a structured dispute resolution process before judicial proceedings?",
+      options: ["CPR", "MFDR", "HARPTA", "TMK"],
+      correctIndex: 1,
+      explain: "Mortgage Foreclosure Dispute Resolution (MFDR) under HRS 667 is Hawaii's required alternative dispute process that allows owner-occupants to challenge foreclosures through negotiation and mediation before court action proceeds.",
+    },
   ],
   "hi-title-conveyances-q04": [
     {
@@ -3287,6 +4097,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Right of survivorship passes to the surviving co-owner", "Each owner holds an equal, undivided interest as tenants in common", "The parties own together as husband and wife by the entirety", "Each owner receives a separate, distinct legal parcel"],
       correctIndex: 1,
       explain: "Hawaii law presumes tenancy in common as the default concurrent ownership form; joint tenancy rights of survivorship and tenancy by the entirety require express deed language.",
+    },
+    {
+      q: "When a Hawaii deed conveys property to two individuals without specifying the type of co-ownership, which form applies by statute?",
+      options: ["Severalty with undivided interest", "Tenancy by the entirety", "Tenancy in common", "Joint tenancy with right of survivorship"],
+      correctIndex: 2,
+      explain: "Hawaii law presumes tenancy in common when co-owners are not married and no express survivorship language is used; it is the default presumption.",
+    },
+    {
+      q: "A property is deeded to Sarah and Michael with no explicit language regarding survivorship or unity of title. Absent any other agreement, what is the resulting ownership arrangement in Hawaii?",
+      options: ["Joint tenancy automatically", "Tenancy in common", "Tenancy by the entirety", "Sole ownership split equally"],
+      correctIndex: 1,
+      explain: "Tenancy in common is the default form of co-ownership in Hawaii when no express intent for joint tenancy or tenancy by the entirety is stated in the conveyance.",
+    },
+    {
+      q: "Which co-ownership form in Hawaii requires explicit language in the deed to be created, as it is not the presumed default?",
+      options: ["Tenancy in common", "Joint tenancy with right of survivorship", "Tenancy by the entirety for married couples", "Undivided interest ownership"],
+      correctIndex: 1,
+      explain: "Joint tenancy must be expressly created with clear language stating the intent for survivorship rights; without such language, the law defaults to tenancy in common.",
+    },
+    {
+      q: "A Hawaii property is conveyed to two unrelated individuals. The deed is silent on the nature of their ownership rights. Which presumption does Hawaii property law apply?",
+      options: ["Joint tenancy with automatic survivorship", "Tenancy in common with equal shares", "Tenancy by the entirety", "Concurrent ownership by statute only"],
+      correctIndex: 1,
+      explain: "Hawaii statute presumes tenancy in common when co-ownership intent is not explicitly expressed in the deed; this is the default form unless joint tenancy is specifically created.",
+    },
+    {
+      q: "When two individuals purchase real property in Hawaii without explicitly stating how title should be held, what form of ownership is presumed?",
+      options: ["Tenancy by the entirety with survivorship rights", "Tenancy in common with equal undivided interests", "Joint tenancy with right of survivorship", "Sole and separate property ownership"],
+      correctIndex: 1,
+      explain: "Hawaii law presumes tenancy in common as the default co-ownership form when the deed or purchase agreement does not specify joint tenancy or another arrangement. Tenancy in common allows each owner an undivided interest without survivorship rights.",
     },
   ],
   "hi-title-conveyances-q05": [
@@ -3314,6 +4154,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Tenancy by the entirety uniquely combines spousal-only availability with both survivorship and individual creditor immunity.",
     },
+    {
+      q: "A husband and wife purchase residential property in Hawaii and want automatic transfer rights upon death while maintaining protection from individual creditors. Which ownership form best meets both objectives?",
+      options: ["Severalty with a will provision", "Tenancy by the entirety", "Joint tenancy with right of survivorship", "Tenancy in common with survivorship clause"],
+      correctIndex: 1,
+      explain: "Tenancy by the entirety is the only title form that combines both right of survivorship AND creditor protection for married couples in Hawaii.",
+    },
+    {
+      q: "Two spouses hold title to Oahu beachfront property. Upon one spouse's death, title automatically passes to the surviving spouse, and neither spouse's separate creditors can attach a lien against the property. This ownership arrangement is most likely a:",
+      options: ["Tenancy in common", "Tenancy by the entirety", "Joint tenancy between unrelated parties", "Community property with survivorship"],
+      correctIndex: 1,
+      explain: "Only tenancy by the entirety provides both automatic survivorship to the remaining spouse and creditor protection inherent to the tenancy form.",
+    },
+    {
+      q: "A married couple in Hawaii wants title to their vacation home structured so that the property automatically vests in the surviving spouse at death, and their individual creditors cannot pursue claims against the property. What form of co-ownership achieves both goals?",
+      options: ["Joint tenancy", "Tenancy in common", "Tenancy by the entirety", "Partnership ownership"],
+      correctIndex: 2,
+      explain: "Tenancy by the entirety is specifically designed for married couples and uniquely provides both right of survivorship and spousal creditor protection.",
+    },
+    {
+      q: "At closing, a married couple elects a title form that provides survivorship rights and shields the property from claims by one spouse's individual creditors. Which ownership structure did they most likely choose?",
+      options: ["Tenancy by the entirety", "Tenancy in common with cross-default provisions", "Joint tenancy with liability waivers", "Severalty with spousal consent requirement"],
+      correctIndex: 0,
+      explain: "Tenancy by the entirety is the sole ownership form that statutorily combines survivorship with inherent creditor protection for married spouses.",
+    },
+    {
+      q: "A husband and wife purchase residential property in Hawaii and want automatic transfer of ownership upon one spouse's death while also protecting their interest from individual creditors. Which ownership form achieves both objectives?",
+      options: ["Joint tenancy with right of survivorship", "Tenancy by the entirety", "Tenancy in common with a survivorship agreement", "Community property arrangement"],
+      correctIndex: 1,
+      explain: "Tenancy by the entirety is the only form that provides both survivorship rights AND creditor protection, as creditors of one spouse cannot attach the property without both spouses' consent.",
+    },
   ],
   "hi-title-conveyances-q06": [
     {
@@ -3339,6 +4209,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Request the seller execute a quitclaim deed and assume the risk", "Petition the county to revise the recorded plat map", "Bring a quiet title action to judicially settle the ownership dispute", "Cancel the sale and file a breach of contract claim only"],
       correctIndex: 2,
       explain: "A quiet title action provides judicial resolution to title clouds like disputed easements, confirming ownership rights and clearing the defect from the record.",
+    },
+    {
+      q: "A seller discovers a lien from a previous owner on the property title. To clear this cloud on the title, the seller would most likely file:",
+      options: ["A quitclaim deed with the county recorder", "A quiet title action in court", "A notice of default against the lienholder", "A title insurance claim with the insurer"],
+      correctIndex: 1,
+      explain: "A quiet title action is a legal proceeding used to remove clouds on title and confirm clear ownership by court decree.",
+    },
+    {
+      q: "Which of the following BEST describes the purpose of a quiet title lawsuit?",
+      options: ["To prevent a mortgagee from foreclosing on residential property", "To establish marketable title and eliminate competing claims or defects", "To reduce the assessed value of real property for tax purposes", "To create a valid mechanic's lien against the property"],
+      correctIndex: 1,
+      explain: "Quiet title actions are judicial proceedings that establish clear ownership by removing title defects, liens, and other competing claims.",
+    },
+    {
+      q: "An owner wants to clear a disputed easement and an old tax deed claim from the property records. The most appropriate legal remedy is:",
+      options: ["Filing a statutory declaration of homestead", "Requesting a quiet title action through the courts", "Executing a warranty deed to a new owner", "Recording a disclaimer of interest with the county"],
+      correctIndex: 1,
+      explain: "A quiet title action is a court proceeding specifically designed to remove title defects and resolve ownership disputes.",
+    },
+    {
+      q: "When a property has multiple parties claiming ownership rights or unresolved liens, a real estate attorney typically recommends filing:",
+      options: ["An affidavit of adverse possession", "A quiet title suit in district court", "A release of security agreement", "An amendment to the deed of trust"],
+      correctIndex: 1,
+      explain: "A quiet title suit is the legal action used to resolve competing claims and clear title defects through court judgment.",
+    },
+    {
+      q: "A property owner files a lawsuit to remove defects from the chain of title and establish clear ownership. This legal proceeding is known as:",
+      options: ["A mechanic's lien action", "An action for quiet title", "A reconveyance deed", "A notice of default"],
+      correctIndex: 1,
+      explain: "Quiet title is a judicial proceeding that resolves clouds on title and confirms the owner's right to clear ownership of the property.",
     },
   ],
   "hi-types-of-ownership-q00": [
