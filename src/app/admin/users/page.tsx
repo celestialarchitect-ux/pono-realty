@@ -171,6 +171,8 @@ function NotAdmin({ onLogout }: { onLogout: () => void }) {
 function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; sortBy: 'recent' | 'hours' | 'name'; setSortBy: (s: 'recent' | 'hours' | 'name') => void; onLogout: () => void }) {
   const [editing, setEditing] = useState<AdminUserRow | null>(null);
   const [rows, setRows] = useState(users);
+  const [query, setQuery] = useState('');
+  const [tierFilter, setTierFilter] = useState<'all' | 'free' | 'standard' | 'plus' | 'solo' | 'admin'>('all');
   useEffect(() => { setRows(users); }, [users]);
 
   const updateUser = async (u: AdminUserRow, patch: Partial<AdminUserRow>) => {
@@ -194,7 +196,22 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
     try { window.localStorage.setItem('rfs:auth-bump', String(Date.now())); } catch {/* ignore */}
   };
 
-  const sorted = [...rows].sort((a, b) => {
+  // Filter first, then sort. Filtering by name / email / phone covers the
+  // common admin search patterns; tierFilter is a separate dropdown.
+  const q = query.trim().toLowerCase();
+  const filtered = rows.filter(u => {
+    if (q) {
+      const hay = `${u.name} ${u.email} ${u.roles?.join(' ') ?? ''}`.toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    if (tierFilter === 'admin') {
+      if (!u.isAdmin) return false;
+    } else if (tierFilter !== 'all') {
+      if (u.tier !== tierFilter) return false;
+    }
+    return true;
+  });
+  const sorted = [...filtered].sort((a, b) => {
     if (sortBy === 'hours') return b.totalSeconds - a.totalSeconds;
     if (sortBy === 'name') return a.name.localeCompare(b.name);
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
@@ -202,11 +219,43 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
 
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 20 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
         <p style={{ fontSize: 15, color: T.textDim, lineHeight: 1.6, margin: 0 }}>
-          {users.length} enrolled students. Hawaii state law requires 60 hours of pre-license study before exam eligibility.
+          {filtered.length === users.length
+            ? `${users.length} enrolled student${users.length === 1 ? '' : 's'}.`
+            : `${filtered.length} of ${users.length} match the filters.`}
+          {' '}Hawaii state law requires 60 hours of pre-license study before exam eligibility.
         </p>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+      </div>
+
+      {/* SEARCH + TIER FILTER + SORT — single row on desktop, stacks on mobile */}
+      <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexWrap: 'wrap', marginBottom: 18 }}>
+        <input
+          type="search"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Search by name, email, or role…"
+          style={{
+            flex: '1 1 280px', minWidth: 200,
+            padding: '10px 14px', borderRadius: 10,
+            border: `1px solid ${T.border}`, background: T.bgRaised, color: T.text,
+            fontFamily: 'inherit', fontSize: 14, lineHeight: 1.3,
+          }}
+        />
+        <div style={{ display: 'inline-flex', gap: 4, padding: 4, background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.border}` }}>
+          {(['all', 'free', 'standard', 'plus', 'solo', 'admin'] as const).map(t => (
+            <button key={t} onClick={() => setTierFilter(t)} style={{
+              padding: '6px 12px', borderRadius: 6,
+              background: tierFilter === t ? T.ocean : 'transparent',
+              color: tierFilter === t ? '#fff' : T.text,
+              border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+              fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
+            }}>
+              {t}
+            </button>
+          ))}
+        </div>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 600 }}>Sort</span>
           {(['recent', 'hours', 'name'] as const).map(s => (
             <button
