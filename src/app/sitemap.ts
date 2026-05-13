@@ -28,6 +28,7 @@ const STATIC_ROUTES: Array<{
   // Public verifier — sponsoring brokers and the REC will share this URL.
   { path: '/verify-certificate', changeFrequency: 'yearly', priority: 0.5 },
   { path: '/forgot-password', changeFrequency: 'yearly', priority: 0.3 },
+  { path: '/faq', changeFrequency: 'monthly', priority: 0.7 },
   // Legal pages — Google will discover them via Footer links too, but
   // including in the sitemap gets them indexed faster.
   { path: '/policies/terms',      changeFrequency: 'yearly', priority: 0.4 },

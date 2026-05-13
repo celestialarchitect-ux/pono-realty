@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:35:25.837Z via Claude Haiku.
+// Generated 2026-05-13T10:38:45.968Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -3366,6 +3366,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "CPR (Condominium Property Regime) is the Hawaii legal mechanism that governs multiple individually-owned units situated on a single parcel of real property.",
     },
+    {
+      q: "Under Hawaii real estate law, what does the acronym CPR stand for?",
+      options: ["Certified Property Residential", "Condominium Property Regime — the legal framework for individually owned units sharing common property", "Commercial Property Registry", "Central Processing Records"],
+      correctIndex: 1,
+      explain: "CPR in Hawaii real estate refers to Condominium Property Regime, which governs the ownership structure where multiple condo units exist on a single parcel of land with shared common areas.",
+    },
+    {
+      q: "A real estate professional in Hawaii encounters a property described as being under CPR. This most likely refers to:",
+      options: ["A requirement for continuous property monitoring by the state", "A structure where separate residential or commercial units occupy one lot with joint ownership of common elements", "A mandatory recording process for all county transfers", "A zoning classification for rural properties"],
+      correctIndex: 1,
+      explain: "CPR (Condominium Property Regime) in Hawaii describes the legal ownership model where individual units on a single lot are separately owned while common areas and facilities are jointly owned or managed.",
+    },
+    {
+      q: "When reviewing a Hawaii property listing, an agent sees \"CPR\" noted in the legal description. The agent should understand this indicates:",
+      options: ["The property is subject to county property tax reassessment", "Multiple separately owned units exist on one parcel with shared common property rights and responsibilities", "The property requires continuous regulatory property review", "The property is enrolled in a county property recording program"],
+      correctIndex: 1,
+      explain: "CPR stands for Condominium Property Regime in Hawaii, signifying that the property comprises individually owned units on a single lot with common property shared among unit owners.",
+    },
+    {
+      q: "A broker in Hawaii receives a purchase agreement referencing a \"CPR property.\" The broker knows this means:",
+      options: ["Continuous Property Recording under state law", "County Property Regulation requirements apply", "Condominium Property Regime — individual ownership of units combined with common ownership on one lot", "Commercial Property Reservation status"],
+      correctIndex: 2,
+      explain: "In Hawaii real estate terminology, CPR stands for Condominium Property Regime, which describes the legal structure where multiple unit owners hold separate title to their units while collectively owning common elements on the same parcel.",
+    },
+    {
+      q: "When a Hawaii real estate professional encounters the acronym CPR on property documents, what does it refer to in the context of residential units?",
+      options: ["Certified Property Registry system mandated by Hawaii state law", "Condominium Property Regime describing common ownership structure", "Comparative Property Records used for appraisal purposes", "Condo Purchase Rider required in purchase agreements"],
+      correctIndex: 1,
+      explain: "CPR in Hawaii real estate specifically denotes Condominium Property Regime, which is a legal framework allowing multiple condominium units to exist on a single parcel of land with shared common areas and separate unit ownership.",
+    },
   ],
   "hi-types-of-ownership-q01": [
     {
@@ -3391,6 +3421,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The right to occupy and use the unit", "The underlying fee simple interest in the land", "An interest in the condominium unit itself", "The right to lease the unit to others"],
       correctIndex: 1,
       explain: "In a leasehold, the buyer does not own the fee or land; they own only a temporary right of occupancy while the lessor retains the underlying fee simple title.",
+    },
+    {
+      q: "In Hawaii, when a condominium owner purchases a 50-year leasehold unit, what property interest do they actually own?",
+      options: ["Fee simple title to both the land and the structure", "A possessory right to occupy the unit for the lease term", "Joint ownership with the AOAO of all common elements", "Reversionary interest in the underlying land after lease expires"],
+      correctIndex: 1,
+      explain: "A leasehold purchase grants only the right to possess and use the unit during the lease term; the lessor retains ownership of the land beneath.",
+    },
+    {
+      q: "Which of the following best describes what a buyer receives when purchasing a leasehold condominium unit in Hawaii?",
+      options: ["Ownership of the land parcel plus ownership of the building structure", "A contractual right to occupy and use the unit for a specified period", "Full fee simple ownership subject to AOAO assessments", "Legal title to the real property with a subordinated lien"],
+      correctIndex: 1,
+      explain: "Leasehold ownership grants only use and occupancy rights during the lease term; the underlying fee interest in the land remains with the lessor.",
+    },
+    {
+      q: "A consumer closes on a 50-year leasehold condo in Honolulu. Which statement accurately reflects their ownership position?",
+      options: ["They own the fee simple estate in the real property", "They possess a limited, time-bounded right to occupy the unit", "They own stock in the AOAO and control the building management", "They hold an easement for exclusive use of the land"],
+      correctIndex: 1,
+      explain: "Leasehold ownership is a personal possessory right limited to the lease term; true ownership of the underlying land remains with the lessor.",
+    },
+    {
+      q: "When a buyer takes title to a leasehold condominium unit with a 50-year term, they acquire:",
+      options: ["Real property ownership equivalent to fee simple title", "An intangible interest in occupying the unit during the lease period", "Stock certificates representing ownership in the building corporation", "A warranty deed to the land and all affixed improvements"],
+      correctIndex: 1,
+      explain: "Leasehold conveys only the right to occupy for the lease term; the lessor retains ownership of the underlying land and legal title.",
+    },
+    {
+      q: "When a condominium buyer takes title to a 50-year leasehold unit in Hawaii, what property right has been transferred to the buyer?",
+      options: ["Full ownership of both the land and the structure", "Only the right to occupy and use the unit for the lease term", "Joint ownership with the AOAO of all common elements", "Fee simple title plus a subordinate lease agreement"],
+      correctIndex: 1,
+      explain: "A leasehold conveys only the right to occupy the unit for the lease duration; the underlying land and fee interest remain with the lessor. The buyer does not own the land itself.",
     },
   ],
   "hi-types-of-ownership-q02": [
@@ -3418,6 +3478,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 3,
       explain: "HRS 514B governs all Hawaii condominiums created on or after January 1, 2006, including a property developed in 2010.",
     },
+    {
+      q: "Which statute provides the primary legal framework for condominiums established in Hawaii after 2006?",
+      options: ["HRS 467B", "HRS 514B", "HRS 521", "HRS 514A"],
+      correctIndex: 1,
+      explain: "HRS 514B is the governing statute for all condominiums created after 2006 in Hawaii and supersedes the older HRS 514A framework.",
+    },
+    {
+      q: "A Hawaii real estate agent is listing a condominium property built in 2015. What is the controlling statute for this property's declaration and governance?",
+      options: ["HRS 514A (Horizontal Property Regime Act)", "HRS 514B (Hawaii Condominium Property Act)", "HRS 521 (Residential Tenancies)", "HRS 467 (Business Corporations)"],
+      correctIndex: 1,
+      explain: "HRS 514B governs all condominiums established after 2006, making it the applicable statute for a 2015-built condominium property.",
+    },
+    {
+      q: "When reviewing a condominium declaration for a property developed in 2010, a Hawaii broker should reference which statute as the primary authority?",
+      options: ["HRS 521", "HRS 467", "HRS 514B", "HRS 514A"],
+      correctIndex: 2,
+      explain: "HRS 514B is the primary statute governing modern condominiums in Hawaii, including all developments created after 2006.",
+    },
+    {
+      q: "Under Hawaii real estate law, contemporary condominium projects are regulated by:",
+      options: ["HRS 514A exclusively for all condominiums", "HRS 514B for condominiums created after 2006", "HRS 521 for all residential developments", "HRS 467 for property management entities"],
+      correctIndex: 1,
+      explain: "HRS 514B is the statute that governs modern condominiums in Hawaii, specifically those established after January 1, 2006.",
+    },
+    {
+      q: "A condominium project established in Hawaii in 2010 would be subject to the provisions of which statute?",
+      options: ["HRS 467B", "HRS 514B", "HRS 521", "HRS 514A"],
+      correctIndex: 1,
+      explain: "HRS 514B is the applicable statute for condominiums created after 2006, making it the governing law for any modern condo project in Hawaii established in 2010.",
+    },
   ],
   "hi-types-of-ownership-q03": [
     {
@@ -3443,6 +3533,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["72 hours of the executed contract", "One week from the purchase date", "10 business days of signing", "Two weeks from closing"],
       correctIndex: 1,
       explain: "Hawaii Revised Statutes 514E mandates that timeshare buyers may rescind their purchase within 7 days of executing the agreement.",
+    },
+    {
+      q: "Under Hawaii Revised Statutes Chapter 514E, a purchaser of a timeshare interest may cancel the purchase agreement during what time period?",
+      options: ["10 days from the date of signing", "7 days from the date of signing", "5 business days from receipt of the disclosure statement", "14 calendar days from initial payment"],
+      correctIndex: 1,
+      explain: "HRS 514E establishes a 7-day rescission period for timeshare contracts in Hawaii, allowing buyers to cancel within that timeframe.",
+    },
+    {
+      q: "If a timeshare buyer in Hawaii wishes to exercise their statutory right of cancellation, they must do so within:",
+      options: ["72 hours of contract execution", "One week of receiving the purchase agreement", "10 business days of the sale", "2 weeks from the date of the purchase agreement"],
+      correctIndex: 1,
+      explain: "Hawaii's timeshare law (HRS 514E) provides a 7-day rescission right, which is commonly referred to as one week from the purchase agreement date.",
+    },
+    {
+      q: "A consumer in Hawaii who has just purchased a timeshare unit discovers undisclosed liens on the property. When must the buyer file for rescission to comply with state law?",
+      options: ["Before 3 business days elapse", "Within 7 days of the purchase agreement", "No later than 21 days after closing", "Within one calendar month of signing"],
+      correctIndex: 1,
+      explain: "HRS 514E mandates a 7-day rescission window for timeshare purchases in Hawaii, providing consumer protection during that period.",
+    },
+    {
+      q: "A timeshare sales contract in Hawaii was executed on a Monday. The buyer now wishes to rescind. According to HRS 514E, the latest day the buyer can legally cancel is:",
+      options: ["Wednesday of the same week", "The following Monday", "10 days from execution", "The end of the same month"],
+      correctIndex: 1,
+      explain: "Hawaii law grants timeshare buyers a 7-day rescission period, meaning a Monday execution allows cancellation through the following Sunday or Monday depending on interpretation of the statute.",
+    },
+    {
+      q: "Under Hawaii Revised Statutes Chapter 514E, a purchaser of a timeshare interest may cancel their purchase agreement by submitting written notice of rescission within what timeframe?",
+      options: ["5 business days from the date of purchase", "7 calendar days from the date of purchase", "10 business days from contract signing", "14 calendar days from receipt of the public offering statement"],
+      correctIndex: 1,
+      explain: "HRS 514E mandates a 7-calendar-day rescission period for timeshare buyers, allowing them to cancel without penalty or obligation during this window.",
     },
   ],
   "hi-types-of-ownership-q04": [
@@ -3470,6 +3590,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "Step-up provisions establish planned rent increases at set times; they are distinct from purchase options, abatement clauses, or index-based escalations.",
     },
+    {
+      q: "A commercial lease includes a rent step-up provision. What does this term typically describe?",
+      options: ["Rent increases at predetermined intervals, commonly escalating over the lease term", "The tenant has the right to purchase the underlying property", "The lessor must maintain and repair all structural elements", "The lease automatically converts to a month-to-month tenancy"],
+      correctIndex: 0,
+      explain: "Rent step-up refers to scheduled rent increases at fixed dates during the lease term, often growing progressively higher.",
+    },
+    {
+      q: "Which of the following best defines a step-up rent clause in a lease agreement?",
+      options: ["A clause allowing the tenant to terminate early without penalty", "A provision for periodic rent adjustments on specified dates, typically increasing", "A requirement that the tenant improve the leased premises", "An option for the tenant to extend the lease at the current rent rate"],
+      correctIndex: 1,
+      explain: "Step-up rent is a structured rent adjustment mechanism where rental payments increase on predetermined dates throughout the lease period.",
+    },
+    {
+      q: "In lease terminology, a step-up structure primarily refers to:",
+      options: ["Physical improvements required to the rental property's entrance", "Scheduled increases in rental payments at designated renewal points", "The lessee's right to assume the lessor's position in the agreement", "An acceleration clause triggered by late payment"],
+      correctIndex: 1,
+      explain: "Step-up is a rental escalation mechanism where rent payments increase according to a predetermined schedule, typically at higher amounts.",
+    },
+    {
+      q: "A landlord and tenant negotiate a lease with a step-up provision. This means the lease includes:",
+      options: ["An automatic buyout option favoring the tenant after five years", "Predetermined rent increases that take effect on specified dates during the tenancy", "A graduated property tax adjustment passed to the lessee", "Mandatory tenant-funded capital improvements"],
+      correctIndex: 1,
+      explain: "A step-up provision establishes a schedule of increasing rent payments at fixed intervals, a common strategy to phase in market-rate adjustments.",
+    },
+    {
+      q: "In a commercial lease, a step-up provision typically refers to:",
+      options: ["An automatic increase in rental payments at predetermined intervals", "The tenant's right to purchase the underlying fee simple", "A clause permitting early lease termination without penalty", "The landlord's obligation to maintain and upgrade the property"],
+      correctIndex: 0,
+      explain: "A step-up provision schedules periodic rent increases, often substantial, at specified dates during the lease term. This is a common structure in long-term commercial and residential leases.",
+    },
   ],
   "hi-types-of-ownership-q05": [
     {
@@ -3495,6 +3645,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Common elements shared by all unit owners", "Limited common elements for exclusive unit use", "Part of the unit's fee simple ownership", "Amenities subject to easement rights"],
       correctIndex: 1,
       explain: "Limited common elements are portions of the common property designated for exclusive use by specific unit owners, such as assigned parking stalls, which remain common property but serve identified units.",
+    },
+    {
+      q: "In a Hawaii condominium, a parking space that is designated for use by residents of Unit 405 only would be classified as a:",
+      options: ["Trade fixture subject to removal", "Limited common element", "Common element available to all unit owners", "Fee simple parcel"],
+      correctIndex: 1,
+      explain: "Limited common elements are portions of common property restricted to use by specific units, which perfectly describes assigned parking stalls serving only designated units.",
+    },
+    {
+      q: "A condominium's declaration specifies that Parking Stall #12 serves only Unit 8. This parking stall is best characterized as:",
+      options: ["Common property with no restrictions", "A limited common element", "Personal property of the unit owner", "An appurtenant easement"],
+      correctIndex: 1,
+      explain: "Limited common elements are common property limited in use to specific units; assigned parking stalls fit this definition exactly as they serve the common building but benefit only their designated unit.",
+    },
+    {
+      q: "When a condo association owns a parking area but reserves certain stalls exclusively for specific units, those reserved stalls represent:",
+      options: ["Fixtures that transfer with the lease", "Limited common elements", "Assessable general common elements", "Separate real property parcels"],
+      correctIndex: 1,
+      explain: "Limited common elements are common property with restricted use to one or more specific units; assigned parking stalls exemplify this category since they are controlled by the association but reserved for particular unit owners.",
+    },
+    {
+      q: "In a Hawaii condo, if the declaration assigns Parking Stalls 7 and 8 to Unit 201, those stalls would be classified under condo law as:",
+      options: ["Fee simple interests owned by the unit owner", "Limited common elements", "Improvements to the general common area", "Chattel property"],
+      correctIndex: 1,
+      explain: "Limited common elements are portions of the common property designated for use by specific units or owners; designated parking stalls are limited common elements because they remain association property but serve only their assigned units.",
+    },
+    {
+      q: "In a condominium project, parking spaces that are reserved exclusively for use by the owners of particular units are classified as:",
+      options: ["General common elements shared by all unit owners", "Limited common elements restricted to designated unit owners", "Separate fee simple parcels independent of the condo declaration", "Improvements that may be removed without damage to the property"],
+      correctIndex: 1,
+      explain: "Limited common elements are portions of common property designated for exclusive use by specific unit owners—a key Hawaii condo classification distinct from shared common elements.",
     },
   ],
   "hi-types-of-ownership-q06": [
@@ -3522,6 +3702,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Non-warrantable condos (those not meeting Fannie/Freddie standards) create financing difficulties for conventional loans, though cash purchases and alternative financing may still be possible; they do not eliminate all mortgage options or exempt from insurance.",
     },
+    {
+      q: "What is the primary financing challenge associated with a non-warrantable condominium in Hawaii?",
+      options: ["Lenders will refuse to originate any mortgage on the property", "Conventional mortgage approval becomes more difficult and may require alternative lending sources", "The property cannot legally be transferred to a new owner", "Insurance premiums are automatically doubled by all carriers"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos don't meet GSE (Fannie Mae/Freddie Mac) standards, making conventional financing problematic; borrowers often must seek FHA, portfolio lenders, or cash alternatives.",
+    },
+    {
+      q: "A buyer interested in purchasing a condominium learns the property is classified as non-warrantable. What should the real estate agent explain about the implications?",
+      options: ["The HOA will require special approval before the sale can close", "Obtaining traditional conventional financing will be significantly more complicated", "The condo must be immediately reported to the Hawaii Real Estate Commission", "The property's market value will automatically decrease by 20% or more"],
+      correctIndex: 1,
+      explain: "Non-warrantable status means the condo fails to meet Fannie Mae or Freddie Mac underwriting guidelines, creating substantial obstacles for conventional loan approval without alternative lending paths.",
+    },
+    {
+      q: "Which statement accurately describes a non-warrantable condo unit?",
+      options: ["It violates Hawaii building codes and cannot receive occupancy permits", "It presents financing difficulties because it does not conform to government-sponsored enterprise standards", "It is prohibited from being listed on the Multiple Listing Service", "It automatically voids any existing property insurance coverage"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos fail to meet Fannie Mae/Freddie Mac warrantable standards, restricting access to conventional financing and requiring buyers to explore non-traditional lending options.",
+    },
+    {
+      q: "When representing a buyer for a non-warrantable condominium purchase, what financing issue should an agent anticipate?",
+      options: ["Cash-only transactions are the legal requirement for all non-warrantable properties", "The buyer may encounter substantial difficulty securing a conventional mortgage and should explore alternative lenders", "All lenders are legally prohibited from offering any financing product for non-warrantable units", "Property tax assessments will automatically increase to compensate for the non-warrantable status"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos do not meet GSE lending criteria, forcing buyers to seek portfolio lenders, FHA financing, or other non-conventional loan products instead of standard conventional mortgages.",
+    },
+    {
+      q: "When a condominium project fails to meet Fannie Mae and Freddie Mac underwriting guidelines, what is the primary consequence for prospective buyers?",
+      options: ["The property automatically loses all legal standing and cannot transfer ownership", "Obtaining mortgage financing through traditional lenders becomes significantly more challenging", "Local property tax assessments are immediately increased by a fixed percentage", "The homeowners association must disband and the unit reverts to the developer"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos do not meet GSE (Government-Sponsored Enterprise) standards, making conventional financing difficult; buyers typically need cash, portfolio loans, or FHA/VA alternatives.",
+    },
   ],
   "hi-types-of-ownership-q07": [
     {
@@ -3547,6 +3757,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["A property controlled by a government conservation agency", "Multiple family members holding concurrent ownership rights to land", "A time-share or interval ownership arrangement", "A property subject to agricultural zoning restrictions"],
       correctIndex: 1,
       explain: "Hui represents traditional Hawaiian family-based co-ownership where several relatives share legal title and rights to the same parcel of land.",
+    },
+    {
+      q: "In Hawaiian real estate tradition, what does the term \"hui\" refer to?",
+      options: ["A licensed property management company", "Ancestral shared land ownership within a family lineage", "A condominium owners' association", "A state regulatory board overseeing transactions"],
+      correctIndex: 1,
+      explain: "Hui represents traditional Hawaiian family-based joint ownership of land, often involving multiple generations with inherited interests.",
+    },
+    {
+      q: "Which of the following best describes a Hawaiian hui in the context of property ownership?",
+      options: ["Family members holding collective title to ancestral land", "An incorporated commercial real estate syndicate", "A municipal zoning authority", "A title insurance company specializing in Hawaiian properties"],
+      correctIndex: 0,
+      explain: "A hui is fundamentally a family-based co-ownership structure where relatives maintain shared interests in land, typically passed down through generations.",
+    },
+    {
+      q: "A real estate agent in Hawaii encounters a property with multiple family members claiming ownership rights. This arrangement is most likely an example of:",
+      options: ["A conservation easement", "A traditional hui ownership structure", "A timeshare arrangement", "A trust created by the state land board"],
+      correctIndex: 1,
+      explain: "Hui arrangements create exactly this scenario—multiple family members hold co-ownership rights in the same parcel, often without formal legal separation of interests.",
+    },
+    {
+      q: "Under Hawaiian property customs, when several family members inherit equal interests in ancestral land, their arrangement is called a:",
+      options: ["Cooperative association", "Hui", "Joint venture partnership", "Common interest community"],
+      correctIndex: 1,
+      explain: "A hui is the traditional Hawaiian term for this type of family co-ownership, where inherited land interests pass collectively through family lineage.",
+    },
+    {
+      q: "In Hawaiian real estate and property law, a 'hui' is best described as:",
+      options: ["A formal property management company licensed by the Hawaii REC", "An ancestral form of shared land ownership within families across multiple generations", "A mandatory condominium association required under Hawaii Revised Statutes Chapter 514A", "A county zoning classification for agricultural properties"],
+      correctIndex: 1,
+      explain: "Hui refers to the traditional Hawaiian practice of family-based communal land ownership and management, often passed down through generations and involving multiple co-owners with complex inheritance rights.",
     },
   ],
   "hi-types-of-ownership-q08": [
@@ -3574,6 +3814,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The specific lease document—particularly reversion and improvement clauses—determines the building's fate; this is not governed by statute alone but by contract.",
     },
+    {
+      q: "When a Hawaii leasehold property reaches the end of its term, what is the most likely outcome regarding the structures on the land?",
+      options: ["The leaseholder retains full ownership of all improvements indefinitely", "Control of the building reverts to the lessor as specified in the lease agreement", "The State of Hawaii assumes ownership and manages the property", "Local county government mandates immediate removal of all structures"],
+      correctIndex: 1,
+      explain: "Leasehold terms typically include reversion clauses; improvements and buildings transfer back to the lessor upon lease expiration unless the lease explicitly states otherwise.",
+    },
+    {
+      q: "A leaseholder's Hawaii property is nearing the end of its lease term. Upon termination, what generally controls the fate of the building constructed on the leased land?",
+      options: ["County zoning ordinances determine whether the building must be removed", "The specific provisions contained within the lease document", "Federal real property law automatically grants the leaseholder perpetual ownership", "A mandatory public auction held by the City and County government"],
+      correctIndex: 1,
+      explain: "The lease contract itself governs what happens to improvements at lease end; reversion to the lessor is common but depends entirely on the lease terms negotiated between parties.",
+    },
+    {
+      q: "After a Hawaii leasehold expires, who typically gains control of the buildings and improvements on the property?",
+      options: ["The original leaseholder, who receives a deed for the improvements", "The lessor, if the lease contains a reversion clause", "A state-appointed property manager designated by the Hawaii REC", "The federal government, which claims all expired leasehold properties"],
+      correctIndex: 1,
+      explain: "Many Hawaii leases include reversion clauses requiring improvements to return to the lessor at lease termination, though some leases may provide compensation or alternative arrangements.",
+    },
+    {
+      q: "What is the primary factor determining what happens to structures on a Hawaii leasehold when the lease term concludes?",
+      options: ["The length of time the leaseholder occupied the property", "Lease agreement language and any reversion provisions it contains", "The appraised value of the improvements at the time of termination", "Whether the leaseholder paid property taxes during the lease period"],
+      correctIndex: 1,
+      explain: "Lease contracts contain specific terms governing the disposition of improvements; reversion to the lessor is a common provision but must be explicitly stated in the lease document.",
+    },
+    {
+      q: "When a Hawaii leasehold agreement expires, what typically determines the disposition of structures and improvements on the leased land?",
+      options: ["The leaseholder retains full ownership regardless of original lease conditions", "The specific provisions contained in the lease document itself", "State law automatically grants ownership to the county assessor", "All buildings must be removed by the leaseholder at their expense"],
+      correctIndex: 1,
+      explain: "Leasehold termination outcomes depend entirely on the lease agreement's terms; reversion to the lessor is common but not automatic without explicit lease language.",
+    },
   ],
   "hi-types-of-ownership-q09": [
     {
@@ -3599,6 +3869,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["A state agency that licenses all property managers", "A non-profit entity that governs condominium communities and collects owner assessments", "A private company that enforces zoning regulations", "An advisory board for apartment construction projects"],
       correctIndex: 1,
       explain: "The AOAO (Association of Apartment Owners) functions as the self-governing body of a condominium, responsible for assessments, maintenance, and enforcement of bylaws.",
+    },
+    {
+      q: "In Hawaii real estate, when a condominium project is governed by an AOAO, what does that acronym represent?",
+      options: ["Association of Apartment Owners", "Authorized Oversight and Assessment Organization", "Administrative Operations and Audit Office", "Association of Assessed Occupants"],
+      correctIndex: 0,
+      explain: "AOAO is the Hawaii-specific term for a condominium owners' association, equivalent to an HOA on the mainland. It stands for Association of Apartment Owners.",
+    },
+    {
+      q: "A real estate agent explains to a buyer that the condominium complex is managed by an AOAO. The buyer asks what this acronym means. The agent should respond:",
+      options: ["It means the property is governed by an Association of Apartment Owners", "It refers to an Apartment Ownership and Authority Organization", "It indicates an Automated Occupancy Assessment Office", "It stands for an Active Operations Authority for Apartments"],
+      correctIndex: 0,
+      explain: "AOAO is Hawaii's statutory term for a condominium association, standing for Association of Apartment Owners, which manages common areas and enforces bylaws.",
+    },
+    {
+      q: "Which of the following best describes what an AOAO is in Hawaii real estate practice?",
+      options: ["The legal entity that represents all unit owners in a condominium project", "A state board that regulates apartment building construction standards", "An authorization office that processes ownership transfers and assessments", "A voluntary association for owners seeking additional property insurance"],
+      correctIndex: 0,
+      explain: "AOAO (Association of Apartment Owners) is the governing body for Hawaii condominiums, created under HRS Chapter 514A or 514B, with authority over common areas and member assessments.",
+    },
+    {
+      q: "A property manager in Hawaii is hired to oversee a multi-unit residential building where decisions are made by the AOAO. What is the full meaning of AOAO?",
+      options: ["Assessment and Occupancy Authority Organization", "Association of Apartment Owners", "Apartment Ownership and Authorization Office", "Administrative Operations and Assessment Authority"],
+      correctIndex: 1,
+      explain: "AOAO stands for Association of Apartment Owners and is the exclusive Hawaii term for a condominium owners' association that manages and controls common property.",
+    },
+    {
+      q: "In Hawaii, a condominium property owner belongs to an AOAO. What does this acronym represent?",
+      options: ["Association of All Occupants", "Association of Apartment Owners", "Authorized Owners and Agents Organization", "Apartment Oversight Authority Organization"],
+      correctIndex: 1,
+      explain: "AOAO is the Hawaii-specific term for a condominium homeowners association, formally known as Association of Apartment Owners, governing shared building operations and common areas.",
     },
   ],
   "land-use-controls-q00": [
