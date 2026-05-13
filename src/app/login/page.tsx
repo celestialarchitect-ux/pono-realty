@@ -25,6 +25,11 @@ function Inner() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  // 'checking' = pre-render session lookup in flight; the form is hidden
+  // entirely so a logged-in user never sees the form (and never gets stuck
+  // submitting it). 'form' = render the actual login form.
+  // 'redirecting' = session found, router.replace already firing, freeze UI.
+  const [phase, setPhase] = useState<'checking' | 'form' | 'redirecting'>('checking');
 
   // If a live session already exists, skip the form entirely and drop the
   // user on the dashboard (or wherever ?next pointed). Prevents the
@@ -33,8 +38,16 @@ function Inner() {
     let cancelled = false;
     fetch('/api/auth/me', { cache: 'no-store' })
       .then(r => r.json())
-      .then(d => { if (!cancelled && d?.user) router.replace(safeNext); })
-      .catch(() => {/* ignore — let the form render */});
+      .then(d => {
+        if (cancelled) return;
+        if (d?.user) {
+          setPhase('redirecting');
+          router.replace(safeNext);
+        } else {
+          setPhase('form');
+        }
+      })
+      .catch(() => { if (!cancelled) setPhase('form'); });
     return () => { cancelled = true; };
   }, [router, safeNext]);
 
@@ -51,6 +64,17 @@ function Inner() {
       });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) {
+        // Belt-and-suspenders: any failure path re-checks the session. If
+        // the user was actually already authed (e.g., they had a tab open,
+        // session cookie just got refreshed, browser re-sent old form),
+        // redirect them anyway instead of leaving them stuck on the error.
+        const meRes = await fetch('/api/auth/me', { cache: 'no-store' }).catch(() => null);
+        const meBody = meRes ? await meRes.json().catch(() => null) : null;
+        if (meBody?.user) {
+          setPhase('redirecting');
+          router.replace(safeNext);
+          return;
+        }
         if (res.status === 503) {
           setError('Account system not yet provisioned. Please try again later.');
         } else if (res.status === 429) {
@@ -60,6 +84,7 @@ function Inner() {
         }
         return;
       }
+      setPhase('redirecting');
       router.push(safeNext);
     } catch {
       setError('Network error. Please try again.');
@@ -74,6 +99,25 @@ function Inner() {
       <div style={{ position: 'relative', zIndex: 10 }}>
         <Header />
         <main style={{ padding: '64px 32px', maxWidth: 480, margin: '0 auto' }}>
+          {phase !== 'form' && (
+            <div style={{ ...CARD, padding: 48, textAlign: 'center' }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginBottom: 12 }}>
+                {phase === 'checking' ? 'Checking your session…' : 'Already signed in'}
+              </div>
+              <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(28px, 4vw, 36px)', fontWeight: 900, letterSpacing: '-0.02em', color: T.text, lineHeight: 1.1, marginBottom: 12 }}>
+                {phase === 'checking' ? 'One moment…' : 'Welcome back.'}
+              </h1>
+              <p style={{ fontSize: 14, color: T.textDim, lineHeight: 1.6, margin: 0 }}>
+                {phase === 'checking' ? 'Looking up your account.' : 'Taking you to your profile…'}
+              </p>
+              {phase === 'redirecting' && (
+                <Link href={safeNext} style={{ ...BUTTON_3D.primary, display: 'inline-flex', padding: '12px 22px', borderRadius: 10, marginTop: 18, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+                  Continue to {safeNext === '/profile' ? 'profile' : 'page'} →
+                </Link>
+              )}
+            </div>
+          )}
+          {phase === 'form' && (<>
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 44px)', fontWeight: 900, letterSpacing: '-0.025em', color: T.text, lineHeight: 1.1, marginBottom: 12 }}>
               Welcome back.
@@ -122,6 +166,7 @@ function Inner() {
               <Link href="/forgot-password" style={{ color: T.ocean, textDecoration: 'underline' }}>Forgot password?</Link>
             </p>
           </form>
+          </>)}
         </main>
         <Footer />
       </div>

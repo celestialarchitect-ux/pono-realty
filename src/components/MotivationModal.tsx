@@ -33,6 +33,12 @@ export function MotivationModal() {
 
   if (!open) return null;
 
+  // Modal layout pattern: an outer scrolling container, an inner flex
+  // wrapper that pushes the dialog to the middle when there's room, and
+  // the dialog itself. Combining `display:flex; align-items:center` with
+  // `overflow:auto` on the SAME element clips overflow at the top — that's
+  // the bug Zach hit on iPhone, where the headline was scrolled out of
+  // reach. This pattern works correctly on iPhone, iPad, Mac, and PC.
   return (
     <div
       role="dialog"
@@ -41,16 +47,34 @@ export function MotivationModal() {
         position: 'fixed', inset: 0, zIndex: 9999,
         background: 'rgba(14, 26, 38, 0.94)',
         backdropFilter: 'blur(10px)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: 'env(safe-area-inset-top, 24px) 24px env(safe-area-inset-bottom, 24px)',
+        WebkitBackdropFilter: 'blur(10px)',
         overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch' as 'touch',
+        // Padding on the outer scroller covers the iOS notch + bottom safe area.
+        paddingTop:    'max(16px, env(safe-area-inset-top))',
+        paddingBottom: 'max(16px, env(safe-area-inset-bottom))',
+        paddingLeft:   'max(12px, env(safe-area-inset-left))',
+        paddingRight:  'max(12px, env(safe-area-inset-right))',
       }}
     >
       <div style={{
-        maxWidth: 660, width: '100%', background: T.bg, borderRadius: 24,
-        padding: 'clamp(28px, 5vw, 56px)', position: 'relative',
+        // Inner wrapper: full-height so the modal can be vertically
+        // centered when content fits, but the wrapper grows with the
+        // content so the scroller can see everything.
+        minHeight: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // Tiny vertical margin so the dialog never touches the safe-area edge.
+        padding: '12px 0',
+      }}>
+      <div style={{
+        maxWidth: 660, width: '100%', background: T.bg, borderRadius: 20,
+        padding: 'clamp(20px, 5vw, 56px)', position: 'relative',
         boxShadow: '0 24px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)',
         animation: 'modalIn 0.5s ease-out',
+        // Keep horizontal slack on tiny screens.
+        marginLeft: 'auto', marginRight: 'auto',
       }}>
         <style>{`
           @keyframes modalIn {
@@ -61,17 +85,17 @@ export function MotivationModal() {
 
         <div style={{
           fontSize: 11, fontFamily: "'JetBrains Mono', monospace",
-          letterSpacing: '0.3em', color: T.coral, textTransform: 'uppercase',
-          fontWeight: 700, marginBottom: 18, textAlign: 'center',
+          letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase',
+          fontWeight: 700, marginBottom: 14, textAlign: 'center',
         }}>
           A word before you begin
         </div>
 
         <h2 style={{
           fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: 'clamp(34px, 5vw, 52px)', fontWeight: 900,
-          letterSpacing: '-0.025em', lineHeight: 1.02,
-          color: T.text, marginBottom: 28, textAlign: 'center',
+          fontSize: 'clamp(26px, 5vw, 48px)', fontWeight: 900,
+          letterSpacing: '-0.025em', lineHeight: 1.05,
+          color: T.text, marginBottom: 22, textAlign: 'center',
         }}>
           Your future is in <em style={{ color: T.ocean, fontStyle: 'italic' }}>your hands.</em>
         </h2>
@@ -143,22 +167,23 @@ export function MotivationModal() {
           style={{
             ...BUTTON_3D.primary,
             width: '100%',
-            padding: '18px 24px',
-            borderRadius: 14,
-            fontSize: 15, fontWeight: 700,
+            padding: '16px 24px',
+            borderRadius: 12,
+            fontSize: 14, fontWeight: 700,
             letterSpacing: '0.05em', textTransform: 'uppercase',
             cursor: 'pointer', marginTop: 4,
-            border: 'none', minHeight: 56,
+            border: 'none', minHeight: 52,
           }}
         >
           I&apos;m ready to do the work →
         </button>
         <div style={{
-          fontSize: 12, color: T.textMute, textAlign: 'center', marginTop: 14,
+          fontSize: 12, color: T.textMute, textAlign: 'center', marginTop: 12,
           fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em',
         }}>
           You&apos;ll only see this once.
         </div>
+      </div>
       </div>
     </div>
   );

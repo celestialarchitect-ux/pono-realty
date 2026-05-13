@@ -27,10 +27,21 @@ export async function GET() {
   const thirtyDaysAgo = new Date(todayStart.getTime() - 29 * 86400 * 1000);
   const sixtySecondsAgo = new Date(now.getTime() - 60 * 1000);
 
-  // KPI: total users, eligible (60h+) users, paid users, open tickets, unread inbound
-  const [totalUsers, paidUsers, eligibleAgg, recentSignups, recentUpgrades, openTickets, unreadInbound] = await Promise.all([
+  // KPI: total users, eligible (60h+) users, access-granted users, paying
+  // customers (distinct), open tickets, unread inbound.
+  //
+  // IMPORTANT: "paying customers" counts distinct userId from Payment table
+  // (real money). "access granted" counts users whose tier was set —
+  // including admin-granted comps. We expose BOTH so the dashboard never
+  // confuses "people who paid" with "people who have access".
+  const [totalUsers, accessGrantedUsers, payingCustomerIds, eligibleAgg, recentSignups, recentUpgrades, openTickets, unreadInbound] = await Promise.all([
     db.user.count(),
     db.user.count({ where: { tier: { in: ['standard', 'plus', 'solo'] } } }),
+    db.payment.findMany({
+      where: { status: 'succeeded' },
+      distinct: ['userId'],
+      select: { userId: true },
+    }),
     db.timeEvent.groupBy({
       by: ['userId'],
       _sum: { seconds: true },
@@ -50,6 +61,7 @@ export async function GET() {
     db.message.count({ where: { direction: 'inbound', readAt: null } }),
   ]);
   const eligibleCount = eligibleAgg.filter(a => (a._sum.seconds ?? 0) >= 60 * 3600).length;
+  const paidUsers = payingCustomerIds.length;
 
   // Signups today / 7d / 30d
   const [signupsToday, signups7d, signups30d] = await Promise.all([
@@ -136,6 +148,7 @@ export async function GET() {
     kpi: {
       totalUsers,
       paidUsers,
+      accessGrantedUsers,
       eligibleCount,
       signupsToday,
       signups7d,

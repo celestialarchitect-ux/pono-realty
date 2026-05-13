@@ -8,7 +8,8 @@ import { formatDuration } from '@/lib/time-tracking';
 
 interface KPI {
   totalUsers: number;
-  paidUsers: number;
+  paidUsers: number;          // distinct customers with a succeeded Payment row
+  accessGrantedUsers: number; // tier in (standard/plus/solo) — includes admin grants
   eligibleCount: number;
   signupsToday: number;
   signups7d: number;
@@ -93,7 +94,11 @@ export default function AdminDashboard() {
 
       {/* TOP KPI ROW */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14, marginBottom: 22 }} data-stack-mobile="true">
-        <Kpi label="Total students" value={data.kpi.totalUsers.toLocaleString()} sub={`${data.kpi.paidUsers.toLocaleString()} paid`} />
+        <Kpi
+          label="Total students"
+          value={data.kpi.totalUsers.toLocaleString()}
+          sub={`${data.kpi.paidUsers.toLocaleString()} paying · ${data.kpi.accessGrantedUsers.toLocaleString()} with access`}
+        />
         <Kpi label="Active right now" value={data.kpi.activeNow.toLocaleString()} sub="last 60 s" accent={data.kpi.activeNow > 0 ? 'ocean' : 'mute'} live />
         <Kpi label="Eligible (60h+)" value={data.kpi.eligibleCount.toLocaleString()} sub="PSI-ready" />
         <Kpi label="Signups today" value={data.kpi.signupsToday.toLocaleString()} sub={`${data.kpi.signups7d} this week · ${data.kpi.signups30d} this month`} />
@@ -133,24 +138,7 @@ export default function AdminDashboard() {
         )} />
       </div>
 
-      {/* NAV TO SUBPAGES */}
-      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        <Link href="/admin/prospects" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          Prospects →
-        </Link>
-        <Link href="/admin/users" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          All students
-        </Link>
-        <Link href="/admin/inbox" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          Inbox{data.kpi.unreadInbound > 0 && <span style={{ marginLeft: 8, padding: '2px 8px', background: T.coral, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{data.kpi.unreadInbound}</span>}
-        </Link>
-        <Link href="/admin/support" style={{ ...BUTTON_3D.secondary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          Support{data.kpi.openTickets > 0 && <span style={{ marginLeft: 8, padding: '2px 8px', background: T.coral, color: '#fff', borderRadius: 999, fontSize: 11, fontWeight: 700, fontFamily: "'JetBrains Mono', monospace" }}>{data.kpi.openTickets}</span>}
-        </Link>
-        <Link href="/profile" style={{ ...BUTTON_3D.ghost, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          My profile
-        </Link>
-      </div>
+      {/* Nav lives in AdminLayout — no per-page bottom nav anymore. */}
     </Shell>
   );
 }
