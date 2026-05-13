@@ -11,22 +11,29 @@ const securityHeaders = [
   { key: 'X-XSS-Protection', value: '1; mode=block' },
   // Tight referrer policy — share origin, never path
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  // Lock down sensitive APIs we don't use
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=()' },
-  // CSP — permissive enough for Google Fonts + Unsplash hero image + inline styles (we use them heavily)
+  // Lock down sensitive APIs. `payment=*` permits Stripe Payment Request /
+  // Apple Pay / Google Pay inside the embedded checkout iframe.
+  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), payment=*' },
+  // CSP — permissive enough for:
+  //   - Google Fonts (style + font hosts)
+  //   - Unsplash hero image
+  //   - inline styles (we use them heavily)
+  //   - Stripe.js + Embedded Checkout (js.stripe.com, m.stripe.network,
+  //     api.stripe.com, hooks.stripe.com, b.stripecdn.com, checkout.stripe.com)
   {
     key: 'Content-Security-Policy',
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline'",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com data:",
-      "img-src 'self' data: blob: https://images.unsplash.com",
-      "connect-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://js.stripe.com https://*.stripe.com https://*.stripecdn.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.stripe.com",
+      "font-src 'self' https://fonts.gstatic.com https://*.stripe.com data:",
+      "img-src 'self' data: blob: https://images.unsplash.com https://*.stripe.com https://*.stripecdn.com",
+      "connect-src 'self' https://api.stripe.com https://*.stripe.com https://*.stripecdn.com https://merchant-ui-api.stripe.com",
       "media-src 'self'",
+      "frame-src https://js.stripe.com https://*.stripe.com https://hooks.stripe.com",
       "frame-ancestors 'self'",
       "base-uri 'self'",
-      "form-action 'self'",
+      "form-action 'self' https://*.stripe.com",
     ].join('; '),
   },
 ];
