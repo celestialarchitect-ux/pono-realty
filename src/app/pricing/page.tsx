@@ -368,7 +368,7 @@ export default function PricingPage() {
                 <b style={{ color: T.text }}>Not legal advice.</b> Hawaii statutes change. Verify against current Hawaii Revised Statutes and REC rules before relying on any material for a real transaction.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
-                <b style={{ color: T.text }}>Independent.</b> Not affiliated with the Hawaii Real Estate Commission, PSI, or any official body.
+                <b style={{ color: T.text }}>REC-approved pre-license course.</b> Ralph Foulger&rsquo;s Academy of Real Estate is an approved Hawaii Real Estate Commission pre-license course provider. Course-completion certificate is valid for 2 years per Hawaii REC rules and qualifies you to register for the PSI Hawaii Salesperson Exam. PSI administers the state exam separately; we are not a PSI testing site.
               </li>
               <li style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>
                 <b style={{ color: T.text }}>One-time payment, no auto-renewal on course tuition.</b> Hosting / maintenance for delivered websites is the only recurring charge, and only after the site is live.

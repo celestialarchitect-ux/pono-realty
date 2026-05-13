@@ -108,8 +108,8 @@ function wrap(inner: string): string {
   </div>
   ${inner}
   <div style="margin-top:32px;padding-top:20px;border-top:1px solid rgba(45,55,72,0.08);font-size:12px;color:${MUTED};line-height:1.6;">
-    Ralph Foulger&rsquo;s Academy of Real Estate &middot; Hawaii pre-license &amp; PSI prep<br>
-    Not affiliated with Hawaii REC &middot; Study aid only<br>
+    Ralph Foulger&rsquo;s Academy of Real Estate &middot; Hawaii REC-approved pre-license course<br>
+    Ralph S. Foulger, Realtor &middot; Instructor since 1972<br>
     <a href="${SITE}" style="color:${MUTED};">${SITE.replace(/^https?:\/\//, '')}</a>
   </div>
 </td></tr></table>
