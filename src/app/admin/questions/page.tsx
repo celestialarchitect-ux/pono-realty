@@ -223,19 +223,49 @@ function QuestionRow({ question, open, onToggle }: { question: QuestionOut; open
 
       {open && (
         <div style={{ padding: '4px 16px 18px', borderTop: `1px solid ${T.border}` }}>
-          {question.variants.map(v => <VariantBlock key={v.index} v={v} />)}
+          {question.variants.map(v => <VariantBlock key={v.index} v={v} questionId={question.id} />)}
         </div>
       )}
     </div>
   );
 }
 
-function VariantBlock({ v }: { v: VariantOut }) {
+function VariantBlock({ v, questionId }: { v: VariantOut; questionId: string }) {
   const wrongPct = v.attempts > 0 ? Math.round(((v.attempts - v.correctCount) / v.attempts) * 100) : 0;
   const tone = v.attempts === 0 ? T.textMute
     : wrongPct >= 60 ? T.coral
     : wrongPct >= 40 ? T.amber
     : T.green;
+
+  const [flagOpen, setFlagOpen] = useState(false);
+  const [flagCategory, setFlagCategory] = useState<string>('wording');
+  const [flagNotes, setFlagNotes] = useState('');
+  const [flagBusy, setFlagBusy] = useState(false);
+  const [flagDone, setFlagDone] = useState<'created' | 'updated' | null>(null);
+
+  const submitFlag = async () => {
+    setFlagBusy(true);
+    try {
+      const r = await fetch('/api/admin/flag-variant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          questionId,
+          variantIndex: v.index,
+          questionText: v.q,
+          category: flagCategory,
+          notes: flagNotes,
+        }),
+      });
+      const j = await r.json();
+      if (r.ok) {
+        setFlagDone(j.created ? 'created' : 'updated');
+        setTimeout(() => { setFlagOpen(false); setFlagNotes(''); setFlagDone(null); }, 1500);
+      }
+    } finally {
+      setFlagBusy(false);
+    }
+  };
 
   return (
     <div style={{ padding: '14px 16px', marginTop: 10, borderRadius: 10, background: T.bg, border: `1px solid ${T.border}`, borderLeftWidth: 3, borderLeftColor: tone }}>
@@ -248,6 +278,16 @@ function VariantBlock({ v }: { v: VariantOut }) {
             {v.attempts} attempt{v.attempts === 1 ? '' : 's'} · {v.attempts > 0 ? `${wrongPct}% wrong` : 'no attempts yet'}
           </span>
         </div>
+        <button
+          onClick={() => setFlagOpen(!flagOpen)}
+          style={{
+            padding: '4px 10px', borderRadius: 6,
+            background: 'transparent', border: `1px solid ${T.coral}`, color: T.coral,
+            fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em',
+            textTransform: 'uppercase', fontWeight: 700, cursor: 'pointer',
+          }}>
+          {flagOpen ? 'Cancel' : 'Flag for review'}
+        </button>
       </div>
 
       <p style={{ fontSize: 14, color: T.text, fontWeight: 600, lineHeight: 1.55, margin: '0 0 12px' }}>
@@ -282,6 +322,67 @@ function VariantBlock({ v }: { v: VariantOut }) {
       <p style={{ fontSize: 12, color: T.textDim, lineHeight: 1.65, marginTop: 12, fontStyle: 'italic', padding: '8px 12px', background: T.bgRaised, borderRadius: 6, border: `1px solid ${T.border}` }}>
         <strong style={{ color: T.text, fontStyle: 'normal' }}>Explanation:</strong> {v.explain}
       </p>
+
+      {flagOpen && (
+        <div style={{ marginTop: 12, padding: '14px 16px', background: 'rgba(232,93,60,0.06)', border: `1px solid ${T.coral}33`, borderRadius: 8 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 10 }}>
+            Flag this variant for review
+          </div>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 10 }}>
+            {[
+              { v: 'wording', label: 'Confusing wording' },
+              { v: 'wrong-answer', label: 'Wrong answer key' },
+              { v: 'distractor', label: 'Bad distractor' },
+              { v: 'typo', label: 'Typo' },
+              { v: 'other', label: 'Other' },
+            ].map(c => (
+              <button key={c.v} onClick={() => setFlagCategory(c.v)} style={{
+                padding: '5px 10px', borderRadius: 6,
+                background: flagCategory === c.v ? T.coral : 'transparent',
+                color: flagCategory === c.v ? '#fff' : T.text,
+                border: `1px solid ${flagCategory === c.v ? T.coralDark : T.border}`,
+                fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
+              }}>
+                {c.label}
+              </button>
+            ))}
+          </div>
+          <textarea
+            value={flagNotes}
+            onChange={(e) => setFlagNotes(e.target.value)}
+            placeholder="What's wrong? Optional notes — e.g., 'option C is also technically correct'"
+            rows={3}
+            style={{
+              width: '100%', padding: '10px 12px', borderRadius: 6,
+              border: `1px solid ${T.border}`, background: T.bg, color: T.text,
+              fontFamily: 'inherit', fontSize: 13, lineHeight: 1.5,
+              resize: 'vertical', boxSizing: 'border-box',
+            }}
+          />
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 10, marginTop: 10 }}>
+            {flagDone && (
+              <span style={{ fontSize: 11, color: T.green, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em', fontWeight: 700 }}>
+                {flagDone === 'created' ? '✓ Ticket created' : '✓ Ticket updated'}
+              </span>
+            )}
+            <button
+              onClick={submitFlag}
+              disabled={flagBusy}
+              style={{
+                padding: '8px 16px', borderRadius: 6,
+                background: T.coral, color: '#fff',
+                border: 'none', cursor: flagBusy ? 'wait' : 'pointer',
+                fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', fontFamily: 'inherit',
+                opacity: flagBusy ? 0.6 : 1,
+              }}>
+              {flagBusy ? 'Saving…' : 'Save flag'}
+            </button>
+          </div>
+          <p style={{ fontSize: 10, color: T.textMute, lineHeight: 1.55, marginTop: 8, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+            Creates a support ticket in /admin/support. Resaving the same flag updates the same ticket instead of duplicating.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
