@@ -315,6 +315,9 @@ export default function ProfilePage() {
       {/* SETTINGS */}
       <SettingsCard />
 
+      {/* DANGER ZONE — account deletion */}
+      {isServer && user && <DangerZone />}
+
       {/* META */}
       <div style={{ ...CARD, padding: 22, borderLeft: `3px solid ${T.coral}` }}>
         <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 10 }}>How real-time tracking works</h3>
@@ -909,6 +912,94 @@ function GradeCard() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Final card on the profile — self-serve account deletion. Two-factor
+// confirmation: password re-entry AND typing 'delete'. Server cascades
+// every row owned by the user (study time, plan, quiz attempts, etc.)
+// in one transaction.
+function DangerZone() {
+  const [open, setOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const onDelete = async () => {
+    if (typeof window !== 'undefined' && !window.confirm('Delete your account permanently? This cannot be undone.')) return;
+    setBusy(true);
+    setError(null);
+    try {
+      const r = await fetch('/api/auth/delete-account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password, confirm }),
+      });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        setError(j.message ?? j.error ?? 'Could not delete account.');
+        return;
+      }
+      // Server already cleared the session cookie. Hard nav to home.
+      window.location.href = '/?account_deleted=1';
+    } catch {
+      setError('Network error. Try again.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.coral}` }}>
+      <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 6 }}>
+        Delete my account
+      </h3>
+      <p style={{ fontSize: 12, color: T.textMute, lineHeight: 1.6, marginBottom: 14 }}>
+        Permanently remove your account and every record tied to it &mdash; study time, plan, quiz attempts, payments. Stripe receipts still exist on file for tax purposes; <strong style={{ color: T.textDim }}>everything else is gone</strong>. This is not reversible.
+      </p>
+
+      {!open ? (
+        <button onClick={() => setOpen(true)} style={{ ...BUTTON_3D.ghost, padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit', color: T.coral }}>
+          Start deletion
+        </button>
+      ) : (
+        <div style={{ padding: '14px 16px', background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.coral}`, display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <label style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>
+            Re-enter your password
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              autoComplete="current-password"
+              style={{ display: 'block', width: '100%', marginTop: 6, padding: '10px 12px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.bg, color: T.text, fontFamily: 'inherit', fontSize: 14 }}
+            />
+          </label>
+          <label style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700 }}>
+            Type <code style={{ background: T.bg, padding: '1px 6px', borderRadius: 4, color: T.coral, fontFamily: 'inherit' }}>delete</code> to confirm
+            <input
+              type="text"
+              value={confirm}
+              onChange={e => setConfirm(e.target.value)}
+              placeholder="delete"
+              style={{ display: 'block', width: '100%', marginTop: 6, padding: '10px 12px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.bg, color: T.text, fontFamily: 'inherit', fontSize: 14 }}
+            />
+          </label>
+          {error && <p style={{ fontSize: 12, color: T.coral, margin: 0 }}>{error}</p>}
+          <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
+            <button
+              onClick={onDelete}
+              disabled={busy || !password || confirm.trim().toLowerCase() !== 'delete'}
+              style={{ ...BUTTON_3D.primary, padding: '10px 16px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: busy ? 'wait' : 'pointer', fontFamily: 'inherit', border: 'none', background: T.coral, opacity: (busy || !password || confirm.trim().toLowerCase() !== 'delete') ? 0.5 : 1 }}>
+              {busy ? 'Deleting…' : 'Permanently delete my account'}
+            </button>
+            <button onClick={() => { setOpen(false); setPassword(''); setConfirm(''); setError(null); }} style={{ ...BUTTON_3D.ghost, padding: '10px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
