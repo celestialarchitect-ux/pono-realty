@@ -132,7 +132,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (!hasRole(session, 'admin')) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const { id } = await params;
-  let body: { isAdmin?: boolean; roles?: string[]; tier?: string };
+  let body: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: string | null };
   try { body = await req.json(); } catch {
     return NextResponse.json({ error: 'bad_json' }, { status: 400 });
   }
@@ -143,7 +143,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'cannot_demote_self', message: "You can't remove your own admin flag." }, { status: 400 });
   }
 
-  const data: { isAdmin?: boolean; roles?: string[]; tier?: string } = {};
+  const data: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: Date | null } = {};
   if (typeof body.isAdmin === 'boolean') data.isAdmin = body.isAdmin;
   if (Array.isArray(body.roles)) {
     const clean = body.roles.filter(r => typeof r === 'string' && VALID_ROLES.has(r));
@@ -151,6 +151,22 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
   if (typeof body.tier === 'string' && VALID_TIERS.has(body.tier)) {
     data.tier = body.tier;
+  }
+  // Support / staff need to grant or extend access for legitimate reasons
+  // (offline study credit, comp days, etc.). 'null' clears the window
+  // entirely (lifetime); 'YYYY-MM-DD' or ISO sets it to end-of-day UTC.
+  if (Object.prototype.hasOwnProperty.call(body, 'accessExpiresAt')) {
+    if (body.accessExpiresAt === null) {
+      data.accessExpiresAt = null;
+    } else if (typeof body.accessExpiresAt === 'string') {
+      const trimmed = body.accessExpiresAt.trim();
+      const date = /^\d{4}-\d{2}-\d{2}$/.test(trimmed)
+        ? new Date(trimmed + 'T23:59:59Z')
+        : new Date(trimmed);
+      if (!Number.isNaN(date.getTime())) {
+        data.accessExpiresAt = date;
+      }
+    }
   }
   if (Object.keys(data).length === 0) {
     return NextResponse.json({ error: 'nothing_to_update' }, { status: 400 });

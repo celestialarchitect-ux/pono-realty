@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:32:02.111Z via Claude Haiku.
+// Generated 2026-05-13T10:35:25.837Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -1974,6 +1974,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "HARPTA mandates withholding when a non-Hawaii resident sells Hawaii residential real property, with the buyer or escrow agent responsible for remitting the withheld amount to the Hawaii Department of Taxation.",
     },
+    {
+      q: "A mainland investor from Oregon completes the purchase of a condominium on Oahu. Which withholding statute applies to this transaction?",
+      options: ["GET", "HARPTA", "FIRPTA", "HRS Chapter 507"],
+      correctIndex: 1,
+      explain: "HARPTA (Hawaii Sanford Act) requires withholding when a non-Hawaii resident sells Hawaii real property; the buyer is typically responsible for compliance.",
+    },
+    {
+      q: "During the closing of a Big Island property sale, the escrow agent discovers the seller is a foreign national residing outside Hawaii. What withholding requirement must the buyer's agent address?",
+      options: ["RESPA withholding at settlement", "HARPTA withholding obligation", "FIRPTA withholding on the net proceeds", "Conveyance tax under HRS 247"],
+      correctIndex: 1,
+      explain: "HARPTA applies to sales of Hawaii real property by non-Hawaii residents; the buyer or escrow agent must withhold a percentage of the purchase price.",
+    },
+    {
+      q: "A broker assists with the sale of a Kauai home where the seller is a Washington state resident. The buyer asks which federal or state withholding law governs the transaction. What is the correct response?",
+      options: ["FIRPTA, because the seller is out-of-state", "HARPTA, because Hawaii imposes withholding on non-resident sellers", "GET applies at the county assessor level", "No withholding applies—only federal income tax reporting"],
+      correctIndex: 1,
+      explain: "HARPTA is Hawaii's real property transfer withholding statute that applies when a non-Hawaii resident sells Hawaii property; it is separate from federal FIRPTA requirements.",
+    },
+    {
+      q: "At the settlement table, the title company's closing attorney notes the seller transferred to Hawaii only three years ago and is still a Nevada resident. Which withholding obligation takes precedence in this Hawaii real estate transaction?",
+      options: ["FIRPTA withholding of 15% of the sale price", "HARPTA withholding (currently 7.25% of the purchase price)", "Passive Activity Loss (PAL) withholding", "No withholding because the seller has already paid state income taxes"],
+      correctIndex: 1,
+      explain: "HARPTA requires withholding by the buyer or escrow agent on sales by non-Hawaii residents; residency status, not length of time in Hawaii, determines the withholding obligation.",
+    },
+    {
+      q: "When a mainland seller transfers residential property in Hawaii to a local buyer, which withholding requirement typically applies to the transaction?",
+      options: ["GET (General Excise Tax)", "Hawaii Resident Property Tax Act", "HARPTA", "FIRPTA"],
+      correctIndex: 2,
+      explain: "HARPTA requires withholding when a non-Hawaii resident sells Hawaii real property, with the buyer/escrow agent responsible for withholding approximately 7.25% of the sale price.",
+    },
   ],
   "hi-material-facts-q01": [
     {
@@ -1999,6 +2029,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The Bureau of Conveyances", "Land Court", "The Real Estate Commission", "County Recorder's Office"],
       correctIndex: 1,
       explain: "Land Court issues the TCT under Hawaii's Torrens-style registered title system, providing conclusive proof of ownership superior to conventional recording.",
+    },
+    {
+      q: "Which Hawaii system provides conclusive title through a judicial process similar to the Torrens model used in other jurisdictions?",
+      options: ["CPR registration", "Land Court certification", "Bureau of Conveyances filing", "Tax Map Key assignment"],
+      correctIndex: 1,
+      explain: "Land Court is Hawaii's Torrens-style system that issues a conclusive Transfer Certificate of Title (TCT) after judicial examination of ownership.",
+    },
+    {
+      q: "In Hawaii, when a property owner obtains a TCT (Transfer Certificate of Title) through judicial process, they have gone through which system?",
+      options: ["The Land Court process", "The CPR (Condominium Property Regime)", "The Bureau of Conveyances recording", "The TMK (Tax Map Key) classification"],
+      correctIndex: 0,
+      explain: "The Land Court system issues Transfer Certificates of Title as the conclusive proof of ownership, modeled after the Torrens title system.",
+    },
+    {
+      q: "Which of the following Hawaii institutions operates a Torrens-style registered title system that produces conclusive evidence of ownership?",
+      options: ["Tax Assessment Office", "Land Court", "Bureau of Conveyances", "Real Estate Commission"],
+      correctIndex: 1,
+      explain: "Land Court in Hawaii administers the Torrens-style registered title system and issues conclusive TCTs through judicial review of chain of title.",
+    },
+    {
+      q: "A buyer who receives a court-issued certificate of title showing conclusive ownership in Hawaii has obtained this document from which system?",
+      options: ["CPR", "Land Court", "BOC", "TMK"],
+      correctIndex: 1,
+      explain: "Land Court issues Transfer Certificates of Title that provide conclusive ownership proof under Hawaii's Torrens-style registered title system.",
+    },
+    {
+      q: "Which Hawaii government entity administers the Torrens system of title registration and issues conclusive certificates of ownership?",
+      options: ["Bureau of Conveyances", "Land Court", "County Tax Assessment Office", "Real Estate Commission"],
+      correctIndex: 1,
+      explain: "Land Court is Hawaii's Torrens-system authority that issues Transfer Certificates of Title (TCT) with conclusive proof of ownership, distinct from the BOC which records non-Torrens documents.",
     },
   ],
   "hi-material-facts-q02": [
@@ -2026,6 +2086,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Hawaii's GET applies to all gross receipts from business activities, including real estate brokerage commissions earned by the firm.",
     },
+    {
+      q: "When a real estate broker in Hawaii collects commissions from property sales, which state tax obligation applies to those gross receipts?",
+      options: ["Conveyance tax", "General Excise Tax", "FIRPTA withholding", "Hawaii's Real Property Tax Assessment"],
+      correctIndex: 1,
+      explain: "GET (General Excise Tax) is Hawaii's broad-based tax on gross receipts from all business activities, including real estate brokerage services.",
+    },
+    {
+      q: "A Hawaii-licensed broker receives $50,000 in commissions over the course of a quarter. Which tax regime directly impacts these earnings?",
+      options: ["HARPTA (withholding on non-resident sellers)", "Conveyance tax on the sale price", "GET on business gross receipts", "Federal FIRPTA rules"],
+      correctIndex: 2,
+      explain: "GET applies to the broker's gross receipts from brokerage commissions as a Hawaii business operating obligation.",
+    },
+    {
+      q: "Under Hawaii tax law, the revenue collected from real estate brokerage commissions is subject to:",
+      options: ["Property transfer conveyance tax only", "A federal withholding regime for non-residents", "The state's General Excise Tax on business receipts", "A special real estate commission licensing fee"],
+      correctIndex: 2,
+      explain: "GET taxes the gross receipts of Hawaii businesses, including real estate brokers' commission income.",
+    },
+    {
+      q: "Which Hawaii tax applies to the commission income earned by brokers and brokerage firms conducting real estate transactions?",
+      options: ["FIRPTA (Foreign Investment in Real Property Tax Act)", "General Excise Tax", "Conveyance tax (deed transfer tax)", "HARPTA (Hawaii's Real Property Transfer Tax)"],
+      correctIndex: 1,
+      explain: "Hawaii's GET is levied on the gross receipts of all business activities, including real estate brokerage commissions.",
+    },
+    {
+      q: "When a real estate brokerage in Hawaii collects commissions from sales transactions, which state tax obligation applies to those gross receipts?",
+      options: ["Conveyance tax", "FIRPTA withholding tax", "General Excise Tax", "HARPTA withholding tax"],
+      correctIndex: 2,
+      explain: "GET (General Excise Tax) is Hawaii's broad-based sales tax that applies to gross receipts from real estate brokerage services and commissions earned in the state.",
+    },
   ],
   "hi-material-facts-q03": [
     {
@@ -2051,6 +2141,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["It indicates the property manager's certification level and renewal status", "It serves as the unique parcel identifier organizing properties by zone, section, plat, and parcel", "It specifies the insurance company handling the homeowner's coverage", "It documents the HOA's financial assessment and reserve fund status"],
       correctIndex: 1,
       explain: "TMK (Tax Map Key) is the critical Hawaii parcel identification system using zone-section-plat-parcel organization that enables accurate property location, taxation, and transaction documentation.",
+    },
+    {
+      q: "When a Hawaii real estate agent needs to locate a specific residential lot in a subdivision, which document or identifier would contain the TMK?",
+      options: ["The homeowner's fire insurance declaration page", "The property tax assessment card and deed", "The mortgage lender's loan origination statement", "The title company's E&O insurance certificate"],
+      correctIndex: 1,
+      explain: "TMK (Tax Map Key) appears on property tax documents and deeds as the unique identifier for that parcel in Hawaii's tax mapping system.",
+    },
+    {
+      q: "A licensee is preparing a CMA and needs to reference comparable properties by their unique parcel identifiers in Hawaii. What system would use the format Zone-Section-Plat-Parcel?",
+      options: ["The Hawaii Real Estate Commission's licensing database", "The state's Tax Map Key system", "The National Association of REALTORS® MLS coding structure", "Hawaii's statewide property owner disclosure registry"],
+      correctIndex: 1,
+      explain: "The Tax Map Key (TMK) uses the Zone-Section-Plat-Parcel format to uniquely identify each taxable parcel in Hawaii for assessment and taxation purposes.",
+    },
+    {
+      q: "Which of the following best describes what TMK stands for and its primary use in Hawaii real estate transactions?",
+      options: ["Tangible Market Knowledge—a broker's certification of property valuation expertise", "Tax Map Key—a unique parcel identification number assigned by county assessors", "Transferable Mortgage Kicker—an adjustable interest rate provision", "Territorial Measurement Kilometers—a distance calculation for property boundaries"],
+      correctIndex: 1,
+      explain: "TMK is the abbreviation for Tax Map Key, which serves as Hawaii's standardized method of identifying and cataloging individual property parcels for tax and legal purposes.",
+    },
+    {
+      q: "A title company is preparing closing documents for a land sale in Honolulu. To correctly identify the parcel using the Hawaii tax system's unique designation, which element would they reference?",
+      options: ["The grantor's social security number and vesting code", "The Tax Map Key (TMK) assigned by the county assessor's office", "The loan servicer's account number and escrow identifier", "The broker's multiple listing service reference number"],
+      correctIndex: 1,
+      explain: "The TMK (Tax Map Key) is the official Hawaii county assessor's parcel identifier used in all legal documents and tax records to distinguish one property from another.",
+    },
+    {
+      q: "When a Hawaii real estate professional needs to locate and reference a specific property on the tax assessor's records, which designation would they use?",
+      options: ["Recording number assigned by the state land office", "Tax Map Key that breaks down the island, district, section, and individual parcel", "Mortgage lender identification code", "Conveyance transfer index"],
+      correctIndex: 1,
+      explain: "TMK (Tax Map Key) is Hawaii's unique property identification system used by tax assessors and real estate professionals to identify and locate specific parcels, organized by geographic and administrative divisions.",
     },
   ],
   "hi-material-facts-q04": [
@@ -2078,6 +2198,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Hawaii's HARPTA and the federal FIRPTA statute both independently govern withholding for foreign entity sales of Hawaii property and can apply concurrently.",
     },
+    {
+      q: "An individual from Japan sells a condominium in Honolulu. Which withholding requirement(s) apply to this transaction?",
+      options: ["Federal FIRPTA withholding only", "State HARPTA withholding only", "Federal FIRPTA and state HARPTA withholding", "No withholding is required for foreign nationals"],
+      correctIndex: 2,
+      explain: "A foreign national (non-U.S. citizen) selling Hawaii real property is subject to both federal FIRPTA withholding and Hawaii's parallel state withholding requirement (HARPTA), which operate independently.",
+    },
+    {
+      q: "When a non-citizen resident of another country conveys real property located in Hawaii, the escrow agent must withhold funds under:",
+      options: ["HARPTA exclusively", "FIRPTA and HARPTA concurrently", "FIRPTA exclusively", "State income tax only"],
+      correctIndex: 1,
+      explain: "Foreign persons disposing of Hawaii real estate must comply with both the federal FIRPTA withholding requirement and Hawaii's HARPTA withholding requirement, which are separate obligations.",
+    },
+    {
+      q: "A seller who is a foreign corporation liquidates its Maui property holdings. Withholding obligations include:",
+      options: ["HARPTA, but only if the seller is also a nonresident", "Both FIRPTA at the federal level and HARPTA at the state level", "FIRPTA only, as state law defers to federal withholding", "Neither, as corporate sales are exempt from withholding"],
+      correctIndex: 1,
+      explain: "Foreign persons and entities selling Hawaii real property are subject to concurrent federal FIRPTA withholding and state HARPTA withholding; these are separate statutory requirements that both apply.",
+    },
+    {
+      q: "During closing of a Hawaii real estate sale, the title company identifies that the seller is a foreign national. This triggers withholding compliance under:",
+      options: ["State HARPTA only", "Federal FIRPTA only", "Both federal FIRPTA and state HARPTA requirements", "Neither requirement applies to foreign nationals"],
+      correctIndex: 2,
+      explain: "Foreign nationals selling Hawaii real property must satisfy both the federal Foreign Investment in Real Property Tax Act (FIRPTA) and Hawaii's Real Property Tax Act (HARPTA), which operate as parallel withholding obligations.",
+    },
+    {
+      q: "When a nonresident alien disposes of Hawaii real property, which withholding requirement(s) apply?",
+      options: ["Federal FIRPTA withholding applies, but Hawaii HARPTA does not apply to foreign nationals", "Hawaii HARPTA withholding applies, but federal FIRPTA does not apply to nonresidents", "Both federal FIRPTA and Hawaii HARPTA withholding may be required on the same sale", "Neither withholding applies if the seller has a valid Hawaii driver's license"],
+      correctIndex: 2,
+      explain: "A nonresident alien selling Hawaii real estate is subject to both FIRPTA (federal) and HARPTA (Hawaii state) withholding obligations simultaneously, as they address different statutory frameworks.",
+    },
   ],
   "hi-material-facts-q05": [
     {
@@ -2103,6 +2253,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["HRS 467", "HRS 521", "HRS 514B", "HRS 508D"],
       correctIndex: 3,
       explain: "HRS 508D establishes Hawaii's mandatory seller disclosure statute for residential resale properties, requiring disclosure of known defects and material information.",
+    },
+    {
+      q: "Which Hawaii Revised Statute requires residential real estate sellers to provide written disclosures about property condition?",
+      options: ["HRS 521", "HRS 508D", "HRS 514B", "HRS 467"],
+      correctIndex: 1,
+      explain: "HRS 508D is Hawaii's seller disclosure statute that mandates written property condition disclosures for residential real estate transactions.",
+    },
+    {
+      q: "A real estate licensee in Hawaii must ensure a seller complies with disclosure requirements found in:",
+      options: ["HRS 467 regarding property taxation", "HRS 514B concerning condominium associations", "HRS 508D pertaining to residential property disclosures", "HRS 521 relating to landlord-tenant matters"],
+      correctIndex: 2,
+      explain: "HRS 508D specifically governs mandatory seller disclosures for residential real estate sales in Hawaii.",
+    },
+    {
+      q: "Under Hawaii law, the statute that establishes seller disclosure obligations for property condition is:",
+      options: ["HRS 467", "HRS 514B", "HRS 508D", "HRS 521"],
+      correctIndex: 2,
+      explain: "HRS 508D contains Hawaii's mandatory seller property disclosure requirements for residential real estate transactions.",
+    },
+    {
+      q: "Which of the following HRS sections contains Hawaii's residential seller disclosure requirements?",
+      options: ["HRS 514B", "HRS 467", "HRS 521", "HRS 508D"],
+      correctIndex: 3,
+      explain: "HRS 508D is the statute that governs mandatory disclosures by sellers regarding the condition of residential property.",
+    },
+    {
+      q: "Under Hawaii law, which statute specifically requires residential sellers to provide property condition disclosures to prospective buyers?",
+      options: ["HRS 521", "HRS 508D", "HRS 514B", "HRS 467"],
+      correctIndex: 1,
+      explain: "HRS 508D is Hawaii's residential property disclosure statute that mandates sellers disclose known defects and property conditions to buyers during the sales transaction.",
     },
   ],
   "hi-material-facts-q06": [
@@ -2130,6 +2310,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Non-disclosure of leasehold status is a material violation; the buyer has the statutory right to rescind the transaction.",
     },
+    {
+      q: "A property transaction closes without the buyer being informed of the leasehold nature of the property. The seller omitted this material fact. What legal recourse is available to the buyer?",
+      options: ["Demand immediate fee-simple conversion at seller's expense", "Seek rescission under Hawaii leasehold disclosure requirements", "File a complaint limited to cosmetic defect claims", "Accept the property with no legal remedies available"],
+      correctIndex: 1,
+      explain: "Non-disclosure of leasehold status is a material misrepresentation; Hawaii law provides rescission rights to the uninformed buyer.",
+    },
+    {
+      q: "During escrow, a licensee fails to reveal that the property operates under a lease rather than fee ownership. Upon discovery after closing, the buyer:",
+      options: ["May rescind the transaction based on leasehold non-disclosure", "Is limited to claiming damages for missing disclosures only", "Must accept the property as-is with no recourse", "Can only pursue damages if the lease term is under 10 years"],
+      correctIndex: 0,
+      explain: "Failure to disclose leasehold status constitutes a material omission giving the buyer rescission rights under Hawaii leasehold disclosure law.",
+    },
+    {
+      q: "A buyer unknowingly purchases a leasehold property because the seller concealed this essential term. Which of the following best describes the buyer's rights?",
+      options: ["No rights; the buyer should have investigated independently", "Rescission rights due to material non-disclosure of leasehold status", "Rights limited to recovering inspection costs only", "Rights to sue for breach of warranty of habitability"],
+      correctIndex: 1,
+      explain: "Material non-disclosure of leasehold creates a duty to remedy; rescission is the primary remedy available to the deceived buyer.",
+    },
+    {
+      q: "A seller deliberately omits leasehold information from the property disclosures. The buyer closes unaware and later discovers the truth. The buyer's primary legal remedy is:",
+      options: ["Specific performance forcing the seller to obtain fee ownership", "Right of rescission under leasehold disclosure statutes", "Damages limited to the cost of title insurance", "Forced renegotiation of the lease terms with the lessor"],
+      correctIndex: 1,
+      explain: "Intentional or negligent failure to disclose leasehold status enables the buyer to rescind under Hawaii's leasehold disclosure requirements.",
+    },
+    {
+      q: "A purchaser enters into a contract expecting to own a property in fee simple, but discovers at closing that the property is actually leasehold and the seller never disclosed this material fact. Which of the following remedies is likely available to the buyer?",
+      options: ["Mandatory acceptance of the property with a price reduction negotiated at closing", "The right to cancel the transaction and recover earnest money under leasehold nondisclosure laws", "A claim for specific performance to convert the lease to fee ownership", "Damages limited to the cost of property inspections"],
+      correctIndex: 1,
+      explain: "Failure to disclose leasehold status is a material nondisclosure that triggers rescission rights, allowing the buyer to unwind the transaction and recover their earnest money.",
+    },
   ],
   "hi-material-facts-q07": [
     {
@@ -2155,6 +2365,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Conveyance tax", "Recording fee tax", "Property transfer surcharge", "HARPTA obligation"],
       correctIndex: 0,
       explain: "Hawaii's conveyance tax is the official state transfer tax on real estate transactions, imposed on the sale and calculated using tiered rates. Recording fees are separate administrative costs; property transfer surcharge and HARPTA are not the correct names for Hawaii's state transfer tax.",
+    },
+    {
+      q: "When a property sells in Hawaii, which tax is imposed on the transfer of ownership?",
+      options: ["General Excise Tax (GET)", "Conveyance tax", "Hawaii Real Property Tax Act (HARPTA)", "Foreign Investment in Real Property Tax Act (FIRPTA)"],
+      correctIndex: 1,
+      explain: "Conveyance tax is Hawaii's state-level real estate transfer tax, applied to the deed or instrument transferring property. GET, HARPTA, and FIRPTA are different taxes or acts that do not serve as Hawaii's transfer tax mechanism.",
+    },
+    {
+      q: "Which of the following best describes Hawaii's real estate transfer tax?",
+      options: ["FIRPTA compliance requirement for foreign buyers", "A tiered tax based on the sale price of real property", "The General Excise Tax imposed on all commercial transactions", "A federal withholding tax on non-resident sellers"],
+      correctIndex: 1,
+      explain: "Hawaii's conveyance tax is applied to real estate transfers with tiered rates based on purchase price. FIRPTA is federal, GET is a general sales tax, and the fourth option describes federal withholding requirements.",
+    },
+    {
+      q: "A residential property in Honolulu closes for $800,000. Which state tax specifically applies to this transaction?",
+      options: ["Hawaii Real Property Tax Act surcharge", "Conveyance tax", "General Excise Tax exclusion", "Real Estate Commission transfer fee"],
+      correctIndex: 1,
+      explain: "The conveyance tax is the state-level transfer tax on real property sales in Hawaii, calculated based on the sale price. The other options either do not apply to the transfer itself or are not the correct state transfer tax.",
+    },
+    {
+      q: "A licensee explains to a buyer that when purchasing property in Hawaii, a certain tax is due based on the property's transfer. This tax is called:",
+      options: ["Conveyance tax", "Property acquisition tax (PAT)", "Hawaii transfer withholding tax", "Deed recording surcharge"],
+      correctIndex: 0,
+      explain: "Conveyance tax is Hawaii's designated state transfer tax on real estate transactions. The other options are not actual Hawaii transfer taxes or are misnamed instruments.",
+    },
+    {
+      q: "When a property changes ownership in Hawaii, what is the name of the state tax imposed on the transaction?",
+      options: ["FIRPTA withholding tax", "Conveyance tax", "General Excise Tax (GET)", "HARPTA compliance fee"],
+      correctIndex: 1,
+      explain: "Conveyance tax is Hawaii's state-level real estate transfer tax applied to property sales. It operates on a tiered rate structure based on the purchase price.",
     },
   ],
   "hi-material-facts-q08": [
@@ -2182,6 +2422,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Land Commission Awards are historical grants from the 1848 Mahele period that serve as foundational title documents requiring careful and thorough chain of title examination.",
     },
+    {
+      q: "When examining a deed that references a 'Land Commission Award' as the original source of title, a Hawaii real estate licensee should recognize this as:",
+      options: ["A contemporary conveyance method still in use today", "A nineteenth-century Hawaiian Kingdom distribution requiring thorough title investigation", "A U.S. government patent issued under federal homestead law", "A timeshare or fractional ownership instrument"],
+      correctIndex: 1,
+      explain: "Land Commission Awards originated during the Mahele period in the 1850s and represent a unique aspect of Hawaiian land history requiring careful examination of title records.",
+    },
+    {
+      q: "A seller's abstract of title shows the property's lineage beginning with an LCA (Land Commission Award). This historical designation indicates:",
+      options: ["The land is subject to federal trust restrictions", "Title derives from the Hawaiian Kingdom's 1848 division of lands and demands thorough chain-of-title analysis", "The property was subdivided from a larger modern development", "The property is held in common ownership by multiple parties"],
+      correctIndex: 1,
+      explain: "LCAs are specific to Hawaii's Mahele period land distribution system and licensees must carefully verify the complete chain of ownership from this historical source forward.",
+    },
+    {
+      q: "During a title review, you discover that ownership traces back to a 'Land Commission Award.' This finding reflects:",
+      options: ["Recent acreage added through coastal reclamation", "A parcel with roots in the 1850s Hawaiian Kingdom land redistribution requiring detailed historical title work", "Land held in perpetual lease from the State of Hawaii", "A property converted from agricultural to residential zoning"],
+      correctIndex: 1,
+      explain: "Land Commission Awards are historical documents from the Mahele era that necessitate careful examination of successive transfers to establish clear current title.",
+    },
+    {
+      q: "A property's title report indicates its origin as a 'Land Commission Award.' A licensee should understand this means:",
+      options: ["The deed was recorded within the last five years", "The land's ownership traces to Hawaii's mid-nineteenth-century kingdom-era land division system and requires meticulous chain verification", "The property carries a federal maritime boundary designation", "Ownership is vested in a corporation or partnership entity"],
+      correctIndex: 1,
+      explain: "Land Commission Awards are historical grants from the Mahele period in the 1850s, and thorough analysis of the intervening chain of title is essential for establishing marketable title.",
+    },
+    {
+      q: "When reviewing a property's title history, you discover the original ownership interest originated from a Land Commission Award. This indicates that:",
+      options: ["The property was recently subdivided and requires new surveying", "The property title traces back to the Mahele period and warrants thorough examination of the chain of title", "The property is held in trust by the State of Hawaii", "The property must be converted to a fee simple estate before sale"],
+      correctIndex: 1,
+      explain: "Land Commission Awards are historical grants from the Mahele era (1848) that require careful title analysis to ensure validity and proper succession through the chain of title.",
+    },
   ],
   "hi-material-facts-q09": [
     {
@@ -2207,6 +2477,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The applicant acquires full fee ownership with standard market restrictions", "The applicant receives a leasehold interest subject to HHCA eligibility and terms", "The applicant qualifies for a mortgage as if it were private property", "The applicant may immediately resell or transfer to any third party"],
       correctIndex: 1,
       explain: "HHCA approval grants a lease interest restricted to eligible Native Hawaiians with specific transfer and use limitations, not unrestricted ownership.",
+    },
+    {
+      q: "Which statement accurately describes the legal status of Hawaiian Home Lands under the Hawaiian Homes Commission Act?",
+      options: ["They are held in trust by the state and leased exclusively to Native Hawaiians who meet eligibility requirements", "They are privately owned parcels available for purchase by any qualified buyer", "They are federal trust lands managed by the U.S. Department of Interior", "They are public lands open to development under Hawaii's zoning laws"],
+      correctIndex: 0,
+      explain: "The HHCA established a trust system where lands are leased (not sold) to Native Hawaiians meeting specific criteria; they are state-held lands with restricted transfer rights.",
+    },
+    {
+      q: "A prospective buyer asks about purchasing a parcel of Hawaiian Home Land. As a licensee, you should explain that:",
+      options: ["The property can be purchased if the buyer obtains federal approval", "The land is available only through long-term leases to Native Hawaiians who qualify under HHCA provisions", "The property is offered at auction to the highest bidder annually", "The land may be purchased but requires state income verification"],
+      correctIndex: 1,
+      explain: "HHCA lands operate under a lease system restricted to qualifying Native Hawaiians; they are not available for purchase by the general public.",
+    },
+    {
+      q: "Under Hawaii law, Hawaiian Home Lands differ from standard real estate because they are:",
+      options: ["Taxable commercial properties owned by Native Hawaiian corporations", "Restricted to lease arrangements with Native Hawaiians who meet specific residency and ancestry criteria", "County-managed conservation areas with recreational access for all residents", "Federal enclaves exempt from all state and local regulations"],
+      correctIndex: 1,
+      explain: "HHCA lands are state trust lands leased exclusively to eligible Native Hawaiians under strict eligibility requirements; they have unique restrictions not found in conventional real estate.",
+    },
+    {
+      q: "If a client is a Native Hawaiian interested in Hawaiian Home Land, the primary mechanism for obtaining use of such land is:",
+      options: ["Purchasing fee-simple title through a standard mortgage", "Entering into a lease agreement after meeting HHCA qualification standards", "Receiving a grant deed from the Hawaii Department of Commerce", "Obtaining an easement and right-of-way from the county assessor"],
+      correctIndex: 1,
+      explain: "Qualifying Native Hawaiians obtain Hawaiian Home Lands through leasing arrangements (typically long-term) under HHCA; ownership transfer is restricted and controlled.",
+    },
+    {
+      q: "Under the Hawaiian Homes Commission Act, what is the primary characteristic of Hawaiian Home Land disposition?",
+      options: ["Land is sold in fee simple to any qualified purchaser regardless of ancestry", "Land is conveyed through 99-year leases restricted to Native Hawaiians meeting HHCA eligibility criteria", "Land is held in trust by the state with no restrictions on use or occupancy", "Land is administered by the federal government as part of the National Park System"],
+      correctIndex: 1,
+      explain: "The HHCA mandates that Hawaiian Home Lands be leased (not sold) to Native Hawaiians who meet specific qualification requirements; these leases are typically 99 years and include strict transfer restrictions.",
     },
   ],
   "hi-professional-conduct-q00": [

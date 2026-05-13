@@ -17,6 +17,7 @@ interface AdminUserRow {
   createdAt: string;
   lastSeenAt: string;
   passedExamAt: string | null;
+  accessExpiresAt: string | null;
   totalSeconds: number;
 }
 
@@ -372,6 +373,10 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
   const [isAdmin, setIsAdmin] = useState(user.isAdmin);
   const [roles, setRoles] = useState<string[]>(user.roles ?? []);
   const [tier, setTier] = useState(user.tier);
+  // accessExpiresAt is YYYY-MM-DD for the date input; null means "no expiry".
+  const [accessExpiresAt, setAccessExpiresAt] = useState<string>(
+    user.accessExpiresAt ? user.accessExpiresAt.slice(0, 10) : ''
+  );
   const [saving, setSaving] = useState(false);
 
   const toggleRole = (role: string) => {
@@ -380,7 +385,12 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
 
   const save = async () => {
     setSaving(true);
-    await onSave(user, { isAdmin, roles, tier });
+    // accessExpiresAt: empty string → null (clear/lifetime); YYYY-MM-DD → string
+    const patch: Partial<AdminUserRow> & { accessExpiresAt?: string | null } = {
+      isAdmin, roles, tier,
+      accessExpiresAt: accessExpiresAt.trim() === '' ? null : accessExpiresAt,
+    };
+    await onSave(user, patch as Partial<AdminUserRow>);
     setSaving(false);
   };
 
@@ -430,6 +440,33 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
             <option value="solo">Solo Website ($800)</option>
           </select>
           <p style={{ fontSize: 11, color: T.textGhost, marginTop: 6, lineHeight: 1.5 }}>Manually changing tier here doesn&apos;t charge them. Stripe webhook normally handles this on payment.</p>
+        </Section>
+
+        <Section title="Access window">
+          <input
+            type="date"
+            value={accessExpiresAt}
+            onChange={e => setAccessExpiresAt(e.target.value)}
+            style={{ width: '100%', padding: '10px 12px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.white, color: T.text, fontFamily: 'inherit', fontSize: 14 }}
+          />
+          <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+            <button onClick={() => {
+              const d = new Date(); d.setUTCDate(d.getUTCDate() + 30);
+              setAccessExpiresAt(d.toISOString().slice(0, 10));
+            }} style={{ ...BUTTON_3D.ghost, padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>+30 days</button>
+            <button onClick={() => {
+              const d = new Date(); d.setUTCDate(d.getUTCDate() + 90);
+              setAccessExpiresAt(d.toISOString().slice(0, 10));
+            }} style={{ ...BUTTON_3D.ghost, padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>+90 days</button>
+            <button onClick={() => {
+              const d = new Date(); d.setUTCDate(d.getUTCDate() + 180);
+              setAccessExpiresAt(d.toISOString().slice(0, 10));
+            }} style={{ ...BUTTON_3D.ghost, padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit' }}>+180 days</button>
+            <button onClick={() => setAccessExpiresAt('')} style={{ ...BUTTON_3D.ghost, padding: '6px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.04em', cursor: 'pointer', fontFamily: 'inherit', color: T.coral }}>Clear (lifetime)</button>
+          </div>
+          <p style={{ fontSize: 11, color: T.textGhost, marginTop: 8, lineHeight: 1.55 }}>
+            Empty = no expiration. Use this to comp study time after offline study or extend a window manually. Time gets set to end-of-day UTC.
+          </p>
         </Section>
 
         <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 18 }}>

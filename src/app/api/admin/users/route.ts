@@ -29,6 +29,7 @@ export async function GET() {
       createdAt: true,
       lastSeenAt: true,
       passedExamAt: true,
+      accessExpiresAt: true,
     },
   });
 
