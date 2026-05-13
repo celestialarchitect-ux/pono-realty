@@ -70,7 +70,11 @@ export default function PracticeExam() {
     return () => clearInterval(id);
   }, [phase]);
   useEffect(() => {
-    if (phase === 'taking' && secondsLeft === 0) setPhase('results');
+    if (phase === 'taking' && secondsLeft === 0) {
+      // Timer expired — submit whatever's filled in. Same recording flow.
+      submitAndRecord();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsLeft, phase]);
 
   const start = (d: ExamDifficulty) => {
@@ -80,6 +84,48 @@ export default function PracticeExam() {
     setCurrent(0);
     setSecondsLeft(EXAM_TIME_MINUTES * 60);
     setPhase('taking');
+  };
+
+  // Build the canonical questionId for a mock-sampled question. Mock items
+  // are sampled from the same per-chapter `practice` arrays that power the
+  // chapter quizzes, so the chapter-index addresses the SAME question on
+  // both surfaces — analytics aggregate cleanly across mock + chapter
+  // attempts of the same question. Items sourced from the TOUGH bank
+  // (chapterIndex === -1) fall back to a text-hash ID so they still
+  // group consistently across mock attempts.
+  const questionIdFor = (q: ExamItem): string => {
+    if (typeof q.chapterIndex === 'number' && q.chapterIndex >= 0) {
+      return `${q.chapterSlug}-q${q.chapterIndex.toString().padStart(2, '0')}`;
+    }
+    let h = 5381;
+    for (let i = 0; i < q.q.length; i++) {
+      h = ((h << 5) + h) + q.q.charCodeAt(i);
+      h |= 0;
+    }
+    return `tough-${Math.abs(h).toString(36).slice(0, 7)}`;
+  };
+
+  // Record the attempt server-side when the student submits. Best-effort —
+  // a network error doesn't block the local results view.
+  const submitAndRecord = async () => {
+    setPhase('results');
+    try {
+      await fetch('/api/quiz/attempt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          kind: 'mock',
+          context: `mock-${difficulty}`,
+          answers: questions.map((q, i) => ({
+            questionId: questionIdFor(q),
+            variantIndex: 0,
+            selectedIndex: answers[i] ?? -1,
+            correctIndex: q.correctIndex,
+            correct: answers[i] === q.correctIndex,
+          })),
+        }),
+      });
+    } catch { /* non-fatal */ }
   };
 
   const score = useMemo(() => {
@@ -112,7 +158,7 @@ export default function PracticeExam() {
               setCurrent={setCurrent}
               secondsLeft={secondsLeft}
               difficulty={difficulty}
-              submit={() => setPhase('results')}
+              submit={submitAndRecord}
             />
           )}
           {phase === 'results' && (

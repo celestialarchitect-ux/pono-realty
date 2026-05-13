@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T09:48:07.766Z via Claude Haiku.
+// Generated 2026-05-13T09:55:31.090Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -2606,6 +2606,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A variance provides relief from specific zoning restrictions like setbacks when unique site conditions create hardship; it does not require or result in rezoning.",
     },
+    {
+      q: "A property owner constructed a structure that encroaches on the required front setback. To legally keep the structure in place without changing the zone classification, which application should be filed?",
+      options: ["Rezoning petition", "Variance request", "Conditional use permit", "Nonconforming use declaration"],
+      correctIndex: 1,
+      explain: "A variance permits relief from specific zoning requirements due to hardship or unique circumstances, while rezoning would alter the entire zone's regulations.",
+    },
+    {
+      q: "After construction, a developer discovers that a building setback violates local zoning ordinances. The most appropriate remedy that does not require changing the zoning classification is a:",
+      options: ["Special exception", "Variance", "Conditional use permit", "Comprehensive plan amendment"],
+      correctIndex: 1,
+      explain: "A variance grants relief from specific zoning restrictions for properties with unique hardships; it leaves the underlying zoning intact unlike rezoning.",
+    },
+    {
+      q: "A homeowner's fence placement violates the side yard setback requirement in the residential zone. To remedy this non-conformance while maintaining the property's current zoning, the owner should apply for a:",
+      options: ["Conditional use permit", "Zone change", "Variance", "Planned Unit Development"],
+      correctIndex: 2,
+      explain: "A variance addresses relief from specific zoning requirements for individual hardship cases without changing the zone itself.",
+    },
+    {
+      q: "During a property inspection, a real estate professional discovers that an existing carport was built in violation of the rear setback ordinance. To allow this nonconforming structure to remain without rezoning the parcel, the property owner needs to obtain a:",
+      options: ["Use permit amendment", "Variance approval", "Rezoning certificate", "Exception to code"],
+      correctIndex: 1,
+      explain: "A variance provides relief from specific dimensional or setback requirements based on hardship or unique site conditions, preserving the underlying zoning designation.",
+    },
+    {
+      q: "A property owner constructed a fence that encroaches 2 feet into the required side yard setback. To legalize the existing structure without changing the zoning district, the owner should petition for a:",
+      options: ["Rezoning application to expand permitted uses", "Variance from the setback requirement", "Conditional use permit", "Special exception under current code"],
+      correctIndex: 1,
+      explain: "A variance is the appropriate remedy when an existing structure violates a dimensional requirement (setback) due to unique site conditions, without altering the underlying zoning classification.",
+    },
   ],
   "land-use-controls-q01": [
     {
@@ -2631,6 +2661,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["All affected property owners formally waive their right to judicial review", "The project serves a public purpose and displaced owners receive just compensation", "The U.S. Secretary of Transportation authorizes the specific land acquisition", "At least 75% of nearby residents vote in favor of the project"],
       correctIndex: 1,
       explain: "The Fifth Amendment permits condemnation for public use when just compensation is paid; neither owner consent nor public referendum is constitutionally required.",
+    },
+    {
+      q: "When a government entity exercises eminent domain, what two essential requirements must be satisfied under the Fifth Amendment?",
+      options: ["Majority approval by affected neighbors and a hearing before a county board", "A legitimate public purpose and payment of fair market value to the owner", "Written consent from the property owner and environmental clearance", "State legislative authorization and appraisal by a licensed real estate appraiser"],
+      correctIndex: 1,
+      explain: "The Fifth Amendment mandates that taking of private property for public use requires just compensation; public purpose and fair payment are the two non-negotiable elements.",
+    },
+    {
+      q: "Which of the following correctly describes a constitutional limitation on the government's power of eminent domain?",
+      options: ["The taking can occur only if the property owner waives the right to challenge it", "The property must be taken for public benefit, and the owner must receive just compensation", "Federal law supersedes state law, so only the federal government can condemn property", "The taking requires approval from a supermajority of the local city council"],
+      correctIndex: 1,
+      explain: "The Fifth Amendment protects property owners by requiring both a public use/benefit and just compensation; these are constitutionally protected safeguards against arbitrary taking.",
+    },
+    {
+      q: "Under eminent domain law, a condemnation action by a municipal government is valid only when:",
+      options: ["The property owner fails to pay property taxes for two consecutive years", "The taking serves a public interest and the owner receives compensation equal to fair market value", "A referendum is held and at least 60% of voters approve the taking", "The title is held by a non-resident owner or a corporate entity"],
+      correctIndex: 1,
+      explain: "Constitutional law requires that eminent domain takings must be for public use/purpose and accompanied by just compensation to the property owner.",
+    },
+    {
+      q: "A state government wishes to acquire private land to build a public highway. Under the takings clause of the Fifth Amendment, this action is permitted only if:",
+      options: ["The property owner voluntarily agrees to sell at a discount to support the public project", "The land is put up for public auction before condemnation is pursued", "The government can demonstrate public use and pays the owner just compensation", "The property has been declared blighted or unsuitable for private development"],
+      correctIndex: 2,
+      explain: "The Fifth Amendment requires that property taken via eminent domain serve a public purpose and that owners receive just compensation; both elements must be present for a valid taking.",
+    },
+    {
+      q: "When a government agency exercises its power of eminent domain to acquire private land for a highway project, which of the following must occur?",
+      options: ["The property owner must voluntarily transfer title within 30 days", "Just compensation must be paid and the taking must be for public use", "A majority of neighboring property owners must petition the government", "The state legislature must pass a special statute authorizing the specific taking"],
+      correctIndex: 1,
+      explain: "Eminent domain under the Fifth Amendment requires both a legitimate public use and payment of just compensation to the owner; voluntary transfer and legislative approval are not constitutional requirements.",
     },
   ],
   "land-use-controls-q02": [
@@ -2658,6 +2718,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Uses that pre-date zoning changes are protected as nonconforming uses and may continue indefinitely, provided they are not abandoned or discontinued.",
     },
+    {
+      q: "When a property owner operates a use that was lawful before the zoning code changed, and the use is now prohibited under the new zoning classification, the use is classified as a:",
+      options: ["Conditional use permit", "Nonconforming use", "Variance from the zoning board", "Overlay district exception"],
+      correctIndex: 1,
+      explain: "Uses that existed legally before zoning changes are grandfathered in as nonconforming uses and may continue operating despite current zoning restrictions.",
+    },
+    {
+      q: "A property has been operating a commercial laundry in a residential zone for 15 years. Last year, the zone was changed to prohibit laundromats. Which term best describes the legal status of this laundry operation?",
+      options: ["Spot zoning", "Variance", "Nonconforming use", "Special use permit"],
+      correctIndex: 2,
+      explain: "Establishments that operated legally before zoning ordinances prohibited them are protected as nonconforming uses and may generally continue despite the new zoning classification.",
+    },
+    {
+      q: "An office building was constructed and operating lawfully for many years in what is now zoned exclusively for residential use. The building continues to function as an office. This situation is an example of:",
+      options: ["Variance", "Conditional use", "Nonconforming use", "Zoning appeal"],
+      correctIndex: 2,
+      explain: "Properties that legally existed before restrictive zoning was adopted retain nonconforming use status, allowing them to continue operations despite current zoning prohibitions.",
+    },
+    {
+      q: "Under Hawaii zoning law, what is the name of the protection that allows an existing use to continue operating even though the current zoning code no longer permits that type of use?",
+      options: ["Deviation approval", "Nonconforming use", "Administrative waiver", "Conditional use permit"],
+      correctIndex: 1,
+      explain: "Nonconforming use is the legal doctrine that grandfathers in pre-existing uses, allowing them to persist despite being incompatible with current zoning regulations.",
+    },
+    {
+      q: "A property owner operates a business that was lawfully established before new zoning regulations were enacted. The business does not comply with the current zoning code but is allowed to continue. This is known as a:",
+      options: ["Conditional use permit", "Nonconforming use", "Zoning variance", "Floating zone"],
+      correctIndex: 1,
+      explain: "Uses that existed legally before zoning changes are grandfathered in as nonconforming uses and may continue despite current zoning restrictions.",
+    },
   ],
   "land-use-controls-q03": [
     {
@@ -2683,6 +2773,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The state legislature", "Current and previous owners, operators, transporters, and generators", "Environmental consultants who conducted site assessments", "Only whoever first brought hazardous materials to the site"],
       correctIndex: 1,
       explain: "CERCLA establishes strict liability across multiple categories of responsible parties, including both current and former owners and operators, creating potential exposure for multiple defendants.",
+    },
+    {
+      q: "Under CERCLA, who may be held responsible for environmental remediation costs at a contaminated property?",
+      options: ["The federal EPA administrator exclusively", "Current property owners, former property owners, site operators, and potentially waste generators", "Only the entity that directly caused the contamination", "State environmental agencies with no federal involvement"],
+      correctIndex: 1,
+      explain: "CERCLA establishes broad liability for current owners, previous owners, operators, and potentially generators of hazardous substances at contaminated sites.",
+    },
+    {
+      q: "Which party or parties could potentially face CERCLA liability for cleanup costs?",
+      options: ["The current property owner and current operator only", "Anyone in the chain of ownership or operation, including past owners, current owners, operators, and waste transporters", "Only the original entity responsible for dumping the waste", "Only those who knowingly discharged hazardous materials"],
+      correctIndex: 1,
+      explain: "CERCLA imposes strict liability without regard to fault and extends to a wide range of potentially responsible parties including current and former owners and operators.",
+    },
+    {
+      q: "CERCLA's liability framework applies to:",
+      options: ["Solely the present owner of contaminated real property", "Current owners, previous owners, operators of the site, and generators of hazardous substances", "Only parties with direct knowledge of the contamination", "Exclusively those who obtained permits to operate on the property"],
+      correctIndex: 1,
+      explain: "CERCLA assigns liability broadly across multiple classes of responsible parties without requiring proof of negligence or causation.",
+    },
+    {
+      q: "A commercial property shows signs of historical contamination. Under CERCLA, liability for cleanup expenses may attach to:",
+      options: ["Only the company currently operating the business on the site", "The current landowner, any previous landowners, the current operator, and possibly parties who generated or transported waste there", "Only the original owner from decades ago", "The state environmental agency responsible for permitting"],
+      correctIndex: 1,
+      explain: "CERCLA imposes joint and several strict liability across the current owner, prior owners, current operators, and potentially other parties in the chain of responsibility.",
+    },
+    {
+      q: "Under the Comprehensive Environmental Response, Compensation, and Liability Act, which parties may be held responsible for contaminated site remediation?",
+      options: ["The party that directly caused the pollution and no other party", "Only entities that currently own or occupy the contaminated property", "Current owners, previous owners, operators, transporters, and waste generators", "State environmental agencies exclusively"],
+      correctIndex: 2,
+      explain: "CERCLA establishes strict liability that extends to a broad group of potentially responsible parties (PRPs), including current and former property owners, operators, and those who arranged for waste disposal.",
     },
   ],
   "land-use-controls-q04": [
@@ -2710,6 +2830,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Property tax liens maintain the highest priority status and are paid before mortgages, federal tax liens, and mechanic's liens in the foreclosure or sale proceeds distribution.",
     },
+    {
+      q: "In a foreclosure sale, which of the following liens would be satisfied BEFORE a previously recorded first mortgage?",
+      options: ["Property tax liens", "Judgment liens recorded after the mortgage", "Homeowner association assessment liens", "Deed of trust liens"],
+      correctIndex: 0,
+      explain: "Property tax liens hold superior priority over virtually all other liens, including mortgages and judgment liens, regardless of recording sequence.",
+    },
+    {
+      q: "A property owner has a delinquent property tax obligation, an unpaid contractor's lien, and a recorded mortgage. If the property is sold at auction, which creditor typically receives payment first?",
+      options: ["The mortgage holder", "The taxing authority", "The contractor with a mechanic's lien", "Whichever lien was recorded earliest"],
+      correctIndex: 1,
+      explain: "Property tax liens maintain statutory priority over mortgages, mechanic's liens, and other encumbrances, making the taxing authority the first to be paid.",
+    },
+    {
+      q: "Which of the following would a title company typically list FIRST in the priority sequence on a preliminary report?",
+      options: ["Federal income tax liens", "Property tax assessments and liens", "Existing mortgages and deeds of trust", "Judgments against the property owner"],
+      correctIndex: 1,
+      explain: "Property tax liens hold the highest statutory priority and appear first in the lien hierarchy, superseding federal tax liens, mortgages, and judgment liens.",
+    },
+    {
+      q: "A buyer is concerned about title issues. The property has a senior mortgage, unpaid property taxes, and a filed UCC lien. In what order would these typically be paid from sale proceeds?",
+      options: ["Mortgage, property taxes, UCC lien", "Property taxes, mortgage, UCC lien", "UCC lien, mortgage, property taxes", "Order depends solely on recording dates"],
+      correctIndex: 1,
+      explain: "Property tax liens take statutory priority regardless of recording order, followed by mortgages and other liens; the UCC lien would typically be lowest in priority.",
+    },
+    {
+      q: "In Hawaii, when determining lien priority on real property, property tax liens would rank ahead of which of the following?",
+      options: ["Judgment liens recorded before the tax assessment", "Mechanic's liens, mortgages, and federal tax liens", "Only federal tax liens and mechanic's liens, but not mortgages", "Mortgages and judgment liens, but property tax liens rank below mechanic's liens"],
+      correctIndex: 1,
+      explain: "Property tax liens hold superior lien position over mechanic's liens, mortgages, and federal tax liens regardless of when those other liens were recorded or perfected.",
+    },
   ],
   "land-use-controls-q05": [
     {
@@ -2735,6 +2885,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Police power, Eminent domain, Taxation, Escheat", "Property lien, Encumbrance, Tender clause, Easement right", "Permit requirement, Eminent taking, Title tax, Equity claim", "Public record, Environmental easement, Torrens title, Estate assessment"],
       correctIndex: 0,
       explain: "PETE is the acronym for the four governmental powers: Police power (zoning/regulation), Eminent domain (forced acquisition), Taxation (property tax), and Escheat (reversion when no heirs exist).",
+    },
+    {
+      q: "Which acronym correctly identifies the four sovereign powers that government exercises over real property?",
+      options: ["Police, Eminent domain, Taxation, Escheat", "Possession, Encumbrance, Title, Exchange", "Public lands, Environmental protection, Tenancy, Equitable conversion", "Partition, Easement, Transfer, Estate division"],
+      correctIndex: 0,
+      explain: "PETE represents the four inherent government powers over land: police power (health/safety/welfare), eminent domain (taking for public use), taxation, and escheat (reversion to state).",
+    },
+    {
+      q: "A Hawaii real estate professional should understand that PETE refers to:",
+      options: ["Property owners, Easement holders, Tax assessors, and Equity investors", "Police power, Eminent domain, Taxation, and Escheat", "Public records, Environmental zones, Title insurance, and Encumbrances", "Possession, Encroachment, Tenancy, and Estates"],
+      correctIndex: 1,
+      explain: "PETE is the mnemonic for the four sovereign governmental powers over real property, which all property owners must respect and understand.",
+    },
+    {
+      q: "In real estate law, when discussing the government's authority over land, PETE encompasses all of the following EXCEPT:",
+      options: ["The power to assess and collect property taxes", "The power to regulate use through police authority", "The power to regulate conveyancing and deed recording", "The power of eminent domain to acquire private property for public purposes"],
+      correctIndex: 2,
+      explain: "PETE (Police power, Eminent domain, Taxation, Escheat) represents four sovereign powers; regulating conveyancing and recording is a state administrative function, not one of the four core governmental powers over land.",
+    },
+    {
+      q: "Which set of terms best represents the four governmental powers abbreviated as PETE?",
+      options: ["Partition rights, Exclusive use, Transfer taxes, and Equitable title", "Public utility easements, Environmental restrictions, Tax liens, and Estate succession", "Police authority, Eminent domain, Taxation, and Escheat", "Possession by the state, Encumbrances on title, Taking of land, and Equitable conversion"],
+      correctIndex: 2,
+      explain: "PETE is the standard real estate acronym for the four inherent sovereign powers that government holds over all real property: police power, eminent domain, taxation, and escheat.",
+    },
+    {
+      q: "Which acronym correctly identifies the four sovereign powers that government may exercise over real property?",
+      options: ["Taxation, Escheat, Police power, and Eminent domain", "Easement, Encumbrance, Property tax, and Title transfer", "Eviction, Exchange, Possession, and Encroachment", "Permit, Encumbrance, Taking, and Estate restriction"],
+      correctIndex: 0,
+      explain: "Police power, Eminent domain, Taxation, and Escheat are the four inherent government powers over land; rearranged here as T-E-P-E to test understanding beyond memorization of the acronym order.",
     },
   ],
   "land-use-controls-q06": [
@@ -2762,6 +2942,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Spot zoning is the practice of singling out one individual parcel for different zoning treatment than similar properties, which is generally unconstitutional absent a clear public purpose.",
     },
+    {
+      q: "A city council rezones a single residential lot to commercial use while leaving all adjacent parcels zoned residential. This action is best described as:",
+      options: ["A nonconforming use exception", "Spot zoning", "A conditional use permit", "A variance from the zoning ordinance"],
+      correctIndex: 1,
+      explain: "Spot zoning refers to the improper practice of rezoning one parcel differently from surrounding properties without a legitimate planning purpose; it is generally unconstitutional unless it serves the public interest.",
+    },
+    {
+      q: "When a local government grants zoning relief to a single property that differs fundamentally from the treatment of nearby similarly-situated properties, this practice is known as:",
+      options: ["Variance approval", "Spot zoning", "Special permit issuance", "Grandfather clause application"],
+      correctIndex: 1,
+      explain: "Spot zoning is the discriminatory rezoning of an individual parcel to a different classification than surrounding properties, which courts generally invalidate unless justified by clear public benefit.",
+    },
+    {
+      q: "A property owner requests that their lot be rezoned to allow a use prohibited in the surrounding district. If the city rezones only that one parcel without changing the zoning of the entire district, this would likely constitute:",
+      options: ["A legal conditional use", "An enforceable variance", "Spot zoning", "A valid amendment to the comprehensive plan"],
+      correctIndex: 2,
+      explain: "Spot zoning occurs when a single parcel receives zoning treatment different from adjacent properties without a comprehensive planning rationale; courts typically strike down this practice as arbitrary and capricious.",
+    },
+    {
+      q: "If a municipality rezones one parcel in a residential zone to permit commercial development while all surrounding properties remain residential, the rezoning could be challenged as:",
+      options: ["A variance that exceeds the applicant's hardship", "Spot zoning", "An illegal nonconforming use", "A failure to comply with conditional use standards"],
+      correctIndex: 1,
+      explain: "Spot zoning—treating one parcel differently from similarly-situated neighboring properties—is generally unconstitutional absent a legitimate public purpose and comprehensive planning justification.",
+    },
+    {
+      q: "A city zoning board grants one property owner special zoning classification that differs from surrounding parcels in the same district without a public purpose. This action is most likely an example of:",
+      options: ["A permitted nonconforming use under grandfathering provisions", "An illegal spot zoning practice", "A properly granted conditional use permit", "A legitimate variance based on hardship"],
+      correctIndex: 1,
+      explain: "Spot zoning illegally singles out an individual parcel for different zoning treatment without serving a legitimate public purpose, distinguishing it from variances, conditional uses, or nonconforming uses.",
+    },
   ],
   "land-use-controls-q07": [
     {
@@ -2787,6 +2997,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Disclosure is not required because it is a condo unit", "Disclosure is required because the unit was built before 1978", "Disclosure is only required if the paint is visibly deteriorated", "Disclosure is required only for buildings with more than 10 units"],
       correctIndex: 1,
       explain: "Lead-based paint disclosure requirements apply to any residential property built before 1978, including individual condo units.",
+    },
+    {
+      q: "Under federal law, which residential properties require lead-based paint disclosures in Hawaii real estate transactions?",
+      options: ["Only single-family homes constructed after 1980", "Residential units built in or before 1977", "Commercial properties and apartments built before 1975", "All properties regardless of construction date"],
+      correctIndex: 1,
+      explain: "Federal law requires lead-based paint disclosure for residential properties built before 1978, as lead paint was commonly used in residential construction until that year.",
+    },
+    {
+      q: "A Hawaii licensee is listing a home built in 1976. Which statement correctly describes the lead-based paint disclosure requirement?",
+      options: ["Disclosure is optional if the property has been recently renovated", "The property must include lead-based paint disclosures in all marketing and sale documents", "Disclosure applies only if the seller is aware of lead contamination", "This property is exempt because it was built before 1980"],
+      correctIndex: 1,
+      explain: "Properties built before 1978 are presumed to contain lead-based paint and require mandatory disclosure in all real estate transactions, regardless of actual testing or seller knowledge.",
+    },
+    {
+      q: "When does the federal lead-based paint disclosure requirement become mandatory for a residential property in Hawaii?",
+      options: ["Only for properties built between 1968 and 1975", "For any home constructed prior to 1978", "For all properties built before 1985 that will be owner-occupied", "Never, unless the property has tested positive for lead"],
+      correctIndex: 1,
+      explain: "Federal lead-based paint disclosure applies to all residential properties constructed before 1978, as this was when lead paint regulations were implemented.",
+    },
+    {
+      q: "A prospective buyer asks why a disclosure form is required for a house built in 1975. What is the correct explanation?",
+      options: ["The home was built during an era when lead paint prohibitions were enforced by the EPA", "Lead-based paint was commonly used in residential construction until 1978, so homes built before that year are subject to disclosure requirements", "Hawaii state law mandates disclosures for all properties over 40 years old", "The disclosure is required only if the current owner originally purchased the home before 1980"],
+      correctIndex: 1,
+      explain: "Lead-based paint was a standard ingredient in residential paint products until the federal ban in 1978, making pre-1978 homes subject to mandatory disclosure.",
+    },
+    {
+      q: "Under federal law, which properties require a lead-based paint disclosure in Hawaii?",
+      options: ["All residential structures constructed in 1980 or earlier", "Residential properties built before 1978", "Commercial buildings constructed prior to 1972", "Single-family homes built before 1985"],
+      correctIndex: 1,
+      explain: "Federal lead-based paint disclosure requirements apply to residential housing constructed before 1978, when lead paint was commonly used in residential construction.",
     },
   ],
   "land-use-controls-q08": [
@@ -3854,6 +4094,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Built-in dishwashers affixed to the home with permanent connections are classified as real property fixtures and are part of the real estate sale unless explicitly excluded in the purchase agreement.",
     },
+    {
+      q: "When a dishwasher is permanently installed beneath a kitchen counter with plumbing and electrical connections, how should it be classified for purposes of a real estate sale?",
+      options: ["An emblement subject to severance by the seller", "A real property fixture that conveys with the dwelling", "Personal property that may be removed at closing", "A trade fixture belonging to the appliance manufacturer"],
+      correctIndex: 1,
+      explain: "Permanently installed dishwashers become real property fixtures because they are affixed to the realty and integrated into the structure's utility systems, conveying automatically unless expressly excluded.",
+    },
+    {
+      q: "A homeowner installs a new built-in dishwasher by connecting it to the home's water supply and integrating it into the cabinetry. This appliance would most likely be considered:",
+      options: ["Chattels that retain personal property status", "A real property fixture due to its annexation and intent", "A trade fixture if the homeowner is a contractor", "An agricultural fixture subject to harvest"],
+      correctIndex: 1,
+      explain: "The permanent physical attachment and integration into the home's utility and structural systems demonstrates an intent for the dishwasher to remain as part of the real property.",
+    },
+    {
+      q: "During a property inspection, a buyer asks whether a permanently plumbed dishwasher will stay with the house or be removed. The real estate licensee should explain that it is:",
+      options: ["Personal property unless specifically listed in the bill of sale", "A trade fixture that the previous owner may reclaim", "A fixture that ordinarily conveys as part of the real property", "An item subject to Hawaii UCC uniform fixture law only"],
+      correctIndex: 2,
+      explain: "Built-in dishwashers installed with permanent connections are classified as real property fixtures and transfer with the property unless the purchase agreement explicitly states otherwise.",
+    },
+    {
+      q: "In a residential lease negotiation, the landlord wants to clarify the status of a permanently installed dishwasher in the rental unit. From a Hawaii real estate perspective, this appliance should be classified as:",
+      options: ["Personal property of the tenant after one year of occupancy", "A removable item classified under Hawaii fixture law", "A real property fixture integral to the dwelling", "A trade fixture owned by the original installer"],
+      correctIndex: 2,
+      explain: "Affixed appliances like built-in dishwashers are real property fixtures because they are annexed to the realty with intent to remain permanently as part of the premises.",
+    },
+    {
+      q: "When a seller installs a dishwasher permanently into kitchen cabinetry before listing the property for sale, how should the listing agent classify this item for MLS and disclosure purposes?",
+      options: ["Chattel to be removed at closing", "A fixture that conveys with the real property", "Trade fixture belonging to a contractor", "A growing crop or agricultural product"],
+      correctIndex: 1,
+      explain: "A permanently installed dishwasher becomes part of the real property as a fixture because it is affixed to the real estate with the intent that it remain as part of the structure, and its removal would cause material damage.",
+    },
   ],
   "property-ownership-q01": [
     {
@@ -3879,6 +4149,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Tenancy in common", "Joint tenancy", "Severalty", "Leasehold tenancy"],
       correctIndex: 1,
       explain: "Joint tenancy is characterized by the right of survivorship, which automatically vests the deceased owner's interest in the surviving co-owner(s) outside the probate process.",
+    },
+    {
+      q: "When property is held by two individuals with the right of survivorship, what form of co-ownership exists?",
+      options: ["Tenancy at will", "Joint tenancy", "Tenancy in common", "Community property"],
+      correctIndex: 1,
+      explain: "Joint tenancy is the only co-ownership form that automatically includes the right of survivorship, meaning the surviving co-owner automatically receives the deceased's interest.",
+    },
+    {
+      q: "A husband and wife take title to real property with the express intention that if one dies, the survivor automatically owns the entire property. Which ownership form accomplishes this?",
+      options: ["Tenancy in common with right of succession", "Severalty with a named beneficiary", "Joint tenancy with right of survivorship", "Tenancy for years with contingent remainder"],
+      correctIndex: 2,
+      explain: "Joint tenancy with right of survivorship is specifically designed to pass a deceased co-owner's interest automatically to the surviving co-owners without probate.",
+    },
+    {
+      q: "Which of the following co-ownership arrangements does NOT require probate proceedings to transfer a deceased owner's interest to the surviving owner?",
+      options: ["Tenancy in common", "Joint tenancy", "Tenancy by the entirety as modified by statute", "Severalty with a will"],
+      correctIndex: 1,
+      explain: "Joint tenancy bypasses probate through automatic survivorship; the deceased owner's interest immediately vests in the surviving joint tenant(s).",
+    },
+    {
+      q: "A real estate licensee explains to a client that one form of co-ownership will pass ownership automatically upon death without estate administration. Which co-ownership form is the licensee describing?",
+      options: ["Tenancy in common", "Joint tenancy", "Life estate with remainder", "Leasehold in severalty"],
+      correctIndex: 1,
+      explain: "Joint tenancy includes automatic right of survivorship, which transfers the deceased's interest directly to surviving joint tenant(s) outside the probate process.",
+    },
+    {
+      q: "A property owner dies and leaves no will. Under which form of co-ownership would the surviving owner automatically acquire the deceased owner's interest without probate?",
+      options: ["Tenancy at sufferance", "Tenancy in common with right of descent", "Joint tenancy", "Community property arrangement"],
+      correctIndex: 2,
+      explain: "Joint tenancy is the only co-ownership form that includes the automatic right of survivorship, meaning the surviving joint tenant's interest passes directly to them outside of probate proceedings.",
     },
   ],
   "property-ownership-q02": [
@@ -3906,6 +4206,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Fee simple absolute is the only estate that provides complete, permanent ownership free from any restrictions, conditions, or temporal limits.",
     },
+    {
+      q: "Which of the following represents the most comprehensive ownership interest a person can hold in real property?",
+      options: ["Fee simple absolute", "Fee simple determinable", "Leasehold estate", "Estate for life"],
+      correctIndex: 0,
+      explain: "Fee simple absolute grants complete and perpetual ownership with no conditions, restrictions, or time limitations, making it the maximum possible interest in real property.",
+    },
+    {
+      q: "A property owner holds title with no conditions attached and the right to pass it to heirs indefinitely. This ownership interest is best described as:",
+      options: ["Qualified fee", "Fee simple absolute", "Fee simple subject to condition subsequent", "Pur autre vie"],
+      correctIndex: 1,
+      explain: "Fee simple absolute is the only estate that allows unconditional, indefinite ownership with full rights of inheritance and no reversionary interests or conditions subsequent.",
+    },
+    {
+      q: "Which estate or fee allows an owner to possess, use, and transfer property in perpetuity without any restrictions or contingencies?",
+      options: ["Estate in tail", "Reversion interest", "Fee simple absolute", "Conditional fee"],
+      correctIndex: 2,
+      explain: "Fee simple absolute is the highest form of title ownership, characterized by unrestricted duration and the ability to transfer indefinitely without conditions or reversions.",
+    },
+    {
+      q: "A buyer purchases property with the intention of owning the greatest possible estate. Which type of deed or ownership interest should be sought?",
+      options: ["Tenancy for years", "Life estate with remainder", "Fee simple absolute", "Fee simple subject to condition precedent"],
+      correctIndex: 2,
+      explain: "Fee simple absolute provides the maximum ownership rights in real property—perpetual, unconditional, and fully transferable to heirs and assigns.",
+    },
+    {
+      q: "Which of the following estates in real property grants the owner complete and perpetual ownership with no restrictions or conditions?",
+      options: ["Tenancy at will", "Fee simple absolute", "Estate subject to a condition subsequent", "Leasehold estate"],
+      correctIndex: 1,
+      explain: "Fee simple absolute represents the highest and most complete form of property ownership, lasting indefinitely with no limiting conditions or reversionary interests.",
+    },
   ],
   "property-ownership-q03": [
     {
@@ -3931,6 +4261,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["A valid express easement", "An unauthorized encroachment", "A statutory right to use the land", "A prescriptive easement already perfected"],
       correctIndex: 1,
       explain: "The unauthorized crossing of utility lines onto another's property constitutes an encroachment—an unlawful physical occupation—unless formalized by a recorded easement agreement.",
+    },
+    {
+      q: "A property owner discovers that a contractor's equipment storage shed extends 18 inches onto their land without permission. This physical invasion of the owner's property rights is best described as:",
+      options: ["A covenant running with the land", "An encroachment", "An easement appurtenant", "A prescriptive right"],
+      correctIndex: 1,
+      explain: "Encroachment is the unauthorized physical intrusion or occupation of another's real property; it differs from easements (which are authorized rights) and covenants (which are restrictions).",
+    },
+    {
+      q: "A homeowner's driveway has been paved 2 feet over the property line into the adjacent lot. What legal term best characterizes this situation?",
+      options: ["A license agreement", "A trespass by easement", "An encroachment", "A junior lien"],
+      correctIndex: 2,
+      explain: "Encroachment is the physical invasion of real property without authorization; licenses are revocable permission, and easements require a proper legal grant.",
+    },
+    {
+      q: "When a neighbor's building structure extends beyond the legal property boundary onto your parcel without your consent or formal agreement, this is called:",
+      options: ["An encroachment", "A riparian right", "A restrictive covenant", "An adverse possession claim"],
+      correctIndex: 0,
+      explain: "Encroachment describes unauthorized physical invasion of property; riparian rights apply to water boundaries, restrictive covenants limit land use, and adverse possession requires lengthy occupation with specific intent.",
+    },
+    {
+      q: "A homeowner notices their neighbor's pool deck has been constructed 3 feet into their yard without permission or legal documentation. The unauthorized physical occupation of the property is known as:",
+      options: ["A prescriptive easement", "An encroachment", "A statutory lien", "A quit claim transfer"],
+      correctIndex: 1,
+      explain: "Encroachment is the unlawful physical intrusion onto another's property; prescriptive easements require open use over time, liens are financial claims, and quit claims transfer title.",
+    },
+    {
+      q: "Your property survey reveals that a portion of your neighbor's driveway extends two feet onto your land without permission or agreement. This situation is best described as:",
+      options: ["A restrictive covenant affecting the property", "An encroachment on your property rights", "An implied easement for maintenance access", "A voluntary mechanic's lien"],
+      correctIndex: 1,
+      explain: "An encroachment is an unauthorized physical intrusion of a structure or improvement from one property onto an adjoining property, exactly as described with the driveway extension.",
     },
   ],
   "property-ownership-q04": [
@@ -3958,6 +4318,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Depreciation is a tax accounting concept applied to property, not a true ownership right within the bundle of property rights.",
     },
+    {
+      q: "A property owner holds several rights as part of real property ownership. Which of the following is NOT considered a traditional property right in the bundle of rights?",
+      options: ["Right to depreciate", "Right to control and possess", "Right to transfer or convey", "Right to restrict others' access"],
+      correctIndex: 0,
+      explain: "Depreciation is an accounting and tax deduction method, not a legal property right. The actual bundle of rights includes possession, control, transfer, and exclusion.",
+    },
+    {
+      q: "When discussing the bundle of rights concept in real estate, an instructor lists several owner privileges. Which one does NOT belong as a true property right?",
+      options: ["Right to occupy and use the property", "Right to lease or sell the property", "Right to accelerate depreciation", "Right to keep trespassers off the land"],
+      correctIndex: 2,
+      explain: "Acceleration of depreciation is a tax-planning strategy, not an inherent ownership right. The bundle comprises use, transfer, exclusion, and possession rights.",
+    },
+    {
+      q: "In a Hawaii real estate licensing exam, a candidate is asked which item is outside the scope of property rights in the bundle of rights doctrine. What is the correct answer?",
+      options: ["The right to claim depreciation deductions", "The right to physically occupy the land", "The right to prohibit unwanted entry", "The right to convey title to another person"],
+      correctIndex: 0,
+      explain: "Depreciation deductions are tax benefits tied to ownership but not a legal property right itself. The bundle of rights includes possession, exclusion, transfer, and use.",
+    },
+    {
+      q: "An investor reviews the core components of real property ownership. Which concept is commonly confused with a property right but is actually a financial/accounting matter?",
+      options: ["Exclusion of the public", "Depreciation for tax purposes", "Possession and occupancy", "Disposition and transfer of title"],
+      correctIndex: 1,
+      explain: "Depreciation is a tax accounting mechanism used to reduce taxable income, not a fundamental ownership right. The true bundle of rights includes exclusion, possession, transfer, and control.",
+    },
+    {
+      q: "A property owner holds several rights collectively known as the bundle of sticks. Which of the following is NOT included in this bundle of ownership rights?",
+      options: ["Right to transfer ownership", "Right to control use and occupancy", "Right to claim depreciation deductions", "Right to prevent others from entering"],
+      correctIndex: 2,
+      explain: "Depreciation is a tax accounting mechanism and benefit, not an actual ownership right within the bundle of sticks.",
+    },
   ],
   "property-ownership-q05": [
     {
@@ -3983,6 +4373,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Determinable life estate", "Estate in reversion", "A life estate pur autre vie", "A defeasible fee simple"],
       correctIndex: 2,
       explain: "Pur autre vie applies when a life estate's duration is measured by the life of a third party—in this case, the widow's brother—rather than the holder.",
+    },
+    {
+      q: "When a property owner grants a life estate that is contingent upon the life span of a third party rather than the grantee, what is this interest called?",
+      options: ["Defeasible fee", "Pur autre vie", "Reversionary interest", "Determinable life estate"],
+      correctIndex: 1,
+      explain: "Pur autre vie literally means 'for another's life' and describes a life estate whose duration depends on someone other than the person holding the estate.",
+    },
+    {
+      q: "A property owner conveys a life estate to a beneficiary, but the estate will terminate upon the death of the owner's spouse. This type of life estate is known as:",
+      options: ["A pur autre vie", "An estate for years", "A contingent reversionary estate", "A fee determinable"],
+      correctIndex: 0,
+      explain: "An estate measured by the life of a person other than the estate holder is called pur autre vie, meaning the duration depends on the life of a third party.",
+    },
+    {
+      q: "Which of the following describes an estate where the holder has the right to occupy property for life, but the duration is measured by the lifetime of someone else?",
+      options: ["Reversionary estate", "Pur autre vie", "Defeasible estate", "Terminable life interest"],
+      correctIndex: 1,
+      explain: "Pur autre vie means 'for another's life'—the estate holder's rights continue only as long as the measuring life (a third party) survives.",
+    },
+    {
+      q: "A grantor transfers property to a grantee for the grantee's life, provided the grantee outlives the grantor's daughter. Upon the daughter's death, the grantee's life estate terminates. This is best described as:",
+      options: ["A determinable fee simple", "A pur autre vie estate", "A vested remainder", "A reversionary interest"],
+      correctIndex: 1,
+      explain: "Because the life estate's duration is measured by someone other than the grantee (the grantor's daughter), this is a pur autre vie estate.",
+    },
+    {
+      q: "When a property owner grants a life estate that terminates upon the death of a third party rather than the grantee, this type of estate is known as a:",
+      options: ["Fee simple determinable", "Pur autre vie", "Remainder interest", "Reversion"],
+      correctIndex: 1,
+      explain: "Pur autre vie (\"for another's life\") is a life estate where the duration is measured by the lifespan of someone other than the person holding the estate, not the holder's own life.",
     },
   ],
   "property-ownership-q06": [
@@ -4010,6 +4430,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Interest, Possession, Time, and Title are the four unities of joint tenancy; all must be acquired simultaneously by all co-owners to create a valid joint tenancy.",
     },
+    {
+      q: "To create a valid joint tenancy in Hawaii, all four of the following unities must be present EXCEPT:",
+      options: ["Possession by each tenant of the whole property", "Intent to create survivorship rights", "Title acquired at the same time by all parties", "Interest held in equal shares by all parties"],
+      correctIndex: 1,
+      explain: "Joint tenancy requires Time, Title, Interest, and Possession (TTIP), but NOT a specific intent to create survivorship—that is an automatic result of the unity of interest and title. Intent to create joint tenancy is assumed by law when the other three unities exist.",
+    },
+    {
+      q: "Which set of elements must be present simultaneously for joint tenancy to be established in Hawaii real property?",
+      options: ["Equal ownership, written agreement, mutual consent, and right of survivorship", "Contemporaneous acquisition, identical title documents, equal fractional shares, and undivided possession", "Registered ownership, notarized deed, spousal approval, and financial contribution", "Unity of person, unity of duration, unity of claim, and unity of enjoyment"],
+      correctIndex: 1,
+      explain: "The four unities of joint tenancy are Time (contemporaneous acquisition), Title (identical documents), Interest (equal shares), and Possession (undivided). Option B describes these concepts using alternative terminology.",
+    },
+    {
+      q: "A Hawaii real estate broker explains to clients that joint tenancy requires all of the following EXCEPT:",
+      options: ["All co-owners must receive their interest at the same moment", "The deed must be recorded with survivorship language only", "Each owner holds an undivided right to occupy the entire property", "All co-owners must hold identical percentage interests"],
+      correctIndex: 1,
+      explain: "Joint tenancy requires Time, Title, Interest, and Possession. While the deed must clearly express joint tenancy intent, it does not require special 'survivorship language only'—the unities themselves create the right of survivorship by operation of law.",
+    },
+    {
+      q: "When reviewing a joint tenancy arrangement, which requirement is NOT one of the four essential unities?",
+      options: ["Unity of Time—all parties obtain their interest on the same date", "Unity of Title—all parties take title from the same legal instrument", "Unity of Profits—all parties receive equal rental or investment income", "Unity of Possession—all parties have equal right to occupy the entire property"],
+      correctIndex: 2,
+      explain: "The four required unities are Time, Title, Interest (equal ownership percentage), and Possession—not Profits. While income may be divided equally by agreement, the unity requirement focuses on ownership interest and occupancy rights, not income distribution.",
+    },
+    {
+      q: "A broker is explaining the essential requirements for establishing a valid joint tenancy in Hawaii. Which set of four unities must be present simultaneously?",
+      options: ["Possession, intent, title, and consideration", "Time, title, interest, and possession", "Agreement, authority, title, and occupancy", "Intent, marriage, title, and possession"],
+      correctIndex: 1,
+      explain: "Joint tenancy requires the four unities of Time (acquired at same time), Title (from same document), Interest (equal shares), and Possession (equal right to occupy). These are collectively remembered as TTIP.",
+    },
   ],
   "property-ownership-q07": [
     {
@@ -4035,6 +4485,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["They have become part of the real property and cannot be removed", "They qualify as trade fixtures and may be removed as personal property", "They are affixed improvements owned jointly by tenant and landlord", "They constitute deemed easements binding future tenants"],
       correctIndex: 1,
       explain: "Equipment and systems installed by a tenant to conduct their business retain trade fixture classification, allowing removal and remaining the tenant's personal property despite physical attachment.",
+    },
+    {
+      q: "A commercial tenant installs specialized kitchen equipment—including a commercial-grade oven and refrigeration unit—as part of their bakery business. How is this equipment classified in Hawaii real estate law?",
+      options: ["A permanent improvement that becomes part of the real property", "Personal property that the tenant may remove at lease end", "A fixture subject to the landlord's ownership claims", "An improvement requiring landlord consent to become real property"],
+      correctIndex: 1,
+      explain: "Business equipment installed by a tenant for commercial operations qualifies as a trade fixture, remaining personal property that the tenant retains ownership of and may remove upon lease termination.",
+    },
+    {
+      q: "During a commercial lease dispute, a hair salon owner installed custom mirrors, styling stations, and specialized plumbing for shampoo stations. Upon lease termination, who typically retains ownership of these items?",
+      options: ["The landlord, as they are attached to the building structure", "The tenant, as they are trade fixtures related to the business operation", "Both parties, divided proportionally by cost", "The property appraiser, as they affect market value"],
+      correctIndex: 1,
+      explain: "Equipment and fixtures installed by a tenant for the operation of their business constitute trade fixtures, which remain the tenant's personal property and may be removed before lease expiration.",
+    },
+    {
+      q: "A retail clothing store owner attaches shelving units, dressing room partitions, and lighting fixtures to the leased commercial space. These items are best classified as:",
+      options: ["Real property improvements owned by the landlord", "Trade fixtures that retain personal property status", "Emblements entitled to seasonal harvest", "Structural alterations requiring permit modification"],
+      correctIndex: 1,
+      explain: "Items installed by a business tenant specifically to facilitate their commercial operations are classified as trade fixtures, which maintain their status as personal property despite attachment to the real estate.",
+    },
+    {
+      q: "A manufacturing tenant leases factory space and installs machinery, assembly equipment, and electrical systems customized for production. At lease end, the tenant wishes to remove these items. Under Hawaii real estate principles, this removal is:",
+      options: ["Prohibited, as all attached items become the landlord's property", "Allowed, because business equipment qualifies as a trade fixture", "Subject to severance taxes and landlord approval fees", "Possible only if the items are removed before occupancy begins"],
+      correctIndex: 1,
+      explain: "Trade fixtures—equipment installed by a tenant for business operations—remain the tenant's personal property and may generally be removed during or at the end of the lease term.",
+    },
+    {
+      q: "A commercial tenant in a retail space installs specialized shelving and HVAC equipment for her jewelry business. Upon lease termination, she removes both items. These removals are lawful because the equipment constitutes:",
+      options: ["Real property that the tenant has the right to sever", "Trade fixtures that remain the tenant's personal property", "Agricultural emblements subject to tenant harvest rights", "Fixtures that have become part of the real estate through annexation"],
+      correctIndex: 1,
+      explain: "Equipment installed by a tenant for business operations remains trade fixtures—personal property owned by the tenant that can be removed before lease end, even though physically attached to the premises.",
     },
   ],
   "property-ownership-q08": [
@@ -4062,6 +4542,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Sufferance describes the lowest estate created when a tenant wrongfully occupies property beyond lease expiration without landlord authorization or agreement.",
     },
+    {
+      q: "When a tenant remains in possession of a rental property after expiration of the lease term without the landlord's approval, what type of tenancy is created?",
+      options: ["Tenancy at will", "Tenancy at sufferance", "Tenancy for a fixed term", "Tenancy from year to year"],
+      correctIndex: 1,
+      explain: "A tenancy at sufferance occurs when a tenant wrongfully continues occupying the property after the lease expires without landlord permission; it is the lowest form of tenancy.",
+    },
+    {
+      q: "A former tenant continues occupying commercial real estate for two weeks after the lease has terminated and the landlord has not consented to this occupancy. What estate does this tenant hold?",
+      options: ["Estate for a term of years", "Estate at will created by operation of law", "Estate at sufferance", "Periodic tenancy"],
+      correctIndex: 2,
+      explain: "An estate at sufferance is created when a tenant unlawfully holds over after the lease ends without landlord authorization, representing the lowest tenancy estate.",
+    },
+    {
+      q: "Under Hawaii real estate law, a residential tenant who fails to vacate at lease end and remains on the premises without the owner's permission holds what type of interest?",
+      options: ["Determinable fee", "Life estate", "Tenancy at sufferance", "Tenancy by the entirety"],
+      correctIndex: 2,
+      explain: "Tenancy at sufferance is the only valid tenancy interest when a tenant wrongfully remains in possession without consent; all other options represent different types of property interests.",
+    },
+    {
+      q: "A commercial lease expires on March 31st. The tenant remains in possession through April without obtaining the landlord's consent to continue occupancy. This tenant now has:",
+      options: ["A renewable lease option", "An implied periodic tenancy", "An estate at sufferance", "A statutory right of first refusal"],
+      correctIndex: 2,
+      explain: "When a tenant holds over after lease expiration without permission, an estate at sufferance is created—the lowest estate type with minimal tenant rights.",
+    },
+    {
+      q: "When a tenant remains in possession of rental property beyond the lease expiration date without the landlord's approval, what type of tenancy is created?",
+      options: ["Tenancy at will", "Tenancy for a term of years", "Tenancy at sufferance", "Periodic tenancy"],
+      correctIndex: 2,
+      explain: "An estate at sufferance is the lowest form of tenancy, created when a tenant wrongfully holds over after lease termination without landlord consent or permission to remain.",
+    },
   ],
   "property-ownership-q09": [
     {
@@ -4087,6 +4597,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Riparian rights because the owner abuts water", "Littoral rights as the owner borders a static body of water", "Prescriptive rights through continuous occupation", "Covenant rights established by the developer"],
       correctIndex: 1,
       explain: "Littoral rights are specifically for static water boundaries such as lakes and oceans; riparian rights apply only to flowing water like rivers and streams.",
+    },
+    {
+      q: "A property owner whose parcel abuts a large pond has certain water-related rights. What is the legal term for these rights?",
+      options: ["Prescriptive easement rights", "Littoral rights", "Riparian rights", "Reversionary interest rights"],
+      correctIndex: 1,
+      explain: "Littoral rights attach to land bordering still or non-flowing water bodies like ponds, lakes, and oceans. Riparian rights apply to flowing water such as rivers and streams.",
+    },
+    {
+      q: "Which of the following best describes the water-access privileges an owner enjoys when their land is adjacent to a calm, enclosed body of water?",
+      options: ["Riparian interest", "Adverse possession rights", "Littoral interest", "Equitable servitude"],
+      correctIndex: 2,
+      explain: "Littoral interest applies to static water bodies (lakes, oceans, ponds); riparian interest applies to flowing water features like rivers and streams.",
+    },
+    {
+      q: "An owner of beachfront property in Hawaii has certain water-related ownership rights. These rights are classified as:",
+      options: ["Riparian rights", "Littoral rights", "Tidewater rights", "Alluvial rights"],
+      correctIndex: 1,
+      explain: "Littoral rights are those held by owners whose land borders non-flowing water (ocean, lake); riparian rights belong to owners whose land borders flowing water (rivers, streams).",
+    },
+    {
+      q: "A developer is planning a subdivision on land that backs up to a large reservoir. What legal term describes the water-related ownership rights that each lot owner will possess?",
+      options: ["Riparian rights to use flowing water", "Littoral rights to the static water body", "Navigational servitude rights", "Appurtenant water easements"],
+      correctIndex: 1,
+      explain: "Littoral rights are associated with ownership of land bordering still water bodies like reservoirs, lakes, and oceans, while riparian rights pertain to flowing water sources.",
+    },
+    {
+      q: "A property owner whose residence sits adjacent to a large pond has which type of water rights?",
+      options: ["Prescriptive rights to divert water for irrigation", "Littoral rights over the stationary body of water", "Riparian rights to construct dams and channels", "Reversionary rights to claim the water upon abandonment"],
+      correctIndex: 1,
+      explain: "Littoral rights apply to owners whose land borders non-flowing bodies of water like lakes, ponds, and oceans. Riparian rights apply specifically to flowing water such as rivers and streams.",
     },
   ],
   "property-ownership-q10": [
@@ -4114,6 +4654,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Q, as the expressly designated successor, receives a remainder interest that becomes possessory and transfers ownership to Q upon P's death.",
     },
+    {
+      q: "A property owner executes a deed stating \"to C for the duration of C's life, then to D.\" What type of future interest does D possess?",
+      options: ["A vested remainder", "A reversionary interest", "An executory interest", "A life tenancy"],
+      correctIndex: 0,
+      explain: "D holds a vested remainder because the property will definitely pass to the named third party (D) upon the expiration of C's life estate.",
+    },
+    {
+      q: "In a conveyance reading \"to X for life, remainder to Y,\" which statement correctly describes Y's interest?",
+      options: ["Y holds a reversion that will return to the grantor", "Y holds a future interest that will vest upon X's death", "Y holds a defeasible fee simple subject to X's life estate", "Y holds an equitable interest only, not a legal one"],
+      correctIndex: 1,
+      explain: "Y is the named remainderman whose future interest becomes possessory upon the natural termination of X's life estate, making it a remainder.",
+    },
+    {
+      q: "A grantor transfers real property \"to M for M's lifetime, and upon M's death to N.\" Which of the following best characterizes N's position?",
+      options: ["N has a contingent interest that depends on M surviving the grantor", "N has a present possessory estate subject to M's life use", "N has a future interest that will become present at M's death", "N has only a reversionary right, not a remainderman's right"],
+      correctIndex: 2,
+      explain: "N's interest is a remainder—a future interest in a named third party that will inevitably become possessory when M's life estate terminates.",
+    },
+    {
+      q: "When a deed conveys property \"to J for life, then to K,\" what is K's legal status regarding the property?",
+      options: ["K is a reversioner with rights that revert to the original grantor", "K is a remainderman holding a future interest that will vest in possession", "K is a tenant in common with J during J's lifetime", "K is a grantee of a fee simple determinable"],
+      correctIndex: 1,
+      explain: "K is a remainderman whose remainder will ripen into possession when J's life estate ends, making K a named third-party holder of a future interest.",
+    },
+    {
+      q: "In a deed that states \"to C for life, then to D and D's heirs,\" what type of future interest does D possess?",
+      options: ["A reversionary interest returning to the grantor", "A remainder interest following a life estate", "A vested leasehold estate", "An executory interest subject to a condition subsequent"],
+      correctIndex: 1,
+      explain: "D is named to take possession after C's life estate ends, making D a remainderman with a remainder interest—a future interest that passes to a specified third party rather than reverting to the original grantor.",
+    },
   ],
   "property-ownership-q11": [
     {
@@ -4139,6 +4709,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The deceased co-owner's share goes to the named beneficiary in the will", "All four shares merge equally among the three surviving co-owners", "The property automatically converts to a tenancy by the entireties", "The entire property reverts to the original grantor's estate"],
       correctIndex: 0,
       explain: "Tenancy in common provides no survivorship rights; the deceased tenant's fractional interest becomes part of their probate estate and passes to whoever is named in their will.",
+    },
+    {
+      q: "A property owner holds title as a tenant in common and passes away without a will. What happens to their ownership interest in the property?",
+      options: ["The interest automatically vests in the surviving co-owners", "The interest becomes part of the deceased owner's estate and is distributed according to intestate succession laws", "The interest is forfeited to the state as unclaimed property", "The interest reverts to the original grantor or their heirs"],
+      correctIndex: 1,
+      explain: "Tenancy in common lacks survivorship rights; each owner's share is a separate, inheritable property interest that passes through their estate.",
+    },
+    {
+      q: "Three investors own commercial real estate as tenants in common. If one investor dies, which statement correctly describes the disposition of that investor's ownership percentage?",
+      options: ["It automatically transfers to the two surviving investors in equal shares", "It is subject to probate and distributed according to the deceased's will or state intestacy laws", "It converts to a joint tenancy with the remaining owners", "It lapses and becomes unencumbered property held by the property manager"],
+      correctIndex: 1,
+      explain: "In tenancy in common, there is no right of survivorship; the deceased's interest is a separate, devisable asset that passes through probate.",
+    },
+    {
+      q: "Which of the following correctly identifies what occurs with a tenant in common's ownership share upon their death?",
+      options: ["The share immediately vests in the other co-tenants by operation of law", "The share becomes part of the owner's probate estate and passes by devise or descent", "The share terminates and the property becomes solely owned by remaining tenants", "The share transfers automatically to the state's escheat account"],
+      correctIndex: 1,
+      explain: "Tenancy in common creates separate, devisable interests; there is no survivorship feature, so shares pass through the owner's estate.",
+    },
+    {
+      q: "A Hawaii property title shows four equal owners in a tenancy in common arrangement. One owner dies intestate. How is that owner's property interest handled?",
+      options: ["The other three owners each receive one-third of the deceased's share automatically", "The deceased's share passes to their heirs or next of kin as determined by intestate succession", "The entire property reverts to fee simple ownership of the surviving tenants", "The share is held in trust by the county until claimed by a designated beneficiary"],
+      correctIndex: 1,
+      explain: "Tenancy in common has no survivorship rights; the deceased owner's share is an inheritable asset that passes through their estate per intestacy statutes.",
+    },
+    {
+      q: "A property held as tenancy in common between two co-owners is transferred to the heirs of a deceased owner through which legal mechanism?",
+      options: ["Automatic transfer to the surviving co-owner by right of survivorship", "The decedent's will or the state's intestacy laws", "Escheat to the State of Hawaii as unclaimed property", "Return to the original grantor or their estate"],
+      correctIndex: 1,
+      explain: "Tenancy in common has no survivorship rights; each owner's interest is treated as separate property that passes through their estate via will or intestate succession.",
     },
   ],
   "real-estate-calculations-q00": [

@@ -10,13 +10,23 @@ export interface ExamItem extends PracticeQ {
   chapterSlug: string;
   portion: 'national' | 'state';
   difficulty?: 'standard' | 'hard' | 'gnarly';
+  // Stable index of this question within its source chapter's `practice`
+  // array. Needed so we can derive the canonical questionId (used by
+  // QuizAttempt analytics + QuizHistory drill-down). Items sourced from
+  // TOUGH_BANK don't have a chapter index — the practice page falls back
+  // to a text-hash ID for those.
+  chapterIndex?: number;
 }
 
 export type ExamDifficulty = 'standard' | 'hard' | 'gnarly';
 
 export const EXAM_BANK: ExamItem[] = [
-  ...NATIONAL_CONTENT.flatMap(c => c.practice.map(q => ({ ...q, chapterSlug: c.slug, portion: 'national' as const, difficulty: 'standard' as const }))),
-  ...STATE_CONTENT.flatMap(c => c.practice.map(q => ({ ...q, chapterSlug: c.slug, portion: 'state' as const, difficulty: 'standard' as const }))),
+  ...NATIONAL_CONTENT.flatMap(c => c.practice.map((q, i) => ({
+    ...q, chapterSlug: c.slug, portion: 'national' as const, difficulty: 'standard' as const, chapterIndex: i,
+  }))),
+  ...STATE_CONTENT.flatMap(c => c.practice.map((q, i) => ({
+    ...q, chapterSlug: c.slug, portion: 'state' as const, difficulty: 'standard' as const, chapterIndex: i,
+  }))),
 ];
 
 const TOUGH_AS_EXAM: ExamItem[] = TOUGH_BANK.map(q => ({
@@ -27,6 +37,7 @@ const TOUGH_AS_EXAM: ExamItem[] = TOUGH_BANK.map(q => ({
   chapterSlug: q.chapterSlug,
   portion: q.portion,
   difficulty: q.difficulty,
+  chapterIndex: -1,
 }));
 
 /**
