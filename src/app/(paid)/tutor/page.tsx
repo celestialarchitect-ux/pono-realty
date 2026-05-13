@@ -53,8 +53,23 @@ export default function TutorPage() {
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
+        // The API can fail for several distinct reasons. Surface each with
+        // an actionable message instead of the generic "error" fallback.
         if (err.error === 'tutor_offline') {
-          setError(err.message || 'Tutor is being provisioned.');
+          setError(err.message || 'Tutor is being provisioned. Check back shortly.');
+        } else if (err.error === 'tier_required' || res.status === 402) {
+          // Free / Solo / expired users: bounce them to /pricing with context.
+          setError(err.message || 'Upgrade to use the AI tutor.');
+          setTimeout(() => {
+            window.location.href = err.upgrade || '/pricing?reason=tutor';
+          }, 1400);
+        } else if (err.error === 'unauthorized' || res.status === 401) {
+          setError('Your session ended. Sending you to sign in…');
+          setTimeout(() => {
+            window.location.href = `/login?next=${encodeURIComponent('/tutor')}`;
+          }, 1200);
+        } else if (err.error === 'rate_limited' || res.status === 429) {
+          setError(err.message || 'You\'ve hit the hourly tutor limit. Try again in a few minutes.');
         } else {
           setError(err.message || 'The tutor encountered an error. Please try again.');
         }

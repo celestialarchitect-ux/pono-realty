@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:19:01.018Z via Claude Haiku.
+// Generated 2026-05-13T10:22:17.830Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -5342,6 +5342,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "Steering is the practice of directing prospects toward or away from properties based on their membership in a protected class, constituting a fair housing violation.",
     },
+    {
+      q: "Under Hawaii fair housing law, which practice constitutes steering?",
+      options: ["Showing properties in neighborhoods where the buyer's income qualifies", "Directing buyers away from certain areas based on their race or national origin", "Recommending a property inspection company to a client", "Advising a seller on comparable market analysis"],
+      correctIndex: 1,
+      explain: "Steering—directing or discouraging buyers based on protected characteristics—is a direct violation of fair housing laws in Hawaii and federally.",
+    },
+    {
+      q: "A licensee commits steering when they:",
+      options: ["Limit property showings to areas where a buyer can afford based on financing", "Subtly discourage an applicant from purchasing in a particular neighborhood due to their familial status", "Provide a list of approved contractors for home repairs", "Explain closing costs and loan terms to a client"],
+      correctIndex: 1,
+      explain: "Steering based on protected class characteristics (including familial status) is illegal. Limiting showings by affordability or providing contractor referrals are legitimate business practices.",
+    },
+    {
+      q: "Which scenario best describes steering as a fair housing violation?",
+      options: ["A broker encourages a client to put down a larger deposit for a stronger offer", "An agent channels prospective buyers away from specific communities because of their religion", "A salesperson refers buyers to mortgage lenders for pre-qualification", "An associate broker recommends title insurance and escrow services"],
+      correctIndex: 1,
+      explain: "Steering involves steering buyers away from or toward properties based on protected class status; recommending financial services or negotiating terms are lawful activities.",
+    },
+    {
+      q: "In Hawaii real estate practice, steering is prohibited because it:",
+      options: ["Increases transaction costs for the brokerage", "Limits consumers' free choice by channeling them based on protected class membership", "Requires additional paperwork at closing", "Reduces the number of properties shown to each client"],
+      correctIndex: 1,
+      explain: "Steering violates fair housing by restricting buyer choice and opportunity based on race, color, national origin, religion, sex, familial status, or disability—not for administrative or transaction reasons.",
+    },
+    {
+      q: "Under Hawaii fair housing law, which practice constitutes steering?",
+      options: ["Directing prospective buyers toward or away from neighborhoods based on their race or national origin", "Recommending a property inspection company to a client", "Advising a seller to accept a competitive offer", "Suggesting mortgage pre-approval before showing properties"],
+      correctIndex: 0,
+      explain: "Steering is the unlawful practice of influencing buyers or renters to favor certain properties or neighborhoods based on protected class characteristics. It is a direct violation of the Fair Housing Act and Hawaii REC rules.",
+    },
   ],
   "practice-of-real-estate-q01": [
     {
@@ -5367,6 +5397,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Acceptable if the broker maintains detailed records", "Conversion", "A minor commingling issue", "Procuring cause"],
       correctIndex: 1,
       explain: "Conversion is the misappropriation of client trust funds for the broker's own use or benefit. Record-keeping does not excuse the unauthorized use of client money for broker obligations.",
+    },
+    {
+      q: "A broker deposits client earnest money into a trust account, then withdraws funds to cover the broker's personal business expenses. What violation has occurred?",
+      options: ["Misappropriation of commingled funds", "Conversion of trust account monies", "Failure to maintain proper escrow accounting", "Breach of fiduciary duty without conversion"],
+      correctIndex: 1,
+      explain: "Conversion occurs when a broker uses client trust funds for personal benefit, regardless of intent to repay. This is a serious violation of Hawaii REC trust account rules.",
+    },
+    {
+      q: "Which of the following scenarios represents an illegal use of earnest money deposits?",
+      options: ["Depositing earnest money in a non-interest bearing trust account", "Using earnest money to pay the broker's monthly office utilities", "Commingling earnest money with other client funds in one account", "Holding earnest money for 30 days before disbursing per closing instructions"],
+      correctIndex: 1,
+      explain: "Using client trust funds for broker business expenses constitutes conversion, the unauthorized appropriation of another's property for personal use.",
+    },
+    {
+      q: "A real estate broker receives earnest money on a transaction and places it in the trust account. The broker then withdraws a portion to pay salesperson commissions owed from a previous sale. This action is best described as:",
+      options: ["Improper trust accounting with correctable deficiencies", "Conversion of client funds", "Commingling of earnest money with operating funds", "Failure to follow proper escrow procedures"],
+      correctIndex: 1,
+      explain: "Converting trust account funds to pay broker or salesperson obligations—even legitimate business expenses—is conversion because the funds belong to clients and must not be used for broker benefit.",
+    },
+    {
+      q: "If a broker temporarily uses earnest money held in trust to pay office expenses with a written plan to repay within 30 days, the broker has committed:",
+      options: ["A technical violation requiring a corrective notice", "Conversion of trust monies", "Commingling that requires trust account remediation", "Negligent trust account management"],
+      correctIndex: 1,
+      explain: "Conversion is using trust funds for personal benefit—the intent to repay does not cure conversion because the funds were misappropriated when withdrawn, not borrowed.",
+    },
+    {
+      q: "A broker deposits earnest money into the firm's operating account and withdraws funds to cover monthly office expenses. What violation has occurred?",
+      options: ["Commingling of client and broker funds", "Unauthorized practice of real estate", "Conversion of trust account funds", "Breach of fiduciary duty that is curable upon repayment"],
+      correctIndex: 2,
+      explain: "Conversion occurs when a broker uses client trust funds (earnest money) for personal or business expenses, which constitutes misappropriation regardless of intent to repay. This is distinct from commingling, which is improper account management but may not involve actual use of funds.",
     },
   ],
   "practice-of-real-estate-q02": [
@@ -5394,6 +5454,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "Parallel pricing combined with evidence of communication regarding commissions can establish an illegal agreement; the exchange of rate information suggests conspiracy, not independent decision-making.",
     },
+    {
+      q: "A group of three real estate firms in the same market decide together to uniformly charge 5.5% commission on all residential transactions. What legal issue does this create?",
+      options: ["Violation of the Sherman Antitrust Act", "Compliance with Hawaii Real Estate Commission guidelines", "A reasonable market stabilization agreement", "Fair competition practice"],
+      correctIndex: 0,
+      explain: "Competitors agreeing on commission rates constitutes price fixing, a per se Sherman Act violation; commissions must remain independently negotiable by each broker.",
+    },
+    {
+      q: "Four brokers in Honolulu meet and collectively decide to charge no less than 6% commission on all listings in their market area. This agreement is:",
+      options: ["An acceptable trade association standard", "An illegal restraint of trade under federal antitrust law", "Required by Hawaii Real Estate Commission rules", "A customary industry practice"],
+      correctIndex: 1,
+      explain: "Horizontal agreements among competitors to set minimum commission rates violate antitrust law; each broker must independently set their own commission rates.",
+    },
+    {
+      q: "If brokers in the same geographic area conspire to establish a uniform 6% commission structure across all their firms, they are engaging in:",
+      options: ["Predictable market behavior", "Consumer protection", "Price fixing—a federal antitrust violation", "Standard industry coordination"],
+      correctIndex: 2,
+      explain: "Such collusion constitutes illegal price fixing under the Sherman Act; commission rates must be determined independently by each broker without agreement or coordination.",
+    },
+    {
+      q: "Two brokers discuss and agree to charge identical 6% commissions on all their listings to avoid 'destructive competition.' This arrangement violates:",
+      options: ["Hawaii real estate licensing renewal requirements", "The Sherman Antitrust Act", "Local board of REALTORS® bylaws", "Hawaii Revised Statutes on brokerage operations"],
+      correctIndex: 1,
+      explain: "Commission rates are individually negotiable; competitors cannot agree on commission levels or structure as this constitutes illegal price fixing under federal antitrust law.",
+    },
+    {
+      q: "Three real estate brokers in the same market decide together to maintain a uniform 6% commission rate across all properties. What legal issue does this arrangement create?",
+      options: ["Violation of the Sherman Antitrust Act through horizontal price fixing", "Compliance with Hawaii real estate industry standards", "A legitimate cooperative marketing agreement", "An acceptable industry custom that benefits consumers through predictability"],
+      correctIndex: 0,
+      explain: "Brokers agreeing to set commissions at a fixed rate constitutes illegal price fixing under antitrust law; commissions must be independently determined and negotiable with clients.",
+    },
   ],
   "practice-of-real-estate-q03": [
     {
@@ -5419,6 +5509,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Protection applies to race, color, and religion, plus five additional protected classes", "Protection covers only race and national origin", "Protection applies to race, color, religion, sex, national origin, familial status, disability, and political affiliation", "Federal law protects only against race discrimination; states add other categories"],
       correctIndex: 0,
       explain: "Federal Fair Housing protects seven specific classes: race, color, religion, sex, national origin, familial status, and disability; political affiliation is not a federally protected class.",
+    },
+    {
+      q: "Which of the following represents the complete list of protected classes under the federal Fair Housing Act?",
+      options: ["Race, color, religion, sex, national origin, familial status, disability", "Race, color, religion, sex, national origin, and disability only", "Race, color, religion, sex, national origin, familial status, disability, and sexual orientation", "Race, color, religion, sex, national origin, familial status, disability, and marital status"],
+      correctIndex: 0,
+      explain: "The Fair Housing Act prohibits discrimination based on exactly these seven protected classes; Hawaii and other states may add additional protections beyond federal law.",
+    },
+    {
+      q: "A real estate agent must be aware that federal fair housing law prohibits discrimination based on membership in which groups?",
+      options: ["Sexual orientation and gender identity only", "Race, color, religion, sex, national origin, familial status, and disability", "Religion and national origin only", "Employment history and credit rating"],
+      correctIndex: 1,
+      explain: "These seven classes are the federal baseline for protected-class status; additional protections may exist under state or local law, but federal law covers these specific categories.",
+    },
+    {
+      q: "Under the federal Fair Housing Act, which combination of protected classes is legally prohibited from being used as a basis for discrimination in housing transactions?",
+      options: ["Race, color, familial status, and disability only", "Race, color, religion, sex, national origin, familial status, and disability", "Religion, sex, disability, and sexual orientation only", "National origin and familial status only"],
+      correctIndex: 1,
+      explain: "Federal fair housing law protects these seven distinct classes; Hawaii may recognize additional protected classes, but the federal requirement covers all seven.",
+    },
+    {
+      q: "If a Hawaii licensee is training on federal Fair Housing Act compliance, they should know the seven protected classes are which of the following?",
+      options: ["Race, color, religion, sex, national origin, familial status, and disability", "Race, color, age, disability, sexual orientation, and religion", "Sex, national origin, familial status, disability, and marital status", "Race, color, religion, and national origin only"],
+      correctIndex: 0,
+      explain: "These are the exact seven protected classes established by the federal Fair Housing Act; states and counties may add protections, but these seven form the federal foundation.",
+    },
+    {
+      q: "Under the federal Fair Housing Act, which of the following represents the complete list of protected classes?",
+      options: ["Income level, employment history, credit rating, and financial status", "Race, color, religion, sex, national origin, familial status, and disability", "Race, color, and religion only", "Sex and disability only"],
+      correctIndex: 1,
+      explain: "The Fair Housing Act protects these seven federal classes; Hawaii state law adds additional protected classes beyond the federal minimum.",
     },
   ],
   "practice-of-real-estate-q04": [
@@ -7234,6 +7354,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A lender's policy protects the mortgagee specifically for the loan amount outstanding, with coverage decreasing as principal is paid and eventually terminating when the mortgage is satisfied.",
     },
+    {
+      q: "Which statement accurately describes the scope and purpose of a lender's title insurance policy in Hawaii?",
+      options: ["It protects the property owner against all title defects throughout the loan term", "It indemnifies the mortgagee for the outstanding loan balance and diminishes as the loan principal is repaid", "It is mandatory for all residential transactions and cannot be waived", "It covers both the lender and borrower equally under a single combined policy"],
+      correctIndex: 1,
+      explain: "A lender's policy insures the lender's interest (the loan amount) and the coverage amount decreases proportionally as the mortgage principal is paid down.",
+    },
+    {
+      q: "A lender requires title insurance as a condition of funding the mortgage. What is the primary protection this lender's policy provides?",
+      options: ["Protection of the buyer's equity and ownership rights against title defects", "Protection of the lender's financial interest in an amount equal to the loan balance outstanding", "Protection against future property tax assessments and special assessments", "Protection that remains constant at the original purchase price regardless of loan payoff"],
+      correctIndex: 1,
+      explain: "The lender's policy covers the mortgagee's interest, which equals the loan amount owed, and this coverage amount reduces as the borrower pays down the principal balance.",
+    },
+    {
+      q: "In a typical Hawaii real estate transaction, the lender's title insurance policy differs from an owner's policy in that it:",
+      options: ["Is paid for by the seller instead of the buyer", "Protects an amount of coverage that decreases in proportion to the loan paydown", "Provides broader coverage and includes all physical property defects", "Extends indefinitely even after the mortgage has been satisfied"],
+      correctIndex: 1,
+      explain: "The lender's policy amount tracks the outstanding loan balance; as the borrower pays down the mortgage, the insured amount decreases accordingly, unlike an owner's policy which remains constant.",
+    },
+    {
+      q: "A mortgagee insists on a title insurance policy before releasing loan funds. This lender's policy protects against title defects up to an amount equal to:",
+      options: ["The appraised value of the property at the time of closing", "The unpaid principal balance of the mortgage loan at any given time", "The original sales price stated in the purchase agreement", "A flat minimum amount set by Hawaii real estate commission rules"],
+      correctIndex: 1,
+      explain: "A lender's title policy insures the mortgagee's interest for the loan amount, with coverage declining as the principal balance is paid down over the life of the loan.",
+    },
+    {
+      q: "Which statement accurately describes the scope and purpose of a lender's title insurance policy?",
+      options: ["It protects the property owner against defects in title", "It insures the lender's interest up to the outstanding loan balance", "It is a mandatory requirement that can never be waived by the borrower", "It provides coverage that increases as the mortgage principal is paid down"],
+      correctIndex: 1,
+      explain: "A lender's title policy protects the lender's financial interest in the property up to the loan amount, with coverage that decreases as the borrower pays down the principal balance.",
+    },
   ],
   "transfer-of-title-q07": [
     {
@@ -7259,6 +7409,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The property avoids estate taxes through a stepped-up basis", "The surviving joint tenant receives the property without probate proceedings", "The property is automatically subject to a recorded deed of trust", "The surviving joint tenant must file an affidavit with the probate court"],
       correctIndex: 1,
       explain: "Joint tenancy's right of survivorship allows seamless transfer to the surviving co-owner(s) upon death, bypassing the probate system entirely.",
+    },
+    {
+      q: "When a joint tenant dies, how does their interest in the property transfer to the surviving joint tenant?",
+      options: ["Through the probate court system", "Automatically by operation of law, without probate proceedings", "Via the decedent's will or the state intestacy statute", "To a designated beneficiary named in a deed"],
+      correctIndex: 1,
+      explain: "Joint tenancy with right of survivorship transfers property directly to surviving co-owners outside the probate process upon death.",
+    },
+    {
+      q: "Which statement correctly describes what happens to jointly held real property when one joint tenant passes away?",
+      options: ["The deceased's share goes to their estate and is distributed through probate", "Title automatically vests in the surviving joint tenant(s) outside probate", "The property must be transferred by court order following intestate succession laws", "Ownership transfers to the county recorder's office until heirs claim it"],
+      correctIndex: 1,
+      explain: "Joint tenancy includes the right of survivorship, which causes the property to pass automatically to surviving joint tenants without probate involvement.",
+    },
+    {
+      q: "A property is titled in joint tenancy between two individuals. Upon the death of one joint tenant, the surviving joint tenant's interest in the property is determined by:",
+      options: ["The provisions of the decedent's last will and testament", "The right of survivorship inherent in the joint tenancy arrangement", "State laws governing probate administration and estate settlement", "Creditors' claims filed during the probate period"],
+      correctIndex: 1,
+      explain: "The right of survivorship is a fundamental characteristic of joint tenancy that automatically passes the deceased's share to the surviving co-owner(s) outside probate.",
+    },
+    {
+      q: "If real estate is owned in joint tenancy and one owner dies, which of the following best describes the transfer of that owner's property interest?",
+      options: ["It becomes part of the probate estate and is subject to court administration", "It transfers immediately to the surviving joint tenant(s) by operation of law", "It passes according to the decedent's intestate succession plan", "It is held in trust for the heirs until probate is completed"],
+      correctIndex: 1,
+      explain: "Joint tenancy creates an automatic transfer mechanism—the right of survivorship—that bypasses probate entirely and vests the property directly in surviving co-owners.",
+    },
+    {
+      q: "When a joint tenant dies, how does their interest in the property transfer to the surviving joint tenant?",
+      options: ["Through the probate court system with a will requirement", "Automatically by operation of law without probate proceedings", "Through the Hawaii intestate succession statutes", "By quitclaim deed filed with the county recorder"],
+      correctIndex: 1,
+      explain: "Joint tenancy includes the right of survivorship, which automatically transfers the deceased's interest to surviving joint tenants outside the probate process by operation of law.",
     },
   ],
   "transfer-of-title-q08": [
@@ -7286,6 +7466,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A cloud on title consists of unresolved claims or defects—such as judgment liens, unreleased mortgages, or competing ownership claims—that cloud marketability.",
     },
+    {
+      q: "When a title search reveals a 'cloud on title,' what does this indicate?",
+      options: ["The property is located in a flood zone requiring additional insurance", "There is an outstanding claim or defect that impairs the seller's ability to transfer clear ownership", "The property has been registered with the Hawaii Land Court system", "A mechanic's lien has been placed on the property by a contractor"],
+      correctIndex: 1,
+      explain: "A cloud on title is any claim, lien, or defect that creates uncertainty or impairs ownership rights; it must be resolved before a clean title transfer.",
+    },
+    {
+      q: "Which of the following best describes a 'cloud on title' in real estate transactions?",
+      options: ["A title insurance policy that limits coverage to specific risks", "An unresolved or questionable claim against the property that affects marketability", "An easement granted by the state of Hawaii for public utility purposes", "A covenant requiring disclosure of property defects to future buyers"],
+      correctIndex: 1,
+      explain: "A cloud on title is a defect or unresolved claim that makes the title unmarketable; it must be cleared through legal action or settlement.",
+    },
+    {
+      q: "A title company discovers a 'cloud on title' during a preliminary examination. What does this mean?",
+      options: ["The property deed must be recorded with the state tax assessor", "There exists an outstanding claim, prior lien, or other defect that affects clear ownership transfer", "The property is subject to deed restrictions that limit future use", "The owner has failed to pay property taxes for the current fiscal year"],
+      correctIndex: 1,
+      explain: "A cloud on title represents any unresolved title defect or claim that compromises the seller's ability to convey marketable title.",
+    },
+    {
+      q: "In Hawaii real estate practice, a 'cloud on title' refers to:",
+      options: ["A requirement to obtain title insurance before closing escrow", "An unresolved title defect or questionable claim that must be resolved before clear title passes", "A notice from the Hawaii Department of Land and Natural Resources regarding property boundaries", "A preliminary assessment required by the Hawaii Real Estate Commission"],
+      correctIndex: 1,
+      explain: "A cloud on title is any defect, lien, or claim that creates doubt about ownership; it impairs marketability until resolved.",
+    },
+    {
+      q: "When a title examiner discovers a \"cloud on title,\" what does this mean for the property owner?",
+      options: ["The property is located in a flood-prone area requiring additional insurance", "There is a potential dispute or encumbrance that may affect ownership rights", "The seller must provide a title commitment within 10 days", "A mechanic's lien has been recorded against the property"],
+      correctIndex: 1,
+      explain: "A cloud on title refers to any unresolved claim, defect, or potential dispute that casts doubt on clear ownership—distinct from specific liens or weather conditions.",
+    },
   ],
   "transfer-of-title-q09": [
     {
@@ -7311,6 +7521,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The grantee must countersign the deed for it to be recordable", "Only the grantor is required to sign a deed", "Both parties must appear together to sign before a notary", "The grantor's agent can sign without the grantor's presence"],
       correctIndex: 1,
       explain: "A deed requires only the grantor's signature; the grantee is not a party to the execution of the deed.",
+    },
+    {
+      q: "In Hawaii real estate transactions, which party is responsible for executing the deed by adding their signature?",
+      options: ["The person transferring the property", "The person receiving the property", "Both the transferor and transferee", "The title company representative"],
+      correctIndex: 0,
+      explain: "The grantor (person transferring property) is the only party required to sign the deed; the grantee's signature is not necessary for a valid deed.",
+    },
+    {
+      q: "Which of the following is a requirement for executing a valid deed in Hawaii?",
+      options: ["Signature of the grantor only", "Signature of the grantee and grantor together", "Signature of the grantee alone", "Signature of a licensed escrow officer"],
+      correctIndex: 0,
+      explain: "Only the grantor must sign the deed; the grantee is not a signatory party to the instrument transferring title.",
+    },
+    {
+      q: "When closing a real estate transaction in Hawaii, whose signature makes a deed legally binding?",
+      options: ["The grantor's signature only", "The grantee's signature and acknowledgment", "Signatures from both parties equally", "The recorder's signature upon filing"],
+      correctIndex: 0,
+      explain: "The grantor's signature is what executes the deed and transfers title; the grantee does not sign the deed itself.",
+    },
+    {
+      q: "A seller is preparing to transfer property to a buyer through a warranty deed. Who must sign this document?",
+      options: ["Only the seller", "Only the buyer", "The seller and buyer together", "Only the real estate agent handling the transaction"],
+      correctIndex: 0,
+      explain: "The seller, as the grantor, is the only required signatory on the deed; the buyer (grantee) does not execute the deed.",
+    },
+    {
+      q: "When preparing a warranty deed for recording in Hawaii, whose signature is legally required on the document?",
+      options: ["The person transferring the property", "The person receiving the property", "Both the transferor and transferee", "The county recorder"],
+      correctIndex: 0,
+      explain: "Only the grantor (person transferring the property) must sign a deed. The grantee does not sign the deed, though they may sign other closing documents.",
     },
   ],
   "transfer-of-title-q10": [
@@ -7338,6 +7578,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The Closing Disclosure became the required federal closing document under TRID, superseding the HUD-1 Settlement Statement for residential mortgage transactions.",
     },
+    {
+      q: "Under the TRID rule, which document must be provided to borrowers at closing for a federally-regulated residential mortgage transaction?",
+      options: ["Truth in Lending Statement", "Closing Disclosure", "HUD-1 Settlement Statement", "Loan Estimate (final version)"],
+      correctIndex: 1,
+      explain: "The Closing Disclosure is the mandatory federal closing document required by TRID regulations for most residential mortgage loans, replacing the older HUD-1 form.",
+    },
+    {
+      q: "A mortgage lender in Hawaii must provide borrowers with which official federal closing document three business days before settlement?",
+      options: ["Settlement Statement", "Closing Disclosure", "Good Faith Estimate", "Promissory Note"],
+      correctIndex: 1,
+      explain: "The Closing Disclosure is the TRID-required federal form that lenders must deliver at least three business days before closing for residential mortgage transactions.",
+    },
+    {
+      q: "Which of the following replaced the HUD-1 Settlement Statement as the standard federal closing disclosure form for most home loans?",
+      options: ["Closing Disclosure", "Final Truth in Lending Act Notice", "Uniform Closing Dataset", "Affiliated Business Arrangement Disclosure"],
+      correctIndex: 0,
+      explain: "The Closing Disclosure superseded the HUD-1 form under the TRID rule to provide consumers with a clearer, more standardized federal closing document.",
+    },
+    {
+      q: "In a typical residential mortgage closing subject to federal regulations, the lender must provide the borrower with:",
+      options: ["A completed HUD-1 form signed by all parties", "A Closing Disclosure that itemizes loan terms and closing costs", "A Truth in Lending disclosure at the time of closing", "A Settlement Statement within 24 hours after closing"],
+      correctIndex: 1,
+      explain: "The Closing Disclosure is the federally-mandated TRID form that lenders must provide to show loan terms and itemized closing costs for residential mortgage transactions.",
+    },
+    {
+      q: "Under TRID requirements, which document must a lender provide to a borrower at least three business days before closing on a residential mortgage transaction?",
+      options: ["Truth in Lending Act Disclosure", "Closing Disclosure", "Initial Escrow Statement", "HUD-1 Settlement Statement"],
+      correctIndex: 1,
+      explain: "The Closing Disclosure is the mandatory federal form required under TRID that replaced the HUD-1 and must be delivered to borrowers at least three business days before loan consummation.",
+    },
   ],
   "transfer-of-title-q11": [
     {
@@ -7363,6 +7633,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Warranty clause", "Habendum clause", "Testimonium clause", "Description clause"],
       correctIndex: 1,
       explain: "The habendum clause traditionally uses 'to have and to hold' language and establishes the extent and terms of the property interest granted.",
+    },
+    {
+      q: "In a Hawaii deed, which clause contains the phrase 'to have and to hold' and specifies the type and duration of the estate being transferred?",
+      options: ["Recital clause", "Habendum clause", "Testimonium clause", "Consideration clause"],
+      correctIndex: 1,
+      explain: "The habendum clause defines the nature and extent of the estate granted and traditionally includes 'to have and to hold' language.",
+    },
+    {
+      q: "A grantor uses the words 'to have and to hold' in a deed. What is the name of the deed section that contains this language?",
+      options: ["Granting clause", "Acknowledgment", "Habendum clause", "Description of property"],
+      correctIndex: 2,
+      explain: "The habendum clause is the traditional location for 'to have and to hold' language and establishes the extent of the estate transferred.",
+    },
+    {
+      q: "Which of the following deed provisions is characterized by the phrase 'to have and to hold' and determines the scope of ownership rights being conveyed?",
+      options: ["The acknowledgment", "The testimonium", "The habendum clause", "The recital"],
+      correctIndex: 2,
+      explain: "The habendum clause contains 'to have and to hold' language and defines the precise nature and duration of the estate granted to the grantee.",
+    },
+    {
+      q: "When reviewing a deed document, your client asks you to identify where the 'to have and to hold' language appears and what function it serves. You should direct them to the:",
+      options: ["Granting clause, which conveys the property", "Habendum clause, which defines the estate and its duration", "Recital, which states the consideration", "Acknowledgment, which authenticates the grantor's signature"],
+      correctIndex: 1,
+      explain: "The habendum clause is the deed section containing 'to have and to hold' language and it specifies the extent and type of estate being granted.",
+    },
+    {
+      q: "Which deed clause contains the phrase 'to have and to hold' and specifies the nature and extent of the estate being transferred?",
+      options: ["The acknowledgment clause", "The habendum clause", "The consideration clause", "The warranty clause"],
+      correctIndex: 1,
+      explain: "The habendum clause uses 'to have and to hold' language to define the type and duration of the estate granted to the grantee.",
     },
   ],
   "valuation-market-analysis-q00": [
