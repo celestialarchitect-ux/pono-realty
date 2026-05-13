@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:48:44.586Z via Claude Haiku.
+// Generated 2026-05-13T10:56:53.656Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -1768,6 +1768,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Hawaii law requires a neutral escrow company to receive and hold earnest money deposits, documents, and all transaction funds as a fiduciary until closing occurs.",
     },
+    {
+      q: "Which party is responsible for safeguarding earnest money deposits and closing documents in a typical Hawaii real estate transaction?",
+      options: ["Real estate salesperson", "Escrow agent or title company", "Seller's mortgagee", "Real estate appraiser"],
+      correctIndex: 1,
+      explain: "Hawaii's escrow system requires a neutral third party (escrow agent or title company) to hold all funds and documents until closing conditions are satisfied.",
+    },
+    {
+      q: "Under Hawaii real estate law, where are buyer deposits and transaction documents typically held prior to closing?",
+      options: ["With the listing brokerage firm", "In the lender's loan servicing account", "With a neutral escrow or title company", "In the seller's attorney's trust account"],
+      correctIndex: 2,
+      explain: "Hawaii operates as an escrow state where a neutral escrow entity holds all funds and documentation to ensure impartiality and protect both buyer and seller interests.",
+    },
+    {
+      q: "What is the primary function of the escrow holder in a Hawaii residential purchase transaction?",
+      options: ["To represent the seller's financial interests exclusively", "To provide appraisal services and property valuation", "To serve as a neutral custodian of funds and documents until closing conditions are met", "To underwrite and approve the mortgage loan"],
+      correctIndex: 2,
+      explain: "The escrow holder maintains neutrality by safeguarding all transaction money and documents, releasing them only when all closing conditions and requirements are fulfilled.",
+    },
+    {
+      q: "In Hawaii, if a buyer and seller enter into a purchase agreement, who should receive and hold the earnest money deposit and settlement paperwork?",
+      options: ["The buyer's real estate agent", "A neutral escrow company or title company", "The seller directly", "The mortgage broker or loan originator"],
+      correctIndex: 1,
+      explain: "Hawaii's escrow requirement mandates that a neutral third party hold all transaction funds and documents to prevent conflicts of interest and ensure compliance with closing instructions.",
+    },
+    {
+      q: "When a residential property closes in Hawaii, which party is responsible for safeguarding the earnest money deposit and settlement documents until all closing conditions are satisfied?",
+      options: ["The selling broker's office manager", "An impartial escrow agent or title company", "The mortgaging institution providing the loan", "The buyer's real estate agent"],
+      correctIndex: 1,
+      explain: "Hawaii law requires a neutral third party (escrow agent or title company) to hold funds and documents in trust to protect both buyer and seller until closing requirements are met.",
+    },
   ],
   "hi-escrow-closing-q01": [
     {
@@ -1793,6 +1823,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["GET (General Excise Tax)", "Conveyance tax", "Inheritance tax", "Capital gains tax"],
       correctIndex: 1,
       explain: "Conveyance tax is Hawaii's direct tax on the transfer of real property ownership. Hawaii does not impose an inheritance tax or capital gains tax on real estate transfers at the state level.",
+    },
+    {
+      q: "Which of the following is the proper name for Hawaii's transfer tax imposed on the sale of real property?",
+      options: ["Real property sales tax", "Conveyance tax", "Transfer assessment fee", "Property transaction duty"],
+      correctIndex: 1,
+      explain: "Conveyance tax is Hawaii's official tax on real property transfers, distinct from general excise tax (GET) or HARPTA requirements.",
+    },
+    {
+      q: "A buyer closes on residential property in Honolulu. What state-level tax applies to this transaction?",
+      options: ["Stamp tax", "General excise tax only", "Conveyance tax", "Recording and filing fee"],
+      correctIndex: 2,
+      explain: "Hawaii imposes a conveyance tax on real property transfers; GET applies to services but not the real property transfer itself.",
+    },
+    {
+      q: "Under Hawaii law, the tax levied when real property changes ownership is called:",
+      options: ["HARPTA withholding tax", "Conveyance tax", "Documentary stamp tax", "Acquisition surcharge"],
+      correctIndex: 1,
+      explain: "Conveyance tax is Hawaii's established transfer tax on real property; HARPTA is a withholding requirement, not the transfer tax itself.",
+    },
+    {
+      q: "Which tax does a seller owe to the State of Hawaii when transferring ownership of real property?",
+      options: ["Conveyance tax", "Capital gains transfer fee", "Deed recording tax", "Property disposition levy"],
+      correctIndex: 0,
+      explain: "Conveyance tax is Hawaii's statutory transfer tax imposed on real property sales; it is separate from recording fees and other transaction costs.",
+    },
+    {
+      q: "Which of the following is the name of Hawaii's tax imposed on the sale or transfer of real property?",
+      options: ["Transfer assessment fee", "Conveyance tax", "General excise tax", "Hawaii real property withholding tax"],
+      correctIndex: 1,
+      explain: "Conveyance tax is Hawaii's specific tax on real property transfers. The other options refer to different tax mechanisms or do not apply specifically to property transfers.",
     },
   ],
   "hi-escrow-closing-q02": [
@@ -1820,6 +1880,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 3,
       explain: "HRS 449 is the specific statute chapter that provides the legal framework for escrow depository licensing, oversight, and operational standards in Hawaii.",
     },
+    {
+      q: "Which Hawaii Revised Statute specifically establishes the legal framework for escrow depository operations?",
+      options: ["HRS 514B", "HRS 449", "HRS 467", "HRS 521"],
+      correctIndex: 1,
+      explain: "HRS 449 is the statute that governs escrow depositories and their regulatory requirements in Hawaii.",
+    },
+    {
+      q: "A real estate transaction in Hawaii requires escrow services. Under which statute must the escrow company operate?",
+      options: ["HRS 521 (Residential Tenancies)", "HRS 514B (Nonprofit Corporations)", "HRS 449 (Escrow Depositories)", "HRS 467 (Real Estate Commission)"],
+      correctIndex: 2,
+      explain: "HRS 449 is the controlling statute for escrow depository activities and licensing in the state of Hawaii.",
+    },
+    {
+      q: "If a licensee refers a client to an escrow company, that company's compliance obligations fall under:",
+      options: ["HRS 467, which regulates all real estate professionals", "HRS 449, which provides the statutory authority for escrow depositories", "HRS 521, which addresses rental property management", "HRS 514B, which governs corporate structures"],
+      correctIndex: 1,
+      explain: "HRS 449 is the specific Hawaii statute that authorizes and regulates escrow depository licensees and their operations.",
+    },
+    {
+      q: "When a real estate agent questions whether an escrow company is properly licensed, the agent should reference which statute?",
+      options: ["HRS 467 (Real Estate Commission jurisdiction)", "HRS 514B (Corporate formation rules)", "HRS 449 (Escrow Depository Licensing)", "HRS 521 (Landlord-Tenant Law)"],
+      correctIndex: 2,
+      explain: "HRS 449 establishes the licensing and regulatory requirements specific to escrow depositories in Hawaii.",
+    },
+    {
+      q: "Which Hawaii Revised Statute specifically regulates the licensing and conduct of escrow depositories?",
+      options: ["HRS 521 – Condominium Property Regimes", "HRS 449 – Escrow Depositories", "HRS 467 – Broker Licensing", "HRS 514B – Homeowners Associations"],
+      correctIndex: 1,
+      explain: "HRS 449 is the statute that directly governs escrow depositories in Hawaii, establishing their licensing requirements and regulatory framework.",
+    },
   ],
   "hi-escrow-closing-q03": [
     {
@@ -1846,6 +1936,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The estoppel certificate is the AOAO statement that discloses monthly fees, any unpaid amounts, and the overall financial and legal condition of the condominium project.",
     },
+    {
+      q: "When closing on a condo unit purchase in Hawaii, which AOAO document verifies the current assessment obligations and project financial standing?",
+      options: ["CPR", "Estoppel certificate", "CDUP", "Declaration of Condominium"],
+      correctIndex: 1,
+      explain: "The estoppel certificate is the standard AOAO document that certifies fees owed, assessments due, and the financial/legal status of the unit at the time of sale.",
+    },
+    {
+      q: "A buyer's lender typically requires documentation from the association showing what information before approving a condo mortgage?",
+      options: ["A certified list of all unit owners", "Proof of the AOAO's fee obligations and reserve status", "A copy of the original subdivision map", "The CDUP approval letter from the city"],
+      correctIndex: 1,
+      explain: "Lenders require an estoppel certificate from the AOAO to confirm outstanding fees, special assessments, and the project's financial condition to assess mortgage risk.",
+    },
+    {
+      q: "In a Hawaii condo transaction, the AOAO is required to provide which document that discloses outstanding assessments and fees owed by the seller?",
+      options: ["Title Search Report", "Estoppel Certificate", "Property Tax Declaration", "Condominium Project Report"],
+      correctIndex: 1,
+      explain: "The estoppel certificate is the AOAO's official statement of the unit's assessment status and any outstanding financial obligations at the time of closing.",
+    },
+    {
+      q: "A real estate agent preparing a condo sale should obtain which document from the association to verify there are no hidden liens or delinquent assessments against the property?",
+      options: ["CDUP authorization", "Estoppel certificate", "CPR filing", "Architectural Review Approval"],
+      correctIndex: 1,
+      explain: "The estoppel certificate serves as the AOAO's certified statement confirming all fees, assessments, and liens against the unit, protecting the buyer and lender from undisclosed obligations.",
+    },
+    {
+      q: "When a buyer is purchasing a condominium unit in Hawaii, which AOAO-issued document must be provided to verify the current financial obligations and operational status of the association?",
+      options: ["CPR", "Estoppel certificate", "CDUP", "TCT"],
+      correctIndex: 1,
+      explain: "An estoppel certificate from the AOAO confirms outstanding fees, assessments, and project status, protecting the buyer from unknown liabilities and is standard in condo transactions.",
+    },
   ],
   "hi-escrow-closing-q04": [
     {
@@ -1871,6 +1991,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Immediately share the email with all parties to expedite the transaction", "Call the closing agent at a phone number obtained independently to verify the wire instructions are legitimate", "Accept the email as official because it comes from a licensed professional's email account", "Ask the buyer to use a cashier's check instead to avoid any wire complications"],
       correctIndex: 1,
       explain: "Independent verbal verification of wire instructions via a known phone number confirms legitimacy and is essential to prevent impostors from redirecting funds. Email alone is insufficient, even from professional accounts.",
+    },
+    {
+      q: "To minimize the risk of wire fraud during a real estate closing transaction, a licensee should:",
+      options: ["Accept wire transfer instructions via email without additional confirmation", "Contact the sender using a previously known and verified phone number to confirm wire details", "Process wire transfers immediately upon receipt of written instructions from any party", "Recommend that clients use cashier's checks instead of electronic transfers"],
+      correctIndex: 1,
+      explain: "Phone verification using a known number prevents fraudsters from intercepting and altering wire instructions sent via email or text.",
+    },
+    {
+      q: "A client receives new wire instructions via email on the day of closing. What is the best practice to prevent wire fraud?",
+      options: ["Forward the email to the title company without delay", "Call the client back using a phone number from your prior records to confirm the wire instructions are legitimate", "Ask the client to resend the instructions via text message for verification", "Process the wire immediately since the client provided written authorization"],
+      correctIndex: 1,
+      explain: "Calling back using established contact information ensures you're speaking with the actual party, not a criminal who spoofed their email address.",
+    },
+    {
+      q: "Which strategy best protects clients and escrow accounts from wire fraud schemes in Hawaii real estate closings?",
+      options: ["Implementing a policy that all wire instructions must come from the real estate agent's email account", "Requiring verbal confirmation of wire transfer details through a telephone call to a known contact number", "Using automated wire transfer systems that accept instructions from any email domain", "Limiting wire transfers to amounts under $10,000 to reduce fraud exposure"],
+      correctIndex: 1,
+      explain: "Direct telephone confirmation with a known number is the gold standard to authenticate wire instructions and prevent interception by bad actors.",
+    },
+    {
+      q: "A title company receives wire instructions that differ from the original closing estimate. The best practice is to:",
+      options: ["Process the new wire amount since it came from the lender's email system", "Call the lender using a phone number independently verified from prior documents to confirm the change", "Request that the lender send a certified check instead of a wire transfer", "Wait 24 hours before processing to allow for document verification"],
+      correctIndex: 1,
+      explain: "Verifying any change in wire instructions via phone to a known number prevents fraudsters from altering amounts or account information through email spoofing.",
+    },
+    {
+      q: "To protect against wire fraud schemes during a real estate transaction, what is the most critical step a closing agent should take before processing large fund transfers?",
+      options: ["Confirm wire recipient details by calling the client at a previously verified phone number", "Process the wire immediately upon receiving written email confirmation from any party", "Use ACH transfers exclusively to avoid wire fraud altogether", "Request the client send funds via cashier's check to the closing office address"],
+      correctIndex: 0,
+      explain: "Calling the client at a known number to verify wire instructions is the essential safeguard against fraud, as criminals often intercept emails to redirect funds to their accounts.",
     },
   ],
   "hi-financing-q00": [
@@ -1954,6 +2104,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "PMMs are recorded as subordinate liens, meaning they are junior to and recorded after the senior institutional mortgage in the chain of title.",
     },
+    {
+      q: "In a transaction with an existing first mortgage, where would a PMM typically be positioned in the lien hierarchy?",
+      options: ["Ahead of all other encumbrances on the property", "Behind the senior institutional mortgage", "In place of the original mortgage as a replacement loan", "With equal priority to any VA or FHA loan"],
+      correctIndex: 1,
+      explain: "PMMs are subordinate instruments that sit junior to existing first mortgages and other senior liens on the property.",
+    },
+    {
+      q: "When comparing a piggyback mortgage to a first mortgage, the piggyback loan is best characterized as:",
+      options: ["Holding primary lien position on the real property", "Subordinate to the primary institutional lender's security interest", "A refinancing tool that replaces the original obligation", "Exempt from the Hawaii Real Estate Commission's oversight"],
+      correctIndex: 1,
+      explain: "A piggyback mortgage (PMM) is subordinate by nature—it is inferior to the senior lien held by the institutional lender.",
+    },
+    {
+      q: "A buyer uses a piggyback mortgage strategy alongside a traditional bank loan. The PMM holder's claim on the property is:",
+      options: ["Superior to all other secured lenders", "Secondary to the primary institutional lender", "Interchangeable with a home equity line of credit in function", "Mandated by state law for all residential purchases"],
+      correctIndex: 1,
+      explain: "PMMs occupy a junior position relative to the primary mortgage lender, meaning the primary lender has first claim in case of default.",
+    },
+    {
+      q: "Which statement accurately describes the lien position of a piggyback mortgage in relation to a conventional first mortgage?",
+      options: ["The PMM takes priority and must be satisfied before the first mortgage", "The PMM is subordinated to the first mortgage holder's security interest", "The PMM functions identically to a cash-out refinance on the same property", "The PMM is prohibited under Hawaii Real Estate Commission rules"],
+      correctIndex: 1,
+      explain: "PMMs are junior liens by definition—they are subordinate to the senior institutional lender's first mortgage position.",
+    },
+    {
+      q: "In the lien priority structure of a Hawaii property, where does a piggyback mortgage (PMM) typically rank?",
+      options: ["Above all other mortgages and trust deeds on the property", "Behind the first mortgage but ahead of any home equity lines of credit", "In parity with the primary institutional mortgage", "As the sole security instrument, replacing conventional financing"],
+      correctIndex: 1,
+      explain: "A PMM is subordinate to the senior first mortgage but typically takes priority over subsequent liens like HELOCs; it holds a junior position in the lien hierarchy.",
+    },
   ],
   "hi-financing-q02": [
     {
@@ -1979,6 +2159,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The condominium can only be purchased through cash transactions", "Traditional mortgage programs offered through major lenders may not be available", "The condominium must undergo remediation before any sale can close", "The Hawaii Department of Commerce will need to issue a special waiver"],
       correctIndex: 1,
       explain: "Non-warrantable condos fall outside GSE standards, eliminating access to conventional financing through traditional lenders, though portfolio and niche loan products may still exist.",
+    },
+    {
+      q: "Why would a condominium project receive a non-warrantable classification from lenders?",
+      options: ["The building fails to meet structural safety codes", "The project does not satisfy Fannie Mae or Freddie Mac underwriting requirements", "The homeowners association has unpaid property taxes", "The developer never recorded the master deed"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos fail GSE (Fannie Mae/Freddie Mac) standards, requiring portfolio or alternative financing rather than conventional loans.",
+    },
+    {
+      q: "A buyer interested in purchasing a unit in a non-warrantable condominium should understand that:",
+      options: ["Standard conventional mortgages from major lenders will likely be available", "Financing options will be restricted to portfolio lenders or non-GSE sources", "The property cannot legally be mortgaged under any circumstances", "VA and FHA financing are the only options available"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos cannot use GSE-backed conventional financing, forcing buyers toward portfolio lenders or alternative financing sources.",
+    },
+    {
+      q: "When a condominium is labeled non-warrantable, what is the primary lending consequence?",
+      options: ["Property taxes increase by 15% annually", "The unit cannot be used as a primary residence", "Fannie Mae and Freddie Mac will not purchase or guarantee the mortgage", "All construction defects become the buyer's liability"],
+      correctIndex: 2,
+      explain: "Non-warrantable status means the property does not comply with GSE standards, so Fannie Mae and Freddie Mac will not guarantee conventional loans on the unit.",
+    },
+    {
+      q: "A broker explains to a client that their desired condo unit is non-warrantable. This designation primarily affects:",
+      options: ["The ability to claim depreciation on rental income", "Whether conventional financing from GSE-backed lenders is obtainable", "The unit's eligibility for property tax exemptions", "The requirement to maintain flood insurance coverage"],
+      correctIndex: 1,
+      explain: "Non-warrantable means the condo does not meet GSE (Fannie Mae/Freddie Mac) standards, eliminating access to conventional mortgage products backed by these entities.",
+    },
+    {
+      q: "When a condominium project fails to meet Government-Sponsored Enterprise underwriting criteria, what financing restriction typically results?",
+      options: ["The property cannot legally be listed for sale", "Borrowers must seek portfolio loans or non-conforming lenders instead of traditional mortgage companies", "The homeowners association is dissolved by the state", "Property tax assessments are increased by the county"],
+      correctIndex: 1,
+      explain: "Non-warrantable condos don't qualify for Fannie Mae/Freddie Mac loans, forcing buyers to use portfolio lenders, FHA, or other alternative financing rather than conventional mortgages.",
     },
   ],
   "hi-financing-q03": [
@@ -2006,6 +2216,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "HRS 478 governs interest rate caps and usury restrictions that all lenders in Hawaii must follow when structuring loan terms.",
     },
+    {
+      q: "Under Hawaii Revised Statutes, which chapter specifically addresses maximum allowable interest rates that lenders may charge on loans?",
+      options: ["HRS 521 (Residential Tenancies)", "HRS 478 (Interest Rate Limitations)", "HRS 514B (Condominium Property Regimes)", "HRS 467 (Real Estate Commission)"],
+      correctIndex: 1,
+      explain: "HRS 478 is Hawaii's usury statute that establishes the legal caps on interest rates charged by lenders on consumer loans and mortgages.",
+    },
+    {
+      q: "A borrower in Hawaii wants to understand what state law prohibits excessive interest charges on their mortgage. Which statute should they consult?",
+      options: ["HRS 514B", "HRS 467", "HRS 478", "HRS 521"],
+      correctIndex: 2,
+      explain: "HRS 478 is Hawaii's usury law that protects borrowers by limiting the maximum interest rates lenders are permitted to charge on loans.",
+    },
+    {
+      q: "Which of the following Hawaii statutes contains provisions protecting borrowers from usurious lending practices?",
+      options: ["HRS 467 (Real Estate Commission)", "HRS 514B (Condominium Property)", "HRS 521 (Landlord and Tenant)", "HRS 478 (Interest Rate Limitations)"],
+      correctIndex: 3,
+      explain: "HRS 478 governs interest rate caps and usury law in Hawaii, establishing the maximum rates lenders may legally charge borrowers.",
+    },
+    {
+      q: "A Hawaii real estate agent is counseling a client about financing options. The client asks which state law regulates the maximum interest rates that can be charged on loans. The agent should refer to:",
+      options: ["HRS 521 for residential lending standards", "HRS 467 for licensing and conduct requirements", "HRS 478 for usury rate limitations", "HRS 514B for mortgage regulations"],
+      correctIndex: 2,
+      explain: "HRS 478 is Hawaii's usury statute that specifically caps the maximum interest rates allowed on loans to protect consumers from excessive charges.",
+    },
+    {
+      q: "Which Hawaii Revised Statutes chapter contains the regulations limiting the maximum interest rates that lenders may charge on loans?",
+      options: ["HRS 521", "HRS 478", "HRS 467", "HRS 514B"],
+      correctIndex: 1,
+      explain: "HRS 478 is Hawaii's usury statute that establishes caps on allowable interest rates for various types of loans and credit transactions.",
+    },
   ],
   "hi-financing-q04": [
     {
@@ -2031,6 +2271,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Lease assumption", "Lease conversion", "Lease novation", "AOAO conversion"],
       correctIndex: 1,
       explain: "Lease conversion is the purchase of the fee interest by the leaseholder to convert leasehold property into fee simple property free of lease encumbrances.",
+    },
+    {
+      q: "When a leaseholder in Hawaii negotiates to purchase the underlying fee interest from the lessor, what is this transaction called?",
+      options: ["Fee simple acquisition", "Lease conversion", "Leaseback arrangement", "Easement subordination"],
+      correctIndex: 1,
+      explain: "Lease conversion is the process of acquiring the fee interest to convert leasehold property into fee simple ownership.",
+    },
+    {
+      q: "A Hawaii property owner holds a leasehold estate on land. To eliminate the lessor's underlying fee interest and gain complete ownership, the property owner should pursue:",
+      options: ["A subordination agreement with the lessor", "Lease conversion through fee acquisition", "An assignment to a new leaseholder", "AOAO formation and restructuring"],
+      correctIndex: 1,
+      explain: "Lease conversion involves buying out the lessor's fee interest, converting the leasehold into full fee simple ownership.",
+    },
+    {
+      q: "In Hawaii real estate, what does the term 'lease conversion' most accurately describe?",
+      options: ["The process of extending a lease term by mutual agreement", "Purchasing the fee simple interest from the lessor to convert leasehold to fee ownership", "Creating a second lease on the same property", "Transferring leasehold rights to a condominium association"],
+      correctIndex: 1,
+      explain: "Lease conversion specifically refers to buying out the lessor's fee interest to convert leasehold property into fee simple.",
+    },
+    {
+      q: "A Hawaii leaseholder decides to eliminate the landlord's ownership interest by purchasing it. This action is best described as:",
+      options: ["Lease renewal", "Lease conversion", "Lease subordination", "Lease assignment"],
+      correctIndex: 1,
+      explain: "Lease conversion is the transaction where a leaseholder purchases the underlying fee from the lessor to achieve fee simple ownership.",
+    },
+    {
+      q: "Under Hawaii real estate law, when a leaseholder negotiates to purchase the underlying fee interest from the lessor, this transaction is properly called:",
+      options: ["Fee simple conversion", "Lease conversion", "Equity buydown", "Perpetual lease extension"],
+      correctIndex: 1,
+      explain: "Lease conversion specifically refers to acquiring the lessor's fee interest to convert leasehold property into fee simple ownership.",
     },
   ],
   "hi-land-utilization-q00": [
@@ -2954,6 +3224,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Hawaii REC mandates exactly 60 hours of pre-licensing education for salesperson candidates at approved schools.",
     },
+    {
+      q: "A candidate in Hawaii is enrolling in a REC-approved pre-licensing school to become a salesperson. What is the minimum number of instructional hours required?",
+      options: ["45 hours", "60 hours", "75 hours", "90 hours"],
+      correctIndex: 1,
+      explain: "Hawaii Real Estate Commission requires 60 hours of pre-licensing education at an approved school for salesperson licensure.",
+    },
+    {
+      q: "Before applying for a Hawaii real estate salesperson license through the REC, how many contact hours must an applicant complete at an accredited pre-licensing program?",
+      options: ["30 hours minimum", "55 hours minimum", "60 hours minimum", "80 hours minimum"],
+      correctIndex: 2,
+      explain: "The Hawaii Real Estate Commission mandates 60 contact hours of pre-licensing classroom instruction for all salesperson license applicants.",
+    },
+    {
+      q: "An individual is preparing to take the Hawaii salesperson license exam. According to REC regulations, what is the required course load before she is eligible to sit for the test?",
+      options: ["40 hours of approved coursework", "60 hours of approved coursework", "70 hours of approved coursework", "100 hours of approved coursework"],
+      correctIndex: 1,
+      explain: "Hawaii requires completion of a 60-hour pre-licensing course from an REC-approved provider as a prerequisite to taking the salesperson licensing exam.",
+    },
+    {
+      q: "Which statement accurately describes the pre-licensing education requirement for obtaining a Hawaii salesperson license?",
+      options: ["Candidates must complete 45 hours at any real estate school in the United States.", "Candidates must complete 60 hours at a Hawaii REC-approved real estate school.", "Candidates must complete 90 hours plus pass a broker-level exam.", "Candidates must complete 30 hours and provide proof of 2 years prior experience."],
+      correctIndex: 1,
+      explain: "Hawaii REC regulations specify that salesperson applicants must successfully complete a 60-hour pre-licensing course at an approved school.",
+    },
+    {
+      q: "A candidate in Hawaii is enrolling in a Real Estate Commission-approved pre-licensing program to become a salesperson. What is the minimum classroom hour requirement she must complete before sitting for the licensing exam?",
+      options: ["45 hours of instruction", "60 hours of instruction", "75 hours of instruction", "120 hours of instruction"],
+      correctIndex: 1,
+      explain: "Hawaii REC mandates 60 hours of pre-licensing education at an approved school for salesperson licensure. This is the foundational requirement before exam eligibility.",
+    },
   ],
   "hi-professional-conduct-q01": [
     {
@@ -2979,6 +3279,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["20 hours per biennial period with mandatory Core Course", "15 hours of electives plus 5 hours of Core instruction", "40 hours total to maintain dual licensure", "10 hours annually without Core Course prerequisite"],
       correctIndex: 0,
       explain: "Licensees must complete 20 CE hours during each two-year renewal cycle, with the mandatory Core Course included within those 20 hours.",
+    },
+    {
+      q: "What is the total continuing education requirement for a Hawaii real estate licensee over one complete license renewal cycle?",
+      options: ["15 hours including the mandatory Core Course", "20 hours including the mandatory Core Course", "25 hours with no mandatory courses required", "30 hours split equally between broker and salesperson tracks"],
+      correctIndex: 1,
+      explain: "Hawaii requires 20 CE hours per two-year license cycle, which must include completion of the mandatory Core Course.",
+    },
+    {
+      q: "To maintain an active Hawaii real estate license, how many continuing education hours must a licensee complete between renewal periods?",
+      options: ["10 hours annually with no specific course requirements", "20 hours per biennial renewal period, including Core Course", "40 hours per biennial renewal period", "18 hours per year with at least 6 hours in law updates"],
+      correctIndex: 1,
+      explain: "The Hawaii Real Estate Commission mandates 20 CE hours every two years for license renewal, with the Core Course being a required component.",
+    },
+    {
+      q: "A Hawaii real estate licensee's renewal is due in 24 months. Which continuing education requirement must be satisfied?",
+      options: ["Minimum of 10 hours of elective courses only", "Minimum of 20 hours including mandatory Core Course completion", "Minimum of 30 hours with broker approval documentation", "Minimum of 35 hours with at least half in trust account management"],
+      correctIndex: 1,
+      explain: "Over a 24-month (two-year) cycle, licensees must complete 20 CE hours, which includes the required Core Course as part of that total.",
+    },
+    {
+      q: "What continuing education commitment applies to a Hawaii licensee renewing a license issued two years ago?",
+      options: ["5 hours of Core Course instruction only", "20 hours total, with Core Course mandatory", "24 hours distributed across four quarters annually", "45 hours for inactive license reinstatement"],
+      correctIndex: 1,
+      explain: "Hawaii's biennial license cycle requires 20 total CE hours for renewal, with the Core Course being a non-waivable component of that requirement.",
+    },
+    {
+      q: "To maintain an active Hawaii real estate license, how many continuing education hours must a licensee complete during each license renewal period?",
+      options: ["15 hours annually with no core requirement", "20 hours per two-year renewal cycle, including a mandatory Core Course", "25 hours per two-year cycle with optional electives", "35 hours every three years"],
+      correctIndex: 1,
+      explain: "Hawaii REC requires 20 CE hours per biennial license renewal cycle, which must include the mandatory Core Course component.",
     },
   ],
   "hi-professional-conduct-q02": [
@@ -3006,6 +3336,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Commingling—the unlawful combining of client trust money with broker business funds—is a per se violation of Hawaii licensing law.",
     },
+    {
+      q: "A broker deposits earnest money and security deposits into the same account used for paying office rent and salaries. This practice violates which principle?",
+      options: ["Proper reconciliation procedures under HRS 467-14", "Commingling — client funds must remain separate", "The statute of limitations on trust account audits", "Requirements for notarizing escrow agreements"],
+      correctIndex: 1,
+      explain: "Commingling occurs when fiduciary funds are mixed with a broker's personal or operating accounts, regardless of accounting practices. This is a fundamental license violation under Hawaii REC rules.",
+    },
+    {
+      q: "Which situation describes a commingling violation?",
+      options: ["A broker holds client earnest money in a trust account but fails to deposit it within 5 business days", "A broker places client trust funds and broker commission in the same financial institution but separate accounts", "A broker temporarily deposits client funds into an operating account before transferring to the trust account", "A broker records client funds in the trust ledger but reconciles monthly instead of weekly"],
+      correctIndex: 2,
+      explain: "Commingling is the unauthorized mixing of client fiduciary funds with the broker's own funds, even temporarily. Separate accounts at the same institution or accounting delays do not constitute commingling.",
+    },
+    {
+      q: "Under Hawaii real estate law, what is the consequence of a broker combining client trust account funds with broker operating funds, even if the amounts are small?",
+      options: ["A fine of up to $500 per violation", "Commingling — a direct license violation regardless of amount", "Misappropriation charges only if the funds cannot be located", "Suspension of trust account privileges for 30 days"],
+      correctIndex: 1,
+      explain: "Commingling is a per se violation of trust account requirements; the dollar amount is irrelevant. Any unauthorized mixing of fiduciary and operating funds is a license violation.",
+    },
+    {
+      q: "A salesperson advises the broker that it's more efficient to deposit all incoming funds (client escrow, earnest money, and commissions) into one master account and then distribute them later. The broker should:",
+      options: ["Allow this practice only if the salesperson reconciles weekly", "Reject this proposal because it constitutes commingling", "Implement it for transactions under $5,000 only", "Require the salesperson to obtain REC approval in advance"],
+      correctIndex: 1,
+      explain: "Commingling is prohibited regardless of accounting procedures, efficiency arguments, or transaction size. Client trust funds must be maintained in separate accounts from broker operating funds.",
+    },
+    {
+      q: "A broker deposits earnest money checks from multiple transactions into a single bank account that also contains the broker's payroll and office expenses. This practice is known as:",
+      options: ["Trust account management", "Commingling of funds — a violation", "Proper reconciliation procedure", "Conversion of client property"],
+      correctIndex: 1,
+      explain: "Commingling occurs when client trust funds are mixed with broker operating or personal funds in any amount or manner, regardless of whether accounts are later reconciled.",
+    },
   ],
   "hi-professional-conduct-q03": [
     {
@@ -3031,6 +3391,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["HRS 478", "HRS 521", "HRS 514B", "HRS 467"],
       correctIndex: 3,
       explain: "HRS 467 governs all aspects of real estate broker and salesperson licensing, including renewal requirements and professional compliance standards in Hawaii.",
+    },
+    {
+      q: "Which Hawaii Revised Statute chapter establishes the licensing requirements and disciplinary framework for real estate professionals?",
+      options: ["HRS 478 - Contractors and Construction", "HRS 467 - Real Estate Brokers and Salespersons", "HRS 514B - Condominium Management", "HRS 521 - Residential Tenancies"],
+      correctIndex: 1,
+      explain: "HRS 467 is the specific statute that governs the licensing, conduct, and enforcement for real estate brokers and salespersons in Hawaii.",
+    },
+    {
+      q: "A salesperson in Hawaii needs to understand the statutory requirements for her license. Under which chapter would she find the relevant regulations?",
+      options: ["HRS 514B", "HRS 521", "HRS 467", "HRS 478"],
+      correctIndex: 2,
+      explain: "HRS 467 is the Hawaii statute that governs real estate brokers and salespersons, including all licensing and regulatory requirements.",
+    },
+    {
+      q: "The Hawaii Real Estate Commission enforces provisions found in which statute?",
+      options: ["HRS 478", "HRS 467", "HRS 514B", "HRS 521"],
+      correctIndex: 1,
+      explain: "HRS 467 is the enabling statute for the Hawaii Real Estate Commission and contains all provisions governing broker and salesperson licensing and conduct.",
+    },
+    {
+      q: "A broker is cited for violating Hawaii's real estate law. The violation would be prosecuted under which statute?",
+      options: ["HRS 521 - Landlord-Tenant Code", "HRS 514B - Condominium Property Regime", "HRS 478 - Contractor Licensing", "HRS 467 - Real Estate Brokers and Salespersons"],
+      correctIndex: 3,
+      explain: "HRS 467 contains the licensing laws and disciplinary provisions applicable to real estate brokers and salespersons in Hawaii.",
+    },
+    {
+      q: "Which Hawaii Revised Statutes chapter establishes the regulatory framework for real estate brokers and salespeople licensing?",
+      options: ["HRS 478 (Real Estate Commission)", "HRS 467 (Real Estate Brokers and Salespersons)", "HRS 521 (Condominium Property Regime)", "HRS 514B (Homeowners Associations)"],
+      correctIndex: 1,
+      explain: "HRS Chapter 467 is the specific statute that governs licensing requirements, conduct standards, and regulatory oversight of real estate brokers and salespersons in Hawaii.",
     },
   ],
   "hi-professional-conduct-q04": [
@@ -3058,6 +3448,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "The Real Estate Commission, which operates under Hawaii's Department of Commerce and Consumer Affairs, is the official state regulatory agency for all real estate licensees in the islands.",
     },
+    {
+      q: "Which agency within Hawaii state government is responsible for licensing and disciplining real estate professionals?",
+      options: ["Department of Labor and Industrial Relations", "Real Estate Commission under the Department of Commerce and Consumer Affairs", "Hawaii Department of Attorney General", "Federal Trade Commission"],
+      correctIndex: 1,
+      explain: "The Real Estate Commission (REC) operates under DCCA and holds exclusive authority over real estate licensee regulation in Hawaii.",
+    },
+    {
+      q: "A salesperson in Hawaii needs to know which regulatory body enforces compliance with real estate laws and broker conduct standards. This would be:",
+      options: ["NAR (National Association of Realtors)", "The IRS (Internal Revenue Service)", "The Hawaii Real Estate Commission under DCCA", "HUD (Department of Housing and Urban Development)"],
+      correctIndex: 2,
+      explain: "The REC under DCCA is the state regulator with jurisdiction over Hawaii real estate licensees, not federal agencies or professional associations.",
+    },
+    {
+      q: "If a Hawaii real estate licensee faces disciplinary action, which state agency would initiate and conduct the hearing?",
+      options: ["DCCA's Real Estate Commission", "The National Association of Realtors ethics board", "The Federal Reserve", "The Hawaii Tax Foundation"],
+      correctIndex: 0,
+      explain: "DCCA's Real Estate Commission has statutory authority to investigate complaints and conduct disciplinary proceedings against Hawaii real estate licensees.",
+    },
+    {
+      q: "Under Hawaii law, which entity has the authority to deny, suspend, or revoke a real estate broker license?",
+      options: ["HUD's regional office", "The state's Real Estate Commission within DCCA", "The Hawaii State Legislature directly", "The Mortgage Bankers Association"],
+      correctIndex: 1,
+      explain: "The Real Estate Commission under the Department of Commerce and Consumer Affairs holds the statutory power to discipline and control real estate licensure in Hawaii.",
+    },
+    {
+      q: "Which agency is responsible for licensing and regulating real estate professionals in Hawaii?",
+      options: ["The Department of Land and Natural Resources (DLNR)", "The Hawaii Real Estate Commission, which operates under the DCCA", "The Federal Trade Commission (FTC)", "The National Association of REALTORS® (NAR)"],
+      correctIndex: 1,
+      explain: "The Real Estate Commission (REC) under the Department of Commerce and Consumer Affairs (DCCA) is the sole authority in Hawaii responsible for issuing, renewing, and disciplining real estate licenses.",
+    },
   ],
   "hi-professional-conduct-q05": [
     {
@@ -3083,6 +3503,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Race, color, and national origin only", "Sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age", "Familial status and disability only", "Religion and sex exclusively"],
       correctIndex: 1,
       explain: "HRS 515 provides state-level protection for sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age, which are not covered under the federal Fair Housing Act.",
+    },
+    {
+      q: "Which of the following represents a protected class under Hawaii's fair housing law (HRS 515) that is NOT included in the federal Fair Housing Act?",
+      options: ["National origin and disability", "Gender identity, HIV status, and source of income", "Color and familial status", "Religion and sex"],
+      correctIndex: 1,
+      explain: "Hawaii REC HRS 515 extends protections beyond federal law to include sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age.",
+    },
+    {
+      q: "A Hawaii real estate licensee must be aware that state law provides fair housing protections for several classifications beyond those mandated federally. Which category best describes Hawaii's additional protected classes?",
+      options: ["Only economic status and employment history", "Sexual orientation, marital status, age, ancestry, gender identity, HIV status, and source of income", "Limited to protected groups in urban Honolulu only", "Federal protections only; Hawaii adds no new classes"],
+      correctIndex: 1,
+      explain: "HRS 515 comprehensively expands the federal Fair Housing Act with seven additional protected classifications specific to Hawaii.",
+    },
+    {
+      q: "Under Hawaii fair housing law, a broker listing a property cannot discriminate based on any protected class. Beyond the federal Fair Housing Act, HRS 515 also prohibits discrimination based on:",
+      options: ["Citizenship status and veteran status", "Sexual orientation, gender identity, marital status, ancestry, age, HIV status, and source of income", "Prior bankruptcy or credit score alone", "Professional licensing or occupational background"],
+      correctIndex: 1,
+      explain: "Hawaii's state law adds seven classes not in federal law: sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age.",
+    },
+    {
+      q: "When completing fair housing training, a Hawaii licensee learns that the state statute (HRS 515) goes beyond federal law. Which statement accurately reflects Hawaii's expanded protected classes?",
+      options: ["Hawaii protects only income level and family structure", "Hawaii adds protections for sexual orientation, gender identity, marital status, HIV status, ancestry, age, and source of income", "Hawaii mirrors federal law exactly with no additional protections", "Hawaii adds only ancestry and removes federal protections for religion"],
+      correctIndex: 1,
+      explain: "HRS 515 explicitly includes seven state-level protected classes beyond the federal Fair Housing Act's enumerated categories.",
+    },
+    {
+      q: "Which of the following protected classes are recognized ONLY under Hawaii's fair housing law (HRS 515) and NOT under federal Fair Housing Act standards?",
+      options: ["Race, color, and national origin", "Sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age", "Religion and familial status", "Disability and sex"],
+      correctIndex: 1,
+      explain: "Hawaii's HRS 515 extends protection beyond the federal FHA by specifically adding sexual orientation, gender identity, marital status, HIV status, source of income, ancestry, and age as protected classes.",
     },
   ],
   "hi-professional-conduct-q06": [
@@ -3110,6 +3560,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Age 18 is a mandatory minimum requirement; parental consent or exam passage does not waive the age requirement for salesperson licensure.",
     },
+    {
+      q: "Under Hawaii real estate licensing laws, what is the minimum age requirement to qualify for a salesperson license?",
+      options: ["21 years old", "18 years old", "17 years old", "25 years old"],
+      correctIndex: 1,
+      explain: "Hawaii REC requires applicants for a salesperson license to be at least 18 years of age at the time of application.",
+    },
+    {
+      q: "To be eligible to apply for a real estate salesperson license in Hawaii, an applicant must meet a minimum age of:",
+      options: ["16 years", "19 years", "18 years", "20 years"],
+      correctIndex: 2,
+      explain: "The Hawaii Real Estate Commission mandates that salesperson applicants must be at least 18 years old to meet licensing eligibility requirements.",
+    },
+    {
+      q: "Which of the following correctly states the age requirement for obtaining a Hawaii real estate salesperson license?",
+      options: ["Applicants must be at least 25 years old", "Applicants must be at least 18 years old", "Applicants must be at least 21 years old", "Applicants must be at least 16 years old"],
+      correctIndex: 1,
+      explain: "Hawaii law requires prospective salesperson licensees to be a minimum of 18 years of age to satisfy the basic eligibility criteria.",
+    },
+    {
+      q: "A person interested in becoming a real estate salesperson in Hawaii should know that the minimum age requirement is:",
+      options: ["25 years of age or older", "21 years of age or older", "18 years of age or older", "17 years of age or older"],
+      correctIndex: 2,
+      explain: "The Hawaii Real Estate Commission establishes 18 years old as the minimum age threshold for salesperson license applicants.",
+    },
+    {
+      q: "Under Hawaii real estate law, what is the minimum age requirement to obtain a salesperson license?",
+      options: ["21 years old", "18 years old", "19 years old", "17 years old"],
+      correctIndex: 1,
+      explain: "Hawaii REC requires applicants for a salesperson license to be at least 18 years of age to meet the basic eligibility requirements.",
+    },
   ],
   "hi-professional-conduct-q07": [
     {
@@ -3135,6 +3615,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Yes, provided the broker authorizes the activity in writing", "No—the inactive status automatically prohibits all real estate practice", "Yes, but only as a licensed assistant under a broker's direct supervision", "Yes, as long as no compensation is accepted for those services"],
       correctIndex: 1,
       explain: "Inactive licensees cannot perform any real estate services—listing, showing, negotiating, or earning compensation—until their license is reactivated through proper REC procedures.",
+    },
+    {
+      q: "Which statement best describes what an inactive Hawaii real estate licensee is permitted to do?",
+      options: ["Accept commissions and conduct transactions with explicit broker consent", "Engage in no real estate brokerage activities whatsoever", "Market properties to former clients without listing them publicly", "Perform transaction coordination duties without a valid license"],
+      correctIndex: 1,
+      explain: "An inactive license suspends all real estate practice rights; the licensee cannot list, show, negotiate, or receive compensation regardless of circumstances or relationships.",
+    },
+    {
+      q: "A salesperson places their license on inactive status. During this period, can they legally conduct any real estate transactions?",
+      options: ["Yes, provided the broker authorizes it in writing", "No, an inactive status prohibits all transactional activity", "Yes, but only for investment properties they personally own", "Yes, as long as no compensation is involved"],
+      correctIndex: 1,
+      explain: "Inactive status means the licensee cannot practice real estate at all—no listing, showing, negotiating, or transaction involvement is permitted under Hawaii REC rules.",
+    },
+    {
+      q: "While holding an inactive real estate license, a salesperson is asked to negotiate a deal for a friend. What is the correct course of action?",
+      options: ["They may proceed if the broker approves the arrangement", "They must decline because inactive licensees are prohibited from practicing", "They may assist as a consultant without formal brokerage duties", "They may handle it if documented as a favor with no commission"],
+      correctIndex: 1,
+      explain: "Inactive licensees cannot engage in any real estate practice, including negotiation or transaction facilitation, regardless of compensation status or broker permission.",
+    },
+    {
+      q: "An agent's license is converted to inactive status. Which of the following activities would constitute a violation?",
+      options: ["Attending broker meetings and reviewing market trends", "Listing property, negotiating on behalf of clients, or receiving transaction-based compensation", "Answering general real estate questions from acquaintances", "Maintaining an office desk and email with company contact information"],
+      correctIndex: 1,
+      explain: "Inactive licensees are barred from all brokerage activities including listing, showing, negotiating, and compensation; only status-neutral activities like learning are permitted.",
+    },
+    {
+      q: "An individual holding an inactive real estate license in Hawaii is permitted to engage in which of the following activities?",
+      options: ["Negotiate commissions on behalf of a broker with written authorization", "No real estate practice activities whatsoever", "Show properties to friends and family without compensation", "Accept referral fees from active agents in their former office"],
+      correctIndex: 1,
+      explain: "An inactive license holder is prohibited from all real estate practice activities including listing, showing, negotiating, or accepting compensation of any kind; the inactive status means no practice is permitted.",
     },
   ],
   "hi-professional-conduct-q08": [
@@ -3162,6 +3672,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Hawaii requires 80 hours of broker pre-licensing education in addition to qualifying salesperson experience for broker license applicants.",
     },
+    {
+      q: "To transition from an active salesperson license to a broker license in Hawaii, what is the required classroom hour commitment for the broker pre-licensing course?",
+      options: ["60 hours", "80 hours", "100 hours", "120 hours"],
+      correctIndex: 1,
+      explain: "Hawaii requires 80 hours of broker pre-licensing education as a prerequisite for obtaining a broker license, in addition to holding an active salesperson license and meeting experience requirements.",
+    },
+    {
+      q: "A salesperson with 2 years of active experience is applying for a broker license. Besides meeting the experience requirement, how many instructional hours must they complete?",
+      options: ["40 hours of broker training", "70 hours of broker training", "80 hours of broker training", "110 hours of broker training"],
+      correctIndex: 2,
+      explain: "The Hawaii Real Estate Commission mandates an 80-hour broker pre-licensing course for all broker applicants, regardless of their salesperson experience level.",
+    },
+    {
+      q: "Which of the following correctly describes the classroom education requirement for obtaining a broker license in Hawaii?",
+      options: ["50 hours of approved broker education plus 2 years active salesperson experience", "80 hours of approved broker education plus active salesperson licensure", "90 hours of approved broker education plus 3 years active salesperson experience", "120 hours of approved broker education plus 5 years active salesperson experience"],
+      correctIndex: 1,
+      explain: "Hawaii's broker pre-licensing requirement is 80 hours of classroom instruction, which must be completed in addition to holding an active salesperson license and meeting experience qualifications.",
+    },
+    {
+      q: "If a salesperson completes all other broker license requirements, how many hours of pre-licensing education coursework must still be fulfilled?",
+      options: ["30 hours minimum", "60 hours minimum", "80 hours minimum", "100 hours minimum"],
+      correctIndex: 2,
+      explain: "The 80-hour broker pre-licensing course is a mandatory education component that all applicants must complete before they can qualify for a broker license in Hawaii.",
+    },
+    {
+      q: "After obtaining an active Hawaii salesperson license and meeting experience requirements, how many classroom instruction hours must a candidate complete to qualify for a broker license?",
+      options: ["120 hours", "80 hours", "60 hours", "40 hours"],
+      correctIndex: 1,
+      explain: "Hawaii requires 80 hours of broker pre-licensing education as a prerequisite, separate from and in addition to the salesperson license and experience requirement.",
+    },
   ],
   "hi-professional-conduct-q09": [
     {
@@ -3187,6 +3727,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["All licensees currently holding a license issued by the Hawaii Real Estate Commission", "All licensees affiliated with the broker's firm, including both employees and independent contractor associates", "Only licensees who have completed the broker's mandatory training program", "Licensees only during the time they are actively showing property"],
       correctIndex: 1,
       explain: "Broker accountability extends to all licensees affiliated with the firm regardless of their employment classification or training status.",
+    },
+    {
+      q: "Under Hawaii real estate law, which parties' conduct can create liability for a broker's firm?",
+      options: ["Only salespersons who are W-2 employees on payroll", "All associated licensees, whether employed or operating as independent contractors", "Only those licensees with written employment agreements signed before listing property", "Exclusively the broker's personal transactions and those directly supervised"],
+      correctIndex: 1,
+      explain: "A broker is responsible for all affiliated licensees—including both employees and independent contractors—under Hawaii REC regulations and agency law principles.",
+    },
+    {
+      q: "A broker faces potential disciplinary action for the misconduct of which licensees?",
+      options: ["Only those classified as employees in the company's payroll system", "All licensees affiliated with the brokerage, regardless of employment classification", "Only licensees who report directly to the broker in an office location", "Salespersons and associates who have signed restrictive covenants"],
+      correctIndex: 1,
+      explain: "Broker responsibility encompasses all affiliated licensees—employees and independent contractors alike—making the broker liable for their acts within the scope of their license.",
+    },
+    {
+      q: "Which of the following best describes a broker's scope of responsibility regarding licensee conduct?",
+      options: ["Limited to transactions personally negotiated by the broker", "Extends to all licensees affiliated with the brokerage firm, including independent contractors", "Restricted to employees who work exclusively at the broker's main office", "Applicable only when the licensee's misconduct is documented in writing beforehand"],
+      correctIndex: 1,
+      explain: "A broker's supervisory and vicarious liability extends to all affiliated licensees—both employees and independent contractors—under Hawaii real estate licensing law.",
+    },
+    {
+      q: "A salesperson working as an independent contractor at a brokerage commits a violation. Which entity bears responsibility?",
+      options: ["Only the individual salesperson, since they are an independent contractor", "The broker and brokerage firm are responsible for all affiliated licensees' conduct", "Only the broker if the violation occurred during office business hours", "The sponsoring broker, but only if the salesperson signed an agency agreement"],
+      correctIndex: 1,
+      explain: "Broker liability is not limited to employees; brokers are responsible for the conduct of all affiliated licensees, including independent contractors, under Hawaii REC regulations.",
+    },
+    {
+      q: "Under Hawaii real estate law, a broker's supervisory responsibility covers which of the following groups?",
+      options: ["Only salespersons who are direct employees of the brokerage", "All associated licensees, whether employees or independent contractors operating under the firm's license", "Only transactions personally closed by the broker", "Licensees who have signed an exclusive representation agreement"],
+      correctIndex: 1,
+      explain: "A broker is responsible for supervising and controlling the conduct of all licensees affiliated with their firm, including both employees and independent contractor agents, regardless of employment classification.",
     },
   ],
   "hi-professional-conduct-q10": [
@@ -3214,6 +3784,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The broker-salesperson relationship mandates that all client contracts, agreements, and fee collection occur through the broker; salespersons cannot contract or accept payment independently.",
     },
+    {
+      q: "Which of the following is prohibited for a salesperson under Hawaii real estate law?",
+      options: ["Accepting compensation directly from a buyer without broker involvement", "Preparing a market analysis for a prospective seller", "Presenting an offer to purchase on behalf of a client", "Showing listed properties during business hours"],
+      correctIndex: 0,
+      explain: "All salesperson compensation and contractual agreements must flow through their employing broker; direct payment from clients violates the agency relationship and licensing requirements.",
+    },
+    {
+      q: "A salesperson violates Hawaii licensing law if they:",
+      options: ["Conduct a comparative market analysis", "Enter into a listing contract in their own name and collect fees directly", "Assist in negotiating purchase terms", "Schedule property showings for interested parties"],
+      correctIndex: 1,
+      explain: "Salespersons act as agents of their broker and cannot independently sign contracts or accept client fees; all such transactions must be conducted through and compensated by the broker.",
+    },
+    {
+      q: "Under Hawaii real estate regulations, which activity is NOT permitted for a licensed salesperson?",
+      options: ["Negotiating lease or purchase terms with interested parties", "Establishing a direct financial arrangement with clients for services rendered", "Providing property valuations and market comparisons", "Showing properties on behalf of their brokerage firm"],
+      correctIndex: 1,
+      explain: "Salespersons must operate exclusively under their broker's supervision and cannot create independent fee arrangements; all compensation must be processed by and distributed through the broker.",
+    },
+    {
+      q: "A salesperson's employment restrictions include the inability to:",
+      options: ["Discuss property features and financing options with buyers", "Sign listing agreements independently and receive payment directly from customers", "Prepare or present comparative market analyses", "Coordinate showings and open houses"],
+      correctIndex: 1,
+      explain: "Salespersons lack independent authority to bind clients through contracts or collect compensation; all client relationships and payments must be facilitated by their employing broker.",
+    },
+    {
+      q: "Which of the following activities is prohibited for a Hawaii real estate salesperson?",
+      options: ["Accepting commission payments directly from a client outside the broker's trust account", "Preparing comparative market analyses for prospective buyers", "Showing properties to qualified interested parties", "Assisting in contract negotiations between parties"],
+      correctIndex: 0,
+      explain: "All compensation and fee arrangements for salespersons must flow through their employing broker; direct acceptance of fees from customers violates Hawaii REC requirements and the employment relationship.",
+    },
   ],
   "hi-professional-conduct-q11": [
     {
@@ -3239,6 +3839,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Records must be kept for 1 year and then may be destroyed", "Records should be retained for at least 3 years as a standard practice", "Records need only be kept while the license is active", "Records must be archived permanently in a bonded vault"],
       correctIndex: 1,
       explain: "Hawaii Commission rules establish a 3-year minimum retention period for trust account documents to ensure adequate documentation for compliance reviews and consumer protection.",
+    },
+    {
+      q: "A Hawaii broker maintains a client trust account. How long must detailed records of all deposits and withdrawals be kept on file?",
+      options: ["Until the client relationship terminates", "A minimum of 3 years from the date of transaction", "2 years for active accounts, 1 year after closure", "6 months following final reconciliation"],
+      correctIndex: 1,
+      explain: "Hawaii real estate regulations require trust account records to be retained for at least 3 years to ensure audit compliance and regulatory oversight.",
+    },
+    {
+      q: "What is the standard retention period for broker trust account documentation under Hawaii real estate law?",
+      options: ["2 years", "Indefinitely, without exception", "3 years as a general requirement", "1 year per transaction"],
+      correctIndex: 2,
+      explain: "Hawaii's regulatory framework establishes a 3-year record-retention standard for all trust account transactions and supporting documentation.",
+    },
+    {
+      q: "If a broker receives earnest money deposits in a trust account, the transaction records and bank statements must be preserved for no less than:",
+      options: ["18 months", "3 years", "5 years after property sale closing", "The duration of any subsequent disputes"],
+      correctIndex: 1,
+      explain: "Hawaii requires brokers to maintain trust account records, including earnest money documentation, for a minimum of 3 years to satisfy regulatory and audit requirements.",
+    },
+    {
+      q: "During a routine audit, a Hawaii real estate commission investigator asks to review trust account ledgers. What timeframe of records must a broker be able to produce?",
+      options: ["Current year only", "The preceding 3 years", "A rolling 24-month period", "All records since the broker's license inception"],
+      correctIndex: 1,
+      explain: "Hawaii regulatory standards require brokers to maintain and produce trust account records covering at least the preceding 3 years for compliance verification.",
+    },
+    {
+      q: "When a Hawaii real estate licensee maintains a client trust account, what is the standard minimum period for which transaction records and account documentation must be preserved?",
+      options: ["Until the transaction closes and all funds are disbursed", "Three years from the date of the transaction", "Two years, unless the property is in litigation", "Seven years, consistent with federal tax requirements"],
+      correctIndex: 1,
+      explain: "Hawaii's regulatory standards require trust account records to be retained for a minimum of three years; this aligns with Hawaii Real Estate Commission rules for broker accountability and audit purposes.",
     },
   ],
   "hi-professional-conduct-q12": [
@@ -3266,6 +3896,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "The disclosure must precede substantive interaction—before showings, negotiations, or listing discussions—regardless of client history or transaction stage.",
     },
+    {
+      q: "When must a licensee provide the Mandatory Agency Disclosure form to a prospective buyer or seller?",
+      options: ["During the final walkthrough before closing", "Prior to engaging in any substantive discussions about a transaction", "Only when the client requests information about agency relationships", "Immediately after the purchase agreement is executed"],
+      correctIndex: 1,
+      explain: "The Mandatory Agency Disclosure must be delivered before substantive interaction begins, which includes showing property, discussing terms, or conducting a listing presentation.",
+    },
+    {
+      q: "A real estate licensee is about to meet with a prospective seller to discuss listing their home. At what point should the Mandatory Agency Disclosure be given?",
+      options: ["After the seller signs the listing agreement", "Before beginning substantive discussions about representation", "At the time of the closing appointment", "Only if the seller indicates they do not understand agency"],
+      correctIndex: 1,
+      explain: "Substantive interaction includes listing presentations and negotiations, so the disclosure must be delivered before these conversations begin.",
+    },
+    {
+      q: "Which statement correctly describes when the Mandatory Agency Disclosure requirement applies?",
+      options: ["It must be provided to all parties at the closing table", "It applies whenever a licensee engages in substantive representation discussions with a client or customer", "It is only required if the transaction involves a multiple listing service", "It becomes effective only after an offer to purchase is presented"],
+      correctIndex: 1,
+      explain: "The disclosure is required before substantive interaction occurs, meaning before showings, negotiations, listing presentations, or any meaningful discussion about representation.",
+    },
+    {
+      q: "A licensee is working with a buyer who calls to discuss a property seen online. When must the Mandatory Agency Disclosure be delivered in this scenario?",
+      options: ["After the buyer submits an offer on the property", "Before discussing the buyer's needs and property preferences", "At the time of the inspections", "Only if the buyer requests to work exclusively with the licensee"],
+      correctIndex: 1,
+      explain: "Discussing the buyer's needs and property preferences constitutes substantive interaction, which requires prior delivery of the Mandatory Agency Disclosure.",
+    },
+    {
+      q: "When is a licensee required to present the Mandatory Agency Disclosure form to a prospective buyer or seller?",
+      options: ["Upon receipt of a signed purchase agreement", "Prior to commencing any substantive dealings or discussions", "At the time of final walkthrough inspection", "Only upon the client's written request for disclosure"],
+      correctIndex: 1,
+      explain: "The Mandatory Agency Disclosure must be delivered before substantive interaction begins, including before property showings, listing consultations, or negotiations occur.",
+    },
   ],
   "hi-professional-conduct-q13": [
     {
@@ -3291,6 +3951,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["A self-study optional module available through the Hawaii Real Estate Commission website", "A mandatory education component covering current Hawaii law changes and regulatory updates", "A continuing education requirement that meets the same standard in every U.S. jurisdiction", "A testing mechanism that substitutes for formal classroom training hours"],
       correctIndex: 1,
       explain: "Core Courses are required portions of Hawaii's CE curriculum specifically designed to keep licensees informed of changes in Hawaii real estate law and commission rules.",
+    },
+    {
+      q: "Which of the following best describes Hawaii's Core Course requirement for license renewal?",
+      options: ["A voluntary training module agents may take for continuing education credits", "A required biennial update addressing current Hawaii real estate law and regulatory changes", "An online national standardized course administered by NAR", "A proctored examination that counts toward CE hours upon passing"],
+      correctIndex: 1,
+      explain: "Core Course is a mandatory component of Hawaii's CE cycle that updates licensees on recent state law changes and regulatory updates specific to Hawaii.",
+    },
+    {
+      q: "When Hawaii real estate agents complete their continuing education, the Core Course portion is:",
+      options: ["Designed by the National Association of REALTORS® and applies nationwide", "An elective topic chosen by the agent based on personal interest", "A compulsory segment of the CE requirement that addresses Hawaii-specific legal updates", "Satisfied by passing a written exam instead of attending classroom training"],
+      correctIndex: 2,
+      explain: "Core Course is a mandatory part of Hawaii's CE that must be completed and covers state-mandated content reflecting recent changes in Hawaii real estate law.",
+    },
+    {
+      q: "Under Hawaii's continuing education rules, what role does the Core Course play?",
+      options: ["It serves as an optional supplement for agents who want advanced training", "It fulfills the mandatory continuing education requirement with content on recent Hawaii law modifications", "It is a national reciprocal course recognized across all states", "It replaces the need for licensees to take an examination to renew"],
+      correctIndex: 1,
+      explain: "Core Course is the required, state-mandated portion of Hawaii CE that ensures agents receive updates on current Hawaii real estate laws and regulatory changes.",
+    },
+    {
+      q: "A licensee renewing their Hawaii real estate license must complete a Core Course because it is:",
+      options: ["A specialized elective covering topics like commercial or residential practices", "Part of the mandatory CE curriculum reflecting the latest Hawaii legal and regulatory developments", "An internationally recognized course standard for real estate professionals", "A practical skills assessment rather than a formal instructional requirement"],
+      correctIndex: 1,
+      explain: "Core Course is a non-negotiable component of Hawaii's CE cycle designed to keep licensees current with recent changes in Hawaii real estate law and regulations.",
+    },
+    {
+      q: "Which of the following best describes Hawaii's Core Course requirement for license renewal?",
+      options: ["A voluntary advanced training program offered by the Real Estate Commission", "A mandatory education component that addresses current statutory and regulatory changes", "An examination administered instead of traditional classroom instruction", "A nationally standardized course applicable to all U.S. real estate professionals"],
+      correctIndex: 1,
+      explain: "Core Course is a required, state-specific CE component that updates licensees on new laws and regulations affecting Hawaii real estate practice each renewal cycle.",
     },
   ],
   "hi-professional-conduct-q14": [
@@ -3318,6 +4008,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Undisclosed (hidden) referral fees breach both RESPA Section 8 and HRS 467-2, regardless of later disclosure on closing documents; the prohibition applies to the lack of upfront disclosure.",
     },
+    {
+      q: "A Hawaii real estate agent receives a fee from a title company in exchange for client referrals but fails to disclose this arrangement to the referring party. This conduct most likely violates:",
+      options: ["HRS 467 exclusively", "RESPA Section 8 exclusively", "Both federal RESPA regulations and Hawaii state law under HRS 467", "Neither statute, as referral fees between licensees and settlement providers are permitted"],
+      correctIndex: 2,
+      explain: "Undisclosed referral fees to settlement service providers trigger both RESPA Section 8 (federal prohibition) and HRS 467 (Hawaii's mirror prohibition on unlawful kickbacks).",
+    },
+    {
+      q: "Which of the following scenarios would create a potential violation for a Hawaii licensee?",
+      options: ["Disclosing all referral fee arrangements with closing attorneys to clients in writing", "Accepting an undisclosed payment from an escrow agent for steering business their way", "Refusing referral fees from any settlement service provider", "Charging clients a documented transaction fee based on property value"],
+      correctIndex: 1,
+      explain: "Accepting undisclosed payments from settlement service providers violates both RESPA Section 8 and HRS 467, regardless of whether the licensee intended harm.",
+    },
+    {
+      q: "A settlement service provider offers a licensee a concealed kickback arrangement. Under Hawaii and federal law, what is the regulatory status of this proposal?",
+      options: ["Permissible under HRS 467 if properly documented", "Violates RESPA but not Hawaii state regulations", "Prohibited by both RESPA and HRS 467", "Legal as long as the consumer ultimately receives a competitive rate"],
+      correctIndex: 2,
+      explain: "Both RESPA Section 8 and HRS 467 explicitly prohibit undisclosed referral fees or kickbacks to settlement service providers, regardless of documentation or consumer benefit claims.",
+    },
+    {
+      q: "If a Hawaii licensee secretly receives compensation from a mortgage lender for referrals, which legal framework(s) would likely be implicated?",
+      options: ["Only the Real Estate Commission's ethical rules, not statutory law", "Federal RESPA requirements and Hawaii Revised Statutes Chapter 467", "Only Hawaii state law; RESPA does not apply to residential transactions", "Licensing law only; no violation occurs absent consumer injury"],
+      correctIndex: 1,
+      explain: "Secret referral payments to settlement service providers breach both RESPA Section 8 (federal) and HRS 467 (state), creating dual statutory violations.",
+    },
+    {
+      q: "A Hawaii real estate agent receives a fee from a title company in exchange for steering clients to that company's services without disclosing the arrangement to the clients. Which regulatory requirements has the agent potentially violated?",
+      options: ["HRS 467 only, since it is Hawaii state law", "RESPA only, since federal law always supersedes state law", "Both federal RESPA regulations and Hawaii's HRS 467 statute", "Neither, because referral fees are permissible if documented internally"],
+      correctIndex: 2,
+      explain: "Undisclosed referral fees violate both RESPA Section 8 (federal) and HRS 467 (Hawaii state law), which independently prohibit such arrangements regardless of internal documentation.",
+    },
   ],
   "hi-professional-conduct-q15": [
     {
@@ -3343,6 +4063,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Fines payable to the licensee personally", "Potential license discipline for insufficient oversight", "Criminal charges only, with no administrative sanctions", "Liability limited to restitution paid directly to the consumer"],
       correctIndex: 1,
       explain: "Brokers bear responsibility through potential REC license sanctions when they fail to properly supervise licensees' compliance with real estate laws.",
+    },
+    {
+      q: "A Hawaii broker fails to adequately supervise one of her associate licensees. What is a possible consequence for the broker?",
+      options: ["The broker's license remains unaffected as supervisory liability is the agent's responsibility", "The Hawaii Real Estate Commission may impose discipline against the broker's license", "The broker can only be held liable in civil court, not administratively", "Supervision requirements apply only to unlicensed office staff"],
+      correctIndex: 1,
+      explain: "The REC holds brokers accountable for supervising licensees and can discipline the broker's license for failure to do so; this is an administrative sanction, not merely a civil remedy.",
+    },
+    {
+      q: "Which statement correctly describes the regulatory consequence of a broker's inadequate supervision of affiliated licensees?",
+      options: ["Disciplinary action may be taken against the broker's license by the Hawaii REC", "The broker is protected from any license action if a single licensee violates the law", "Supervision duties apply only to brokers in offices with more than five agents", "Failure to supervise constitutes a contractual breach but not a regulatory violation"],
+      correctIndex: 0,
+      explain: "The Hawaii REC can discipline a broker's license for failure to properly supervise licensees under their control, making it a direct regulatory matter.",
+    },
+    {
+      q: "A broker in Hawaii receives a complaint about an associate licensee's conduct. The broker did not monitor the agent's transaction files or review compliance procedures. What risk does the broker face?",
+      options: ["Risk of civil lawsuit only, with no regulatory impact", "Potential disciplinary action against the broker's own license", "The complaint is automatically dismissed because it targets the associate, not the broker", "Regulatory liability applies only if the licensee was an independent contractor, not an employee"],
+      correctIndex: 1,
+      explain: "A broker's failure to supervise is grounds for the REC to take disciplinary action against the broker's license independently of action taken against the associate licensee.",
+    },
+    {
+      q: "Under Hawaii real estate law, a broker's license may be subject to discipline if the broker:",
+      options: ["Delegates all supervisory tasks to a designated broker representative without retaining oversight responsibility", "Fails to exercise adequate supervision over the business activities of licensed associates", "Employs only salaried brokers rather than commissioned sales associates", "Does not document social interactions with staff but maintains transaction file reviews"],
+      correctIndex: 1,
+      explain: "The Hawaii REC requires brokers to maintain active supervision of their licensees, and inadequate supervision can result in disciplinary sanctions against the broker's license.",
+    },
+    {
+      q: "A broker who fails to adequately oversee the activities of a sponsored salesperson may face which consequence?",
+      options: ["A civil lawsuit only, with no regulatory action possible", "Administrative discipline or suspension of the broker's license by the Hawaii Real Estate Commission", "Automatic license revocation without any hearing process", "Penalties limited to fines paid by the individual licensee, not the broker"],
+      correctIndex: 1,
+      explain: "The Hawaii Real Estate Commission has authority to discipline a broker's license for inadequate supervision of sponsored licensees, including warnings, fines, or license suspension/revocation.",
     },
   ],
   "hi-property-management-q00": [
