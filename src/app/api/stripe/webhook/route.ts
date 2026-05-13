@@ -30,12 +30,14 @@ export async function POST(req: NextRequest) {
   }
 
   switch (event.type) {
-    case 'checkout.session.completed': {
+    case 'checkout.session.completed':
+    case 'checkout.session.async_payment_succeeded': {
+      // Both events represent "money is in". Async-payment-succeeded fires
+      // for slower methods (ACH, certain wallets) that don't settle at the
+      // moment the customer clicks Pay. We treat them identically — apply
+      // tier + write Payment row + send welcome email.
       const sess = event.data.object as Stripe.Checkout.Session;
       const userId = (sess.metadata?.userId ?? '') as string;
-      // metadata.sku is the canonical signal from /api/checkout/create-session
-      // and /api/checkout/extend. Fall back to legacy metadata.tier for any
-      // sessions created before this rollout.
       let sku = (sess.metadata?.sku ?? sess.metadata?.tier ?? '') as CheckoutSku | '';
 
       // Hard fallback: derive SKU from the line-item price if metadata is
@@ -54,10 +56,6 @@ export async function POST(req: NextRequest) {
         ? sess.payment_intent
         : sess.payment_intent?.id ?? null;
 
-      // 1. Record the real payment so the admin "Verified revenue" KPI
-      //    reflects actual money in. Unique stripeSessionId prevents
-      //    double-counting if the webhook fires more than once for the
-      //    same session (Stripe's at-least-once delivery guarantee).
       if (amountCents > 0) {
         try {
           await db.payment.create({
@@ -72,19 +70,97 @@ export async function POST(req: NextRequest) {
             },
           });
         } catch {
-          // Most likely cause: duplicate stripeSessionId (idempotent replay).
-          // Safe to ignore — the original row already exists.
+          // Duplicate stripeSessionId from idempotent replay — safe to skip.
         }
       }
-
-      // 2. Update the user's tier + access window + fire welcome email.
-      //    All idempotent: if Stripe replays this event, the user ends up in
-      //    the same state.
       await applyPayment(userId, sku);
       break;
     }
-    // Future: handle 'charge.refunded' to write negative-amount Payment rows
-    // and downgrade tier when needed.
+
+    case 'checkout.session.async_payment_failed': {
+      // The customer's slow payment method (ACH etc.) ultimately failed.
+      // Log it for admin review — no tier grant happens. We do NOT delete
+      // any Payment row because none should have been written; this branch
+      // is informational only.
+      const sess = event.data.object as Stripe.Checkout.Session;
+      console.warn('webhook: async_payment_failed', { sessionId: sess.id, customer: sess.customer });
+      break;
+    }
+
+    case 'charge.refunded': {
+      // Full or partial refund issued. We flip the Payment row's status,
+      // and on FULL refund of a course-access tier we also revoke the
+      // student's access (set accessExpiresAt to now) so they lose the
+      // content immediately. Solo (website build) refunds don't expire
+      // anything since accessExpiresAt is null anyway.
+      const charge = event.data.object as Stripe.Charge;
+      const paymentIntent = typeof charge.payment_intent === 'string'
+        ? charge.payment_intent
+        : charge.payment_intent?.id ?? null;
+      if (!paymentIntent) break;
+
+      const fullyRefunded = charge.amount_refunded >= charge.amount;
+      const newStatus = fullyRefunded ? 'refunded' : 'partial_refund';
+
+      const payment = await db.payment.findFirst({
+        where: { stripePaymentIntent: paymentIntent },
+        select: { id: true, userId: true, tier: true, status: true },
+      });
+      if (!payment) {
+        console.warn('webhook: charge.refunded — no matching Payment row', { paymentIntent });
+        break;
+      }
+      // Idempotent: skip if already at the same status.
+      if (payment.status !== newStatus) {
+        await db.payment.update({
+          where: { id: payment.id },
+          data: { status: newStatus },
+        });
+      }
+
+      // On full refund of a course tier, revoke immediately.
+      if (fullyRefunded && (payment.tier === 'standard' || payment.tier === 'plus' || payment.tier === 'extension')) {
+        await db.user.update({
+          where: { id: payment.userId },
+          data: {
+            tier: 'free',
+            accessExpiresAt: new Date(), // expire right now
+          },
+        });
+      }
+      // Solo full refund: drop the tier but keep accessExpiresAt null (it
+      // was null anyway — no course component to revoke).
+      if (fullyRefunded && payment.tier === 'solo') {
+        await db.user.update({
+          where: { id: payment.userId },
+          data: { tier: 'free' },
+        });
+      }
+      break;
+    }
+
+    case 'charge.dispute.created': {
+      // Chargeback opened. We DO NOT auto-revoke access yet — chargebacks
+      // can be won by the merchant. Flag the payment for admin review.
+      // Stripe will fire charge.refunded if the dispute is lost; that
+      // handler above does the actual revocation.
+      const dispute = event.data.object as Stripe.Dispute;
+      const paymentIntent = typeof dispute.payment_intent === 'string'
+        ? dispute.payment_intent
+        : dispute.payment_intent?.id ?? null;
+      if (!paymentIntent) break;
+      try {
+        await db.payment.updateMany({
+          where: { stripePaymentIntent: paymentIntent },
+          data: { status: 'disputed' },
+        });
+      } catch (err) {
+        console.warn('webhook: dispute flag failed', err);
+      }
+      // TODO: alert admin via email/Slack once that channel exists.
+      console.warn('webhook: charge.dispute.created', { paymentIntent, reason: dispute.reason });
+      break;
+    }
   }
 
   return NextResponse.json({ received: true });
