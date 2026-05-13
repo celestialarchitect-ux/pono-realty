@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, initial-scale=1">
+<title>Ralph Foulger Academy · post-10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { width: 1080px; height: 1080px; background: #fbf7f0; color: #2d3748; font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
+  body { display: flex; align-items: stretch; justify-content: stretch; }
+  .stage { position: relative; width: 1080px; height: 1080px; overflow: hidden; }
+  .serif { font-family: 'Playfair Display', Georgia, serif; }
+  .mono  { font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace; }
+
+  /* ornament: subtle diagonal lines used as background on every layout */
+  .ornament-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(20,131,123,0.06), transparent 50%),
+      radial-gradient(circle at 92% 88%, rgba(232,93,60,0.05), transparent 55%),
+      #fbf7f0;
+  }
+  .corner-mark {
+    position: absolute; top: 48px; left: 56px;
+    display: inline-flex; align-items: center; gap: 12px;
+    color: #2d3748;
+  }
+  .corner-mark svg { display: block; }
+  .corner-mark .name { font-family: 'Playfair Display', Georgia, serif; font-weight: 800; font-size: 18px; letter-spacing: 0.02em; line-height: 1.1; }
+  .corner-mark .sub  { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: #6b7a8a; margin-top: 4px; }
+  .corner-mark .stack { display: flex; flex-direction: column; }
+
+  .footer-mark {
+    position: absolute; bottom: 48px; left: 56px; right: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #6b7a8a; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .footer-mark .url { color: #2d3748; font-weight: 700; letter-spacing: 0.08em; }
+
+  .pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+  .pill.ocean  { background: rgba(20,131,123,0.10); color: #14837b; border: 1px solid rgba(20,131,123,0.22); }
+  .pill.coral  { background: rgba(232,93,60,0.10);  color: #e85d3c; border: 1px solid rgba(232,93,60,0.22); }
+  .pill.green  { background: rgba(45,134,89,0.10);  color: #2d8659; border: 1px solid rgba(45,134,89,0.22); }
+</style>
+</head>
+<body>
+
+  <div class="stage">
+    <div class="ornament-bg"></div>
+    
+<div class="corner-mark">
+  
+<svg width="56" height="56" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e1a26"/>
+      <stop offset="100%" stop-color="#1a2d3f"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e8c989"/>
+      <stop offset="100%" stop-color="#b88a52"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g1)"/>
+  <rect x="5" y="5" width="54" height="54" rx="10" fill="none" stroke="url(#g2)" stroke-width="0.6" opacity="0.5"/>
+  <text x="50%" y="58%" text-anchor="middle" dominant-baseline="middle" font-family="Playfair Display, Georgia, serif" font-weight="900" font-size="30" fill="url(#g2)" letter-spacing="-1.4">RF</text>
+</svg>
+  <div class="stack">
+    <div class="name">Ralph Foulger&rsquo;s</div>
+    <div class="sub">Academy of Real Estate</div>
+  </div>
+</div>
+    <div style="position: absolute; top: 200px; left: 64px; right: 64px;">
+      <div class="pill ocean">Earn this honestly</div>
+      <h1 class="serif" style="font-size: 60px; font-weight: 900; letter-spacing: -0.025em; line-height: 1.02; color: #2d3748; margin: 28px 0 28px;">
+        Walk into your career<br/>with the one thing<br/>no shortcut ever gives you.
+      </h1>
+      <p style="font-size: 22px; line-height: 1.55; color: #54616d; max-width: 920px;">
+        <em style="font-style:italic;">The actual ability to do the work.</em>
+      </p>
+      
+      
+        <div style="margin-top: 40px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 12px; background: linear-gradient(135deg, #14837b 0%, #0d5e58 100%); color: white; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;">
+          Start free →
+        </div>
+      
+    </div>
+    
+<div class="footer-mark">
+  <span>@ralphfoulger</span>
+  <span class="url">ralphfoulger.com/free</span>
+</div>
+  </div>
+</body>
+</html>
