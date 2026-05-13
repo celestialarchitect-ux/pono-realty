@@ -43,22 +43,29 @@ const STATUS_COLOR: Record<Status, string> = {
 export default function AdminSupportPage() {
   const [tickets, setTickets] = useState<Ticket[] | null>(null);
   const [counts, setCounts] = useState<Record<Status, number>>({ open: 0, in_progress: 0, resolved: 0, dismissed: 0 });
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({});
   const [filter, setFilter] = useState<Status | 'all'>('open');
+  const [categoryFilter, setCategoryFilter] = useState<string | 'all'>('all');
   const [active, setActive] = useState<Ticket | null>(null);
   const [unprovisioned, setUnprovisioned] = useState(false);
 
   const load = async () => {
     try {
-      const res = await fetch(`/api/admin/support${filter === 'all' ? '' : `?status=${filter}`}`, { cache: 'no-store' });
+      const params = new URLSearchParams();
+      if (filter !== 'all') params.set('status', filter);
+      if (categoryFilter !== 'all') params.set('category', categoryFilter);
+      const qs = params.toString();
+      const res = await fetch(`/api/admin/support${qs ? `?${qs}` : ''}`, { cache: 'no-store' });
       if (res.status === 503) { setUnprovisioned(true); return; }
       if (!res.ok) return;
       const data = await res.json();
       setTickets(data.tickets);
       setCounts(data.counts);
+      if (data.categoryCounts) setCategoryCounts(data.categoryCounts);
     } catch {/* ignore */}
   };
 
-  useEffect(() => { load(); const id = setInterval(load, 15_000); return () => clearInterval(id); }, [filter]);
+  useEffect(() => { load(); const id = setInterval(load, 15_000); return () => clearInterval(id); }, [filter, categoryFilter]);
 
   const updateStatus = async (id: string, status: Status, adminNotes?: string) => {
     await fetch(`/api/admin/support/${id}`, {
@@ -78,6 +85,7 @@ export default function AdminSupportPage() {
       ) : (
         <>
           <FilterBar counts={counts} filter={filter} setFilter={setFilter} />
+          <CategoryFilter categoryCounts={categoryCounts} category={categoryFilter} setCategory={setCategoryFilter} />
           {tickets === null ? (
             <p style={{ color: T.textMute, marginTop: 18 }}>Loading…</p>
           ) : tickets.length === 0 ? (
@@ -171,6 +179,47 @@ function FilterBar({ counts, filter, setFilter }: { counts: Record<Status, numbe
           </button>
         );
       })}
+    </div>
+  );
+}
+
+// Category filter — only renders when there's more than one category in
+// the data. Lets admins see ALL variant-review flags in one tap, or all
+// 'billing' tickets, etc.
+function CategoryFilter({ categoryCounts, category, setCategory }: { categoryCounts: Record<string, number>; category: string | 'all'; setCategory: (c: string | 'all') => void }) {
+  const entries = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1]);
+  if (entries.length <= 1) return null;
+  const labelFor = (k: string) => k === 'variant-review' ? 'Variant flags' : k.charAt(0).toUpperCase() + k.slice(1);
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10, alignItems: 'center' }}>
+      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, marginRight: 4 }}>Category</span>
+      <button
+        onClick={() => setCategory('all')}
+        style={{
+          padding: '5px 11px', borderRadius: 999,
+          background: category === 'all' ? T.ocean : 'transparent',
+          color: category === 'all' ? '#fff' : T.text,
+          border: `1px solid ${category === 'all' ? T.oceanDark : T.border}`,
+          fontSize: 11, fontWeight: 700, letterSpacing: '0.05em',
+          cursor: 'pointer', fontFamily: 'inherit',
+        }}>
+        All <span style={{ opacity: 0.7, marginLeft: 4 }}>{entries.reduce((s, [_k, v]) => s + v, 0)}</span>
+      </button>
+      {entries.map(([cat, n]) => (
+        <button
+          key={cat}
+          onClick={() => setCategory(cat)}
+          style={{
+            padding: '5px 11px', borderRadius: 999,
+            background: category === cat ? T.ocean : 'transparent',
+            color: category === cat ? '#fff' : T.text,
+            border: `1px solid ${category === cat ? T.oceanDark : T.border}`,
+            fontSize: 11, fontWeight: 700, letterSpacing: '0.05em',
+            cursor: 'pointer', fontFamily: 'inherit',
+          }}>
+          {labelFor(cat)} <span style={{ opacity: 0.7, marginLeft: 4 }}>{n}</span>
+        </button>
+      ))}
     </div>
   );
 }

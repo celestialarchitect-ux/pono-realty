@@ -12,8 +12,12 @@ export async function GET(req: NextRequest) {
   if (!session) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   if (!session.isAdmin) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
-  const status = new URL(req.url).searchParams.get('status') ?? undefined;
-  const where = status ? { status } : {};
+  const url = new URL(req.url);
+  const status = url.searchParams.get('status') ?? undefined;
+  const category = url.searchParams.get('category') ?? undefined;
+  const where: { status?: string; category?: string } = {};
+  if (status) where.status = status;
+  if (category) where.category = category;
 
   const tickets = await db.supportTicket.findMany({
     where,
@@ -52,5 +56,11 @@ export async function GET(req: NextRequest) {
   const counter: Record<string, number> = { open: 0, in_progress: 0, resolved: 0, dismissed: 0 };
   for (const c of counts) counter[c.status] = (counter[c.status] ?? 0) + c._count._all;
 
-  return NextResponse.json({ tickets: rows, counts: counter });
+  // Counts by category (across ALL statuses) so the category filter chips
+  // can show how many tickets exist in each bucket.
+  const catCounts = await db.supportTicket.groupBy({ by: ['category'], _count: { _all: true } });
+  const categoryCounts: Record<string, number> = {};
+  for (const c of catCounts) categoryCounts[c.category] = c._count._all;
+
+  return NextResponse.json({ tickets: rows, counts: counter, categoryCounts });
 }
