@@ -176,6 +176,73 @@ export default function Landing() {
           </div>
         </section>
 
+        {/* DAILY LESSON PLANNER — THE GAME-CHANGER FEATURE */}
+        <section style={{ padding: '72px 32px', background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 36 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12, fontWeight: 700 }}>
+                The game-changer · New
+              </div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(36px, 5.5vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.05, color: T.text, marginBottom: 16 }}>
+                A daily class schedule. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Like going to actual school.</em>
+              </h2>
+              <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.65, maxWidth: 780, margin: '0 auto' }}>
+                Tell the system when you want to finish &mdash; two weeks, six weeks, three months, anytime. It builds you a <strong style={{ color: T.text }}>full lesson plan for every single study day</strong>: today&apos;s chapters, today&apos;s flashcards, today&apos;s math drills, today&apos;s mock exam. With <strong style={{ color: T.text }}>class times</strong>, like a real-school schedule. Open your profile and you know exactly what to do.
+              </p>
+            </div>
+
+            {/* MOCK SCHEDULE — visual demo of a day */}
+            <div style={{ background: T.bg, border: `1px solid ${T.border}`, borderRadius: 18, padding: 28, maxWidth: 780, margin: '0 auto 32px', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, flexWrap: 'wrap', gap: 12 }}>
+                <div>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>
+                    Tuesday, May 14 · Day 3 of 14
+                  </div>
+                  <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 26, fontWeight: 900, color: T.text, margin: 0, letterSpacing: '-0.02em' }}>
+                    Today&apos;s classes
+                  </h3>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 22, fontWeight: 900, color: T.ocean, lineHeight: 1, letterSpacing: '-0.01em' }}>
+                    0<span style={{ fontSize: 12, color: T.textMute }}> / 240 min</span>
+                  </div>
+                  <div style={{ fontSize: 10, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: 2 }}>4-hour day</div>
+                </div>
+              </div>
+
+              {/* Sample class blocks */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <MockClassBlock time="9:00 AM" minutes={60} typeLabel="Chapter" typeIcon="📖" color={T.ocean} title="Chapter 3: Valuation & Market Analysis" subtitle="National portion · 8 exam items · 24 key terms" />
+                <MockClassBlock time="10:05 AM" minutes={15} typeLabel="Quiz" typeIcon="📝" color="#c08a2e" title="Chapter 3 quiz" subtitle="End-of-chapter check · 8 questions" />
+                <MockClassBlock time="10:25 AM" minutes={70} typeLabel="Chapter" typeIcon="📖" color={T.ocean} title="Chapter 7: Contracts" subtitle="National portion · 10 exam items · 24 key terms" />
+                <MockClassBlock time="11:40 AM" minutes={15} typeLabel="Flashcards" typeIcon="🃏" color={T.oceanDark} title="Smart flashcards" subtitle="Today's chapter + spaced repetition" />
+                <MockClassBlock time="12:00 PM" minutes={15} typeLabel="Math" typeIcon="🧮" color="#2d5a3d" title="Math drill set" subtitle="Prorations, commissions, LTV · 10 problems" />
+              </div>
+
+              <div style={{ marginTop: 18, padding: '12px 16px', background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.border}`, fontSize: 12, color: T.textMute, lineHeight: 1.55, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+                <strong style={{ color: T.text }}>Calendar view</strong> shows all 14 days · <strong style={{ color: T.text }}>Upcoming days</strong> shows every chapter you&apos;ll cover. Skip a day, slip behind, fall sick &mdash; the planner rebalances automatically.
+              </div>
+            </div>
+
+            {/* Why this matters */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginTop: 36 }}>
+              <FeatureCard icon="🎯" title="Goal-driven, not time-driven" body="Set your exam date. The schedule works backward so you finish on time without panicking the last week." />
+              <FeatureCard icon="🧠" title="Spaced repetition built in" body="Daily flashcards on what you just learned + what you've forgotten. The actual mechanism that makes learning stick." />
+              <FeatureCard icon="📈" title="Mock-heavy in the home stretch" body="Last 30% of your timeline becomes review + mock exams — exactly what licensing schools have been doing for decades." />
+              <FeatureCard icon="🔁" title="Auto-rebalances" body="Behind one day? Studied extra? Took a Sunday off? The plan adjusts. No spreadsheets to re-do." />
+            </div>
+
+            <div style={{ textAlign: 'center', marginTop: 36 }}>
+              <Link href="/signup" style={{ ...BUTTON_3D.primary, padding: '14px 32px', borderRadius: 12, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', display: 'inline-flex' }}>
+                Start with the free course →
+              </Link>
+              <p style={{ fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', marginTop: 12 }}>
+                The planner unlocks when you enroll in Standard or Plus.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* TIME WINDOW + FINAL EXAM */}
         <section style={{ padding: '72px 32px', maxWidth: 980, margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
@@ -469,6 +536,50 @@ function Pillar({ icon, title, body, accent }: { icon: IconKind; title: string; 
       <div style={{ marginBottom: 14 }}><IconBadge kind={icon} accent={accent ?? 'ocean'} /></div>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
       <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
+    </div>
+  );
+}
+
+// Class-schedule preview block on the homepage feature section.
+function MockClassBlock({ time, minutes, typeLabel, typeIcon, color, title, subtitle }: {
+  time: string;
+  minutes: number;
+  typeLabel: string;
+  typeIcon: string;
+  color: string;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '88px 1fr', gap: 14, alignItems: 'center',
+      padding: '12px 14px', borderRadius: 10,
+      background: T.bgRaised, border: `1px solid ${T.border}`,
+      borderLeftWidth: 4, borderLeftColor: color,
+    }}>
+      <div style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+        <div style={{ fontSize: 12, color: T.text, fontWeight: 700 }}>{time}</div>
+        <div style={{ fontSize: 10, color: T.textMute, marginTop: 2 }}>{minutes} min</div>
+      </div>
+      <div style={{ minWidth: 0 }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, padding: '2px 8px', borderRadius: 999, background: 'rgba(20,131,123,0.08)', color, fontSize: 10, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>
+          <span aria-hidden="true">{typeIcon}</span>
+          {typeLabel}
+        </div>
+        <div style={{ fontSize: 14, color: T.text, fontWeight: 600, lineHeight: 1.3 }}>{title}</div>
+        <div style={{ fontSize: 11, color: T.textMute, marginTop: 2, lineHeight: 1.4 }}>{subtitle}</div>
+      </div>
+    </div>
+  );
+}
+
+// Small feature highlight under the schedule preview.
+function FeatureCard({ icon, title, body }: { icon: string; title: string; body: string }) {
+  return (
+    <div style={{ background: T.bg, borderRadius: 12, padding: 18, border: `1px solid ${T.border}` }}>
+      <div style={{ fontSize: 24, marginBottom: 8 }} aria-hidden="true">{icon}</div>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 17, fontWeight: 800, color: T.text, marginBottom: 6, lineHeight: 1.25 }}>{title}</div>
+      <div style={{ fontSize: 13, color: T.textDim, lineHeight: 1.6 }}>{body}</div>
     </div>
   );
 }

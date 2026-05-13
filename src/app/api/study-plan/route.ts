@@ -1,9 +1,10 @@
-// ABOUTME: Study plan API — GET current plan + computed schedule, POST to set/update goal.
-// ABOUTME: Schedule is computed dynamically from (60 - studied)/daysUntilGoal so it always reflects reality.
+// ABOUTME: Study plan API — GET current plan + computed class-schedule, POST to set/update goal.
+// ABOUTME: Each day's schedule is a rich activities[] array — chapter reading, quizzes, flashcards, mocks, math.
 
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db';
 import { authConfigured, getSessionUser } from '@/lib/auth';
+import { buildDailyLessonPlan, type DailyPlan } from '@/lib/lesson-plan';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -12,52 +13,44 @@ const STATE_LAW_HOURS_REQUIRED = 60;
 const STATE_LAW_SECONDS_REQUIRED = STATE_LAW_HOURS_REQUIRED * 60 * 60;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-// Format date as YYYY-MM-DD in UTC (matches TimeEvent createdAt grouping)
 function fmtDay(d: Date): string {
   return d.toISOString().slice(0, 10);
 }
 
-// Generate the per-day schedule from the plan + current study state.
-// Returns an array of { date, plannedMinutes, actualMinutes, status } for
-// every day from today until goalDate (inclusive). status is:
-//   'past_done'      — past date with enough actual minutes logged
-//   'past_short'     — past date that didn't hit its planned minutes
-//   'today'          — today (treated as in-progress)
-//   'future'         — future date
-//   'rest'           — explicitly 0 minutes scheduled (weekend skip or override)
+// Day status — derived from past/present and whether the student hit their
+// planned minutes. The UI uses this to color-code calendar cells.
+type DayStatus = 'past_done' | 'past_short' | 'today' | 'future' | 'rest';
+
+interface ScheduleDay extends DailyPlan {
+  actualMinutes: number;
+  status: DayStatus;
+}
+
+// Build the full schedule. The lesson plan + per-day activity list comes
+// from buildDailyLessonPlan; we just attach the status field and actual
+// minutes pulled from TimeEvent aggregation.
 function buildSchedule(
   goalDate: Date,
   includeWeekends: boolean,
   overrides: Record<string, number>,
   studiedSecondsTotal: number,
   studiedSecondsByDay: Record<string, number>,
-): Array<{
-  date: string;
-  plannedMinutes: number;
-  actualMinutes: number;
-  status: 'past_done' | 'past_short' | 'today' | 'future' | 'rest';
-}> {
+  studiedSecondsByPath: Record<string, number>,
+): ScheduleDay[] {
   const now = new Date();
   const todayStr = fmtDay(now);
-  const goalStr = fmtDay(goalDate);
 
-  // Build day list from today (or from earliest TimeEvent if user already
-  // started before setting a plan) through goalDate.
-  const startMs = Math.min(now.getTime(), goalDate.getTime());
-  const endMs = Math.max(now.getTime(), goalDate.getTime());
+  // Full day list (today → goal, inclusive)
   const days: string[] = [];
+  const startMs = now.getTime();
+  const endMs = goalDate.getTime();
   for (let t = startMs; t <= endMs + DAY_MS / 2; t += DAY_MS) {
     days.push(fmtDay(new Date(t)));
   }
 
-  // Total remaining minutes to schedule across remaining study days.
-  const remainingSeconds = Math.max(0, STATE_LAW_SECONDS_REQUIRED - studiedSecondsTotal);
-  const remainingMinutes = Math.ceil(remainingSeconds / 60);
-
-  // Eligible scheduling days = today + future, minus weekends if excluded,
-  // minus any with an override of 0.
-  const scheduleableDays = days.filter(d => {
-    if (d < todayStr) return false;
+  // Which days are scheduleable (today+future, not weekend if excluded,
+  // not explicitly zeroed)
+  const scheduleable = days.filter(d => {
     if (overrides[d] === 0) return false;
     if (!includeWeekends) {
       const dow = new Date(d + 'T12:00:00Z').getUTCDay();
@@ -66,64 +59,53 @@ function buildSchedule(
     return true;
   });
 
-  // Sum of override minutes for scheduleable days
-  const overrideMinutesTotal = scheduleableDays
-    .filter(d => typeof overrides[d] === 'number' && overrides[d] > 0)
-    .reduce((s, d) => s + overrides[d], 0);
-
-  const nonOverrideDayCount = scheduleableDays
-    .filter(d => !(typeof overrides[d] === 'number' && overrides[d] > 0))
-    .length;
-
-  // Distribute the rest evenly across non-override days.
-  const evenMinutes = nonOverrideDayCount > 0
-    ? Math.ceil(Math.max(0, remainingMinutes - overrideMinutesTotal) / nonOverrideDayCount)
+  // Target minutes per study day = remaining seconds / count
+  const remainingSeconds = Math.max(0, STATE_LAW_SECONDS_REQUIRED - studiedSecondsTotal);
+  const remainingMinutes = Math.ceil(remainingSeconds / 60);
+  const perDayMinutes = scheduleable.length > 0
+    ? Math.ceil(remainingMinutes / scheduleable.length)
     : 0;
 
-  return days.map(d => {
+  // Convert seconds-by-path to minutes-by-path for the lesson generator
+  const byPathMinutes: Record<string, number> = {};
+  for (const [path, sec] of Object.entries(studiedSecondsByPath)) {
+    byPathMinutes[path] = Math.floor(sec / 60);
+  }
+
+  // Build the rich lesson plan only for scheduleable days. Rest days get
+  // an empty activities array.
+  const lessonPlans = buildDailyLessonPlan(scheduleable, perDayMinutes, byPathMinutes);
+  const lessonByDate = new Map(lessonPlans.map(lp => [lp.date, lp]));
+
+  return days.map<ScheduleDay>(d => {
     const actualSeconds = studiedSecondsByDay[d] ?? 0;
     const actualMinutes = Math.floor(actualSeconds / 60);
+    const lesson = lessonByDate.get(d);
 
-    let plannedMinutes = 0;
-    let status: 'past_done' | 'past_short' | 'today' | 'future' | 'rest' = 'future';
+    let status: DayStatus;
+    const dow = new Date(d + 'T12:00:00Z').getUTCDay();
+    const isWeekend = dow === 0 || dow === 6;
+    const isRestDay = (!includeWeekends && isWeekend) || overrides[d] === 0;
 
-    if (d < todayStr) {
-      // Past day: planned was whatever the schedule said back then, but
-      // we don't store snapshots — show actual vs the simple "was a rest
-      // day?" check.
-      const dow = new Date(d + 'T12:00:00Z').getUTCDay();
-      const wasRest = !includeWeekends && (dow === 0 || dow === 6);
-      plannedMinutes = 0; // we don't reconstruct past targets
-      status = wasRest ? 'rest' : (actualSeconds > 0 ? 'past_done' : 'past_short');
+    if (isRestDay) {
+      status = 'rest';
+    } else if (d < todayStr) {
+      status = actualMinutes > 0 ? 'past_done' : 'past_short';
     } else if (d === todayStr) {
-      const dow = new Date(d + 'T12:00:00Z').getUTCDay();
-      const isWeekend = dow === 0 || dow === 6;
-      if (!includeWeekends && isWeekend) {
-        plannedMinutes = 0;
-        status = 'rest';
-      } else if (typeof overrides[d] === 'number') {
-        plannedMinutes = overrides[d];
-        status = overrides[d] === 0 ? 'rest' : 'today';
-      } else {
-        plannedMinutes = evenMinutes;
-        status = 'today';
-      }
+      status = 'today';
     } else {
-      const dow = new Date(d + 'T12:00:00Z').getUTCDay();
-      const isWeekend = dow === 0 || dow === 6;
-      if (!includeWeekends && isWeekend) {
-        plannedMinutes = 0;
-        status = 'rest';
-      } else if (typeof overrides[d] === 'number') {
-        plannedMinutes = overrides[d];
-        status = overrides[d] === 0 ? 'rest' : 'future';
-      } else {
-        plannedMinutes = evenMinutes;
-        status = 'future';
-      }
+      status = 'future';
     }
 
-    return { date: d, plannedMinutes, actualMinutes, status };
+    return {
+      date: d,
+      totalMinutes: lesson?.totalMinutes ?? 0,
+      activities: lesson?.activities ?? [],
+      startsChapter: lesson?.startsChapter ?? null,
+      isReviewWeek: lesson?.isReviewWeek ?? false,
+      actualMinutes,
+      status,
+    };
   });
 }
 
@@ -134,22 +116,23 @@ export async function GET() {
 
   const plan = await db.studyPlan.findUnique({ where: { userId: session.id } });
 
-  // Aggregate study time by day (UTC) and total
+  // Aggregate study time: by day + by path (for chapter completion tracking)
   const events = await db.timeEvent.findMany({
     where: { userId: session.id },
-    select: { seconds: true, createdAt: true },
+    select: { seconds: true, createdAt: true, path: true },
   });
   const totalSeconds = events.reduce((s, e) => s + e.seconds, 0);
   const byDay: Record<string, number> = {};
+  const byPath: Record<string, number> = {};
   for (const e of events) {
-    const key = fmtDay(e.createdAt);
-    byDay[key] = (byDay[key] ?? 0) + e.seconds;
+    const dayKey = fmtDay(e.createdAt);
+    byDay[dayKey] = (byDay[dayKey] ?? 0) + e.seconds;
+    byPath[e.path] = (byPath[e.path] ?? 0) + e.seconds;
   }
 
   const hoursRemaining = Math.max(0, STATE_LAW_HOURS_REQUIRED - totalSeconds / 3600);
 
   if (!plan) {
-    // No plan yet — return enough state for the UI to render the "set a goal date" form.
     return NextResponse.json({
       plan: null,
       hoursStudied: +(totalSeconds / 3600).toFixed(2),
@@ -165,20 +148,23 @@ export async function GET() {
     if (parsed && typeof parsed === 'object') overrides = parsed;
   } catch { /* leave empty */ }
 
-  const schedule = buildSchedule(plan.goalDate, plan.includeWeekends, overrides, totalSeconds, byDay);
+  const schedule = buildSchedule(
+    plan.goalDate,
+    plan.includeWeekends,
+    overrides,
+    totalSeconds,
+    byDay,
+    byPath,
+  );
 
-  // On-pace = (hoursStudied / hoursThroughToday) where hoursThroughToday is
-  // what the plan said you should have done by now.
+  // On-pace: cumulative planned minutes (today and earlier) vs actual studied.
   const today = fmtDay(new Date());
   const cumulativePlannedThroughToday = schedule
-    .filter(s => s.date <= today)
-    .reduce((sum, s) => sum + s.plannedMinutes, 0);
-  // Add the hours the user had ALREADY studied before today — that count
-  // toward the cumulative actual.
+    .filter(s => s.date <= today && s.status !== 'rest')
+    .reduce((sum, s) => sum + s.totalMinutes, 0);
   const studiedMinutesTotal = Math.floor(totalSeconds / 60);
-  const studiedThroughToday = studiedMinutesTotal;
   const onPaceRatio = cumulativePlannedThroughToday > 0
-    ? studiedThroughToday / cumulativePlannedThroughToday
+    ? studiedMinutesTotal / cumulativePlannedThroughToday
     : 1;
 
   return NextResponse.json({
@@ -197,9 +183,6 @@ export async function GET() {
 }
 
 // Set / update / clear the plan.
-//   POST { goalDate: 'YYYY-MM-DD' | null, includeWeekends?: bool, overrides?: Record<string, number> }
-//   - goalDate null → delete plan
-//   - goalDate string → upsert
 export async function POST(req: NextRequest) {
   if (!authConfigured() || !db) return NextResponse.json({ error: 'auth_unavailable' }, { status: 503 });
   const session = await getSessionUser();
@@ -221,21 +204,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'invalid_goal_date' }, { status: 400 });
   }
 
-  // Parse as end-of-day UTC so a goalDate of "2026-05-26" means
-  // "must be done by midnight on 2026-05-27 UTC" — i.e., the whole 26th
-  // is a valid study day.
   const goalDate = new Date(body.goalDate + 'T23:59:59Z');
   if (Number.isNaN(goalDate.getTime())) {
     return NextResponse.json({ error: 'invalid_goal_date' }, { status: 400 });
   }
   const now = new Date();
   if (goalDate.getTime() < now.getTime() - DAY_MS) {
-    // Allow today as a valid goal, but reject genuinely-past dates.
     return NextResponse.json({ error: 'goal_date_in_past' }, { status: 400 });
   }
-
-  // Reject goals beyond a reasonable horizon — protects against typos
-  // like 2126 or 2207 that would push the schedule to ~0 min/day forever.
   if (goalDate.getTime() > now.getTime() + 365 * DAY_MS) {
     return NextResponse.json({ error: 'goal_date_too_far' }, { status: 400 });
   }
