@@ -6,6 +6,7 @@ import { db } from '@/lib/db';
 import { authConfigured, getSessionUser } from '@/lib/auth';
 import { NATIONAL_CONTENT } from '@/lib/content/national';
 import { STATE_CONTENT } from '@/lib/content/state';
+import { TOUGH_BANK } from '@/lib/content/exam-tough';
 import { wrapAsVariantQuestions, mergeVariantPool } from '@/lib/content/question-variants';
 import { VARIANT_POOL } from '@/lib/content/variant-pool';
 
@@ -41,9 +42,11 @@ export async function GET(_req: NextRequest, ctx: { params: Promise<{ id: string
   if (attempt.userId !== session.id) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   // Resolve every (questionId, variantIndex) to the actual question text so
-  // the student sees what they were asked, not just an internal ID. The
-  // legacy question banks contribute variant 0; the variant pool contributes
-  // 1..N. We rebuild the same lookup the quiz page uses at attempt time.
+  // the student sees what they were asked, not just an internal ID. Three
+  // resolution sources:
+  //   1. Chapter quizzes — original question = variant 0 from national/state
+  //   2. Generated variants — variant pool 1..N
+  //   3. Tough-bank items (mock-exam-only) — keyed by 'tough-{hash}'
   const allChapters = [...NATIONAL_CONTENT, ...STATE_CONTENT];
   const lookup = new Map<string, { q: string; options: string[]; correctIndex: number; explain: string }>();
   for (const ch of allChapters) {
@@ -59,6 +62,23 @@ export async function GET(_req: NextRequest, ctx: { params: Promise<{ id: string
         });
       });
     }
+  }
+  // Mirror the same djb2 hash the practice page uses for tough-bank items.
+  const toughHash = (s: string): string => {
+    let h = 5381;
+    for (let i = 0; i < s.length; i++) {
+      h = ((h << 5) + h) + s.charCodeAt(i);
+      h |= 0;
+    }
+    return `tough-${Math.abs(h).toString(36).slice(0, 7)}`;
+  };
+  for (const t of TOUGH_BANK) {
+    lookup.set(`${toughHash(t.q)}#0`, {
+      q: t.q,
+      options: t.options as unknown as string[],
+      correctIndex: t.correctIndex,
+      explain: t.explain,
+    });
   }
 
   const answers = attempt.answers
