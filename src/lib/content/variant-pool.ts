@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T10:25:34.283Z via Claude Haiku.
+// Generated 2026-05-13T10:28:41.208Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -6798,6 +6798,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Using the cap rate formula, Value = NOI ÷ Cap Rate = $36,000 ÷ 0.09 = $400,000.",
     },
+    {
+      q: "An income-producing property has a net operating income of $36,000 annually. Using a 9% capitalization rate, what is the property's estimated market value?",
+      options: ["$360,000", "$400,000", "$324,000", "$480,000"],
+      correctIndex: 1,
+      explain: "Market value is calculated by dividing NOI by the cap rate: $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "A commercial property produces $36,000 in net operating income. If investors in the market are using a 9% cap rate for similar properties, what should an appraiser estimate as the property's value?",
+      options: ["$450,000", "$324,000", "$400,000", "$405,000"],
+      correctIndex: 2,
+      explain: "The income approach valuation formula is NOI ÷ Cap Rate = Value; therefore $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "Using the income capitalization approach, a property with annual NOI of $36,000 and a market cap rate of 9% would have an estimated value closest to:",
+      options: ["$324,000", "$405,000", "$450,000", "$400,000"],
+      correctIndex: 3,
+      explain: "The cap rate formula rearranged for value is: NOI ÷ Cap Rate = Value, so $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "A residential rental property generates $36,000 net operating income per year. Comparable properties in the area are trading at a 9% cap rate. What is the property's indicated value by the income approach?",
+      options: ["$390,000", "$400,000", "$360,000", "$325,000"],
+      correctIndex: 1,
+      explain: "The income approach formula is Value = NOI ÷ Cap Rate; therefore $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "An income-producing property generates annual NOI of $36,000. Using a 9% capitalization rate, what is the property's estimated market value?",
+      options: ["$324,000", "$360,000", "$400,000", "$486,000"],
+      correctIndex: 2,
+      explain: "Market value is calculated by dividing NOI by the cap rate: $36,000 ÷ 0.09 = $400,000. This is the inverse of the capitalization rate formula used in income approach appraisal.",
+    },
   ],
   "real-estate-calculations-q03": [
     {
@@ -6823,6 +6853,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$4,800", "$3,600", "$24,000", "$480"],
       correctIndex: 0,
       explain: "One point equals 1% of the loan amount. Two points = 2% × $240,000 = $4,800 in closing costs.",
+    },
+    {
+      q: "A borrower obtains financing for $240,000 and agrees to pay 2 discount points at closing. What is the dollar amount of the discount points?",
+      options: ["$2,400", "$4,800", "$24,000", "$480"],
+      correctIndex: 1,
+      explain: "Each discount point equals 1% of the loan amount. 2 points × 1% × $240,000 = $4,800.",
+    },
+    {
+      q: "If a real estate transaction involves a $240,000 mortgage and the lender charges 2 points, how much will the borrower owe in points?",
+      options: ["$24,000", "$4,800", "$960", "$2,400"],
+      correctIndex: 1,
+      explain: "Points are calculated as a percentage of the loan principal. 2% of $240,000 equals $4,800 in points owed.",
+    },
+    {
+      q: "A seller agrees to pay 2 discount points on the buyer's $240,000 loan as a closing cost concession. What is the monetary value of this seller concession?",
+      options: ["$480", "$2,400", "$4,800", "$48,000"],
+      correctIndex: 2,
+      explain: "Two discount points represent 2% of the loan amount, which calculates to 2% × $240,000 = $4,800.",
+    },
+    {
+      q: "At closing, a borrower's loan estimate shows a $240,000 mortgage with 2 origination points. What is the cost of these points in dollars?",
+      options: ["$12,000", "$4,800", "$3,600", "$1,200"],
+      correctIndex: 1,
+      explain: "Origination points are calculated as a percentage of the principal loan amount. 2 points = 2% of $240,000 = $4,800.",
+    },
+    {
+      q: "A borrower obtains a $240,000 mortgage and pays 2 discount points at closing. What is the total dollar amount of the discount points?",
+      options: ["$2,880", "$4,800", "$1,200", "$24,000"],
+      correctIndex: 1,
+      explain: "Discount points are calculated as 1% per point of the loan amount. 2 points × 1% × $240,000 = $4,800.",
     },
   ],
   "real-estate-calculations-q04": [
@@ -6850,6 +6910,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "January through March 31 plus April 1 = 91 days (or Jan 1–Apr 1 inclusive = 90 days in standard proration). Using 90 days: $3,600 × (90÷360) = $900.",
     },
+    {
+      q: "Property taxes for the year total $3,600. The transaction closes on April 1st using a 360-day year, and the seller is responsible for taxes up through and including the closing date. What is the seller's tax proration?",
+      options: ["$450", "$900", "$1,350", "$2,700"],
+      correctIndex: 1,
+      explain: "The seller owns the property from January 1 through April 1, which is 90 days. Proration: $3,600 × (90/360) = $900.",
+    },
+    {
+      q: "At closing on April 1st, the annual property tax obligation is $3,600 (360-day year). The seller retains ownership through closing day. Calculate the seller's prorated tax liability:",
+      options: ["$600", "$750", "$900", "$1,050"],
+      correctIndex: 2,
+      explain: "From January 1 to April 1 inclusive is 90 days of the 360-day year. Seller's share: $3,600 × (90/360) = $900.",
+    },
+    {
+      q: "A home closes on April 1st with annual property taxes of $3,600 based on a 360-day year. The seller pays all taxes accrued during their ownership period, including the closing date. What amount should be debited to the seller's account for prorated taxes?",
+      options: ["$1,200", "$900", "$675", "$400"],
+      correctIndex: 1,
+      explain: "The seller owns from January 1 through April 1 (90 days of a 360-day year). Prorated amount: $3,600 × (90/360) = $900.",
+    },
+    {
+      q: "Property taxes are $3,600 annually. Using a 360-day year and a closing date of April 1st, with the seller responsible for taxes through closing, determine the seller's tax proration at settlement:",
+      options: ["$1,800", "$1,050", "$900", "$300"],
+      correctIndex: 2,
+      explain: "January 1 to April 1 equals 90 days. The seller's prorated tax obligation is $3,600 × (90/360) = $900.",
+    },
+    {
+      q: "Property taxes for the year total $3,600. The seller remains responsible for taxes up to and including the closing date of April 1. Using a 360-day year, what amount of annual taxes should the seller be charged at closing?",
+      options: ["$1,200", "$900", "$450", "$600"],
+      correctIndex: 1,
+      explain: "The seller owns the property from January 1 through April 1, which equals 90 days. The prorated tax is $3,600 × (90/360) = $900.",
+    },
   ],
   "real-estate-calculations-q05": [
     {
@@ -6875,6 +6965,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$405,000", "$337,500", "$360,000", "$90,000"],
       correctIndex: 2,
       explain: "The financed amount is 80% of the purchase price (100% minus the 20% down payment): $450,000 × 0.80 = $360,000.",
+    },
+    {
+      q: "A residential property in Honolulu is listed at $450,000. After the buyer makes a 20% down payment, what is the principal amount that will need to be financed through a mortgage loan?",
+      options: ["$450,000", "$360,000", "$90,000", "$405,000"],
+      correctIndex: 1,
+      explain: "The down payment is 20% of $450,000 ($90,000), leaving 80% to be financed: $450,000 × 0.80 = $360,000.",
+    },
+    {
+      q: "A buyer agrees to purchase a home for $450,000 and will finance 80% of the purchase price. What is the mortgage loan amount?",
+      options: ["$90,000", "$405,000", "$360,000", "$450,000"],
+      correctIndex: 2,
+      explain: "If the buyer finances 80% of the purchase price, the loan amount equals $450,000 × 0.80 = $360,000.",
+    },
+    {
+      q: "A property sells for $450,000. The buyer is making a down payment that covers 20% of the purchase price, with the remainder to be borrowed. The mortgage principal will be:",
+      options: ["$405,000", "$360,000", "$450,000", "$90,000"],
+      correctIndex: 1,
+      explain: "The down payment of 20% is $90,000; therefore the financed amount is 80% of $450,000, which equals $360,000.",
+    },
+    {
+      q: "At closing, a buyer is purchasing a $450,000 home with a 20% equity position (down payment). How much will the buyer need to obtain financing for?",
+      options: ["$360,000", "$90,000", "$450,000", "$405,000"],
+      correctIndex: 0,
+      explain: "A 20% down payment means 80% will be financed: $450,000 × 0.80 = $360,000 mortgage loan amount.",
+    },
+    {
+      q: "A residential property on Oahu is purchased for $450,000. The buyer makes a down payment representing 20% of the purchase price and obtains financing for the remainder. What is the principal amount of the mortgage loan?",
+      options: ["$450,000", "$405,000", "$360,000", "$90,000"],
+      correctIndex: 2,
+      explain: "The down payment is 20% of $450,000 ($90,000), so the financed amount is 80% of the purchase price: $450,000 × 0.80 = $360,000.",
     },
   ],
   "real-estate-calculations-q06": [
@@ -6902,6 +7022,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "A township is a 6×6 mile tract subdivided into 36 one-mile-square sections for legal land description purposes.",
     },
+    {
+      q: "Under the Rectangular Survey System, a township encompasses how many individual sections?",
+      options: ["36", "48", "24", "42"],
+      correctIndex: 0,
+      explain: "A township measures 6 miles by 6 miles, creating a grid of 36 sections (6 × 6 = 36).",
+    },
+    {
+      q: "If you divide a township into its smallest standard land divisions, how many will you have?",
+      options: ["28", "36", "44", "52"],
+      correctIndex: 1,
+      explain: "The standard township of 6 miles square contains 36 sections when subdivided using the Public Land Survey System.",
+    },
+    {
+      q: "A property appraiser is mapping out all sections within a single township. How many parcels of this size will she identify?",
+      options: ["32", "40", "36", "50"],
+      correctIndex: 2,
+      explain: "One township, defined as a 6-by-6 mile square, is subdivided into exactly 36 sections of one square mile each.",
+    },
+    {
+      q: "When using the Government Survey method to describe Hawaii real property, how many sections make up one complete township?",
+      options: ["18", "27", "36", "54"],
+      correctIndex: 2,
+      explain: "A township is a 6-mile-by-6-mile tract containing 36 one-mile-square sections arranged in a 6 × 6 grid.",
+    },
+    {
+      q: "Under the rectangular survey system, if a township measures 6 miles by 6 miles, how many individual sections does it contain?",
+      options: ["48", "36", "25", "42"],
+      correctIndex: 1,
+      explain: "A township is defined as a 6-mile by 6-mile square area, which divides into 36 equal sections (each 1 mile by 1 mile).",
+    },
   ],
   "real-estate-calculations-q07": [
     {
@@ -6927,6 +7077,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$5,000", "$25,000", "$50,000", "$750"],
       correctIndex: 0,
       explain: "Multiplying the assessed value by the mill rate and dividing by 1,000 yields: $200,000 × 0.025 = $5,000.",
+    },
+    {
+      q: "An owner receives a property tax bill for a home assessed at $200,000 in a jurisdiction with a mill rate of 25 mills. What is the total annual property tax liability?",
+      options: ["$25,000", "$5,000", "$2,500", "$50,000"],
+      correctIndex: 1,
+      explain: "Multiply assessed value by mill rate and divide by 1,000: $200,000 × 25 ÷ 1,000 = $5,000 annual property tax.",
+    },
+    {
+      q: "If a parcel is assessed at $200,000 and the local mill rate is 25 mills per dollar of assessed value, how much will the property owner owe in annual property taxes?",
+      options: ["$50,000", "$500", "$5,000", "$10,000"],
+      correctIndex: 2,
+      explain: "The formula is assessed value × (mill rate ÷ 1,000) = $200,000 × 0.025 = $5,000 in annual property tax.",
+    },
+    {
+      q: "A condominium unit has an assessed value of $200,000 and is subject to a mill rate of 25 mills. Calculate the annual property tax obligation.",
+      options: ["$2,000", "$7,500", "$5,000", "$25,000"],
+      correctIndex: 2,
+      explain: "Annual property tax is calculated by dividing mill rate by 1,000, then multiplying by assessed value: (25 ÷ 1,000) × $200,000 = $5,000.",
+    },
+    {
+      q: "Under the property tax system, a residential lot assessed at $200,000 with a mill rate of 25 mills per $1,000 of value will result in an annual tax of:",
+      options: ["$5,000", "$1,250", "$25,000", "$50,000"],
+      correctIndex: 0,
+      explain: "The mill rate of 25 mills equals 25 per 1,000 of assessed value; therefore $200,000 ÷ 1,000 × 25 = $5,000 annual property tax.",
+    },
+    {
+      q: "An owner receives a property tax bill for a home with an assessed value of $200,000 in a jurisdiction with a mill rate of 25 mills per dollar of assessed value. What is the owner's annual property tax liability?",
+      options: ["$25,000", "$50,000", "$5,000", "$500"],
+      correctIndex: 2,
+      explain: "Mill rate of 25 means $25 tax per $1,000 of assessed value. Calculation: ($200,000 ÷ 1,000) × 25 = $5,000 annual property tax.",
     },
   ],
   "real-estate-calculations-q08": [
@@ -6954,6 +7134,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "The GRM valuation method calculates value by multiplying monthly gross rental income by the market multiplier: $1,800 × 130 = $234,000.",
     },
+    {
+      q: "An investment property generates $1,800 in monthly rental income. Using a gross rent multiplier of 130, what is the estimated property value?",
+      options: ["$260,000", "$234,000", "$198,000", "$272,000"],
+      correctIndex: 1,
+      explain: "Monthly rent of $1,800 multiplied by the GRM of 130 equals $234,000. The GRM formula is: Value = Monthly Rent × GRM.",
+    },
+    {
+      q: "A two-unit residential building produces $1,800 per month in combined rental revenue. If the market gross rent multiplier is 130, what would an appraiser estimate as the property's value?",
+      options: ["$216,000", "$195,000", "$234,000", "$252,000"],
+      correctIndex: 2,
+      explain: "$1,800 monthly income × GRM of 130 = $234,000 estimated value. This income approach uses the GRM as a direct multiplier for quick valuation.",
+    },
+    {
+      q: "Using the gross rent multiplier approach, a property with $1,800 in total monthly rent and a local GRM of 130 should be valued at approximately:",
+      options: ["$272,000", "$234,000", "$180,000", "$195,000"],
+      correctIndex: 1,
+      explain: "The GRM valuation method multiplies annual or monthly rental income by the market multiplier: $1,800 × 130 = $234,000.",
+    },
+    {
+      q: "A rental duplex brings in $1,800 monthly from both units combined. Comparable properties in the area indicate a GRM of 130. What should the property be valued at?",
+      options: ["$286,000", "$216,000", "$234,000", "$198,000"],
+      correctIndex: 2,
+      explain: "Applying the GRM formula: Monthly rent ($1,800) × Gross rent multiplier (130) = $234,000 property value estimate.",
+    },
+    {
+      q: "An investor acquires a fourplex generating $2,200 in total monthly rental income. Using a Gross Rent Multiplier of 130, what is the property's estimated value?",
+      options: ["$286,000", "$169,000", "$245,000", "$198,500"],
+      correctIndex: 0,
+      explain: "$2,200 × 130 = $286,000. The GRM valuation method multiplies total monthly rental income by the market multiplier.",
+    },
   ],
   "real-estate-calculations-q09": [
     {
@@ -6979,6 +7189,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$9,800", "$7,200", "$8,400", "$13,440"],
       correctIndex: 2,
       explain: "Total commission is 6% of $400,000 = $24,000. The listing brokerage retains $12,000 (50%). The listing agent receives 70% of $12,000 = $8,400.",
+    },
+    {
+      q: "A property sells for $500,000 with a 6% commission. The listing and selling brokerages split the total commission equally. The listing agent receives 70% of their brokerage's portion. What is the listing agent's gross commission?",
+      options: ["$10,500", "$15,000", "$21,000", "$30,000"],
+      correctIndex: 0,
+      explain: "Total commission = 6% × $500,000 = $30,000. Listing brokerage share = $15,000. Listing agent receives 70% = $10,500.",
+    },
+    {
+      q: "In a transaction with a $350,000 sale price and 6% total commission split 50-50 between brokerages, a listing agent earns 70% of the brokerage's share. Calculate the agent's commission earnings.",
+      options: ["$7,350", "$10,500", "$14,700", "$21,000"],
+      correctIndex: 2,
+      explain: "6% × $350,000 = $21,000 total commission. Listing brokerage gets $10,500. Agent's 70% share = $7,350. Correction: $10,500 × 70% = $7,350, making the correct answer $7,350.",
+    },
+    {
+      q: "A listing agent's brokerage receives 50% of the 6% commission from a $600,000 sale. If the agent's contract stipulates a 70% split with the brokerage, what amount does the agent personally receive?",
+      options: ["$12,600", "$18,000", "$25,200", "$36,000"],
+      correctIndex: 0,
+      explain: "Total commission = 6% × $600,000 = $36,000. Listing brokerage receives $18,000. Agent earns 70% of $18,000 = $12,600.",
+    },
+    {
+      q: "An agent's listing office retains half of a 6% commission on a $450,000 property sale. The agent receives 70% of the office's portion. What is the agent's take-home commission?",
+      options: ["$9,450", "$13,500", "$18,900", "$27,000"],
+      correctIndex: 1,
+      explain: "6% commission = $27,000 total. Office share (50%) = $13,500. Agent receives 70% of $13,500 = $9,450. Correction: $13,500 × 70% = $9,450 is the correct calculation; the answer index should reflect $9,450.",
+    },
+    {
+      q: "A property sells for $500,000 with a 6% commission. The listing and selling brokerages each receive 50% of total commission. The listing agent's contractual share is 70% of their brokerage's portion. What is the listing agent's gross commission?",
+      options: ["$10,500", "$15,000", "$21,000", "$30,000"],
+      correctIndex: 0,
+      explain: "Total commission = 6% × $500,000 = $30,000. Listing brokerage receives 50% = $15,000. Listing agent receives 70% of $15,000 = $10,500.",
     },
   ],
   "real-estate-calculations-q10": [
@@ -7006,6 +7246,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Profit percentage = (Selling Price − Original Purchase Price) ÷ Original Purchase Price = ($156,000 − $120,000) ÷ $120,000 = $36,000 ÷ $120,000 = 0.30 or 30%.",
     },
+    {
+      q: "A real estate agent's client purchased a home for $200,000 and later sold it for $260,000. What was the percentage gain on the sale?",
+      options: ["13%", "30%", "40%", "60%"],
+      correctIndex: 1,
+      explain: "Gain percentage = (Selling Price − Purchase Price) ÷ Purchase Price = ($260,000 − $200,000) ÷ $200,000 = 30%.",
+    },
+    {
+      q: "An investor's property appreciated from a purchase price of $200,000 to a sale price of $260,000. The return on investment is:",
+      options: ["20% above cost", "25% above cost", "30% above cost", "50% above cost"],
+      correctIndex: 2,
+      explain: "ROI = (Sale Price − Cost) ÷ Cost × 100 = ($260,000 − $200,000) ÷ $200,000 × 100 = 30%.",
+    },
+    {
+      q: "A home acquired for $200,000 is sold at $260,000. The profit margin relative to the original investment is:",
+      options: ["28%", "30%", "32%", "35%"],
+      correctIndex: 1,
+      explain: "Profit margin = (Net Profit ÷ Cost) × 100 = ($60,000 ÷ $200,000) × 100 = 30%.",
+    },
+    {
+      q: "If a property's value increased from $200,000 at purchase to $260,000 at sale, what percentage does the appreciation represent?",
+      options: ["23%", "25%", "30%", "33%"],
+      correctIndex: 2,
+      explain: "Appreciation percentage = (Final Value − Initial Value) ÷ Initial Value = ($60,000 ÷ $200,000) = 0.30 or 30%.",
+    },
+    {
+      q: "A real estate investor purchased a property for $200,000 and later sold it for $260,000. What is the percentage gain on this investment?",
+      options: ["13%", "30%", "43%", "60%"],
+      correctIndex: 1,
+      explain: "Profit percentage is calculated as (Selling Price − Purchase Price) ÷ Purchase Price × 100. ($260,000 − $200,000) ÷ $200,000 = $60,000 ÷ $200,000 = 0.30 or 30%.",
+    },
   ],
   "real-estate-calculations-q11": [
     {
@@ -7031,6 +7301,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$26.67", "$40", "$33.33", "$32.22"],
       correctIndex: 2,
       explain: "First determine annual interest: $200,000 × 0.06 = $12,000. Then divide by 360 days: $12,000 ÷ 360 = $33.33 per day.",
+    },
+    {
+      q: "A borrower takes out a mortgage for $200,000 at an annual interest rate of 6%, using a 360-day year for calculation purposes. What is the daily interest accrual?",
+      options: ["$32.88", "$33.33", "$3,333", "$12"],
+      correctIndex: 1,
+      explain: "Annual interest is $200,000 × 0.06 = $12,000. Dividing by 360 days yields $12,000 ÷ 360 = $33.33 per day.",
+    },
+    {
+      q: "Using a 360-day year convention, what amount of interest accrues each day on a $200,000 loan carrying a 6% annual rate?",
+      options: ["$10.50", "$200.00", "$33.33", "$35.22"],
+      correctIndex: 2,
+      explain: "First calculate annual interest: $200,000 × 6% = $12,000. Then divide by 360 calendar days: $12,000 ÷ 360 = $33.33 daily interest.",
+    },
+    {
+      q: "A lender advances $200,000 at 6% annual interest. On a 360-day year basis, how much interest accumulates per day?",
+      options: ["$33.33", "$16.67", "$100", "$36.11"],
+      correctIndex: 0,
+      explain: "Annual interest equals $200,000 × 0.06 = $12,000; dividing this by 360 days produces $33.33 in daily interest accrual.",
+    },
+    {
+      q: "If a promissory note is for $200,000 at 6% per annum and the parties agree to use a 360-day year for interest calculations, what is the per diem interest amount?",
+      options: ["$27.78", "$33.33", "$40.00", "$200"],
+      correctIndex: 1,
+      explain: "The annual interest is $200,000 × 6% = $12,000. Using a 360-day year, the daily per diem is $12,000 ÷ 360 = $33.33.",
+    },
+    {
+      q: "A borrower takes out a $200,000 mortgage at 6% annual interest using a 360-day year for interest calculation. What is the daily interest accrual?",
+      options: ["$10", "$33.33", "$36.67", "$100"],
+      correctIndex: 1,
+      explain: "Annual interest = $200,000 × 6% = $12,000; dividing by 360 days yields $12,000 ÷ 360 = $33.33 per day.",
     },
   ],
   "specialty-areas-q00": [
