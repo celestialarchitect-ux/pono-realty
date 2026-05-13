@@ -3,7 +3,7 @@
 
 import type { QuestionId, Variant } from './question-variants';
 
-// Generated 2026-05-13T09:58:47.471Z via Claude Haiku.
+// Generated 2026-05-13T10:15:30.706Z via Claude Haiku.
 // 205/205 questions populated; 0 failures.
 // Run `npm run gen-variants` to regenerate (resumes from existing). See /tmp/variant-gen.log for last run.
 export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
@@ -32,6 +32,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Although an email may constitute writing, it must be signed by the party to be charged to satisfy the Statute of Frauds; an unsigned electronic acceptance alone cannot create an enforceable real estate contract.",
     },
+    {
+      q: "A seller orally agrees to sell residential property to a buyer over the phone. Both parties shake hands later and agree to proceed. Is this arrangement enforceable as a real estate contract in Hawaii?",
+      options: ["Yes, because both parties agreed and shook hands", "No, because Hawaii law requires real estate contracts to be documented in writing", "Yes, if the buyer immediately deposits earnest money into escrow", "Yes, if a third party witnessed the oral agreement"],
+      correctIndex: 1,
+      explain: "The Statute of Frauds mandates that contracts for the sale of real property must be in writing to be enforceable, regardless of witness or earnest money.",
+    },
+    {
+      q: "During a property showing, a seller verbally tells a prospective buyer, \"I accept your offer.\" The buyer leaves satisfied that a binding agreement exists. What is the legal status of this transaction?",
+      options: ["Binding and fully enforceable as a valid contract", "Unenforceable because the agreement lacks written documentation", "Binding only if the buyer provides proof of earnest money deposit", "Enforceable if both parties later acknowledge it in front of witnesses"],
+      correctIndex: 1,
+      explain: "Without a written instrument, no enforceable real estate contract exists under the Statute of Frauds, even if both parties intended to be bound.",
+    },
+    {
+      q: "Two parties negotiate the sale of a lot in Hawaii. The seller sends an email saying \"I accept your terms,\" but no formal purchase agreement document is ever signed by either party. Do the parties have an enforceable contract?",
+      options: ["Yes, the email constitutes written acceptance", "No, a formal written purchase agreement signed by both parties is required", "Yes, if earnest money has been exchanged between the parties", "Yes, provided both parties have proof of the negotiation discussions"],
+      correctIndex: 1,
+      explain: "While an email may satisfy the writing requirement in some jurisdictions, a formalized purchase agreement typically signed by both parties is required to create an enforceable real estate contract.",
+    },
+    {
+      q: "A buyer makes an offer for a condominium and the seller responds with a verbal counteroffer at a social gathering, saying \"I'll sell for that price.\" The buyer agrees verbally on the spot. Which statement accurately reflects the legal enforceability of this transaction?",
+      options: ["It is fully enforceable because both parties made mutual assent and consideration was present", "It is not enforceable; Hawaii's Statute of Frauds requires real estate sales contracts to be in writing", "It is enforceable if the buyer can produce written notes documenting the conversation", "It is enforceable if the parties later confirm the terms via telephone conversation with a witness"],
+      correctIndex: 1,
+      explain: "Oral agreements for the sale of real estate cannot be enforced, no matter how clear the mutual intent, because the Statute of Frauds requires a written contract.",
+    },
+    {
+      q: "A seller orally agrees to sell residential property to a buyer over the phone. Both parties clearly understand the terms and price. Is this oral agreement enforceable as a real estate contract in Hawaii?",
+      options: ["Yes, if both parties are competent and agree on material terms", "No, because Hawaii law requires all real estate sales contracts to be evidenced by a signed written document", "Yes, if the buyer deposits earnest money within 24 hours", "Yes, if a real estate licensee was present during the conversation"],
+      correctIndex: 1,
+      explain: "The Statute of Frauds mandates that real estate contracts must be in writing and signed to be legally enforceable, regardless of oral agreement or witness presence.",
+    },
   ],
   "contracts-q01": [
     {
@@ -57,6 +87,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Another brokerage introduces the successful buyer", "The seller contacts a prospect from the broker's advertising and that person buys", "The seller personally negotiates with an interested party and completes the sale", "The property sells through the local MLS database"],
       correctIndex: 2,
       explain: "Exclusive agency permits the seller to circumvent the commission obligation only when the seller is the source of the buyer; broker involvement from any other source triggers the commission obligation.",
+    },
+    {
+      q: "When a seller signs an exclusive-agency listing agreement, the broker's compensation is NOT earned if:",
+      options: ["The property remains on the market for more than 30 days", "The seller locates and procures the buyer themselves", "Another broker brings a qualified offer", "The sale closes within 60 days of listing"],
+      correctIndex: 1,
+      explain: "Under exclusive agency, the broker foregoes commission only when the seller, not the broker or another agent, finds the buyer; in all other scenarios, the broker is entitled to compensation.",
+    },
+    {
+      q: "Which statement correctly describes the broker's right to commission under an exclusive-agency listing?",
+      options: ["The broker is paid a commission regardless of who brings the buyer", "The broker earns commission except when the seller personally produces the buyer", "The broker is only paid if they are the sole source of the buyer", "The broker forfeits all compensation if the property sells within the listing period"],
+      correctIndex: 1,
+      explain: "Exclusive agency protects the seller's right to avoid paying commission if they independently find their own buyer, but the broker receives commission in all other buyer-source scenarios.",
+    },
+    {
+      q: "A seller enters into an exclusive-agency listing with Broker Chen. Broker Chen should expect to receive compensation:",
+      options: ["Only if Broker Chen's agents show the property to the eventual buyer", "Whenever a sale closes, with no exceptions", "Unless the seller personally identifies and brings the buyer to closing", "When any licensed agent procures an offer, even if the seller found them first"],
+      correctIndex: 2,
+      explain: "The defining feature of exclusive agency is that the broker retains the right to commission in most scenarios, except when the seller themselves (not any agent or third party) produces the buyer.",
+    },
+    {
+      q: "Under an exclusive-agency listing arrangement, the broker's entitlement to commission is contingent on which factor?",
+      options: ["Whether the property appraises at or above the listing price", "Whether the listing period extends beyond 90 days", "Whether someone other than the seller was the procuring cause of the buyer", "Whether the transaction includes both a buyer's and seller's agent"],
+      correctIndex: 2,
+      explain: "Exclusive agency allows the broker to earn commission from any buyer source except the seller themselves; if the seller is the procuring cause, no commission is due.",
+    },
+    {
+      q: "Under an exclusive-agency listing agreement, when is the broker NOT entitled to a commission?",
+      options: ["When the property is sold through the MLS", "When the seller procures the buyer without broker assistance", "When the listing period expires without a sale", "When another broker brings the buyer"],
+      correctIndex: 1,
+      explain: "In exclusive agency, the broker earns commission on all sales except those directly procured by the seller themselves; this is the defining exception to the broker's commission guarantee.",
     },
   ],
   "contracts-q02": [
@@ -84,6 +144,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A counteroffer rejects the original proposal and simultaneously introduces new contract terms; the original offer is extinguished in this process.",
     },
+    {
+      q: "When a seller presents a counteroffer to a buyer's initial offer, what happens to the original offer?",
+      options: ["It remains valid until the counteroffer is rejected", "It is terminated and replaced by the counteroffer", "It is held in escrow pending the seller's decision", "It becomes a contingent offer"],
+      correctIndex: 1,
+      explain: "A counteroffer legally rejects and supersedes the original offer; the two cannot coexist simultaneously.",
+    },
+    {
+      q: "An offeree who responds with different terms than those proposed in the original offer has:",
+      options: ["Accepted the original offer conditionally", "Made a counteroffer that extinguishes the original offer", "Requested mediation under Hawaii's real estate law", "Preserved both offers for later comparison"],
+      correctIndex: 1,
+      explain: "Presenting modified terms constitutes a counteroffer, which automatically rejects and replaces the prior offer.",
+    },
+    {
+      q: "If a buyer submits an offer at $500,000 and the seller responds with different price terms, the seller's response:",
+      options: ["Keeps both offers active simultaneously", "Cancels the original offer and creates a new negotiating point", "Requires the buyer to pay the difference immediately", "Extends the inspection period by law"],
+      correctIndex: 1,
+      explain: "The seller's response with different terms is a counteroffer that terminates the buyer's original offer.",
+    },
+    {
+      q: "Under Hawaii real estate practice, when a seller issues a counteroffer with modified conditions, the buyer's original offer:",
+      options: ["Gains legal priority over the counteroffer", "Is no longer available for acceptance", "Must be notarized before the counteroffer takes effect", "Automatically converts to a backup offer"],
+      correctIndex: 1,
+      explain: "A counteroffer rejection destroys the original offer, so the buyer can no longer accept it—they must respond to the counteroffer instead.",
+    },
+    {
+      q: "When a seller presents a counteroffer to a buyer's initial offer, what is the legal effect on the original offer?",
+      options: ["It remains valid until the counteroffer is formally rejected in writing", "It is terminated and replaced by the new counteroffer terms", "It becomes a binding backup offer if the counteroffer is declined", "It continues in effect alongside the counteroffer until closing"],
+      correctIndex: 1,
+      explain: "A counteroffer constitutes a rejection of the original offer and replaces it with new terms; the original offer ceases to exist once the counteroffer is made.",
+    },
   ],
   "contracts-q03": [
     {
@@ -109,6 +199,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Brokers seeking to enforce listing agreement terms", "Buyers compelling sellers to complete the sale", "Appraisers challenging valuation disputes", "Homeowners associations enforcing CC&Rs"],
       correctIndex: 1,
       explain: "Buyers invoke specific performance because real property's unique nature means a breach cannot be remedied by damages; only actual conveyance satisfies the buyer's interest.",
+    },
+    {
+      q: "When a seller refuses to close and transfer title, which party has the strongest legal basis to request specific performance in Hawaii court?",
+      options: ["The mortgage lender holding the promissory note", "The purchaser under the sales contract", "The listing agent's employing broker", "The title insurance company"],
+      correctIndex: 1,
+      explain: "A buyer can pursue specific performance because real property is considered unique and cannot be adequately replaced with monetary damages alone.",
+    },
+    {
+      q: "In a real estate dispute where the seller breaches the purchase agreement, specific performance is typically the remedy of choice for:",
+      options: ["Sellers seeking to recover earnest money deposits", "Buyers seeking to force conveyance of the property", "Brokers seeking compensation for lost commissions", "Lenders seeking foreclosure authority"],
+      correctIndex: 1,
+      explain: "Buyers invoke specific performance because each parcel of real estate is unique; money damages cannot replicate the specific property the buyer contracted to purchase.",
+    },
+    {
+      q: "Which party to a real estate transaction would most likely ask a court to compel the other party to perform the actual deed transfer rather than accept monetary compensation?",
+      options: ["A bank financing the property purchase", "A prospective owner who signed a binding purchase agreement", "A managing broker seeking commission enforcement", "A hazard insurance provider"],
+      correctIndex: 1,
+      explain: "The buyer has the strongest claim for specific performance because real estate's unique nature makes it impossible to substitute with damages; the buyer wants the actual property conveyed.",
+    },
+    {
+      q: "Specific performance as a contractual remedy in Hawaii real estate law is pursued most commonly by:",
+      options: ["Sellers defending against breach claims", "Purchasers seeking to enforce a binding sales agreement", "Real estate brokers collecting earned commissions", "Escrow agents protecting earnest money"],
+      correctIndex: 1,
+      explain: "Purchasers use specific performance to force the actual conveyance of the real property because land is inherently unique and its loss cannot be compensated adequately through money damages.",
+    },
+    {
+      q: "When a seller refuses to close on a valid purchase agreement, which party is most likely to pursue specific performance in court?",
+      options: ["The escrow agent", "The purchaser", "The title insurance company", "The real estate appraiser"],
+      correctIndex: 1,
+      explain: "Purchasers seek specific performance to force the seller to convey the property because real estate is considered unique and irreplaceable, making monetary damages an inadequate remedy.",
     },
   ],
   "contracts-q04": [
@@ -136,6 +256,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "With 'time is of the essence' language, even relatively minor delays in meeting specified deadlines constitute material breaches because the contract has established that timely performance is essential.",
     },
+    {
+      q: "In a real estate contract, when a clause states 'time is of the essence,' what legal obligation does this create?",
+      options: ["The buyer may delay closing without penalty if market conditions change", "Performance must occur by the specified date or the contract may be breached", "Either party can request a 15-day extension without cause", "The transaction timeline becomes a suggestion rather than a requirement"],
+      correctIndex: 1,
+      explain: "This clause makes the deadline a material term of the contract; failure to perform by the stated date constitutes a breach.",
+    },
+    {
+      q: "A seller's agent includes 'time is of the essence' in the purchase agreement. What does this language primarily accomplish?",
+      options: ["It encourages buyers to make quick offers during negotiation", "It establishes that failure to close by the deadline is a material breach", "It allows the escrow company to set closing dates unilaterally", "It prevents either party from requesting inspection contingencies"],
+      correctIndex: 1,
+      explain: "The phrase makes timeliness a critical contract obligation; parties cannot disregard deadlines without risking breach of contract.",
+    },
+    {
+      q: "Which statement best explains the legal effect of including 'time is of the essence' in a Hawaii real estate purchase contract?",
+      options: ["The closing agent must schedule settlement within 20 business days", "Strict compliance with stated deadlines becomes a contractual obligation", "The real estate commission may issue a fine if closing is delayed", "Negotiations must conclude within a specific timeframe set by the MLS"],
+      correctIndex: 1,
+      explain: "This clause converts the closing date and other time-sensitive terms into mandatory contract requirements rather than flexible guidelines.",
+    },
+    {
+      q: "A buyer's attorney advises that 'time is of the essence' language in the offer should be carefully negotiated. Why is this contract language significant?",
+      options: ["It reduces the number of days allowed for title search and review", "It makes the deadline a material term, and missing it can trigger contract default", "It automatically waives the buyer's right to conduct inspections", "It grants the seller authority to proceed with other offers if closing is one day late"],
+      correctIndex: 1,
+      explain: "Including this clause means the parties have explicitly agreed that deadlines are binding; breach of the deadline may justify rescission or damages.",
+    },
+    {
+      q: "When a real estate contract includes the clause 'time is of the essence,' what legal obligation does this create for the parties?",
+      options: ["The buyer may request a reasonable extension without penalty", "Performance must occur by the specified date or the contract may be breached", "Both parties are encouraged to complete the transaction promptly but flexibility is allowed", "The listing agent has authority to extend closing by up to 10 business days"],
+      correctIndex: 1,
+      explain: "This clause makes the deadline a material condition of the contract; failure to perform by the stated date constitutes a breach, with no automatic right to extension.",
+    },
   ],
   "contracts-q05": [
     {
@@ -161,6 +311,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["They are actively promoted by state real estate commissions as consumer-friendly", "They are restricted or prohibited in most states due to inherent conflict-of-interest problems", "They are permitted without limitation as long as both parties consent in writing", "They are the standard arrangement for properties listed under $500,000"],
       correctIndex: 1,
       explain: "Net listings are disfavored or prohibited because the broker's compensation incentive misaligns with fiduciary duty—the agent profits more by negotiating a higher price, creating a conflict that many jurisdictions restrict to protect consumers.",
+    },
+    {
+      q: "In Hawaii and most U.S. states, a net listing arrangement is generally:",
+      options: ["The preferred method for commercial property sales", "Subject to strict regulation or outright prohibition due to ethical concerns", "Mandated by the Hawaii Real Estate Commission for all residential transactions", "Recommended by the National Association of REALTORS® as a best practice"],
+      correctIndex: 1,
+      explain: "Net listings are disfavored or prohibited in most states because they create inherent conflicts of interest between the agent's personal profit motive and the seller's interest in maximizing net proceeds.",
+    },
+    {
+      q: "Why would a Hawaii real estate licensee face regulatory scrutiny when entering into a net listing with a seller?",
+      options: ["Net listings are explicitly required by Hawaii statute for all residential properties", "The arrangement creates a significant risk of agent self-dealing and undisclosed conflicts of interest", "Net listings reduce transaction costs and are considered industry standard practice", "Federal law mandates that all listings must include a net price floor"],
+      correctIndex: 1,
+      explain: "Net listings inherently incentivize the agent to keep any amount above the net price for themselves, rather than seeking the best possible price for the seller, creating a problematic conflict of interest.",
+    },
+    {
+      q: "Which statement accurately reflects the regulatory position on net listings in most states?",
+      options: ["They are encouraged by real estate commissions as a way to align broker and seller incentives", "They are most frequently used in new construction and commercial development markets", "They are generally discouraged or prohibited because the listing agent's personal profit motive may override the seller's interests", "They are required by law whenever a seller requests a guaranteed sale price"],
+      correctIndex: 2,
+      explain: "Most states restrict or prohibit net listings due to the inherent conflict of interest: the agent benefits by keeping the difference between the sale price and the net price, rather than advocating for the highest possible price for the seller.",
+    },
+    {
+      q: "A seller asks a Hawaii licensee: 'Can we set up a net listing where you get to keep anything above $500,000?' The licensee should understand that this arrangement is:",
+      options: ["Permissible under Hawaii law and standard industry practice", "Compliant with NAR Code of Ethics requirements", "Problematic due to the conflict of interest it creates between the agent's compensation and the seller's best interest", "A common structure for listing agreements in residential real estate"],
+      correctIndex: 2,
+      explain: "Net listings create an unacceptable conflict of interest because the agent profits directly from keeping the spread above the net price, rather than being motivated to achieve the highest possible sale price for the seller.",
+    },
+    {
+      q: "In Hawaii and most U.S. states, a net listing arrangement is generally viewed with caution or restricted because:",
+      options: ["It guarantees the seller receives a minimum net amount regardless of sale price", "It creates an inherent conflict of interest between broker compensation and seller's best interest", "It is the fastest way to sell residential properties in competitive markets", "It is mandated by the Hawaii Real Estate Commission for all exclusive listings"],
+      correctIndex: 1,
+      explain: "Net listings are problematic because the broker's commission increases with the sale price above the net, incentivizing the broker to prioritize their own gain over maximizing the seller's proceeds, creating an ethical conflict.",
     },
   ],
   "contracts-q06": [
@@ -188,6 +368,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Duress makes a contract voidable, meaning the coerced party has the right to affirm or disaffirm it; it is not automatically void but rather subject to the victim's election.",
     },
+    {
+      q: "When a real estate agent coerces a seller into signing a listing agreement through threats, the contract is most accurately described as:",
+      options: ["Voidable", "Void ab initio", "Fully executed and binding", "Rescindable only with court approval"],
+      correctIndex: 0,
+      explain: "Duress renders a contract voidable, meaning the injured party may elect to affirm or disaffirm it, but the contract is not automatically void.",
+    },
+    {
+      q: "A buyer who signs a purchase agreement after being threatened with legal action if she does not comply has entered into a contract that is:",
+      options: ["Void and unenforceable against either party", "Voidable at the buyer's election", "Automatically rescinded", "Valid but subject to rescission by the seller"],
+      correctIndex: 1,
+      explain: "A contract procured through duress is voidable—the threatened party has the right to void it, but only that party may exercise this option.",
+    },
+    {
+      q: "Which statement best describes a contract executed under undue influence or coercion?",
+      options: ["It is void from its inception and never creates binding obligations", "It is voidable, and the injured party may choose to enforce or disaffirm it", "It is unenforceable unless both parties later ratify it in writing", "It is suspended until a court determines the extent of the pressure applied"],
+      correctIndex: 1,
+      explain: "Duress makes a contract voidable—the harmed party has the unilateral right to void it, though the contract is not inherently void.",
+    },
+    {
+      q: "A lessor pressures a tenant to sign an extension by threatening eviction based on a false claim of lease violation. The resulting extension agreement is:",
+      options: ["Valid and enforceable unless the tenant files a complaint with the REC", "Voidable at the tenant's discretion", "Null and void from the moment of signing", "Enforceable against the tenant but not the lessor"],
+      correctIndex: 1,
+      explain: "Contracts procured through duress or improper pressure are voidable, meaning the injured party may disaffirm them, but they are not void ab initio.",
+    },
+    {
+      q: "A buyer executes a real estate purchase agreement after the seller threatens legal action if the buyer does not sign immediately. What is the legal status of this agreement?",
+      options: ["It is void from inception and cannot be ratified by either party", "It is voidable by the injured party at their discretion", "It is enforceable because both parties signed the document", "It is unenforceable only if the buyer can prove emotional distress"],
+      correctIndex: 1,
+      explain: "Duress through threats renders a contract voidable, meaning the coerced party may choose to void it or enforce it; the contract is not automatically void.",
+    },
   ],
   "contracts-q07": [
     {
@@ -213,6 +423,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Assignment", "Novation", "Waiver", "Subrogation"],
       correctIndex: 1,
       explain: "Novation is the only modification method that completely releases the original obligor while substituting a new one, and it demands express agreement from all involved parties.",
+    },
+    {
+      q: "When a contract requires all parties to agree to replace one obligor with another party, the legal process is called:",
+      options: ["Reformation", "Novation", "Delegation", "Rescission"],
+      correctIndex: 1,
+      explain: "Novation is the mutual agreement by all parties to substitute a new obligor for the original one, discharging the original party's liability.",
+    },
+    {
+      q: "A seller, buyer, and lender all consent to replace the original buyer with a new buyer in a real estate transaction. This mutual substitution is known as:",
+      options: ["Assignment of contract", "Novation", "Assumption of liability", "Modification"],
+      correctIndex: 1,
+      explain: "Novation requires consent from all parties and creates a new contract with the substituted party, releasing the original obligor entirely.",
+    },
+    {
+      q: "Which contractual remedy involves the complete substitution of one party for another with full consent of all remaining parties?",
+      options: ["Rescission", "Assignment", "Novation", "Estoppel"],
+      correctIndex: 2,
+      explain: "Novation discharges the original party and creates a new obligation with the substitute party, requiring unanimous consent from all parties to the contract.",
+    },
+    {
+      q: "If a real estate contract party wants to be completely released from all obligations by having another party take their place with everyone's approval, this is accomplished through:",
+      options: ["Novation", "Subordination", "Transfer of title", "Contract interpretation"],
+      correctIndex: 0,
+      explain: "Novation is the only mechanism that allows a party to be fully released from contractual obligations while a new party assumes them, provided all parties consent.",
+    },
+    {
+      q: "When all parties agree to replace an original contracting party with a completely new party, thereby releasing the original obligor from liability, this legal process is known as:",
+      options: ["Reformation of the contract terms", "Novation", "Assignment of contractual rights", "Rescission and restatement"],
+      correctIndex: 1,
+      explain: "Novation is the substitution of a new obligor with consent of all parties, which extinguishes the original party's obligations. Assignment, by contrast, transfers rights but does not release the original obligor.",
     },
   ],
   "contracts-q08": [
@@ -344,6 +584,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "$560,000 ÷ $700,000 = 80%. PMI requirements and interest rates are commonly affected by whether LTV exceeds 80%.",
     },
+    {
+      q: "A property is purchased for $425,000. The buyer secures financing of $340,000. What is the loan-to-value ratio?",
+      options: ["75%", "80%", "85%", "90%"],
+      correctIndex: 1,
+      explain: "$340,000 ÷ $425,000 = 80%. LTV measures the loan amount as a percentage of the property's purchase price or appraised value.",
+    },
+    {
+      q: "A borrower puts 20% down on a $550,000 home purchase. The remaining amount is financed. Calculate the LTV.",
+      options: ["70%", "75%", "80%", "85%"],
+      correctIndex: 2,
+      explain: "A 20% down payment means 80% is financed ($440,000). LTV = $440,000 ÷ $550,000 = 80%.",
+    },
+    {
+      q: "In a real estate transaction, the appraised value is $180,000 and the mortgage amount is $144,000. What is the loan-to-value percentage?",
+      options: ["75%", "78%", "80%", "82%"],
+      correctIndex: 2,
+      explain: "$144,000 ÷ $180,000 = 80%. LTV is calculated by dividing the loan amount by the property's appraised value or purchase price.",
+    },
+    {
+      q: "A buyer finances $192,000 on a property valued at $240,000. Which statement correctly describes the LTV ratio?",
+      options: ["The LTV is 75%, meaning the buyer has a 25% equity position", "The LTV is 80%, indicating the buyer has financed four-fifths of the property value", "The LTV is 85%, requiring mortgage insurance coverage", "The LTV is 90%, suggesting a high-risk loan scenario"],
+      correctIndex: 1,
+      explain: "$192,000 ÷ $240,000 = 80%. An 80% LTV means the borrower financed 80% of the property's value, leaving a 20% down payment.",
+    },
+    {
+      q: "A property is valued at $425,000. The buyer obtains a mortgage for $340,000. What is the loan-to-value ratio?",
+      options: ["75%", "80%", "85%", "90%"],
+      correctIndex: 1,
+      explain: "$340,000 ÷ $425,000 = 80%. LTV is calculated by dividing the loan amount by the property value (or purchase price).",
+    },
   ],
   "financing-q01": [
     {
@@ -369,6 +639,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["$2,000", "$20,000", "$1,500", "$3,000"],
       correctIndex: 0,
       explain: "A discount point is 1% of the loan amount; 1% of $200,000 = $2,000.",
+    },
+    {
+      q: "A borrower obtains a mortgage for $200,000 and pays 1 discount point at closing. What dollar amount does this point represent?",
+      options: ["$20,000", "$2,000", "$200", "$10,000"],
+      correctIndex: 1,
+      explain: "One discount point equals 1% of the loan amount. 1% of $200,000 = $2,000.",
+    },
+    {
+      q: "If a lender charges 1 point on a $200,000 mortgage loan, the borrower's point cost is:",
+      options: ["$1,000", "$20,000", "$2,000", "$5,000"],
+      correctIndex: 2,
+      explain: "A point is calculated as 1% of the loan principal. 1% × $200,000 = $2,000.",
+    },
+    {
+      q: "A buyer finances a home with a $200,000 loan and agrees to pay 1 origination point. How much will the buyer pay for this point?",
+      options: ["$2,000", "$200", "$4,000", "$20,000"],
+      correctIndex: 0,
+      explain: "Points are expressed as a percentage of the loan amount; 1 point = 1% of $200,000 = $2,000.",
+    },
+    {
+      q: "On a $200,000 loan amount, what is the monetary value of a single discount point?",
+      options: ["$10,000", "$500", "$2,000", "$200"],
+      correctIndex: 2,
+      explain: "Each discount point represents 1% of the loan amount. 1% of $200,000 equals $2,000.",
+    },
+    {
+      q: "A borrower is financing a property with a $200,000 mortgage. If the lender charges 1 discount point at origination, what is the dollar amount of that point?",
+      options: ["$1,000", "$2,000", "$200", "$20,000"],
+      correctIndex: 1,
+      explain: "A discount point represents 1% of the loan amount. 1% of $200,000 = $2,000.",
     },
   ],
   "financing-q02": [
@@ -396,6 +696,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "The acceleration clause is the lender's enforcement mechanism that converts a defaulted installment loan into a demand for the total outstanding principal balance due immediately.",
     },
+    {
+      q: "A borrower fails to make a mortgage payment. What mortgage clause allows the lender to immediately demand repayment of the entire outstanding loan balance?",
+      options: ["Subordination clause", "Acceleration clause", "Alienation clause", "Defeasance clause"],
+      correctIndex: 1,
+      explain: "The acceleration clause is a standard mortgage provision that permits the lender to declare the entire loan due and payable immediately upon borrower default.",
+    },
+    {
+      q: "Which of the following mortgage provisions gives a lender the right to demand full payment of the remaining loan balance if the borrower defaults?",
+      options: ["Due-on-sale clause", "Prepayment penalty clause", "Acceleration clause", "Estoppel clause"],
+      correctIndex: 2,
+      explain: "The acceleration clause empowers the lender to accelerate the loan maturity and require immediate full repayment when the borrower defaults on obligations.",
+    },
+    {
+      q: "When a mortgagor breaches the loan agreement, the mortgagee typically invokes which clause to declare the entire debt immediately due?",
+      options: ["Alienation clause", "Defeasance clause", "Acceleration clause", "Subordination clause"],
+      correctIndex: 2,
+      explain: "The acceleration clause allows a lender to accelerate the entire remaining balance to maturity upon default, enabling immediate collection of the full debt.",
+    },
+    {
+      q: "A Hawaii mortgage contains a provision that permits the lender to demand payment of the full outstanding balance if the borrower misses even one payment. What is this provision called?",
+      options: ["Defeasance provision", "Alienation provision", "Subordination provision", "Acceleration provision"],
+      correctIndex: 3,
+      explain: "The acceleration provision allows the lender to accelerate maturity of the loan and declare the entire balance immediately due upon default by the borrower.",
+    },
+    {
+      q: "A borrower fails to make a mortgage payment for three months. Which mortgage clause allows the lender to immediately require the entire outstanding loan balance to be paid in full?",
+      options: ["Subordination clause", "Acceleration clause", "Defeasance clause", "Due-on-sale clause"],
+      correctIndex: 1,
+      explain: "The acceleration clause empowers a lender to declare the entire remaining debt due immediately upon borrower default, rather than waiting for individual payments to come due.",
+    },
   ],
   "financing-q03": [
     {
@@ -421,6 +751,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Yes, because it was delivered before the closing date", "No, because only 1 business day (Tuesday) has elapsed before consummation", "Yes, because it was delivered within the same week", "No, because it should be delivered at closing instead"],
       correctIndex: 1,
       explain: "Monday to Wednesday provides only 1 business day (Tuesday) of waiting time; TRID requires a minimum of 3 business days between delivery and consummation.",
+    },
+    {
+      q: "Under TRID regulations, when must a lender provide the Closing Disclosure to a borrower?",
+      options: ["On the day of loan application submission", "At least 3 business days prior to closing", "Within 24 hours after loan approval", "At the closing table immediately before signing"],
+      correctIndex: 1,
+      explain: "TRID mandates that the Closing Disclosure be delivered no later than 3 business days before consummation of the loan.",
+    },
+    {
+      q: "A borrower in Hawaii receives their final loan estimate and asks when they will get the Closing Disclosure. The loan officer should advise:",
+      options: ["It will be ready at closing", "It will be mailed 3 business days before closing", "It must be provided within 7 calendar days of approval", "It will be emailed immediately after underwriting clears the file"],
+      correctIndex: 1,
+      explain: "Federal TRID rules require the Closing Disclosure be given to the borrower no less than 3 business days before the closing date.",
+    },
+    {
+      q: "Which timeline requirement applies to delivery of the Closing Disclosure under current federal lending regulations?",
+      options: ["5 business days before consummation", "3 business days before consummation", "10 calendar days before consummation", "On the date of closing or within 1 day after"],
+      correctIndex: 1,
+      explain: "TRID requires lenders to deliver the Closing Disclosure at least 3 business days before the loan is consummated.",
+    },
+    {
+      q: "A real estate transaction is scheduled to close on Friday. The lender must provide the Closing Disclosure no later than:",
+      options: ["Friday morning before closing", "Tuesday of that week", "The previous Monday", "Within 24 hours of closing"],
+      correctIndex: 2,
+      explain: "Since TRID requires 3 business days before consummation, a Friday closing requires delivery by the prior Monday at the latest.",
+    },
+    {
+      q: "Under TRID regulations, when must a lender provide the Closing Disclosure to a borrower?",
+      options: ["At the time of loan approval", "No later than 3 business days prior to consummation", "On the day the borrower signs the promissory note", "5 calendar days before the scheduled closing date"],
+      correctIndex: 1,
+      explain: "TRID (Regulation Z) mandates that the Closing Disclosure be delivered at least 3 business days before the loan is consummated to allow the borrower time to review final terms.",
     },
   ],
   "financing-q04": [
@@ -448,6 +808,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Fannie Mae enters secondary market transactions by purchasing loans after they have been originated by primary lenders, not during the origination process itself.",
     },
+    {
+      q: "Which of the following government-sponsored enterprises primarily acquires mortgage loans from retail lenders and banks?",
+      options: ["The Federal Reserve System", "Freddie Mac and Fannie Mae", "The Department of Housing and Urban Development", "The Veterans Administration"],
+      correctIndex: 1,
+      explain: "Fannie Mae and Freddie Mac operate as secondary market entities that purchase loans originated by primary lenders, providing liquidity to the mortgage market.",
+    },
+    {
+      q: "A loan originator sells a conforming mortgage to Fannie Mae six months after closing. This transaction occurs in the:",
+      options: ["Primary mortgage market", "Secondary mortgage market", "Warehouse lending market", "Portfolio lending market"],
+      correctIndex: 1,
+      explain: "The secondary mortgage market is where existing loans are bought and sold; Fannie Mae purchases loans from originators in this market segment.",
+    },
+    {
+      q: "Fannie Mae's primary function in the mortgage industry is to:",
+      options: ["Originate new mortgage loans directly to borrowers", "Purchase and hold mortgage loans from primary lenders", "Provide title insurance and escrow services", "Regulate interest rates set by commercial banks"],
+      correctIndex: 1,
+      explain: "Fannie Mae operates in the secondary market by purchasing loans that were originated by primary lenders, thereby providing liquidity and standardization to the mortgage market.",
+    },
+    {
+      q: "Which market does Fannie Mae serve by acquiring loans that were originally issued by mortgage banks and savings institutions?",
+      options: ["The construction lending market", "The secondary mortgage market", "The hard money lending market", "The wholesale mortgage market"],
+      correctIndex: 1,
+      explain: "Fannie Mae functions as a secondary market purchaser, buying loans that primary lenders have already originated, thereby creating liquidity in the market.",
+    },
+    {
+      q: "Which of the following government-sponsored enterprises (GSEs) functions by purchasing mortgage loans from originators in order to provide liquidity to the lending market?",
+      options: ["The Federal Reserve System", "Fannie Mae", "The Department of Housing and Urban Development", "The Government Accountability Office"],
+      correctIndex: 1,
+      explain: "Fannie Mae operates in the secondary mortgage market by purchasing loans from primary lenders (banks, credit unions, mortgage companies), thereby providing liquidity and capital for continued lending.",
+    },
   ],
   "financing-q05": [
     {
@@ -473,6 +863,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Amortized", "Subordinated", "Pledged", "Graduated-payment"],
       correctIndex: 0,
       explain: "An amortized loan requires fixed payments that systematically pay down principal and interest, leaving no balance at loan maturity.",
+    },
+    {
+      q: "Which loan structure features consistent periodic payments that completely eliminate the debt by the end of the loan term?",
+      options: ["Interest-only loan", "Amortized loan", "Adjustable-rate mortgage", "Straight note"],
+      correctIndex: 1,
+      explain: "An amortized loan is designed with equal payments over the loan term that pay down both principal and interest until the debt is fully satisfied at maturity.",
+    },
+    {
+      q: "A borrower receives a mortgage with fixed monthly payments that gradually reduce the principal balance until the loan reaches zero at the end of the amortization period. This is a:",
+      options: ["Balloon note", "Graduated payment mortgage", "Fully amortized mortgage", "Deed of trust"],
+      correctIndex: 2,
+      explain: "A fully amortized mortgage uses consistent monthly payments combining principal and interest that completely pay off the loan by the final maturity date.",
+    },
+    {
+      q: "Which loan type requires the borrower to make uniform monthly installments that cover both principal reduction and interest over the full loan duration?",
+      options: ["Amortized", "Negative amortization", "Swing loan", "Blanket mortgage"],
+      correctIndex: 0,
+      explain: "An amortized loan structure uses equal monthly payments throughout the loan term to progressively retire the principal while paying interest until the obligation is completely satisfied.",
+    },
+    {
+      q: "A real estate loan in which the borrower makes constant monthly payments that pay off both interest and principal, resulting in zero balance at loan maturity, is called:",
+      options: ["Wraparound mortgage", "Construction loan", "Amortized loan", "Term note"],
+      correctIndex: 2,
+      explain: "An amortized loan is characterized by level payments that systematically eliminate the entire debt obligation through the combination of principal paydown and interest charges over the loan's term.",
+    },
+    {
+      q: "Which loan structure requires equal periodic payments that systematically reduce the principal balance to zero over the loan term?",
+      options: ["Interest-only loan", "Amortizing loan", "Balloon note", "Straight loan"],
+      correctIndex: 1,
+      explain: "An amortizing loan features consistent monthly payments that cover both principal and interest, fully retiring the debt by the maturity date with no lump-sum payment due.",
     },
   ],
   "financing-q06": [
@@ -500,6 +920,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The due-on-sale clause is an alienation restriction that allows the lender to demand full repayment if the borrower transfers the property without the lender's permission.",
     },
+    {
+      q: "Under a due-on-sale clause, what right does a lender have if a borrower transfers the property without the lender's approval?",
+      options: ["Demand immediate full repayment of the loan balance", "File a mechanic's lien against the new owner", "Require the buyer to obtain a new appraisal within 30 days", "Impose a penalty equal to 6 months' interest"],
+      correctIndex: 0,
+      explain: "A due-on-sale clause (alienation clause) gives the lender the right to accelerate the loan and demand full repayment if the property is sold or transferred without lender consent.",
+    },
+    {
+      q: "Which statement best describes how a due-on-sale provision protects a lender's interests?",
+      options: ["It prevents the borrower from refinancing at a lower interest rate", "It prevents the property from being transferred without the lender's consent and allows acceleration if violated", "It automatically transfers the property title to the lender upon sale", "It limits the buyer's ability to obtain title insurance on the property"],
+      correctIndex: 1,
+      explain: "The due-on-sale clause protects the lender by giving consent rights over property transfer and acceleration rights if the borrower violates the clause.",
+    },
+    {
+      q: "A borrower conveys property to a family member without notifying the lender. If the loan contains a due-on-sale clause, what is the lender's primary remedy?",
+      options: ["Sue the family member for fraud and unjust enrichment", "Call the loan due in full or approve the transfer with amended terms", "Automatically record a lien on the new owner's other property", "Reduce the interest rate on the existing loan as compensation"],
+      correctIndex: 1,
+      explain: "A due-on-sale clause gives the lender the right to demand acceleration (call the loan) or approve the transfer; it does not automatically create liens or change loan terms.",
+    },
+    {
+      q: "In Hawaii real estate transactions, a due-on-sale clause is commonly included in mortgages to:",
+      options: ["Ensure the seller receives proceeds from the sale", "Give the lender control over property transfers and the right to accelerate if the borrower transfers without consent", "Prevent property taxes from being assessed against the lender", "Allow the lender to assume ownership if property values decline"],
+      correctIndex: 1,
+      explain: "The due-on-sale clause protects lender interests by requiring lender approval for transfers and allowing acceleration if the borrower violates this restriction.",
+    },
+    {
+      q: "When a real estate loan contains an alienation clause, what right does it grant to the lender?",
+      options: ["The right to demand full payment if the borrower transfers title without lender approval", "The right to adjust the interest rate annually based on market conditions", "The right to foreclose immediately upon any property improvement", "The right to prevent the borrower from obtaining homeowner insurance"],
+      correctIndex: 0,
+      explain: "An alienation (due-on-sale) clause gives the lender the power to accelerate the loan and demand full repayment if the property is sold or ownership is transferred without the lender's consent.",
+    },
   ],
   "financing-q07": [
     {
@@ -525,6 +975,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Hold the property in an LLC", "Pay private mortgage insurance premiums", "Accept a higher interest rate in lieu of down payment", "Complete a homebuyer education course"],
       correctIndex: 1,
       explain: "At 85% LTV, the borrower exceeds the 80% threshold and therefore must pay PMI to protect the lender's interest in the event of default.",
+    },
+    {
+      q: "A lender will typically mandate private mortgage insurance on a conventional loan if the borrower's:",
+      options: ["Down payment represents 25% or more of the purchase price", "Loan-to-value ratio surpasses 80%", "Credit score falls within the prime range of 740–760", "Debt-to-income ratio is below 28%"],
+      correctIndex: 1,
+      explain: "PMI is required on conventional loans when LTV exceeds 80%, meaning the borrower's equity is less than 20% and lender risk increases.",
+    },
+    {
+      q: "Under what loan condition would a conventional mortgage borrower most likely be required to pay PMI?",
+      options: ["When the borrower puts down 22% of the home's purchase price", "When the loan amount exceeds 80% of the property's appraised value", "When the loan principal is under $500,000", "When the borrower has made timely payments for 24 consecutive months"],
+      correctIndex: 1,
+      explain: "Private mortgage insurance protects the lender when LTV exceeds 80%, indicating the borrower has less than 20% equity in the property.",
+    },
+    {
+      q: "Which scenario would trigger the requirement for PMI on a conventional residential loan?",
+      options: ["Borrower obtains a fixed-rate 30-year mortgage", "Borrower finances more than 80% of the property's value", "Borrower's employment is in a commission-based field", "Borrower makes an initial earnest money deposit of 3%"],
+      correctIndex: 1,
+      explain: "PMI becomes mandatory when LTV exceeds 80% because the lender's risk exposure increases with a lower equity cushion for the borrower.",
+    },
+    {
+      q: "On a conventional loan, private mortgage insurance is generally imposed when the:",
+      options: ["Property appraises for less than the purchase price agreed in the contract", "Borrower's initial equity position falls below 20% of the property value", "Interest rate is locked in at a rate below the market average", "Title search reveals no prior liens or encumbrances"],
+      correctIndex: 1,
+      explain: "PMI is required when the loan-to-value ratio exceeds 80% (meaning the borrower has less than 20% equity), protecting the lender's interest in a higher-risk loan scenario.",
+    },
+    {
+      q: "A lender will typically require private mortgage insurance on a conventional loan if the borrower's loan-to-value ratio reaches what threshold?",
+      options: ["75% or higher", "Greater than 80%", "60% or lower", "Exactly 100%"],
+      correctIndex: 1,
+      explain: "PMI is mandated by lenders on conventional loans when LTV exceeds 80%, protecting the lender against default risk on high-leverage loans.",
     },
   ],
   "financing-q08": [
@@ -552,6 +1032,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Discount points are factored into APR calculations as part of the total financing cost, causing the APR to exceed the nominal interest rate presented to the borrower.",
     },
+    {
+      q: "When a lender charges discount points on a mortgage loan, how does the APR typically compare to the stated interest rate?",
+      options: ["The APR is identical to the interest rate regardless of points", "The APR becomes lower because points reduce the loan balance", "The APR exceeds the interest rate due to the cost of points and fees", "The APR is eliminated entirely when points are present"],
+      correctIndex: 2,
+      explain: "APR (Annual Percentage Rate) includes the nominal interest rate plus the cost of points and other fees expressed as an annualized rate, making it higher than the stated interest rate alone.",
+    },
+    {
+      q: "A borrower receives a mortgage quote with a 4% interest rate and 2 discount points. Which statement most accurately describes the relationship between APR and the quoted rate?",
+      options: ["APR will be lower than 4% because points improve the loan terms", "APR will be approximately 4% since points don't affect annual calculations", "APR will be higher than 4% once points and associated fees are factored in", "APR will equal 0% for the first year due to point deductions"],
+      correctIndex: 2,
+      explain: "The APR reflects the true cost of borrowing by incorporating points, origination fees, and other charges into an annualized percentage, resulting in a rate higher than the nominal interest rate.",
+    },
+    {
+      q: "In mortgage financing disclosures, APR and interest rate are typically different values. This difference is most commonly due to:",
+      options: ["State and federal usury law caps limiting how high interest rates can go", "The inclusion of points, origination fees, and closing costs in the APR calculation", "A requirement that APR must always be lower for consumer protection purposes", "The APR being reset to zero after the loan closing"],
+      correctIndex: 1,
+      explain: "APR includes discount points, loan origination fees, and other financing charges amortized over the loan term, which raises the APR above the nominal interest rate shown on the promissory note.",
+    },
+    {
+      q: "A lender advertises a 3.5% mortgage rate but the APR disclosed on the Loan Estimate is 3.75%. This difference primarily reflects:",
+      options: ["An error in the lender's calculations that must be corrected immediately", "The lender's markup on the property appraisal fee only", "The cost of points, fees, and other charges included in the APR computation", "A penalty applied to borrowers who fail to lock in their rate early"],
+      correctIndex: 2,
+      explain: "The higher APR incorporates the cost of discount points, origination fees, title fees, and other financing charges expressed as an annual rate, making the true cost of the loan higher than the stated interest rate.",
+    },
+    {
+      q: "When a lender quotes an APR that is higher than the stated interest rate, this difference most likely reflects:",
+      options: ["An error in the lender's calculation software", "The inclusion of points, fees, and other financing costs amortized over the loan term", "A penalty imposed by the Hawaii Real Estate Commission", "Market conditions that will reverse before closing"],
+      correctIndex: 1,
+      explain: "APR incorporates discount points, origination fees, and other closing costs expressed as an annual percentage, making it typically higher than the nominal interest rate when points are charged.",
+    },
   ],
   "financing-q09": [
     {
@@ -577,6 +1087,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["State insurance commission regulations on premium rates", "RESPA Section 8 kickback prohibitions", "The Dodd-Frank Act's consumer protection rules", "Hawaii's Real Estate Commission licensing requirements"],
       correctIndex: 1,
       explain: "RESPA Section 8 bans any payment or benefit given as compensation for referrals between settlement service providers, making this direct payment arrangement illegal.",
+    },
+    {
+      q: "Under RESPA Section 8, which of the following practices is strictly forbidden in real estate transactions?",
+      options: ["Charging a reasonable origination fee for loan processing", "Receiving compensation for referring a client to a title company", "Requiring a home inspection before closing", "Disclosing all closing costs on the Closing Disclosure"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 prohibits referral fees and kickbacks between settlement service providers, as these undisclosed payments could inflate costs for consumers.",
+    },
+    {
+      q: "A real estate broker is approached by a mortgage lender offering a commission for every loan referral. What does RESPA Section 8 say about this arrangement?",
+      options: ["It is permissible if documented in the listing agreement", "It is illegal regardless of whether the referral fee is disclosed", "It is allowed as long as the fee does not exceed 10% of the loan amount", "It is acceptable if both parties agree to the arrangement in writing"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 explicitly prohibits kickbacks and unearned fees between settlement service providers to prevent inflated costs and maintain transaction integrity.",
+    },
+    {
+      q: "Which federal regulation makes it unlawful for settlement service providers to pay each other for generating referrals?",
+      options: ["FIRREA Section 1113", "RESPA Section 8", "The Community Reinvestment Act", "Regulation Z of the Truth in Lending Act"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 specifically bans referral fees, kickbacks, and unearned fees among closing service providers to protect consumers from inflated settlement costs.",
+    },
+    {
+      q: "A title company offers to pay an escrow agent for each customer referred to them. This transaction would violate:",
+      options: ["State licensing laws and appraisal independence standards", "RESPA Section 8 prohibition on kickbacks and referral fees", "The Fair Housing Act and lending discrimination guidelines", "Regulation Z disclosure requirements for affiliated business arrangements"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 prohibits compensation payments between settlement service providers for referrals, as these undisclosed kickbacks artificially increase consumer costs.",
+    },
+    {
+      q: "Under RESPA Section 8, which practice is considered an illegal referral arrangement?",
+      options: ["A lender charging origination fees for loan processing", "A title company paying a real estate agent for sending business their way", "A broker requiring earnest money deposits from buyers", "A mortgage servicer collecting monthly loan payments"],
+      correctIndex: 1,
+      explain: "RESPA Section 8 explicitly prohibits kickbacks and referral fees between settlement service providers, regardless of the form or justification for the payment.",
     },
   ],
   "financing-q10": [
@@ -604,6 +1144,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "VA loans are prohibited from requiring PMI; the VA backing and optional funding fee serve as the guarantor, eliminating this cost.",
     },
+    {
+      q: "Which of the following is a key benefit unique to VA loan programs for eligible veterans?",
+      options: ["Exemption from property inspections", "No down payment needed in most cases", "Automatic loan approval regardless of credit", "Lower interest rates than conventional loans by statute"],
+      correctIndex: 1,
+      explain: "VA loans typically require zero down payment as a primary benefit to veterans, distinguishing them from conventional and FHA loans that may require 3-20% down.",
+    },
+    {
+      q: "A service member with VA eligibility should understand that VA financing generally:",
+      options: ["Requires 10% minimum down payment", "Mandates mortgage insurance premiums", "Eliminates the down payment requirement", "Limits borrowers to a single property purchase"],
+      correctIndex: 2,
+      explain: "VA loans feature a zero down payment benefit, which removes the financial barrier of accumulating a large down payment fund required by most other loan types.",
+    },
+    {
+      q: "What is a primary distinguishing feature of VA mortgage loans compared to conventional financing?",
+      options: ["Borrowers pay mortgage insurance annually", "Down payment is not typically required", "Veterans can only refinance once per year", "Interest rates are set by the Department of Veterans Affairs"],
+      correctIndex: 1,
+      explain: "VA loans uniquely offer no down payment requirement, along with no PMI, making them one of the most affordable financing options available to eligible borrowers.",
+    },
+    {
+      q: "An eligible VA borrower reviewing loan terms should expect:",
+      options: ["A requirement to pay private mortgage insurance", "A 15% down payment minimum", "No down payment obligation in most transactions", "Restrictions on using the benefit for investment property"],
+      correctIndex: 2,
+      explain: "VA loan programs characteristically waive the down payment requirement for eligible veterans, reducing upfront cash needed to purchase a home compared to other loan programs.",
+    },
+    {
+      q: "Which of the following is a key advantage of a VA loan for an eligible veteran?",
+      options: ["The lender will waive the appraisal requirement", "A down payment is typically not required", "Private mortgage insurance premiums are mandatory", "The interest rate is fixed at the federal rate"],
+      correctIndex: 1,
+      explain: "VA loans are designed to help veterans by eliminating the down payment requirement and avoiding PMI, making homeownership more accessible.",
+    },
   ],
   "financing-q11": [
     {
@@ -629,6 +1199,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["The new margin percentage applied to the previous rate", "The current market index value plus the lender's fixed margin", "The margin value only, with no index component", "The index divided by the margin"],
       correctIndex: 1,
       explain: "Each ARM adjustment recalculates using the current index value added to the constant margin; the index may change but the margin component remains fixed.",
+    },
+    {
+      q: "When calculating the interest rate on an adjustable-rate mortgage, a lender combines two components. Which of the following correctly identifies those components?",
+      options: ["The discount point percentage and the loan-to-value ratio", "The benchmark rate and the lender's markup", "The annual percentage rate and the origination fee", "The appraisal value and the underwriting adjustment"],
+      correctIndex: 1,
+      explain: "An ARM rate is determined by adding the benchmark index (which fluctuates) to the lender's markup or spread, commonly called the margin.",
+    },
+    {
+      q: "An ARM borrower wants to understand what makes up their adjustable rate. If the index is currently 2% and the lender's spread is 2.5%, what is the resulting interest rate?",
+      options: ["2%", "4.5%", "2.5%", "0.5%"],
+      correctIndex: 1,
+      explain: "The ARM rate equals the index plus the margin: 2% + 2.5% = 4.5%; the margin remains constant while the index adjusts.",
+    },
+    {
+      q: "Which component of an ARM interest rate is set by the lender and does NOT change throughout the loan term?",
+      options: ["The index rate, which is tied to market conditions", "The margin, which is the lender's fixed spread", "The rate cap, which adjusts annually", "The initial teaser rate, which is subsidized"],
+      correctIndex: 1,
+      explain: "The margin is the lender's static profit spread that never changes; the index component varies with market conditions and is added to this fixed margin.",
+    },
+    {
+      q: "A borrower's ARM adjusts when the index changes. To find the new rate after adjustment, a loan servicer must:",
+      options: ["Subtract the margin from the current index", "Use only the published index without any additions", "Add the fixed margin to the new index value", "Multiply the index by the margin percentage"],
+      correctIndex: 2,
+      explain: "The new ARM rate is always calculated by adding the constant margin to the current index; this simple addition formula applies at each adjustment period.",
+    },
+    {
+      q: "When calculating the interest rate on an adjustable-rate mortgage (ARM), which two components must be combined?",
+      options: ["The margin and the discount points", "The index and the margin", "The index and the points paid at origination", "The margin alone, adjusted annually"],
+      correctIndex: 1,
+      explain: "An ARM's interest rate is determined by adding the lender's fixed margin to the variable index rate. The index fluctuates with market conditions while the margin remains constant throughout the loan term.",
     },
   ],
   "hi-contracts-addenda-q00": [
@@ -3278,6 +3878,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The acronym COALD directly corresponds to Care, Obedience, Accounting, Loyalty, and Disclosure, which are the five essential fiduciary duties.",
     },
+    {
+      q: "Which of the following correctly identifies the five fiduciary duties represented by the acronym COALD?",
+      options: ["Conduct, Obedience, Audit, Loyalty, Disclosure", "Care, Obedience, Accounting, Loyalty, Disclosure", "Competence, Obligation, Authority, Liability, Documentation", "Confidence, Obedience, Accuracy, Loyalty, Diligence"],
+      correctIndex: 1,
+      explain: "COALD is a mnemonic for the five fiduciary duties: Care, Obedience, Accounting, Loyalty, and Disclosure. These are the core ethical and legal obligations brokers owe to their clients.",
+    },
+    {
+      q: "A real estate licensee must understand COALD, which represents:",
+      options: ["Communication, Obligation, Audit, Loyalty, Disclosure", "Conduct, Order, Authority, Liability, Documentation", "Care, Obedience, Accounting, Loyalty, Disclosure", "Competence, Organization, Accuracy, Legal compliance, Diligence"],
+      correctIndex: 2,
+      explain: "COALD stands for Care, Obedience, Accounting, Loyalty, and Disclosure—the five essential fiduciary duties that Hawaii and mainland brokers must fulfill toward their clients.",
+    },
+    {
+      q: "In Hawaii real estate practice, the acronym COALD describes the broker's:",
+      options: ["Care, Obedience, Accounting, Loyalty, Disclosure", "Confidentiality, Obligation, Authority, Legal duty, Documentation", "Conduct, Obedience, Audit, Liability, Diligence", "Communication, Obligation, Accountability, Loyalty, Disclosure"],
+      correctIndex: 0,
+      explain: "COALD is the acronym for the five fiduciary duties: Care, Obedience, Accounting, Loyalty, and Disclosure. These duties form the foundation of a broker's legal and ethical responsibilities to clients.",
+    },
+    {
+      q: "When studying broker responsibilities, what does the acronym COALD stand for?",
+      options: ["Competence, Obligation, Accounting, Loyalty, Disclosure", "Confidence, Order, Authority, Loyalty, Documentation", "Care, Obedience, Accounting, Loyalty, Disclosure", "Conduct, Obedience, Accuracy, Legal duty, Diligence"],
+      correctIndex: 2,
+      explain: "COALD represents the five fiduciary duties required of real estate brokers: Care, Obedience, Accounting, Loyalty, and Disclosure. These are core principles in Hawaii real estate law.",
+    },
+    {
+      q: "Which of the following correctly identifies the five fiduciary duties represented by the acronym COALD?",
+      options: ["Candor, Oversight, Appraisal, Legal compliance, Diligence", "Care, Obedience, Accounting, Loyalty, Disclosure", "Competence, Organization, Authority, Liabilities, Documentation", "Confidentiality, Obligations, Assessments, Liability, Duties"],
+      correctIndex: 1,
+      explain: "COALD is the established acronym for the five core fiduciary duties that Hawaii real estate licensees must perform for their clients and principals.",
+    },
   ],
   "laws-of-agency-q01": [
     {
@@ -3303,6 +3933,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Subagent acting under a broker's direct control", "General agent with authority over multiple matters", "Special agent authorized for one specific purpose", "Universal agent with all possible powers"],
       correctIndex: 1,
       explain: "Property managers function as general agents because they exercise broad, ongoing authority over multiple aspects of property management on behalf of the owner.",
+    },
+    {
+      q: "Which type of agency relationship best describes the authority held by someone managing residential rental properties on behalf of an owner?",
+      options: ["Universal agent with power of attorney", "General agent with broad, continuing powers", "Special agent limited to lease negotiations only", "Subagent acting under a broker's supervision"],
+      correctIndex: 1,
+      explain: "Property managers exercise general agency because they have broad, continuing authority to handle multiple, recurring tasks for the owner over time.",
+    },
+    {
+      q: "A person hired to oversee daily operations, collect rent, arrange maintenance, and handle tenant relations for an apartment complex typically functions as a:",
+      options: ["Special agent", "Subagent", "General agent", "Limited power-of-attorney agent"],
+      correctIndex: 2,
+      explain: "The scope and duration of property management duties—ongoing authority across multiple property functions—constitute general agency rather than limited or special agency.",
+    },
+    {
+      q: "What classification of agent is a property manager who is authorized to act on multiple matters for the property owner on a continuous basis?",
+      options: ["Subagent of the listing broker", "General agent", "Special agent for transaction purposes", "Universal agent with fiduciary power"],
+      correctIndex: 1,
+      explain: "General agents possess continuous, broad authority to conduct multiple recurring duties; property managers fit this classification due to their ongoing operational responsibilities.",
+    },
+    {
+      q: "An individual employed to manage a condominium complex—including rent collection, maintenance coordination, and tenant screening—exercises which form of agency authority?",
+      options: ["Special agency limited to one specific transaction", "Universal agency over all financial decisions", "General agency with continuing broad powers", "Subagency under the owner's broker"],
+      correctIndex: 2,
+      explain: "Property managers hold general agency authority because their role involves broad, continuing power to handle multiple, interconnected property-related functions.",
+    },
+    {
+      q: "Which type of agency relationship does a property manager typically hold with their principal?",
+      options: ["Universal agency with unlimited scope", "General agency with ongoing broad authority", "Special agency limited to a single transaction", "Transactional agency for lease negotiations only"],
+      correctIndex: 1,
+      explain: "Property managers exercise general agency because they have continuous, wide-ranging authority to act on the principal's behalf across multiple property management duties.",
     },
   ],
   "laws-of-agency-q02": [
@@ -3330,6 +3990,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Hawaii law mandates written informed consent from both parties before a licensee can act as a dual agent. Implied consent, phone calls, or broker approval alone do not satisfy this requirement.",
     },
+    {
+      q: "When a real estate licensee in Hawaii represents both the seller and the buyer in the same transaction, what is legally required?",
+      options: ["Obtain oral acknowledgment from the seller only", "Obtain documented written consent from each party acknowledging the dual representation", "File a dual agency disclosure with the Hawaii Real Estate Commission before closing", "Receive written approval from the buyer's lender"],
+      correctIndex: 1,
+      explain: "Dual agency in Hawaii requires written informed consent from both parties, not just oral acknowledgment or one-sided approval. The licensee must ensure both parties understand and accept the conflict.",
+    },
+    {
+      q: "A Hawaii licensee who acts as agent for both parties in a real estate transaction must obtain:",
+      options: ["Verbal permission from the party they contacted first", "Written informed consent acknowledging dual agency from both the seller and buyer", "A notarized statement from one party only", "Approval from the listing broker before proceeding with the transaction"],
+      correctIndex: 1,
+      explain: "Both parties must provide written informed consent to the dual agency arrangement; verbal consent or single-party consent is insufficient and does not meet Hawaii's legal requirements.",
+    },
+    {
+      q: "To lawfully engage in dual representation, a licensee must:",
+      options: ["Inform both parties verbally and document it in the MLS remarks", "Secure written informed consent from both parties to the dual agency arrangement", "Obtain consent from whichever party has the larger financial stake", "Disclose the dual agency to the Hawaii Real Estate Commission in writing before acceptance of offer"],
+      correctIndex: 1,
+      explain: "Written informed consent from both parties is the legal standard for dual agency; verbal disclosure or selective consent does not satisfy Hawaii's statutory requirements.",
+    },
+    {
+      q: "In Hawaii, a licensee representing both the seller and buyer in a single transaction must ensure that:",
+      options: ["Both parties sign a written document acknowledging and consenting to the dual agency", "The seller provides written consent and the buyer provides verbal consent", "The buyer's agent is notified in writing instead of obtaining client consent", "Only the party paying the commission is informed of the dual representation"],
+      correctIndex: 0,
+      explain: "Both the seller and buyer must provide written consent acknowledging the dual agency; partial consent (one written, one verbal) or notifying third parties does not substitute for full informed consent from both parties.",
+    },
+    {
+      q: "When a real estate licensee represents both the buyer and seller in the same transaction, what documentation is required?",
+      options: ["A single disclosure form signed by the buyer is sufficient", "Written acknowledgment of dual agency from each party", "Oral permission from the seller and written permission from the buyer", "No formal documentation if the parties are aware of the arrangement"],
+      correctIndex: 1,
+      explain: "Hawaii law requires written informed consent from both parties when a licensee acts as a dual agent, ensuring each party understands the conflict and agrees in writing.",
+    },
   ],
   "laws-of-agency-q03": [
     {
@@ -3355,6 +4045,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Treat them as a client and provide undivided loyalty", "Disclose all known material defects and deal honestly with them", "Keep information confidential to protect the transaction", "Exclusively negotiate in the customer's favor"],
       correctIndex: 1,
       explain: "Agents owe honesty and disclosure of material facts to all parties, which is a non-negotiable duty regardless of agency status.",
+    },
+    {
+      q: "When a licensee interacts with an unrepresented party in a transaction, what obligation does the agent have?",
+      options: ["Fiduciary loyalty to protect their interests", "Disclosure of known material facts and honest dealing", "Keeping all transaction details confidential from the seller's agent", "Acting as their transaction coordinator without compensation"],
+      correctIndex: 1,
+      explain: "All agents must disclose material facts honestly to unrepresented parties, even without a client relationship; this is a statutory duty, not a fiduciary one.",
+    },
+    {
+      q: "A buyer attends an open house without representation. The listing agent's primary duty to this unrepresented buyer is to:",
+      options: ["Provide exclusive market analysis and comparative pricing", "Refrain from disclosing known defects to avoid liability", "Inform the buyer of material facts about the property that the agent knows", "Negotiate the best possible price on the buyer's behalf"],
+      correctIndex: 2,
+      explain: "Agents must disclose known material facts to all parties regardless of representation; this duty of honesty applies universally in Hawaii real estate transactions.",
+    },
+    {
+      q: "Which statement correctly describes an agent's responsibilities when working with a non-client?",
+      options: ["The agent owes them undivided loyalty and confidentiality", "The agent must honestly disclose material defects and facts about the property", "The agent has no obligations unless there is a signed buyer or seller agreement", "The agent must act in the customer's best interest above all other parties"],
+      correctIndex: 1,
+      explain: "Even without a representation agreement, licensees are required by law to provide honest information and disclose material facts to unrepresented parties.",
+    },
+    {
+      q: "An unrepresented seller contacts a listing agent before the property is listed. What is the agent's duty?",
+      options: ["To keep all information confidential until a listing agreement is signed", "To provide honest disclosure of known material property facts and defects", "To advocate exclusively for the buyer to ensure a fair market price", "To withhold opinions about the property's condition to avoid liability"],
+      correctIndex: 1,
+      explain: "Licensees must disclose known material facts honestly to all parties, including unrepresented individuals, as a fundamental ethical and legal obligation in Hawaii.",
+    },
+    {
+      q: "When working with an unrepresented third party during a transaction, what obligation does a real estate licensee have?",
+      options: ["Full fiduciary duty identical to represented clients", "Truthful disclosure of known material facts affecting the property", "Keeping all transaction details confidential from the other party's agent", "Acting as a neutral intermediary to negotiate better terms for them"],
+      correctIndex: 1,
+      explain: "Hawaii law requires licensees to disclose material facts truthfully to all parties, represented or not, though unrepresented parties do not receive fiduciary duties like loyalty or confidentiality.",
     },
   ],
   "laws-of-agency-q04": [
@@ -3382,6 +4102,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Agency terminates by operation of law upon death of the principal, destruction of property, or agent bankruptcy—these occur automatically without requiring notice or consent.",
     },
+    {
+      q: "Which of the following events will automatically terminate an agency relationship without requiring explicit notice or agreement?",
+      options: ["Death of the principal, destruction of the subject property, and insolvency of the agent", "Mutual written agreement only", "Expiration of the listing period alone", "The agent's decision to relocate to another state"],
+      correctIndex: 0,
+      explain: "Agency by operation of law terminates automatically upon death of the principal, property destruction, or bankruptcy/insolvency of the agent without further action needed.",
+    },
+    {
+      q: "A principal's agency with a broker is terminated by operation of law in which scenario?",
+      options: ["The broker receives a competing offer on the property", "The principal becomes incapacitated, the subject property is destroyed, or the broker files for bankruptcy", "The principal requests a rate reduction", "A buyer makes an unsolicited inquiry"],
+      correctIndex: 1,
+      explain: "Agency by operation of law terminates automatically upon principal's incapacity (death), destruction of property, or agent's insolvency without requiring affirmative termination steps.",
+    },
+    {
+      q: "Under Hawaii real estate law, which of the following will NOT automatically end an agency relationship by operation of law?",
+      options: ["Bankruptcy of the agent", "Physical destruction of the listed property", "Passage of time beyond the original listing period", "Death of the principal"],
+      correctIndex: 2,
+      explain: "Passage of time requires affirmative action or mutual agreement to terminate; death of principal, bankruptcy of agent, and property destruction terminate agency by operation of law automatically.",
+    },
+    {
+      q: "A real estate agent's authority to represent a principal terminates automatically by operation of law when:",
+      options: ["The principal dies, the subject property is destroyed, or the agent becomes insolvent", "The agent fails to produce a buyer within 30 days", "The property listing appears on the MLS system", "Either party expresses dissatisfaction with the agreement"],
+      correctIndex: 0,
+      explain: "These three occurrences—principal death, property destruction, and agent bankruptcy—are statutory grounds for automatic termination without requiring notice or further action.",
+    },
+    {
+      q: "Which of the following events will automatically terminate an agency relationship without requiring notice or further action?",
+      options: ["The agent's insolvency, the principal's death, or destruction of the subject property", "The principal's request to terminate the listing agreement", "The expiration of the listing period specified in the contract", "The agent's failure to perform marketing duties as promised"],
+      correctIndex: 0,
+      explain: "Agency by operation of law terminates automatically upon death of the principal, bankruptcy/insolvency of the agent, or destruction of the property—all occur without need for affirmative action or notice. The other options require active steps or are contractual matters, not automatic terminations.",
+    },
   ],
   "laws-of-agency-q05": [
     {
@@ -3407,6 +4157,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Obedience", "Transparency regarding market conditions", "Care", "Loyalty"],
       correctIndex: 1,
       explain: "Transparency regarding market conditions is a standard ethical obligation owed to all parties; fiduciary duties (obedience, care, loyalty) are owed exclusively to the client.",
+    },
+    {
+      q: "A real estate licensee owes fiduciary duties to their client. Which of the following is a duty owed to customers but NOT a fiduciary duty?",
+      options: ["Honest and fair dealing", "Full disclosure of all material facts", "Accounting for client funds", "Loyalty to the principal"],
+      correctIndex: 1,
+      explain: "Fiduciary duties (loyalty, care, obedience, accounting) are owed only to the client/principal. Disclosure of material facts is owed to all parties as a legal obligation, but it is not a fiduciary duty.",
+    },
+    {
+      q: "Under Hawaii real estate law, which duty does a broker NOT owe to a customer who is not their client?",
+      options: ["Confidentiality regarding privileged information", "Care and diligence in performing tasks", "Obedience to lawful instructions", "Honesty in all dealings"],
+      correctIndex: 2,
+      explain: "Obedience is a fiduciary duty owed exclusively to the client/principal. Customers receive honesty, fair dealing, and disclosure of material facts, but not the fiduciary duty of obedience.",
+    },
+    {
+      q: "When a licensee represents a buyer as their client, which of the following is NOT among the fiduciary duties owed to that client?",
+      options: ["Undivided loyalty", "Timely disclosure of known defects to all parties", "Competent and diligent representation", "Following lawful client instructions"],
+      correctIndex: 1,
+      explain: "Timely disclosure of material facts is a legal duty owed to all parties, not a fiduciary duty reserved for the client. The four fiduciary duties are loyalty, care, obedience, and accounting.",
+    },
+    {
+      q: "Which statement best distinguishes a fiduciary duty from a duty owed to the general public?",
+      options: ["Fiduciary duties include accounting and loyalty, which apply only to clients", "Disclosure of material defects is a fiduciary duty owed exclusively to the principal", "Obedience and care are general duties owed to all transaction parties equally", "Customers receive fiduciary duties but at a lower standard than clients"],
+      correctIndex: 0,
+      explain: "Fiduciary duties (loyalty, obedience, care, accounting) are owed only to the client/principal. Disclosure to the general public is a legal obligation but not a fiduciary duty.",
+    },
+    {
+      q: "A real estate licensee owes fiduciary duties to their principal client. Which of the following is owed only to third parties (customers) and NOT as a fiduciary duty?",
+      options: ["Honest and fair dealing", "Undivided loyalty", "Reasonable care and skill", "Obedience to lawful instructions"],
+      correctIndex: 0,
+      explain: "Honest and fair dealing is a duty owed to all parties (customers and clients), but it is not a fiduciary duty. Fiduciary duties—loyalty, care, obedience, and accounting—are owed exclusively to the principal client.",
     },
   ],
   "laws-of-agency-q06": [
@@ -3434,6 +4214,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Subjective evaluations of quality or personal impression ('finest properties') are classic examples of puffing, which is permissible sales rhetoric and not legally binding.",
     },
+    {
+      q: "A listing agent tells a prospective buyer, \"You'll love the views from this lanai.\" This statement is best classified as:",
+      options: ["A material misrepresentation subject to rescission", "Puffing or seller's talk", "Fraudulent concealment", "A breach of fiduciary duty"],
+      correctIndex: 1,
+      explain: "Subjective expressions of opinion or value (like 'love the views') are puffing and not actionable misrepresentation because they are not presented as verifiable facts.",
+    },
+    {
+      q: "During a showing, a broker says, \"This is one of the finest homes in the neighborhood.\" From a legal standpoint, this statement would most likely be deemed:",
+      options: ["Fraud requiring criminal intent", "Non-actionable puffery", "An express warranty of condition", "Fraudulent inducement"],
+      correctIndex: 1,
+      explain: "General laudatory statements about quality or desirability are considered puffing—harmless opinions that buyers are expected to disregard or verify independently.",
+    },
+    {
+      q: "Which of the following statements by a real estate agent would be protected as non-actionable opinion rather than actionable misrepresentation?",
+      options: ["\"The roof was inspected last year and passed.\" (when it was not)", "\"This is a wonderful investment opportunity.\"", "\"The property has never flooded.\" (when it has)", "\"The zoning allows commercial use.\" (when it does not)"],
+      correctIndex: 1,
+      explain: "Only subjective assessments of value, desirability, or quality constitute puffing; false statements about specific facts, conditions, or legal matters are misrepresentations.",
+    },
+    {
+      q: "A salesperson states, \"This is a fantastic property at a great price.\" If a buyer relied on this statement and later sued, the court would most likely classify it as:",
+      options: ["Actionable fraud due to false statements of material fact", "Seller puffery and opinion, not legally actionable", "Negligent misrepresentation requiring proof of damages", "Innocent misrepresentation voiding the contract"],
+      correctIndex: 1,
+      explain: "Vague, subjective praise about a property's quality or value is recognized as puffing—ordinary sales talk that reasonable buyers are expected to evaluate skeptically rather than rely on as fact.",
+    },
+    {
+      q: "A listing agent tells a prospective buyer that a home has \"the best views in the neighborhood.\" This statement is most appropriately classified as:",
+      options: ["Fraudulent misrepresentation requiring rescission", "A material fact that must be disclosed in writing", "Puffing or sales talk that is not legally actionable", "Non-disclosure of a latent defect"],
+      correctIndex: 2,
+      explain: "Subjective praise and comparative opinions ('best,' 'great') constitute puffing—non-actionable seller talk rather than factual misrepresentation or fraud.",
+    },
   ],
   "laws-of-agency-q07": [
     {
@@ -3459,6 +4269,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Represents the seller and owes duties to the seller only", "Assumes a fiduciary position with the buyer as principal", "Functions as a neutral third party with no allegiance to either party", "Retains only transactional duties without agency obligations"],
       correctIndex: 1,
       explain: "A buyer-broker agreement creates express agency with fiduciary duties running from the broker to the buyer as the principal.",
+    },
+    {
+      q: "When a real estate licensee and a prospective buyer execute a buyer-broker agreement, what legal relationship is established between them?",
+      options: ["A dual agency arrangement requiring written consent from all parties", "A fiduciary duty owed by the broker to the buyer as principal", "An independent contractor relationship with limited liability", "A transactional facilitator role with no agency duties"],
+      correctIndex: 1,
+      explain: "A buyer-broker agreement creates express agency, establishing fiduciary duties owed by the broker to the buyer who is the principal in the relationship.",
+    },
+    {
+      q: "A buyer signs a representation agreement with a broker. This agreement results in:",
+      options: ["The broker acting as a subagent of the listing agent only", "Fiduciary obligations running from the broker to the buyer", "A non-agency customer arrangement with disclosure requirements", "Mutual obligations with no agency duties on either party"],
+      correctIndex: 1,
+      explain: "Buyer representation agreements create express agency wherein the broker owes fiduciary duties to the buyer as the client and principal.",
+    },
+    {
+      q: "Which best describes the relationship created when a buyer enters into a written agreement with a broker to represent the buyer's interests in a real estate transaction?",
+      options: ["Customer status with the broker acting as a transaction facilitator", "Principal-agent relationship with fiduciary duties owed to the buyer", "Limited agency with shared responsibilities between broker and buyer", "Subagency of the seller's broker with divided loyalty"],
+      correctIndex: 1,
+      explain: "A written buyer-broker agreement creates a principal-agent relationship where the broker becomes the agent owing fiduciary duties to the buyer as principal.",
+    },
+    {
+      q: "A buyer executes a buyer-broker agreement. The legal consequence is that the broker:",
+      options: ["Becomes a transaction coordinator without fiduciary responsibility", "Owes fiduciary duties to the buyer as the broker's client", "Acts as the seller's subagent in all matters", "Functions as a neutral third party with no agency authority"],
+      correctIndex: 1,
+      explain: "A buyer-broker agreement creates express agency, making the buyer the broker's client to whom fiduciary duties are owed.",
+    },
+    {
+      q: "When a real estate licensee and a buyer execute a buyer-broker agreement, what legal relationship is established between them?",
+      options: ["The licensee becomes a transaction coordinator with limited liability", "The broker owes fiduciary duties to the buyer as the client", "The buyer is classified as a customer with no agency protection", "A limited agency relationship with the seller as the primary principal"],
+      correctIndex: 1,
+      explain: "A buyer-broker agreement creates express agency, making the broker a fiduciary bound to the buyer (the principal), not a limited or transaction-only service provider.",
     },
   ],
   "laws-of-agency-q08": [
@@ -3486,6 +4326,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Subagency is specifically the term for delegated authority granted by one broker to another broker in a different firm to act on behalf of the original principal.",
     },
+    {
+      q: "A listing broker transfers the power to act on the seller's behalf to an agent at another brokerage firm. This relationship is best described as:",
+      options: ["Implied agency", "Subagency", "Designated agency", "Ostensible agency"],
+      correctIndex: 1,
+      explain: "Subagency occurs when a broker delegates authority to another broker or agent outside their firm to represent the same principal. This is a formal delegation of the original agent's authority.",
+    },
+    {
+      q: "When a cooperating broker accepts the authority to represent a seller through delegation from the listing broker, what is this agent relationship called?",
+      options: ["General agency", "Subagency", "Transactional agency", "Limited agency"],
+      correctIndex: 1,
+      explain: "Subagency is the delegation of an agent's authority to another agent in a different brokerage firm, creating a chain of authority back to the original principal.",
+    },
+    {
+      q: "An agent from Broker A authorizes an agent from Broker B to perform acts on behalf of their mutual client. This arrangement is known as:",
+      options: ["Power of attorney", "Subagency", "Dual agency", "Fiduciary agency"],
+      correctIndex: 1,
+      explain: "Subagency is the delegation of authority from one agent to another agent in a different brokerage; the subagent owes fiduciary duties to the original principal through the delegating agent.",
+    },
+    {
+      q: "If a listing agent's brokerage delegates its authority to represent a seller to an agent at a different firm, the delegated agent holds what type of agency?",
+      options: ["Exclusive agency", "Subagency", "Undisclosed agency", "Coupled agency"],
+      correctIndex: 1,
+      explain: "Subagency is the formal delegation of an agent's authority to another agent at a different brokerage, allowing the subagent to act as an authorized representative of the principal.",
+    },
+    {
+      q: "A listing broker transfers their authority to represent the seller to a cooperating broker in another firm. This relationship is known as:",
+      options: ["Implied agency", "Subagency", "Designated agency", "Transactional brokerage"],
+      correctIndex: 1,
+      explain: "Subagency occurs when a broker delegates their fiduciary authority to another broker in a different firm to act on behalf of the principal. The cooperating broker becomes the subagent of the listing broker.",
+    },
   ],
   "laws-of-agency-q09": [
     {
@@ -3511,6 +4381,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Universal agency", "Bilateral agency", "Special agency restricted in scope", "Limited agency for single transactions"],
       correctIndex: 0,
       explain: "A POA creates a universal agency, meaning the agent has broad authority to represent the principal across all legal and financial matters within the document's scope.",
+    },
+    {
+      q: "When a principal grants a power of attorney to an agent, what type of agency relationship is established?",
+      options: ["Limited agency restricted to real estate transactions only", "Universal agency with broad authority across all legal matters", "Exclusive agency preventing the principal from acting independently", "Ostensible agency based solely on apparent authority"],
+      correctIndex: 1,
+      explain: "A power of attorney grants the agent broad authority to act in all legal matters on behalf of the principal, creating a universal agency relationship.",
+    },
+    {
+      q: "Which agency classification best describes the relationship created by executing a power of attorney document?",
+      options: ["Subagency", "Universal agency", "Special agency for designated transactions", "Dual agency with disclosed principals"],
+      correctIndex: 1,
+      explain: "POA grants comprehensive legal authority across all matters, establishing a universal agency rather than limited or special agency authority.",
+    },
+    {
+      q: "A principal executes a power of attorney giving an agent authority to handle financial, legal, and personal affairs. This creates what type of agency?",
+      options: ["General agency limited to business transactions", "Special agency for specific enumerated powers", "Universal agency with comprehensive delegated authority", "Fiduciary agency requiring court approval"],
+      correctIndex: 2,
+      explain: "Authority to manage financial, legal, and personal affairs demonstrates universal agency—the broadest form of delegated authority covering all legal matters.",
+    },
+    {
+      q: "Under Hawaiian real estate law, when a client grants a power of attorney to another person, the resulting agency is classified as:",
+      options: ["Special agency tied to one specific property transaction", "Universal agency encompassing authority over all legal and business matters", "Implied agency created by conduct rather than document", "Probate agency requiring estate administration approval"],
+      correctIndex: 1,
+      explain: "A power of attorney is the legal instrument that establishes universal agency, granting the agent sweeping authority to act in all legal matters on the principal's behalf.",
+    },
+    {
+      q: "When a principal executes a power of attorney document, what type of agency relationship is established?",
+      options: ["Limited agency restricted to financial transactions only", "Transactional agency for a single real estate closing", "Universal agency with broad authority over all legal matters", "Designated agency covering only property management duties"],
+      correctIndex: 2,
+      explain: "A power of attorney grants the agent (attorney-in-fact) broad authority to act on behalf of the principal in all legal matters, which constitutes universal agency rather than limited or specific agency types.",
     },
   ],
   "laws-of-agency-q10": [
@@ -3538,6 +4438,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The confidentiality duty is a fiduciary obligation that persists beyond agency termination, unlike other duties that end when the relationship dissolves.",
     },
+    {
+      q: "After a real estate agency relationship is terminated, an agent's duty of confidentiality:",
+      options: ["Persists indefinitely with respect to client information", "Expires immediately upon termination", "Only applies to transactions valued above $500,000", "Covers only oral statements made during the listing period"],
+      correctIndex: 0,
+      explain: "Confidentiality is a fiduciary duty that survives the termination of agency; agents remain bound to protect client confidences after the relationship ends.",
+    },
+    {
+      q: "Which statement correctly describes the scope of an agent's confidentiality obligation in Hawaii?",
+      options: ["It terminates when the purchase and sale agreement is executed", "It extends beyond the conclusion of the agency relationship", "It only protects information disclosed in writing by the client", "It applies exclusively to residential properties, not commercial ones"],
+      correctIndex: 1,
+      explain: "Confidentiality duty persists after agency termination and protects all client information regardless of how it was disclosed or the property type involved.",
+    },
+    {
+      q: "An agent receives confidential information from a client during a listing engagement. Once the listing expires and the agency terminates, the agent:",
+      options: ["May disclose the information to prospective buyers or other parties", "Must continue to protect the confidential information", "Is released from all duties except those required by written contract", "Only remains bound to keep information secret if it pertains to the physical property condition"],
+      correctIndex: 1,
+      explain: "The duty of confidentiality persists after agency termination and requires agents to maintain client secrets even after the relationship concludes.",
+    },
+    {
+      q: "Regarding confidentiality obligations, a licensee's duty to keep client information private:",
+      options: ["Lasts only until the transaction closes", "Continues even after the agent-client relationship is dissolved", "Applies only to factual disclosures, not to opinions or observations", "Is waived if the information becomes public knowledge through other sources"],
+      correctIndex: 1,
+      explain: "Confidentiality is a post-termination fiduciary duty that survives agency dissolution and obligates licensees to protect client confidences indefinitely.",
+    },
+    {
+      q: "A real estate agent's duty to maintain confidentiality of client information:",
+      options: ["Must be disclosed to all third parties upon request", "Persists even after the agency relationship has been dissolved", "Is limited to facts known in writing before the transaction closes", "Only applies to residential properties and not commercial deals"],
+      correctIndex: 1,
+      explain: "The confidentiality duty is fiduciary in nature and survives the termination of agency, protecting client information indefinitely after the relationship ends.",
+    },
   ],
   "laws-of-agency-q11": [
     {
@@ -3563,6 +4493,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Initiate disclosure of the known foundation issue as a material defect", "Let the buyer's own structural inspector identify the cracks during the inspection period", "Provide the structural engineer's report only if the buyer requests it in writing", "Tell the buyer to consult with the seller directly about any structural matters"],
       correctIndex: 0,
       explain: "An agent cannot withhold known material defects based on a buyer's lack of inquiry. The duty to disclose is affirmative and independent of buyer questions or inspection results.",
+    },
+    {
+      q: "During a transaction, a listing agent becomes aware that the property has experienced recurring moisture intrusion in the crawl space. When preparing marketing materials, the agent should:",
+      options: ["Include this information in all disclosures provided to prospective buyers", "Wait for the buyer's inspector to discover it independently", "Mention it only to buyers who specifically inquire about foundation conditions", "Allow the seller to decide whether disclosure is necessary"],
+      correctIndex: 0,
+      explain: "Real estate agents have an affirmative duty to disclose known material defects to all potential buyers regardless of whether they ask; this duty is independent of the seller's preferences.",
+    },
+    {
+      q: "An agent lists a home where the owner mentions that the roof leaks during heavy rains. A prospective buyer asks if there are any known structural issues. The agent's obligation is to:",
+      options: ["Refer the buyer directly to the seller for all property condition questions", "Disclose the known roof leak because it is a material defect", "Suggest the buyer obtain a professional inspection before asking further questions", "Disclose the defect only if the buyer appears interested in making an offer"],
+      correctIndex: 1,
+      explain: "Agents must disclose known material facts about the property's condition to all parties; the roof leak is a material defect that directly affects property value and insurability.",
+    },
+    {
+      q: "A seller confides in the listing agent that the home's electrical system has intermittent failures. Later, a buyer asks general questions about the property's systems. The agent must:",
+      options: ["Provide honest disclosure of the known electrical issue", "State that all systems appear to be in working order", "Suggest the buyer hire an electrician if they have concerns", "Keep the seller's confidential information private unless the buyer specifically asks about electricity"],
+      correctIndex: 0,
+      explain: "Material defects must be affirmatively disclosed as a matter of law and professional ethics; an agent cannot withhold known defects even when the seller requests confidentiality.",
+    },
+    {
+      q: "While preparing a property listing, the agent learns that the home has had significant termite damage in the past. When a buyer tours the property and asks if there are any pest-related concerns, the agent should:",
+      options: ["Acknowledge the prior termite damage and disclose this material fact", "State that current pest control reports are available for the buyer to review", "Explain that the seller's pest control company can discuss any history", "Avoid the topic unless the buyer specifically mentions termites by name"],
+      correctIndex: 0,
+      explain: "An agent's duty to disclose material defects includes known past structural damage from pests; this information directly affects property value and the buyer's decision-making.",
+    },
+    {
+      q: "During a listing appointment, the seller mentions that the property has experienced water intrusion in the crawl space during heavy rains. When a prospective buyer's agent inquires about the foundation and structural condition, the listing agent should:",
+      options: ["Wait for the buyer to submit a formal inspection request before mentioning any water issues", "Affirmatively disclose the known water intrusion problem to protect all parties", "Allow the seller to decide whether to volunteer this information directly to the buyer", "Suggest the buyer hire a professional inspector without commenting on known defects"],
+      correctIndex: 1,
+      explain: "Agents have an independent fiduciary duty to disclose material defects known to them, regardless of seller preference or buyer inquiry method; water intrusion is a material defect affecting property value and habitability.",
     },
   ],
   "mandated-disclosures-q00": [
@@ -3590,6 +4550,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Licensees cannot comply with seller instructions to conceal material defects; affirmative disclosure duties exist independently of seller consent.",
     },
+    {
+      q: "During a property showing, a licensee discovers that the roof has persistent leak damage. The seller explicitly forbids disclosure of this condition to prospective buyers. What is the licensee's legal obligation?",
+      options: ["Keep the information confidential per the listing agreement", "Disclose the known material defect regardless of seller objection", "Document the seller's refusal and proceed with marketing", "Reveal only the defect's existence, not its severity"],
+      correctIndex: 1,
+      explain: "A licensee has an independent fiduciary and statutory duty to disclose known material defects to potential buyers, regardless of seller preferences or instructions.",
+    },
+    {
+      q: "A broker's agent becomes aware that a property has a history of termite infestation. When the agent attempts to include this in the disclosure, the seller threatens to fire the brokerage and work with another agent. The broker should:",
+      options: ["Advise the agent to comply with the seller's demand to maintain the listing", "Ensure the material defect is disclosed to all prospective buyers", "Suggest the seller hire a separate pest control company first", "Allow the buyer to request a termite inspection at their own expense"],
+      correctIndex: 1,
+      explain: "The broker and licensee cannot be coerced into non-disclosure; they must fulfill their independent duty to disclose known material facts affecting property value or desirability.",
+    },
+    {
+      q: "An agent has personal knowledge that the property's foundation has cracks caused by soil settlement. The seller states that disclosure could tank the sale and asks the agent to keep silent. Which action is permissible under Hawaii real estate law?",
+      options: ["Honor the seller's request and only disclose if a buyer specifically asks about foundation issues", "Affirmatively disclose the known material defect to all interested parties", "Wait for the buyer's home inspection to reveal the problem naturally", "File a complaint with the REC and withdraw from the transaction"],
+      correctIndex: 1,
+      explain: "An agent's duty to disclose known material defects is affirmative and independent of seller instructions or buyer inquiries, protecting the integrity of the transaction.",
+    },
+    {
+      q: "While listing a property, a licensee learns from neighbors that the home experiences mold growth every summer due to poor drainage. The seller denies there is a problem and instructs the agent not to mention it. The agent must:",
+      options: ["Obey the seller's directive to remain in their fiduciary role", "Disclose this known material defect to prospective buyers despite the seller's prohibition", "Require the seller to obtain a mold inspection before proceeding", "List the property 'as-is' and let the buyer's inspector discover any issues"],
+      correctIndex: 1,
+      explain: "Licensees cannot subordinate their duty to disclose known material defects to seller pressure; disclosure is mandatory and protects both buyers and the integrity of the market.",
+    },
+    {
+      q: "During a listing presentation, the licensee discovers that the roof leaks during heavy rains—a fact the seller wants kept confidential. What is the licensee's obligation?",
+      options: ["Wait for a buyer's inspector to find the defect", "Affirmatively disclose the known material defect to prospective buyers", "Suggest the seller repair the roof before listing", "Respect the seller's confidentiality and remain silent"],
+      correctIndex: 1,
+      explain: "A real estate licensee has an independent fiduciary duty to disclose known material facts affecting property value, regardless of seller instructions or buyer inquiries.",
+    },
   ],
   "mandated-disclosures-q01": [
     {
@@ -3615,6 +4605,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Pre-1960 construction", "Construction completed before January 1, 1978", "Pre-1980 residential development", "Any structure built prior to 1975"],
       correctIndex: 1,
       explain: "Federal regulations establish 1978 as the threshold year; properties built before that date fall under lead-based paint disclosure requirements.",
+    },
+    {
+      q: "Under federal law, a residential property built in 1975 requires disclosure of potential lead-based paint hazards. In what year did this federal requirement become effective?",
+      options: ["1970", "1978", "1982", "1988"],
+      correctIndex: 1,
+      explain: "The federal lead-based paint disclosure requirement applies to all residential properties constructed before 1978, making 1978 the cutoff year for mandatory disclosure obligations.",
+    },
+    {
+      q: "A real estate licensee in Hawaii is listing a single-family home constructed in 1960. Which statement correctly identifies the lead-based paint disclosure requirement?",
+      options: ["Disclosure is required only if the property has been tested for lead", "The property was built before the federal lead-based paint disclosure threshold and requires disclosure", "Disclosure applies only to properties built after 1980", "Disclosure is waived for homes older than 50 years"],
+      correctIndex: 1,
+      explain: "Federal law requires lead-based paint disclosure for all residential properties built before 1978, regardless of testing status or age category.",
+    },
+    {
+      q: "Which of the following residential properties would trigger a mandatory lead-based paint disclosure requirement?",
+      options: ["A condominium built in 1985", "A multi-family rental built in 1977", "A townhouse built in 1979", "A single-family home built in 1990"],
+      correctIndex: 1,
+      explain: "Pre-1978 construction requires lead-based paint disclosure; the 1977 multi-family rental is the only property built before the 1978 cutoff date.",
+    },
+    {
+      q: "A property transaction involves a home originally constructed in 1973. What federal real estate disclosure requirement applies to this transaction?",
+      options: ["Radon gas testing and disclosure only", "Lead-based paint hazard disclosure", "Mold remediation certification", "Asbestos encapsulation documentation"],
+      correctIndex: 1,
+      explain: "Properties built before 1978 are subject to federal lead-based paint disclosure requirements; the 1973 construction date falls within the regulated period.",
+    },
+    {
+      q: "Under federal law, which properties require a lead-based paint disclosure when being sold or leased?",
+      options: ["All residential properties constructed after 1980", "Residential structures built in or before 1977", "Commercial buildings and multi-unit dwellings only", "Single-family homes built between 1970 and 1985"],
+      correctIndex: 1,
+      explain: "Federal lead-based paint disclosure requirements apply to housing built in 1978 or earlier (pre-1978 residential housing), making 1977 and prior the applicable cutoff date for disclosure obligations.",
     },
   ],
   "mandated-disclosures-q02": [
@@ -3642,6 +4662,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Superlative descriptions regarding aesthetic appeal or general quality are puffing—permitted rhetorical exaggeration that buyers are expected to discount rather than rely upon.",
     },
+    {
+      q: "A listing agent tells a buyer, \"This is the most beautiful kitchen in the neighborhood.\" This statement is best classified as:",
+      options: ["A material fact that must be disclosed", "Puffing or sales talk", "Fraudulent misrepresentation", "A breach of fiduciary duty"],
+      correctIndex: 1,
+      explain: "Statements of subjective aesthetic quality (beauty, attractiveness) are opinion-based puffing, which is permissible in real estate sales and does not constitute actionable misrepresentation.",
+    },
+    {
+      q: "During an open house, an agent says, \"You won't find a better location anywhere in this area.\" How should this statement be characterized?",
+      options: ["Fraud requiring rescission", "Actionable misrepresentation", "Harmless puffery or exaggeration", "Concealment of a material defect"],
+      correctIndex: 2,
+      explain: "Comparative value judgments and superlative claims about location desirability are considered puffing—subjective opinions that buyers are expected to evaluate independently.",
+    },
+    {
+      q: "A seller's agent describes the property as \"stunning\" and \"the nicest home in the subdivision.\" Which category best describes these statements?",
+      options: ["Puffing or seller's talk", "Active fraud", "Omission of a material fact", "Misrepresentation requiring monetary damages"],
+      correctIndex: 0,
+      explain: "Subjective characterizations of aesthetic appeal and comparative quality are classic examples of puffing, which is generally not legally actionable in real estate transactions.",
+    },
+    {
+      q: "A listing includes the phrase: \"This property has the most desirable curb appeal on the block.\" What is the proper legal classification of this language?",
+      options: ["Material misrepresentation subject to rescission", "Puffing or exaggerated sales talk", "Fraudulent concealment", "A factual assertion about comparative market value"],
+      correctIndex: 1,
+      explain: "Statements about subjective qualities like desirability and curb appeal are opinion-based puffery, not factual representations, and therefore constitute permitted sales talk in Hawaii real estate practice.",
+    },
+    {
+      q: "A listing agent tells a prospective buyer that a property has \"the most beautiful landscaping in the neighborhood.\" This statement would most appropriately be classified as:",
+      options: ["A material fact that must be disclosed in writing", "Permissible puffing or sales talk", "Actionable misrepresentation requiring damages", "Fraudulent concealment of defects"],
+      correctIndex: 1,
+      explain: "Subjective aesthetic judgments about beauty, views, or landscaping are considered puffing—exaggerated opinions that buyers expect in real estate sales and are not actionable misrepresentations.",
+    },
   ],
   "mandated-disclosures-q03": [
     {
@@ -3667,6 +4717,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Chipped tile on the bathroom floor", "Faulty electrical wiring concealed within walls", "Faded exterior paint", "Cracked glass in sliding doors"],
       correctIndex: 1,
       explain: "Latent defects are defects that are not visible or apparent under normal circumstances; agents must disclose any known latent defects to potential buyers.",
+    },
+    {
+      q: "Which category of property defect is characterized by being concealed from view and discoverable only through specialized inspection or disclosure?",
+      options: ["Obvious defect", "Hidden defect", "Structural defect", "Aesthetic defect"],
+      correctIndex: 1,
+      explain: "Hidden defects (latent defects) are not apparent during normal inspection and must be disclosed if the agent has actual knowledge of them.",
+    },
+    {
+      q: "A homebuyer tours a property and observes no water damage, mold, or foundation issues. However, the seller's agent knows there is significant termite damage behind the walls. This damage would be classified as a:",
+      options: ["Manifest defect", "Latent defect", "Minor defect", "Disclosed defect"],
+      correctIndex: 1,
+      explain: "Termite damage behind walls is a latent defect—not visible during a reasonable inspection—and the agent's knowledge triggers a disclosure obligation.",
+    },
+    {
+      q: "Under Hawaii real estate law, a defect that cannot be discovered through ordinary observation or reasonable inspection is considered:",
+      options: ["Patent", "Latent", "Trivial", "Conditional"],
+      correctIndex: 1,
+      explain: "Latent defects are hidden from ordinary view and do not become apparent except upon close investigation or specialized testing; they must be disclosed if known.",
+    },
+    {
+      q: "A licensee learns that a property has a known subsurface issue that would not be visible during a standard walkthrough. This is an example of a:",
+      options: ["Conspicuous defect", "Latent defect", "Surface defect", "Readily apparent defect"],
+      correctIndex: 1,
+      explain: "Subsurface problems are latent defects because they are not discoverable through reasonable inspection and must be disclosed if the agent has actual knowledge.",
+    },
+    {
+      q: "Which term describes a property defect that cannot be discovered through a standard walk-through or visual inspection?",
+      options: ["Obvious defect", "Concealed defect", "Apparent defect", "Superficial defect"],
+      correctIndex: 1,
+      explain: "Concealed (latent) defects are hidden from ordinary view and must be disclosed by the agent if known; this is the same concept as latent defects.",
     },
   ],
   "mandated-disclosures-q04": [
@@ -3694,6 +4774,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "Even with an as-is clause, disclosure laws mandate that known material defects be revealed; the as-is condition addresses post-closing liability, not pre-sale disclosure obligations.",
     },
+    {
+      q: "When a property is marketed with an \"as-is\" condition clause, what effect does this have on the seller's responsibility to disclose known defects?",
+      options: ["It completely waives all disclosure requirements under Hawaii law", "It allows the seller to conceal latent defects discovered during inspection", "It does not relieve the seller from disclosing known material defects", "It transfers all disclosure liability solely to the buyer's agent"],
+      correctIndex: 2,
+      explain: "An as-is clause addresses the condition of the property but does not override statutory disclosure obligations; sellers must still reveal known material defects regardless of as-is language.",
+    },
+    {
+      q: "A broker represents a seller who insists on including an \"as-is\" provision in the listing. Which statement accurately reflects the broker's disclosure obligations?",
+      options: ["The broker is exempt from the fiduciary duty to disclose defects known to the broker", "The broker must still disclose known material facts about the property condition", "The as-is clause permits the broker to withhold information about structural issues", "The broker's duties end once the as-is language is added to the contract"],
+      correctIndex: 1,
+      explain: "Brokers cannot hide behind as-is clauses; they retain their duty to disclose known material defects even when a property is sold as-is.",
+    },
+    {
+      q: "A buyer signs a purchase agreement containing an \"as-is\" clause. Which of the following is true regarding what the seller must disclose?",
+      options: ["The seller has no obligation to reveal any property conditions", "The seller must disclose known material defects unless the as-is clause was prominently displayed", "The seller is required to disclose known material defects despite the as-is language", "The as-is clause eliminates the seller's liability for non-disclosure"],
+      correctIndex: 2,
+      explain: "The as-is clause does not eliminate disclosure obligations; sellers must still disclose known material defects as required by Hawaii law and fiduciary duties.",
+    },
+    {
+      q: "How does an \"as-is\" condition clause interact with Hawaii's disclosure requirements?",
+      options: ["It supersedes all statutory disclosure rules and contractual obligations", "It eliminates the need for the seller to provide a property condition disclosure form", "It permits the agent to withhold information about known defects from the buyer", "It does not negate the obligation to disclose known material defects"],
+      correctIndex: 3,
+      explain: "An as-is clause addresses the buyer's acceptance of visible condition but does not override the legal duty to disclose known material defects.",
+    },
+    {
+      q: "When a property is sold under an \"as-is\" condition clause, which of the following statements is most accurate regarding the seller's legal obligations?",
+      options: ["The seller is relieved of all responsibility to disclose latent defects discovered during inspection", "The seller must still reveal known material facts about the property despite the as-is language", "The real estate agent may withhold information about defects if the contract includes an as-is provision", "The buyer assumes all risk and waives the right to pursue any legal remedies for discovered problems"],
+      correctIndex: 1,
+      explain: "An as-is clause does not override Hawaii's mandatory seller disclosure requirements for known material defects; sellers and agents must still disclose what they know regardless of the as-is language in the contract.",
+    },
   ],
   "mandated-disclosures-q05": [
     {
@@ -3719,6 +4829,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["14 days of the purchase agreement", "10 days of the purchase agreement", "18 days of the purchase agreement", "3 days of the purchase agreement"],
       correctIndex: 1,
       explain: "The federal lead-based paint inspection period is 10 days from acceptance of the offer; this period can be waived in writing by the buyer.",
+    },
+    {
+      q: "Under federal lead-based paint disclosure rules, how long does a purchaser have to conduct an inspection for lead hazards before becoming obligated to proceed with the transaction?",
+      options: ["5 business days", "10 calendar days", "21 calendar days", "45 calendar days"],
+      correctIndex: 1,
+      explain: "Buyers have a 10-day inspection period for lead-based paint; this timeframe applies to all residential properties built before 1978 and can be shortened or waived by mutual written agreement.",
+    },
+    {
+      q: "A seller provides a lead-based paint disclosure to a buyer on a pre-1978 home. The buyer wishes to have the property inspected for lead. What is the maximum inspection window allowed?",
+      options: ["7 days from disclosure", "10 days from disclosure", "14 days from disclosure", "30 days from closing"],
+      correctIndex: 1,
+      explain: "The federal lead-based paint inspection period is 10 days from receipt of the disclosure; buyers may waive this right in writing if they choose to proceed without an inspection.",
+    },
+    {
+      q: "In a transaction involving a residential structure constructed before 1978, the buyer's inspection contingency for lead-based paint typically allows:",
+      options: ["3 business days for testing and results", "10 days to arrange and conduct inspections", "15 days to complete all lead remediation", "20 days to obtain a lead-free certification"],
+      correctIndex: 1,
+      explain: "Federal regulations provide a 10-day period for lead-based paint inspection in pre-1978 homes; the buyer may waive this right in writing at any time.",
+    },
+    {
+      q: "A licensee is assisting with a property sale built in 1975. The buyer asks how long they have after receiving the lead disclosure to inspect for lead-based paint hazards without penalty. What should the licensee state?",
+      options: ["The buyer has only 3 days before the contract becomes binding", "The buyer has 10 days to request and complete an inspection", "The buyer has until closing to arrange any lead testing", "The buyer waives inspection rights unless demanded within 5 days"],
+      correctIndex: 1,
+      explain: "Federal law grants a 10-day inspection period for lead-based paint in pre-1978 homes, which begins upon receipt of the disclosure and may be waived in writing by the buyer.",
+    },
+    {
+      q: "Under federal lead-based paint disclosure requirements, what is the standard timeframe a purchaser has to conduct an inspection for lead hazards before contract contingencies expire?",
+      options: ["5 business days", "10 calendar days", "21 calendar days", "45 calendar days"],
+      correctIndex: 1,
+      explain: "Federal law provides a 10-day inspection period for lead-based paint hazards; buyers may voluntarily waive this right in writing if they choose.",
     },
   ],
   "mandated-disclosures-q06": [
@@ -3746,6 +4886,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 0,
       explain: "Materiality is the standard that determines disclosure obligations based on whether a reasonable buyer would regard the information as important to the transaction.",
     },
+    {
+      q: "In Hawaii real estate disclosure law, a fact that a prudent buyer would want to know before purchasing is considered:",
+      options: ["Latent", "Material", "Speculative", "Superficial"],
+      correctIndex: 1,
+      explain: "Material facts are those a reasonable person would consider important in deciding whether to buy or the price to pay; this is the standard test for disclosure obligations.",
+    },
+    {
+      q: "When determining whether a property defect must be disclosed, the legal standard asks: would an ordinary, prudent buyer regard this as significant? This describes the test of:",
+      options: ["Caveat emptor", "Materiality", "Apparent defect", "Fraudulent concealment"],
+      correctIndex: 1,
+      explain: "The materiality test is whether a reasonable person would consider the fact important in their purchase decision or financing; it is the benchmark for mandatory disclosure.",
+    },
+    {
+      q: "A real estate licensee must disclose information about a property defect if a reasonable person in the buyer's position would consider it important to their transaction. This criterion is known as:",
+      options: ["The patent defect rule", "The materiality standard", "The puffery exception", "The stigmatized property test"],
+      correctIndex: 1,
+      explain: "Materiality is the foundational standard—facts are material if they would influence a reasonable person's decision or affect the property's value or desirability.",
+    },
+    {
+      q: "A seller's agent learns that the property experiences occasional flooding during heavy rains. When deciding if this must be disclosed, the agent applies the test of whether a typical, reasonable buyer would find this fact significant. This is the:",
+      options: ["Fiduciary disclosure duty", "Material fact standard", "Innocent misrepresentation threshold", "Obvious defect exemption"],
+      correctIndex: 1,
+      explain: "The material fact standard asks whether a reasonable party would consider the information important in making a buying decision; flooding history clearly meets this threshold.",
+    },
+    {
+      q: "Under Hawaii real estate disclosure laws, a fact that a reasonable person in the buyer's position would regard as significant in making a purchase decision is classified as:",
+      options: ["Latent", "Material", "Caveat emptor", "Immaterial"],
+      correctIndex: 1,
+      explain: "Materiality is defined by what a reasonable buyer would consider important or significant to their decision-making; this is the legal standard for determining disclosure obligations in Hawaii.",
+    },
   ],
   "mandated-disclosures-q07": [
     {
@@ -3771,6 +4941,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Fraudulent misrepresentation", "Negligent misrepresentation", "Innocent misrepresentation caused by third-party information", "Puffing or exaggeration within industry standards"],
       correctIndex: 1,
       explain: "Negligent misrepresentation applies when a licensee should have verified material facts through reasonable investigation but failed to do so, creating liability despite lack of intent to defraud.",
+    },
+    {
+      q: "A real estate licensee states a property fact that turns out to be false. The licensee did not know it was false at the time but failed to conduct a reasonable investigation that would have revealed the truth. This is best classified as:",
+      options: ["Puffing or sales talk", "Negligent misrepresentation", "Innocent misrepresentation", "Fraudulent misrepresentation with intent to deceive"],
+      correctIndex: 1,
+      explain: "Negligent misrepresentation occurs when a party makes a false statement without knowledge of its falsity but should have known through reasonable investigation or due diligence.",
+    },
+    {
+      q: "An agent represents that a home's roof was recently replaced, but this claim was never verified. The agent genuinely believed the statement was true when made. Under Hawaii real estate law, this unverified assertion most likely constitutes:",
+      options: ["Fraudulent misrepresentation", "Innocent misrepresentation only", "Negligent misrepresentation", "Actionable puffery"],
+      correctIndex: 2,
+      explain: "Because the agent made the statement without verifying it despite having the opportunity and obligation to do so, this represents negligent misrepresentation—a failure to exercise reasonable care in confirming facts.",
+    },
+    {
+      q: "Which type of misrepresentation involves a false statement that the speaker did not know was false but reasonably should have discovered through proper inquiry?",
+      options: ["Innocent misrepresentation", "Fraudulent misrepresentation", "Negligent misrepresentation", "Harmless exaggeration"],
+      correctIndex: 2,
+      explain: "Negligent misrepresentation is defined by the speaker's failure to exercise reasonable care or verify information before stating it as fact, even without actual knowledge of falsity.",
+    },
+    {
+      q: "A licensee tells a buyer that the property has not had foundation issues based on a casual conversation with the seller, without ordering an inspection or reviewing public records. The statement proves false. This represents:",
+      options: ["Fraud requiring proof of intentional deception", "Negligent misrepresentation due to lack of reasonable verification", "Innocent misstatement with no liability", "Opinion stated as fact that is protected by law"],
+      correctIndex: 1,
+      explain: "The licensee failed to verify a material fact through reasonable methods available to them, making this negligent misrepresentation rather than innocent (which requires no duty to investigate) or fraudulent (which requires intent).",
+    },
+    {
+      q: "An agent makes a statement about property conditions that turns out to be false. The agent did not deliberately lie, but a reasonable person in the real estate profession would have investigated the claim before making it. This constitutes:",
+      options: ["Fraudulent misrepresentation with intent to deceive", "Negligent misrepresentation due to failure to verify", "Innocent misrepresentation without duty to investigate", "Puffery regarding general market conditions"],
+      correctIndex: 1,
+      explain: "Negligent misrepresentation occurs when a statement is made without actual knowledge of falsity but the agent failed to exercise reasonable care or verification that a professional should have performed.",
     },
   ],
   "mandated-disclosures-q08": [
@@ -3798,6 +4998,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Caveat emptor is the Latin maxim meaning 'buyer beware,' reflecting the doctrine that buyers must verify property condition through their own diligence.",
     },
+    {
+      q: "Under the traditional real estate principle known as 'buyer beware,' a purchaser is generally responsible for conducting due diligence on a property. What is the Latin term for this doctrine?",
+      options: ["Quid pro quo", "Caveat emptor", "Caveat venditor", "Statute of frauds"],
+      correctIndex: 1,
+      explain: "Caveat emptor is the Latin phrase meaning 'buyer beware,' placing the onus on the purchaser to inspect and verify property conditions.",
+    },
+    {
+      q: "Which of the following Latin legal principles historically placed the burden of inspection and verification on the purchaser rather than the seller?",
+      options: ["Caveat venditor", "Statute of frauds", "Caveat emptor", "Res ipsa loquitur"],
+      correctIndex: 2,
+      explain: "Caveat emptor ('buyer beware') is the doctrine that transfers responsibility to the buyer to examine property and assume risk of defects.",
+    },
+    {
+      q: "A real estate instructor explains that under common law, buyers were expected to discover property defects themselves rather than rely on seller disclosures. This principle is known as:",
+      options: ["Caveat emptor", "Estoppel", "Caveat venditor", "Good faith and fair dealing"],
+      correctIndex: 0,
+      explain: "Caveat emptor means 'let the buyer beware' and historically required purchasers to conduct their own investigation of property conditions.",
+    },
+    {
+      q: "In contrast to modern mandatory seller disclosure laws, the historical 'as-is' approach to real estate transactions was governed by which Latin doctrine?",
+      options: ["Quid pro quo", "Caveat venditor", "Caveat emptor", "Lis pendens"],
+      correctIndex: 2,
+      explain: "Caveat emptor ('buyer beware') was the historical default principle requiring buyers to assess property conditions without seller obligation to disclose defects.",
+    },
+    {
+      q: "Which Latin maxim reflects the principle that a purchaser assumes responsibility for inspecting property and accepting it in its present condition without reliance on the seller's representations?",
+      options: ["Statute of frauds", "Quid pro quo", "Caveat emptor", "Caveat venditor"],
+      correctIndex: 2,
+      explain: "Caveat emptor (buyer beware) is the doctrine placing the burden on the buyer to investigate property condition and negotiate protections rather than relying on seller warranties. This principle, though modified by modern disclosure laws, remains foundational to real estate transactions.",
+    },
   ],
   "mandated-disclosures-q09": [
     {
@@ -3823,6 +5053,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["State that the fresh paint indicates the seller has maintained the property well", "Acknowledge the observed conditions and recommend a professional home inspection to identify any underlying moisture or structural concerns", "Explain that cosmetic updates are common and do not warrant further investigation", "Suggest the buyer contact the seller directly if they have concerns, as the licensee cannot comment on unpermitted repairs"],
       correctIndex: 1,
       explain: "When a licensee observes red flags suggesting possible defects—even during a direct buyer question—the appropriate response is to disclose the observation and recommend professional inspection.",
+    },
+    {
+      q: "During a showing, a licensee observes discolored drywall and newly applied caulk around a basement window frame. What is the licensee's appropriate action?",
+      options: ["Document the observation and actively investigate or suggest a professional inspection", "Assume the seller has already disclosed any issues and proceed with the showing", "Report findings only to the seller's agent for private handling", "Allow the buyer to discover and address any concerns independently"],
+      correctIndex: 0,
+      explain: "Visible signs of potential water damage or structural issues trigger a duty to investigate further or recommend professional inspection to protect all parties.",
+    },
+    {
+      q: "A licensee spots cracked paint and efflorescence (white mineral deposits) on a basement wall. The licensee's best practice is to:",
+      options: ["Stay silent unless the buyer specifically asks about basement conditions", "Recommend the buyer obtain a professional inspection or conduct further investigation", "Inform only the listing side and let them decide whether to disclose", "Suggest cosmetic repairs to cover the affected area before closing"],
+      correctIndex: 1,
+      explain: "Visible indicators of moisture or foundation issues create an obligation to recommend inspection or further inquiry to fulfill fiduciary duties.",
+    },
+    {
+      q: "At an open house, you notice recently painted drywall adjacent to dark staining that suggests prior water intrusion. What should you do?",
+      options: ["Request the homeowner's written explanation before mentioning it to any prospective buyer", "Encourage prospective buyers to hire an inspector and disclose or investigate the condition", "Consider it a cosmetic issue and focus the showing on other property features", "Relay your concerns exclusively to your broker for internal documentation"],
+      correctIndex: 1,
+      explain: "Signs of concealment or water damage—such as fresh paint over stains—obligate the licensee to recommend inspection or conduct due diligence.",
+    },
+    {
+      q: "While conducting a pre-listing walkthrough, you observe new paint covering what appears to be water-damaged drywall in the basement. Your responsibility is to:",
+      options: ["Accept the owner's assurance that repairs were completed and list the property as-is", "Identify the red flag and recommend further inspection or investigation before marketing", "Withhold the observation from any disclosure and let the buyer's inspector find it", "Note it privately but only share with the buyer's agent if asked directly"],
+      correctIndex: 1,
+      explain: "Fresh paint over suspicious stains is a red flag requiring investigation or professional inspection to ensure proper disclosure and protect all parties.",
+    },
+    {
+      q: "During a showing, a salesperson observes peeling paint in a bedroom closet and discovers mold spots on the adjacent wall. What is the licensee's appropriate course of action?",
+      options: ["Document observations and recommend the buyer obtain a professional mold inspection", "Assume the seller will disclose this issue on the disclosure form", "Mention the issue only if the buyer directly asks about mold or moisture", "Report the findings exclusively to the listing agent without discussing with the buyer"],
+      correctIndex: 0,
+      explain: "A licensee encountering visible defects or red flags must proactively investigate or recommend professional inspection to fulfill the duty of inquiry and care.",
     },
   ],
   "mandated-disclosures-q10": [
@@ -3850,6 +5110,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "Moving forward without a completed mandatory disclosure violates Hawaii REC rules and real estate law; the licensee must enforce the requirement or withdraw.",
     },
+    {
+      q: "During a listing appointment, the seller states they will not fill out the property condition disclosure required by Hawaii law. What is the licensee's most appropriate response?",
+      options: ["Proceed with listing and note that disclosure is pending", "Decline the listing or require the seller to complete the disclosure form", "Ask the seller to initial a waiver instead of completing the full form", "Market the property without disclosure and let the buyer's inspector find issues"],
+      correctIndex: 1,
+      explain: "Licensees cannot bypass mandatory seller disclosure requirements; refusing to complete it is grounds to decline representation to protect both parties and comply with law.",
+    },
+    {
+      q: "A property owner tells their real estate agent that completing a property condition disclosure form is too time-consuming and wants to list without it. The agent should:",
+      options: ["Contact the broker to get written permission to skip the disclosure", "Obtain a signed statement from the seller acknowledging they refuse to disclose and proceed with listing", "Require completion of the disclosure or terminate the listing agreement", "Prepare the disclosure based on publicly available information and the seller's verbal statements"],
+      correctIndex: 2,
+      explain: "Licensees must enforce disclosure compliance as a condition of representation; accepting a refusal without consequences violates fiduciary duty and regulatory requirements.",
+    },
+    {
+      q: "When a seller declines to complete the mandatory property condition disclosure, which action best protects the licensee and client?",
+      options: ["Allow the sale to proceed contingent on buyer discovery and inspection", "Request the seller sign a form acknowledging their refusal and continue marketing", "Refuse to take the listing until the disclosure is properly completed", "Modify the disclosure to include only positive features the seller confirms"],
+      correctIndex: 2,
+      explain: "A licensee's professional obligation is to insist on compliance with disclosure laws; proceeding without it exposes the licensee to liability and violates consumer protection standards.",
+    },
+    {
+      q: "A licensee encounters a seller who explicitly refuses to complete a required property condition disclosure statement. The licensee's proper course of action is to:",
+      options: ["Advise the buyer that disclosure is not available and reduce the offer price accordingly", "Require the seller to complete the disclosure or decline representation of that listing", "File a complaint with the Hawaii Real Estate Commission and then list the property", "Create a simplified disclosure form that summarizes only the seller's known defects"],
+      correctIndex: 1,
+      explain: "Licensees must uphold disclosure requirements; if a seller will not comply, the licensee must choose not to represent them rather than circumvent legal obligations.",
+    },
+    {
+      q: "During listing intake, a seller states they will not complete the property condition disclosure required by Hawaii law. As the listing agent, what is your most appropriate response?",
+      options: ["Proceed with marketing the property and note in the MLS that disclosure is pending", "Decline the listing unless the seller agrees to provide the completed disclosure form", "Have the seller sign a waiver exempting them from the disclosure requirement", "Prepare a summary disclosure based on your own inspection and have the seller initial it"],
+      correctIndex: 1,
+      explain: "Hawaii law requires sellers to provide accurate property condition disclosures; a licensee cannot ethically list a property or circumvent this requirement, and must decline the listing if the seller refuses compliance.",
+    },
   ],
   "mandated-disclosures-q11": [
     {
@@ -3875,6 +5165,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["HUD establishes binding disclosure rules that apply everywhere", "Disclosure requirements are determined individually by each state and vary widely", "There are no legal disclosure requirements for any stigmatizing information", "Disclosure applies only to properties where deaths occurred"],
       correctIndex: 1,
       explain: "Stigmatized property disclosure laws vary by state—some require it, some forbid it, and some are silent, creating a patchwork of state-specific rules with no national standard.",
+    },
+    {
+      q: "When advising a client about disclosure obligations for a property where a suicide occurred, a Hawaii real estate agent should understand that:",
+      options: ["Federal law mandates identical disclosure requirements nationwide for all stigmatized properties", "Disclosure requirements for stigmatized properties differ from state to state", "Hawaii law prohibits any disclosure of stigmatized property information to buyers", "Only deaths resulting from criminal acts must be disclosed in every state"],
+      correctIndex: 1,
+      explain: "Stigmatized property disclosure rules vary significantly by state; some states require disclosure while others do not, and the time periods and types of events differ.",
+    },
+    {
+      q: "A real estate licensee in Hawaii is asked whether a property where a felony occurred must be disclosed to potential buyers. The correct response is:",
+      options: ["All states have adopted the same stigmatized property disclosure statute", "Disclosure requirements depend on which state the property is located in, as rules are not uniform", "Federal regulations override all state laws regarding stigmatized property disclosure", "Stigmatized property disclosures are only required for properties involved in drug manufacturing"],
+      correctIndex: 1,
+      explain: "Each state sets its own rules on what events trigger stigmatized property disclosure requirements, meaning requirements are not consistent across jurisdictions.",
+    },
+    {
+      q: "Which statement accurately describes how Hawaii real estate law handles stigmatized property disclosure?",
+      options: ["The National Association of REALTORS® has established a single nationwide standard that all agents must follow", "State laws control stigmatized property disclosure requirements; they are not standardized federally", "Stigmatized property rules apply equally to all property types and circumstances across the country", "Only events causing death require disclosure, and this requirement is uniform in all states"],
+      correctIndex: 1,
+      explain: "Stigmatized property disclosure obligations are determined by individual state law, not by federal mandate or national standards, resulting in significant variations.",
+    },
+    {
+      q: "When a Hawaii agent encounters a property with a negative history, the agent should recognize that requirements to disclose such stigmatizing information:",
+      options: ["Follow a federal template that applies identically in all 50 states", "Differ from state to state based on each state's specific statutory framework", "Are nonexistent in all jurisdictions as a matter of public policy", "Apply exclusively to properties where violent crimes occurred within the past year"],
+      correctIndex: 1,
+      explain: "Stigmatized property disclosure laws vary by state; some jurisdictions require disclosure while others do not, and the scope of what must be disclosed differs widely.",
+    },
+    {
+      q: "A Hawaii real estate licensee is advising a seller about potential disclosure obligations related to a property's negative history. Which statement best describes how stigmatized property laws function?",
+      options: ["Federal law provides a single standard that all states must follow for disclosure", "Each state establishes its own rules regarding what must be disclosed about a property's stigmatized status", "Hawaii has no legal framework addressing disclosure of properties with negative events or reputations", "Disclosure is required only when a death occurred on the property within the past year"],
+      correctIndex: 1,
+      explain: "Stigmatized property disclosure requirements vary significantly by state; Hawaii and other states each set their own rules about which negative events require disclosure, making this a state-level determination rather than a uniform federal mandate.",
     },
   ],
   "practice-of-real-estate-q00": [
@@ -6106,6 +7426,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "The four essential tests—legal, physical, financial, and productive capacity—must all be satisfied concurrently; absence of any single test negates the highest and best use conclusion.",
     },
+    {
+      q: "When evaluating a property's highest and best use, an appraiser must ensure the use satisfies which of the following criteria?",
+      options: ["Market demand and owner preference", "Legal compliance, physical feasibility, economic viability, and net income maximization", "Zoning approval and construction cost only", "Environmental impact assessment alone"],
+      correctIndex: 1,
+      explain: "Highest and best use requires satisfaction of all four criteria: legal permissibility, physical possibility, financial feasibility, and maximum productivity. Owner preference and environmental impact alone are insufficient.",
+    },
+    {
+      q: "A developer is analyzing potential uses for a vacant lot. Which statement correctly describes the requirements for determining highest and best use?",
+      options: ["The use must generate the greatest profit margin regardless of zoning restrictions", "The use must be legally permitted, physically capable of development, economically viable, and result in the greatest net return", "The use must be the most expensive development option available", "The use must align with the property owner's personal investment goals"],
+      correctIndex: 1,
+      explain: "Highest and best use must simultaneously meet legal (zoning/code), physical (site constraints), financial (cost feasibility), and productivity (maximum return) standards; profit alone or owner preference cannot override these requirements.",
+    },
+    {
+      q: "In an appraisal report, the highest and best use analysis should confirm that the proposed use is:",
+      options: ["Permitted by local zoning and physically possible, but financial feasibility is secondary", "Reasonably probable, legally allowable, constructively feasible, and financially supportable with superior earning potential", "Acceptable to neighborhood residents and most profitable in the current market", "Approved by the city planning department without regard to physical or economic constraints"],
+      correctIndex: 1,
+      explain: "All four tests—legal permissibility, physical possibility, financial feasibility, and maximum productivity—must be simultaneously satisfied; neighborhood approval or planning department preference alone do not constitute highest and best use.",
+    },
+    {
+      q: "Which of the following best describes the complete test for determining if a property use qualifies as highest and best use?",
+      options: ["The use produces the highest sales price in the current market cycle", "The use is achievable within zoning law, capable of being constructed, affordable to develop, and generates the greatest net benefit", "The use has been historically common in the neighborhood", "The use is supported by the majority of adjacent property owners"],
+      correctIndex: 1,
+      explain: "Highest and best use requires satisfaction of four concurrent standards: legal permissibility, physical possibility, financial feasibility, and maximum productivity; historical precedent or neighbor support do not meet these objective criteria.",
+    },
+    {
+      q: "When determining a property's highest and best use, an appraiser must ensure the use satisfies which of the following requirements?",
+      options: ["Generates the greatest return and meets zoning laws only", "Is legally permitted, technically achievable, economically viable, and produces the greatest net benefit", "Maximizes profit regardless of physical or legal constraints", "Receives written consent from the current property owner"],
+      correctIndex: 1,
+      explain: "Highest and best use requires all four criteria: legal permissibility, physical possibility, financial feasibility, and maximum productivity; meeting only some criteria is insufficient.",
+    },
   ],
   "valuation-market-analysis-q07": [
     {
@@ -6131,6 +7481,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Supply and demand", "Regression", "Progression", "Functional obsolescence"],
       correctIndex: 2,
       explain: "Progression explains how a modest property gains value from its superior neighborhood environment, with the quality and prices of neighboring properties pulling the lesser-valued property upward.",
+    },
+    {
+      q: "When a smaller home is situated in a neighborhood of larger, higher-value properties, the smaller home's value tends to increase due to:",
+      options: ["Substitution", "Progression", "Regression", "Anticipation"],
+      correctIndex: 1,
+      explain: "Progression occurs when a lower-value property benefits from being surrounded by superior properties that elevate its market value.",
+    },
+    {
+      q: "A homeowner purchases a modest bungalow in an exclusive subdivision where all other homes are significantly larger and more valuable. The bungalow's value is positively affected by which appraisal principle?",
+      options: ["Regression", "Contribution", "Progression", "Conformity"],
+      correctIndex: 2,
+      explain: "Progression is the principle that a less desirable property gains value when situated among more desirable, higher-value properties.",
+    },
+    {
+      q: "A small, entry-level home benefits most from which principle when it is the least expensive property in a neighborhood of luxury estates?",
+      options: ["Plottage", "Progression", "Regression", "Depreciation"],
+      correctIndex: 1,
+      explain: "Progression explains how inferior properties experience value increases due to the positive influence of superior neighboring properties.",
+    },
+    {
+      q: "Which appraisal principle applies when an older, smaller residence is located among newer, larger homes and experiences an uplift in value?",
+      options: ["Regression", "Obsolescence", "Progression", "Leverage"],
+      correctIndex: 2,
+      explain: "Progression is the principle where a property of lesser quality or size gains value by being situated in a neighborhood of superior properties.",
+    },
+    {
+      q: "An older, smaller home in a neighborhood of newly constructed, high-value properties would most likely experience a positive price influence from which appraisal principle?",
+      options: ["Substitution", "Progression", "Regression", "Plottage"],
+      correctIndex: 1,
+      explain: "Progression applies when a lower-value property gains value by being surrounded by superior properties in the same area. The modest home benefits from the neighborhood's overall quality and desirability.",
     },
   ],
   "valuation-market-analysis-q08": [
@@ -6158,6 +7538,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 2,
       explain: "The income capitalization approach divides NOI by the cap rate: $36,000 ÷ 0.09 = $400,000.",
     },
+    {
+      q: "An income-producing property has a net operating income of $36,000 annually. If comparable properties in the market are trading at a 9% capitalization rate, what is the estimated property value using the income approach?",
+      options: ["$324,000", "$450,000", "$400,000", "$380,000"],
+      correctIndex: 2,
+      explain: "Using the cap rate formula: Value = NOI ÷ Cap Rate = $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "A rental property produces $36,000 in net operating income per year. The prevailing capitalization rate for similar properties is 9%. What should an investor expect to pay for this property at current market rates?",
+      options: ["$360,000", "$412,000", "$432,000", "$400,000"],
+      correctIndex: 3,
+      explain: "The income capitalization approach uses the formula: Property Value = NOI ÷ Cap Rate = $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "Using the direct capitalization method, if a commercial property yields $36,000 NOI and the market cap rate is 9%, the property's value would be approximately:",
+      options: ["$414,000", "$400,000", "$372,000", "$324,000"],
+      correctIndex: 1,
+      explain: "Direct capitalization calculates value by dividing NOI by the cap rate: $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "A property appraiser determines the annual NOI to be $36,000. Given that the market capitalization rate for this property type is 9%, what is the indicated property value?",
+      options: ["$450,000", "$360,000", "$324,000", "$400,000"],
+      correctIndex: 3,
+      explain: "Value is calculated by dividing net operating income by the capitalization rate: $36,000 ÷ 0.09 = $400,000.",
+    },
+    {
+      q: "An investment property produces net operating income of $36,000 annually. If comparable properties in the area are trading at a 9% capitalization rate, what is the estimated property value using the income approach?",
+      options: ["$288,000", "$400,000", "$432,000", "$504,000"],
+      correctIndex: 1,
+      explain: "Using the capitalization rate formula: Value = NOI ÷ Cap Rate = $36,000 ÷ 0.09 = $400,000. This is the standard income approach valuation method.",
+    },
   ],
   "valuation-market-analysis-q09": [
     {
@@ -6183,6 +7593,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["It should be listed as a fixed operating expense", "It is not included in the NOI calculation", "It reduces NOI by the monthly payment amount", "It is classified as a capital improvement cost"],
       correctIndex: 1,
       explain: "NOI is calculated independent of how the property is financed. Mortgage payments are financing decisions that come after NOI is determined and do not affect the calculation.",
+    },
+    {
+      q: "When calculating Net Operating Income (NOI) for an investment property, which of the following should be excluded from the calculation?",
+      options: ["Property taxes and insurance", "Principal and interest payments on the mortgage", "Maintenance and repairs", "Property management fees"],
+      correctIndex: 1,
+      explain: "NOI is calculated before any financing considerations. Mortgage principal and interest are financing costs, not operating expenses, and therefore excluded from NOI.",
+    },
+    {
+      q: "A real estate investor is analyzing a property's profitability using NOI. Which expense item should NOT be deducted when determining the property's NOI?",
+      options: ["Loan amortization payments", "Utilities and maintenance costs", "Property management and leasing commissions", "Real estate taxes and insurance premiums"],
+      correctIndex: 0,
+      explain: "Loan amortization (the blended principal and interest payment) is a financing expense, not an operating expense, so it is excluded from NOI calculations.",
+    },
+    {
+      q: "In Hawaii real estate investment analysis, NOI differs from cash flow primarily because NOI excludes which of the following?",
+      options: ["Advertising and tenant screening costs", "Debt service obligations", "Trash removal and landscaping", "Vacancy losses and rent concessions"],
+      correctIndex: 1,
+      explain: "NOI is calculated independent of how a property is financed; debt service is excluded because NOI represents the property's operational performance before any mortgage obligations.",
+    },
+    {
+      q: "An investor reviewing a property's Net Operating Income statement notices that the figure does not account for the monthly mortgage payment. Is this correct?",
+      options: ["No, mortgage payments must always be included as an operating expense", "Yes, NOI properly excludes debt service payments", "No, but only the principal portion should be excluded", "Yes, but only for investment properties in Hawaii"],
+      correctIndex: 1,
+      explain: "NOI is designed to show a property's operational profitability independent of financing structure, so all debt service (principal and interest) is properly excluded from the calculation.",
+    },
+    {
+      q: "When calculating the Net Operating Income (NOI) of an income-producing property, which of the following items should be excluded from the calculation?",
+      options: ["Property taxes and insurance premiums", "Principal and interest payments on the mortgage loan", "Maintenance and repair costs", "Property management fees"],
+      correctIndex: 1,
+      explain: "NOI is calculated before financing considerations; mortgage principal and interest payments are debt service and are excluded because NOI measures operational performance independent of how the property is financed.",
     },
   ],
   "valuation-market-analysis-q10": [
@@ -6210,6 +7650,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       correctIndex: 1,
       explain: "A CMA is an informal broker pricing tool; an appraisal is a formal, USPAP-compliant valuation performed by a licensed professional required by lenders and institutions.",
     },
+    {
+      q: "Which statement correctly distinguishes a professional appraisal from a comparative market analysis (CMA)?",
+      options: ["A CMA must be conducted by a state-licensed professional following USPAP standards", "An appraisal is performed by a licensed or certified appraiser and adheres to Uniform Standards of Professional Appraisal Practice", "CMAs are legal requirements for all residential transactions in Hawaii", "Appraisals and CMAs serve identical purposes and are interchangeable documents"],
+      correctIndex: 1,
+      explain: "Only licensed/certified appraisers produce appraisals under USPAP; CMAs are informal pricing tools prepared by real estate agents without appraiser licensing requirements.",
+    },
+    {
+      q: "An agent preparing a market analysis for a seller would be creating a CMA rather than an appraisal primarily because:",
+      options: ["The CMA is more detailed and legally binding", "The agent lacks the state licensing and USPAP compliance requirements that appraisers must maintain", "CMAs are mandated by the Hawaii Real Estate Commission for all listing presentations", "Appraisals are only used in commercial transactions, never residential"],
+      correctIndex: 1,
+      explain: "Real estate agents can prepare CMAs without appraiser licensure; appraisals require state-licensed/certified professionals who must follow USPAP.",
+    },
+    {
+      q: "When a lender orders a formal appraisal rather than accepting an agent's market analysis, the key distinction is that:",
+      options: ["The appraisal will always produce a higher property value estimate", "Only the appraisal will be conducted by a state-regulated professional bound by USPAP standards", "The agent's CMA has already satisfied all federal lending requirements", "CMAs and appraisals are functionally equivalent documents with different names"],
+      correctIndex: 1,
+      explain: "Appraisals must be performed by licensed/certified appraisers following USPAP; CMAs are non-regulated price estimates prepared by agents.",
+    },
+    {
+      q: "A real estate professional in Hawaii should understand that the primary regulatory difference between an appraisal and a CMA is:",
+      options: ["CMAs require appraiser licensure and USPAP compliance; appraisals do not", "Appraisals require state appraiser licensing and adherence to USPAP; CMAs are prepared by agents without such requirements", "Both require identical state licensing, but appraisals are more commonly used", "There is no meaningful distinction in how they are conducted or who may prepare them"],
+      correctIndex: 1,
+      explain: "Licensed/certified appraisers must follow USPAP when conducting appraisals; agents prepare CMAs without appraiser licensure or USPAP obligations.",
+    },
+    {
+      q: "Which statement best distinguishes a professional appraisal from a comparative market analysis prepared by a real estate agent?",
+      options: ["Appraisals must comply with USPAP standards and be conducted by a state-licensed appraiser", "CMAs are always more conservative in their value estimates", "Appraisals are optional for conventional loans but CMAs are mandatory", "Both require the same level of government credentialing and oversight"],
+      correctIndex: 0,
+      explain: "Appraisals require state licensure/certification and must follow the Uniform Standards of Professional Appraisal Practice (USPAP), whereas CMAs are informal pricing tools prepared by agents without requiring state credentials or USPAP compliance.",
+    },
   ],
   "valuation-market-analysis-q11": [
     {
@@ -6235,6 +7705,36 @@ export const VARIANT_POOL: Record<QuestionId, Variant[]> = {
       options: ["Property value and cap rate move in the same direction", "Property value decreases as cap rates increase", "Property value is unaffected by cap rate changes", "Property value depends on the property's age and condition"],
       correctIndex: 1,
       explain: "Cap rate and property value have an inverse relationship in the valuation formula V = NOI ÷ Cap Rate; a higher cap rate denominator yields a lower numerator result.",
+    },
+    {
+      q: "When capitalization rate increases while net operating income remains constant, property value will:",
+      options: ["Increase proportionally", "Decrease proportionally", "Remain unchanged", "Fluctuate based on market conditions"],
+      correctIndex: 1,
+      explain: "Using the valuation formula V = NOI ÷ Cap Rate, a larger denominator (higher cap rate) produces a smaller value when NOI is held constant.",
+    },
+    {
+      q: "A property currently valued using a 5% cap rate is reassessed at a 6% cap rate. Assuming NOI stays the same, the property value will:",
+      options: ["Stay the same", "Go down", "Go up", "Double in value"],
+      correctIndex: 1,
+      explain: "Since value is calculated as NOI divided by cap rate, increasing the cap rate (denominator) reduces the overall property valuation when NOI is fixed.",
+    },
+    {
+      q: "If market cap rates rise from 4% to 5% for comparable investment properties, and a property's NOI does not change, its value will:",
+      options: ["Increase due to higher yield", "Decrease due to higher required return", "Remain stable across market cycles", "Depend entirely on property age"],
+      correctIndex: 1,
+      explain: "Higher cap rates represent higher required returns, which mathematically decreases property value since V = NOI ÷ Cap Rate with NOI constant.",
+    },
+    {
+      q: "An investor's required rate of return (cap rate) increases for a particular asset class. With NOI unchanged, the property's market value will:",
+      options: ["Rise to attract new buyers", "Fall to reflect the higher required yield", "Remain constant indefinitely", "Depend on the property's location"],
+      correctIndex: 1,
+      explain: "A higher required rate of return (cap rate) in the denominator of the valuation formula V = NOI ÷ Cap Rate results in a lower property value when NOI is constant.",
+    },
+    {
+      q: "An investment property generates a constant NOI of $50,000. If the capitalization rate increases from 5% to 7%, the property's market value will most likely:",
+      options: ["Increase proportionally to the NOI growth", "Decrease because the denominator in the valuation formula increases", "Remain unchanged since NOI is fixed", "Rise due to improved investor demand at higher cap rates"],
+      correctIndex: 1,
+      explain: "Using V = NOI ÷ Cap Rate, when cap rate rises while NOI stays constant, the denominator increases, resulting in a lower property valuation.",
     },
   ],
 };

@@ -294,7 +294,10 @@ function Table({ users, sortBy, setSortBy, onLogout }: { users: AdminUserRow[]; 
                       <td style={{ ...td, color: T.textMute, fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>{new Date(u.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' })}</td>
                       <td style={{ ...td, color: T.textMute, fontSize: 12, fontFamily: "'JetBrains Mono', monospace" }}>{formatDuration((Date.now() - new Date(u.lastSeenAt).getTime()) / 1000, 'short')} ago</td>
                       <td style={{ ...td, textAlign: 'right' }}>
-                        <button onClick={() => setEditing(u)} style={{ ...BUTTON_3D.secondary, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', cursor: 'pointer', fontFamily: 'inherit' }}>Edit</button>
+                        <div style={{ display: 'inline-flex', gap: 6 }}>
+                          <Link href={`/admin/users/${u.id}`} style={{ ...BUTTON_3D.ghost, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', textDecoration: 'none', display: 'inline-block' }}>View</Link>
+                          <button onClick={() => setEditing(u)} style={{ ...BUTTON_3D.secondary, padding: '6px 12px', borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: '0.06em', cursor: 'pointer', fontFamily: 'inherit' }}>Edit</button>
+                        </div>
                       </td>
                     </tr>
                   );
