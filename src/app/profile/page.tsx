@@ -285,6 +285,9 @@ export default function ProfilePage() {
       {/* STUDY PLANNER — goal-date scheduler with monthly calendar */}
       {isServer && <StudyPlanner />}
 
+      {/* CERTIFICATE TEASER — links to /certificate; shows progress if not yet eligible */}
+      {isServer && <CertificateCallout />}
+
       {/* QUIZ HISTORY — drill into past attempts + review wrong answers */}
       {isServer && <QuizHistory />}
 
@@ -1000,6 +1003,97 @@ function DangerZone() {
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// Lightweight discovery surface for the course-completion certificate.
+// Polls /api/certificate to decide which copy to show: pre-eligibility
+// teaser with a tick-list, or post-eligibility CTA + verification code.
+function CertificateCallout() {
+  interface CertSummary {
+    eligible: boolean;
+    progress: { hoursStudied: number; hoursRequired: number; hoursOk: boolean };
+    mockExam: { mockOk: boolean; bestScorePct: number; attempts: number; passingThreshold: number };
+    completedAt: string | null;
+    verificationCode: string | null;
+  }
+  const [c, setC] = useState<CertSummary | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    const load = async () => {
+      try {
+        const r = await fetch('/api/certificate', { cache: 'no-store' });
+        if (r.ok && mounted) setC(await r.json() as CertSummary);
+      } catch { /* ignore */ }
+    };
+    load();
+    const id = setInterval(load, 60_000);
+    return () => { mounted = false; clearInterval(id); };
+  }, []);
+
+  if (!c) return null;
+
+  if (c.eligible) {
+    return (
+      <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.green}` }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.green, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>
+              Course completion · Issued
+            </div>
+            <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.2 }}>
+              Your certificate is ready.
+            </h3>
+            <p style={{ fontSize: 12, color: T.textMute, marginTop: 8, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
+              Verification ID: <strong style={{ color: T.text }}>{c.verificationCode}</strong>
+            </p>
+          </div>
+          <Link href="/certificate" style={{ ...BUTTON_3D.primary, padding: '12px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+            View &amp; print →
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Pre-eligibility: show a quiet teaser with the 2 requirements.
+  const hourPct = Math.min(100, (c.progress.hoursStudied / c.progress.hoursRequired) * 100);
+  return (
+    <div style={{ ...CARD, padding: 22, marginBottom: 22, borderLeft: `3px solid ${T.ocean}` }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 14 }}>
+        <div style={{ flex: '1 1 280px' }}>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 6 }}>
+            Course completion · In progress
+          </div>
+          <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: 20, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.2 }}>
+            Two milestones to your certificate.
+          </h3>
+          <ul style={{ listStyle: 'none', padding: 0, margin: '12px 0 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <li style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: T.textDim, lineHeight: 1.5 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 18, height: 18, borderRadius: '50%', background: c.progress.hoursOk ? T.green : T.bgRaised, color: c.progress.hoursOk ? '#fff' : T.textMute, flexShrink: 0, fontSize: 11, fontWeight: 800 }}>
+                {c.progress.hoursOk ? '✓' : '·'}
+              </span>
+              {c.progress.hoursStudied.toFixed(1)} / {c.progress.hoursRequired} hours of study
+            </li>
+            <li style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: T.textDim, lineHeight: 1.5 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 18, height: 18, borderRadius: '50%', background: c.mockExam.mockOk ? T.green : T.bgRaised, color: c.mockExam.mockOk ? '#fff' : T.textMute, flexShrink: 0, fontSize: 11, fontWeight: 800 }}>
+                {c.mockExam.mockOk ? '✓' : '·'}
+              </span>
+              {c.mockExam.attempts === 0 ? 'Pass a mock exam at 70%+' : `Best mock: ${c.mockExam.bestScorePct}% (need ${c.mockExam.passingThreshold}%)`}
+            </li>
+          </ul>
+          {!c.progress.hoursOk && (
+            <div style={{ marginTop: 12, height: 4, background: T.bgRaised, borderRadius: 999, overflow: 'hidden' }}>
+              <div style={{ height: '100%', width: `${hourPct}%`, background: T.ocean, transition: 'width 0.4s' }} />
+            </div>
+          )}
+        </div>
+        <Link href="/certificate" style={{ ...BUTTON_3D.secondary, padding: '10px 18px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', flexShrink: 0 }}>
+          View status →
+        </Link>
+      </div>
     </div>
   );
 }
