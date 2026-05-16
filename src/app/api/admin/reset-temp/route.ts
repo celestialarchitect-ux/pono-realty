@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
       data: {
         email: email.toLowerCase(),
         passwordHash,
-        emailVerified: markVerified ? new Date() : null,
+        emailVerifiedAt: markVerified ? new Date() : null,
       },
     });
     return NextResponse.json({
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
       action: 'created',
       userId: created.id,
       email: created.email,
-      emailVerified: created.emailVerified,
+      emailVerifiedAt: created.emailVerifiedAt,
     });
   }
 
@@ -55,9 +55,9 @@ export async function POST(req: NextRequest) {
     where: { email: email.toLowerCase() },
     data: {
       passwordHash,
-      ...(markVerified && !existing.emailVerified ? { emailVerified: new Date() } : {}),
+      ...(markVerified && !existing.emailVerifiedAt ? { emailVerifiedAt: new Date() } : {}),
     },
-    select: { id: true, email: true, name: true, tier: true, emailVerified: true, createdAt: true },
+    select: { id: true, email: true, name: true, tier: true, emailVerifiedAt: true, createdAt: true },
   });
 
   return NextResponse.json({
