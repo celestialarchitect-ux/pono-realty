@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { CURRICULUM, NATIONAL_TOTAL, STATE_TOTAL } from '@/lib/curriculum';
+import { CURRICULUM } from '@/lib/curriculum';
 import { GLOSSARY } from '@/lib/content/glossary';
 import { EXAM_BANK } from '@/lib/content/exam-bank';
 import { T, SHADOW_3D, BUTTON_3D, CARD } from '@/lib/theme';
@@ -15,8 +15,6 @@ export default function Landing() {
   const totalTerms = GLOSSARY.length;
   const totalMinutes = CURRICULUM.reduce((s, c) => s + c.estimatedMinutes, 0);
   const totalHours = Math.round(totalMinutes / 60);
-  const nationalChapters = CURRICULUM.filter(c => c.portion === 'national').length;
-  const stateChapters = CURRICULUM.filter(c => c.portion === 'state').length;
 
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: "'Inter', system-ui, sans-serif" }}>
@@ -94,70 +92,18 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* NATIONAL vs HAWAII STRUCTURE */}
-        <section style={{ padding: '72px 32px', maxWidth: 1180, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>How the curriculum is structured</div>
-            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 52px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text }}>
-              Two halves. Both required. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Clearly labeled.</em>
-            </h2>
-            <p style={{ fontSize: 16, color: T.textDim, maxWidth: 720, margin: '20px auto 0', lineHeight: 1.7 }}>
-              The PSI Hawaii exam tests two distinct portions. We teach them as two distinct portions &mdash; so you always know whether you&apos;re learning a national rule or a Hawaii-specific one.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
-            <div style={{ ...CARD, padding: '32px 30px', borderRadius: 18 }}>
-              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>National Portion</div>
-              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 38, fontWeight: 900, color: T.text, letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 4 }}>{NATIONAL_TOTAL}<span style={{ fontSize: 18, color: T.textMute, marginLeft: 6 }}>questions</span></div>
-              <div style={{ fontSize: 13, color: T.textDim, marginBottom: 18, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>{nationalChapters} chapters · the rules every U.S. agent must know</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: 14, color: T.textDim, lineHeight: 1.7 }}>
-                <li>• Property ownership &amp; estates</li>
-                <li>• Land use controls &amp; zoning</li>
-                <li>• Valuation &amp; market analysis</li>
-                <li>• Financing &amp; mortgage law</li>
-                <li>• Laws of agency (COALD)</li>
-                <li>• Mandated disclosures</li>
-                <li>• Contracts &amp; transfer of title</li>
-                <li>• Practice of real estate &amp; ethics</li>
-                <li>• Real estate calculations</li>
-                <li>• Specialty areas</li>
-              </ul>
-            </div>
-            <div style={{ ...CARD, padding: '32px 30px', borderRadius: 18, borderLeftWidth: 4, borderLeftStyle: 'solid', borderLeftColor: T.coral }}>
-              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>Hawaii Portion</div>
-              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 38, fontWeight: 900, color: T.text, letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 4 }}>{STATE_TOTAL}<span style={{ fontSize: 18, color: T.textMute, marginLeft: 6 }}>questions</span></div>
-              <div style={{ fontSize: 13, color: T.textDim, marginBottom: 18, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>{stateChapters} chapters · what makes Hawaii different</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: 14, color: T.textDim, lineHeight: 1.7 }}>
-                <li>• HARPTA &amp; GET (state taxes)</li>
-                <li>• Material facts &amp; statutory disclosures</li>
-                <li>• Condominium law (HRS 514B)</li>
-                <li>• Property management (HRS 521)</li>
-                <li>• Hawaii land utilization &amp; zoning</li>
-                <li>• Land Court vs. Regular System title</li>
-                <li>• Hawaii standard sales contract &amp; addenda</li>
-                <li>• Hawaii financing (Agreement of Sale)</li>
-                <li>• Escrow process &amp; conveyance tax</li>
-                <li>• License law (HRS 467) &amp; agency disclosure</li>
-              </ul>
-            </div>
-          </div>
-          <p style={{ textAlign: 'center', fontSize: 14, color: T.textMute, marginTop: 28, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
-            Total: {NATIONAL_TOTAL + STATE_TOTAL} questions · 70% to pass · 4-hour exam window
-          </p>
-        </section>
-
         {/* THE OFFICIAL PSI BLUEPRINT — category-by-category breakdown */}
         <section style={{ padding: '80px 32px', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 44 }}>
               <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
-                The Official PSI Blueprint
+                The Official Exam Blueprint
               </div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text, maxWidth: 900, margin: '0 auto 16px' }}>
                 Every category. Every weight. Mapped to a chapter.
               </h2>
               <p style={{ fontSize: 17, lineHeight: 1.6, color: T.textDim, maxWidth: 760, margin: '0 auto' }}>
-                When PSI hands you that sheet of paper on exam day, this is what&apos;s on it. We rebuild it here &mdash; same categories, same item counts, same proportions &mdash; so you study exactly what the exam tests, in exactly the right ratios.
+                The Hawaii salesperson exam tests 20 categories in fixed proportions. Our curriculum mirrors them exactly &mdash; same categories, same item counts, same weighting &mdash; so you study what the exam tests, in the ratios it tests them.
               </p>
             </div>
 
@@ -232,58 +178,6 @@ export default function Landing() {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* VS THE PSI BOOK — direct comparison */}
-        <section style={{ background: T.bgRaised, padding: '72px 32px', borderBottom: `1px solid ${T.border}` }}>
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 40 }}>
-              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
-                Why this beats the $30 PSI book
-              </div>
-              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text, maxWidth: 820, margin: '0 auto' }}>
-                A book gives you questions. We give you a system.
-              </h2>
-            </div>
-
-            <div style={{ ...CARD, overflow: 'hidden' }}>
-              {/* HEADER ROW */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', borderBottom: `1px solid ${T.border}`, background: T.bgElevated }}>
-                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>Feature</div>
-                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, textAlign: 'center', borderLeft: `1px solid ${T.border}` }}>PSI Exam Prep Book</div>
-                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, textAlign: 'center', borderLeft: `1px solid ${T.border}`, background: T.bg }}>Ralph&apos;s Academy</div>
-              </div>
-
-              {[
-                { feat: 'Format', psi: 'Paperback or PDF', us: 'Mobile + desktop web app' },
-                { feat: 'Maps to official PSI category weights', psi: 'Claimed, not shown', us: 'Showcased above &mdash; every chapter mapped' },
-                { feat: 'Practice questions', psi: '720', us: 'Growing bank, weighted to PSI items' },
-                { feat: 'Answer rationales', psi: 'Yes', us: 'Yes &mdash; plus citation to chapter & statute' },
-                { feat: 'Audio narration of every chapter', psi: '&mdash;', us: 'Yes' },
-                { feat: 'Spaced-repetition flashcards', psi: '&mdash;', us: 'Yes' },
-                { feat: 'Math drill module', psi: 'Formula review only', us: 'Interactive drills + step-by-step solutions' },
-                { feat: 'Full-length timed mock exam', psi: '110-question sample', us: '130-item timed simulation matching PSI' },
-                { feat: '24/7 AI tutor grounded in HRS + PSI outline', psi: '&mdash;', us: 'Yes' },
-                { feat: 'Progress tracking & weak-category detection', psi: '&mdash;', us: 'Yes' },
-                { feat: 'Glossary with key terms', psi: '&mdash;', us: 'Yes' },
-                { feat: 'Required 60-hour study tracking', psi: '&mdash;', us: 'Auto-tracked' },
-                { feat: 'Hawaii state law depth', psi: '37 pages', us: '9 dedicated chapters · HRS 467 · 514B · 521 · HARPTA · GET' },
-                { feat: 'Certificate of completion', psi: '&mdash;', us: 'Issued · 2-year validity · verifiable URL' },
-                { feat: 'Pass-the-exam-or-money-back', psi: 'Explicitly disclaimed', us: 'See pricing for details' },
-                { feat: 'Built by a Hawaii broker who teaches it', psi: 'Generic national publisher', us: 'Ralph Foulger, CPM · licensed in HI since 1972' },
-              ].map((row, i) => (
-                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', borderTop: i === 0 ? 'none' : `1px solid ${T.border}` }}>
-                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.text, fontWeight: 600 }}>{row.feat}</div>
-                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.textMute, textAlign: 'center', borderLeft: `1px solid ${T.border}` }} dangerouslySetInnerHTML={{ __html: row.psi }} />
-                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.text, fontWeight: 600, textAlign: 'center', borderLeft: `1px solid ${T.border}`, background: T.bg }} dangerouslySetInnerHTML={{ __html: row.us }} />
-                </div>
-              ))}
-            </div>
-
-            <p style={{ marginTop: 24, textAlign: 'center', fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
-              The book costs $30 and ships in a week. Ralph&apos;s Academy is in your pocket the moment you sign up.
-            </p>
           </div>
         </section>
 
