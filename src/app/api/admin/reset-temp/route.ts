@@ -33,22 +33,12 @@ export async function POST(req: NextRequest) {
 
   const passwordHash = await bcrypt.hash(newPassword, 12);
 
-  const existing = await prisma.user.findUnique({ where: { email: email.toLowerCase() } });
+  const existing = await prisma.user.findUnique({
+    where: { email: email.toLowerCase() },
+    select: { id: true, email: true, emailVerifiedAt: true },
+  });
   if (!existing) {
-    const created = await prisma.user.create({
-      data: {
-        email: email.toLowerCase(),
-        passwordHash,
-        emailVerifiedAt: markVerified ? new Date() : null,
-      },
-    });
-    return NextResponse.json({
-      ok: true,
-      action: 'created',
-      userId: created.id,
-      email: created.email,
-      emailVerifiedAt: created.emailVerifiedAt,
-    });
+    return NextResponse.json({ error: 'no account with that email — sign up first' }, { status: 404 });
   }
 
   const updated = await prisma.user.update({
