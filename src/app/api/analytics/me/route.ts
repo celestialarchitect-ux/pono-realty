@@ -105,6 +105,22 @@ export async function GET() {
   // 'Continue where you left off' card.
   const lastPath = events.length > 0 ? events[events.length - 1].path : null;
 
+  // Per-section "last visited" map — every major area of the academy
+  // (chapters, flashcards, math, glossary, quizzes, tutor, practice) gets
+  // its own resume slot so the profile can surface a Continue card for
+  // EACH section, not just the curriculum. The chronologically-last event
+  // within each bucket wins; ties are broken by bucket order.
+  const lastBySection: Record<string, { path: string; createdAt: string; seconds: number }> = {};
+  // events comes ordered oldest→newest from above, so walking forward and
+  // overwriting yields the most-recent event per bucket.
+  for (const ev of events) {
+    lastBySection[ev.bucket] = {
+      path: ev.path,
+      createdAt: ev.createdAt.toISOString(),
+      seconds: byPath[ev.path] ?? 0,
+    };
+  }
+
   return NextResponse.json({
     totalSeconds,
     todaySeconds,
@@ -115,5 +131,6 @@ export async function GET() {
     recentSessions: recent,
     lastActiveAt,
     lastPath,
+    lastBySection,
   });
 }

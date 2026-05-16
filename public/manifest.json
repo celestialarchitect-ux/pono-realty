@@ -12,23 +12,15 @@
   "theme_color": "#14837b",
   "categories": ["education", "business", "productivity"],
   "shortcuts": [
-    { "name": "Continue studying",  "url": "/profile",     "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
-    { "name": "AI Tutor",           "url": "/tutor",       "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
-    { "name": "Flashcards",         "url": "/flashcards",  "icons": [{ "src": "/icon.svg", "sizes": "any" }] },
-    { "name": "Mock exam",          "url": "/practice",    "icons": [{ "src": "/icon.svg", "sizes": "any" }] }
+    { "name": "Continue studying", "url": "/profile",    "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "AI Tutor",          "url": "/tutor",      "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Flashcards",        "url": "/flashcards", "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }] },
+    { "name": "Mock exam",         "url": "/practice",   "icons": [{ "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" }] }
   ],
   "icons": [
-    {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
+    { "src": "/icon-192.png",          "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png",          "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon.svg",              "sizes": "any",     "type": "image/svg+xml", "purpose": "any" }
   ]
 }

@@ -640,17 +640,31 @@ function CalendarGrid({ schedule }: { schedule: ScheduleDay[] }) {
   const dayLabels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6, marginBottom: 8 }}>
+    // minWidth: 0 lets the calendar shrink inside flex/grid parents
+    // (iPhone) instead of forcing horizontal page overflow. Inner gaps
+    // shrink on small screens so cells stay legible at 375px.
+    <div style={{ minWidth: 0 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: 'clamp(3px, 0.8vw, 6px)', marginBottom: 8 }}>
         {dayLabels.map((d, i) => (
-          <div key={i} style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", textAlign: 'center', letterSpacing: '0.16em', fontWeight: 700 }}>
+          <div key={i} style={{
+            // Two-char abbreviation on phones, full short name on larger screens.
+            fontSize: 'clamp(9px, 2.4vw, 11px)',
+            color: T.textMute,
+            fontFamily: "'JetBrains Mono', monospace",
+            textAlign: 'center',
+            letterSpacing: 'clamp(0.04em, 0.5vw, 0.16em)',
+            fontWeight: 700,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}>
             {d}
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(3px, 0.8vw, 6px)' }}>
         {weeks.map((week, wi) => (
-          <div key={wi} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
+          <div key={wi} style={{ display: 'grid', gridTemplateColumns: 'repeat(7, minmax(0, 1fr))', gap: 'clamp(3px, 0.8vw, 6px)' }}>
             {week.map((day, di) => <CalendarCell key={di} day={day} />)}
           </div>
         ))}
@@ -660,7 +674,11 @@ function CalendarGrid({ schedule }: { schedule: ScheduleDay[] }) {
 }
 
 function CalendarCell({ day }: { day: ScheduleDay | null }) {
-  if (!day) return <div style={{ minHeight: 96, background: 'transparent' }} />;
+  // Cell height scales with viewport — 64px on a 375px iPhone, ~96px on
+  // desktop. Square-ish on phones (one column ≈ 48px wide so 64px tall is
+  // a tight portrait rectangle that still fits the day number + one line).
+  const minH = 'clamp(64px, 12vw, 96px)';
+  if (!day) return <div style={{ minHeight: minH, background: 'transparent' }} />;
 
   const dayNum = Number(day.date.slice(-2));
   const monthName = new Date(day.date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'short' });
@@ -702,36 +720,61 @@ function CalendarCell({ day }: { day: ScheduleDay | null }) {
     <div
       title={describeDay(day)}
       style={{
-        minHeight: 96, borderRadius: 10,
+        minHeight: minH, borderRadius: 'clamp(6px, 1.2vw, 10px)',
         background: bg, border: `1px solid ${border}`,
         borderLeftWidth: isToday ? 4 : 1,
         borderLeftColor: isToday ? T.ocean : border,
         display: 'flex', flexDirection: 'column',
-        padding: '8px 10px', gap: 4,
+        // Padding shrinks on small screens — 4px sides on iPhone, 10px on desktop.
+        padding: 'clamp(4px, 1.2vw, 10px) clamp(5px, 1.4vw, 10px)',
+        gap: 'clamp(2px, 0.5vw, 4px)',
         position: 'relative', overflow: 'hidden',
+        minWidth: 0,
       }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 4 }}>
-        <div>
-          <span style={{ fontSize: 16, color: T.text, fontWeight: 800, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 4, minWidth: 0 }}>
+        <div style={{ minWidth: 0, flex: '0 1 auto' }}>
+          <span style={{
+            fontSize: 'clamp(13px, 3.6vw, 16px)',
+            color: T.text, fontWeight: 800,
+            fontFamily: "'JetBrains Mono', monospace", lineHeight: 1,
+          }}>
             {dayNum}
           </span>
           {dayNum === 1 && (
-            <span style={{ fontSize: 9, color: T.textMute, marginLeft: 4, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', textTransform: 'uppercase' }}>{monthName}</span>
+            <span style={{
+              fontSize: 9, color: T.textMute, marginLeft: 4,
+              fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.1em', textTransform: 'uppercase',
+              // Hide the month label on phones to save space — the day-1
+              // marker is implied by it being the first cell in the row.
+              display: 'inline',
+            }} className="rf-calendar-month-label">{monthName}</span>
           )}
         </div>
-        <span style={{ fontSize: 9, color: accent, fontFamily: "'JetBrains Mono', monospace", lineHeight: 1, letterSpacing: '0.04em', fontWeight: 700 }}>
+        <span style={{
+          fontSize: 'clamp(8px, 1.8vw, 9px)',
+          color: accent, fontFamily: "'JetBrains Mono', monospace",
+          lineHeight: 1, letterSpacing: '0.04em', fontWeight: 700,
+          whiteSpace: 'nowrap', flexShrink: 0,
+        }}>
           {topLabel}
         </span>
       </div>
 
       {headline && (
-        <div style={{ fontSize: 11, fontWeight: 800, color: headlineColor, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em', lineHeight: 1.1, marginTop: 2 }}>
+        <div style={{
+          fontSize: 'clamp(9px, 2.4vw, 11px)',
+          fontWeight: 800, color: headlineColor,
+          fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em',
+          lineHeight: 1.1, marginTop: 1,
+          overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        }}>
           {headline}
         </div>
       )}
       {day.status !== 'rest' && activitySummary && (
         <div style={{
-          fontSize: 10, color: T.textDim, lineHeight: 1.25,
+          fontSize: 'clamp(9px, 2.2vw, 10px)',
+          color: T.textDim, lineHeight: 1.25,
           overflow: 'hidden', textOverflow: 'ellipsis',
           display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
         }}>
@@ -739,14 +782,20 @@ function CalendarCell({ day }: { day: ScheduleDay | null }) {
         </div>
       )}
       {day.status === 'rest' && (
-        <div style={{ fontSize: 10, color: T.textGhost, fontStyle: 'italic', marginTop: 2 }}>
-          Recovery
+        <div style={{ fontSize: 'clamp(9px, 2.2vw, 10px)', color: T.textGhost, fontStyle: 'italic', marginTop: 2 }}>
+          Rest
         </div>
       )}
 
-      {/* Activity-count footer */}
+      {/* Activity-count footer — hidden on small screens, the calendar cell
+          is too tight to fit a fourth line of text below 600px wide. */}
       {day.activities.length > 0 && day.status !== 'rest' && (
-        <div style={{ marginTop: 'auto', fontSize: 9, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+        <div
+          className="rf-calendar-act-count"
+          style={{
+            marginTop: 'auto', fontSize: 9, color: T.textMute,
+            fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em',
+          }}>
           {day.activities.length} {day.activities.length === 1 ? 'activity' : 'activities'}
         </div>
       )}

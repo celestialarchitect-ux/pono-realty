@@ -102,6 +102,7 @@ export default function AdminUserDetail({ params }: { params: Promise<{ id: stri
   const { id } = usePromise(params);
   const [data, setData] = useState<DossierResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [messageOpen, setMessageOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -160,10 +161,27 @@ export default function AdminUserDetail({ params }: { params: Promise<{ id: stri
             {user.passedExamAt && <Tag label="Passed PSI" color={T.green} />}
           </div>
         </div>
-        <Link href="/admin/users" style={{ ...BUTTON_3D.secondary, padding: '10px 18px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
-          Edit tier &amp; roles →
-        </Link>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <button onClick={() => setMessageOpen(true)} style={{
+            padding: '10px 18px', borderRadius: 10,
+            background: T.ocean, color: '#fff', border: 'none', cursor: 'pointer',
+            fontFamily: 'inherit', fontSize: 12, fontWeight: 700, letterSpacing: '0.04em',
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+          }}>
+            ✉ Send message
+          </button>
+          <Link href="/admin/users" style={{ ...BUTTON_3D.secondary, padding: '10px 18px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', textAlign: 'center' }}>
+            Edit tier &amp; roles →
+          </Link>
+        </div>
       </div>
+      {messageOpen && (
+        <DirectMessageComposer
+          userId={user.id}
+          userName={user.name}
+          onClose={() => setMessageOpen(false)}
+        />
+      )}
 
       {/* TOP KPI ROW */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 14, marginBottom: 22 }}>
@@ -332,7 +350,100 @@ export default function AdminUserDetail({ params }: { params: Promise<{ id: stri
 function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ minHeight: '100vh', background: T.bg, color: T.text, fontFamily: 'Inter, system-ui, sans-serif', flex: 1, minWidth: 0 }}>
-      <main style={{ padding: '40px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>{children}</main>
+      <main style={{ padding: '40px clamp(14px, 3.5vw, 32px) 64px', maxWidth: 1180, margin: '0 auto', minWidth: 0 }}>{children}</main>
+    </div>
+  );
+}
+
+// Modal composer for a one-to-one admin → student message. Lands in the
+// student's /profile inbox immediately. Email goes out too when Resend is
+// configured; checkbox can suppress email and keep it in-app only.
+function DirectMessageComposer({ userId, userName, onClose }: { userId: string; userName: string; onClose: () => void }) {
+  const [subject, setSubject] = useState('');
+  const [bodyText, setBodyText] = useState('');
+  const [inAppOnly, setInAppOnly] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+  const [done, setDone] = useState<{ channel: string } | null>(null);
+
+  const send = async () => {
+    setBusy(true); setErr(null);
+    try {
+      const r = await fetch(`/api/admin/users/${userId}/message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject, bodyText, inAppOnly }),
+      });
+      const j = await r.json();
+      if (!r.ok) { setErr(j.message || j.error || 'Send failed.'); return; }
+      setDone({ channel: j.channel });
+    } catch (e) {
+      setErr(e instanceof Error ? e.message : 'Network error.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div onClick={onClose} style={{ position: 'fixed', inset: 0, background: 'rgba(14,26,38,0.6)', backdropFilter: 'blur(4px)', zIndex: 1000, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: 18, overflowY: 'auto' }}>
+      <div onClick={e => e.stopPropagation()} style={{ ...CARD, maxWidth: 560, width: '100%', padding: 'clamp(20px, 4vw, 28px)', marginTop: 60, borderRadius: 16 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12, marginBottom: 18 }}>
+          <div>
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', fontWeight: 700, marginBottom: 8 }}>
+              Direct message
+            </div>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 800, color: T.text, margin: 0, lineHeight: 1.2 }}>To {userName}</h2>
+          </div>
+          <button onClick={onClose} aria-label="Close" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: 24, color: T.textMute, lineHeight: 1 }}>×</button>
+        </div>
+
+        {done ? (
+          <>
+            <div style={{ ...CARD, padding: 18, marginBottom: 14, background: T.bgRaised, borderLeft: `3px solid ${T.green}` }}>
+              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 900, color: T.green, lineHeight: 1.1 }}>
+                Sent.
+              </div>
+              <div style={{ fontSize: 13, color: T.textDim, marginTop: 6 }}>
+                Delivered via {done.channel}. The message is already showing in their /profile inbox.
+              </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <button onClick={onClose} style={{ ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', cursor: 'pointer', fontFamily: 'inherit', border: 'none' }}>Done</button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, color: T.textDim, marginBottom: 6 }}>Subject</label>
+              <input type="text" value={subject} onChange={e => setSubject(e.target.value)} maxLength={200} placeholder="Quick check-in" style={{ width: '100%', padding: '10px 14px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.bgRaised, color: T.text, fontFamily: 'inherit', fontSize: 14, boxSizing: 'border-box' }} />
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <label style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, color: T.textDim, marginBottom: 6 }}>Body</label>
+              <textarea value={bodyText} onChange={e => setBodyText(e.target.value)} maxLength={20000} rows={8} placeholder={`Hi {{firstName}},\n\n...`} style={{ width: '100%', padding: '10px 14px', borderRadius: 8, border: `1px solid ${T.border}`, background: T.bgRaised, color: T.text, fontFamily: 'inherit', fontSize: 14, lineHeight: 1.6, resize: 'vertical', minHeight: 180, boxSizing: 'border-box' }} />
+              <p style={{ fontSize: 11, color: T.textMute, marginTop: 6, lineHeight: 1.5, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
+                <code>{'{{firstName}}'}</code> personalizes. Blank lines become paragraph breaks.
+              </p>
+            </div>
+            <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, cursor: 'pointer' }}>
+              <input type="checkbox" checked={inAppOnly} onChange={e => setInAppOnly(e.target.checked)} style={{ width: 16, height: 16, cursor: 'pointer' }} />
+              <span style={{ fontSize: 12, color: T.textDim }}>In-app only (skip the email — message still appears in their inbox)</span>
+            </label>
+            {err && <p style={{ fontSize: 12, color: T.coral, marginBottom: 10 }}>{err}</p>}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              <button onClick={onClose} style={{ ...BUTTON_3D.ghost, padding: '10px 18px', borderRadius: 10, fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', cursor: 'pointer', fontFamily: 'inherit' }}>Cancel</button>
+              <button onClick={send} disabled={busy || subject.length < 2 || bodyText.length < 2} style={{
+                padding: '10px 18px', borderRadius: 10,
+                background: T.ocean, color: '#fff', border: 'none',
+                cursor: busy ? 'wait' : 'pointer',
+                fontSize: 12, fontWeight: 700, letterSpacing: '0.06em', fontFamily: 'inherit',
+                opacity: (busy || subject.length < 2 || bodyText.length < 2) ? 0.5 : 1,
+              }}>
+                {busy ? 'Sending…' : 'Send →'}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

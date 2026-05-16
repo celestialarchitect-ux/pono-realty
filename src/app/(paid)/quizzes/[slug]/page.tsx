@@ -24,27 +24,57 @@ export default function ChapterQuizPage({ params }: { params: Promise<{ slug: st
   // attemptSalt changes on every new run so retakes pull DIFFERENT
   // variants from the pool, preventing rote memorization.
   const [attemptSalt, setAttemptSalt] = useState<string>('');
+  // Live overrides fetched from /api/quiz/variants — admin edits land here.
+  // null = haven't fetched yet (use static pool as the fallback).
+  type LiveVariant = { q: string; options: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; explain: string };
+  const [liveOverrides, setLiveOverrides] = useState<Map<string, LiveVariant[]> | null>(null);
 
   useEffect(() => {
     setLoaded(true);
-    // Salt is rotated only on mount or "Retake quiz" click below. Refreshes
-    // within a single attempt keep the same variants (so students don't
-    // lose their place if they hit reload mid-quiz).
     setAttemptSalt(crypto.randomUUID());
   }, [slug]);
 
-  // Build the variant-aware question list. The variant pool may contribute
-  // additional variants per question id; pickVariant chooses one per
-  // (questionId, attemptSalt) pair deterministically.
+  // Pull effective variants (static + admin overrides) once per page mount.
+  // Best-effort: a failure quietly falls back to the static pool so a quiz
+  // never refuses to load if the network blips.
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/quiz/variants?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .then((payload: { questions?: Array<{ id: string; variants: Array<{ index: number; q: string; options: [string, string, string, string]; correctIndex: 0 | 1 | 2 | 3; explain: string }> }> } | null) => {
+        if (cancelled || !payload?.questions) return;
+        const m = new Map<string, LiveVariant[]>();
+        for (const q of payload.questions) {
+          const arr: LiveVariant[] = [];
+          for (const v of q.variants) {
+            arr[v.index] = { q: v.q, options: v.options, correctIndex: v.correctIndex, explain: v.explain };
+          }
+          m.set(q.id, arr);
+        }
+        setLiveOverrides(m);
+      })
+      .catch(() => { /* fallback to static pool below */ });
+    return () => { cancelled = true; };
+  }, [slug]);
+
+  // Build the variant-aware question list. When liveOverrides is populated,
+  // swap in the matching variant from there; otherwise use the static
+  // VARIANT_POOL. pickVariant() runs against the static structure to keep
+  // variant index selection deterministic.
   const presented = useMemo(() => {
     if (!content) return [];
     const base = wrapAsVariantQuestions(content.practice, slug);
     const expanded = mergeVariantPool(base, VARIANT_POOL);
     return expanded.map(q => {
       const picked = pickVariant(q, attemptSalt);
-      return { id: q.id, variantIndex: picked.variantIndex, variant: picked.variant };
+      const live = liveOverrides?.get(q.id)?.[picked.variantIndex];
+      return {
+        id: q.id,
+        variantIndex: picked.variantIndex,
+        variant: live ?? picked.variant,
+      };
     });
-  }, [content, slug, attemptSalt]);
+  }, [content, slug, attemptSalt, liveOverrides]);
 
   if (!loaded || !meta || !content) {
     return <div style={{ padding: 64, textAlign: 'center', fontFamily: 'Inter, sans-serif', color: T.text }}>Loading…</div>;

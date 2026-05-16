@@ -18,6 +18,7 @@ interface AdminUserRow {
   lastSeenAt: string;
   passedExamAt: string | null;
   accessExpiresAt: string | null;
+  mockExamEarlyAccess: boolean;
   totalSeconds: number;
 }
 
@@ -72,7 +73,7 @@ export default function AdminUsersPage() {
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         {/* sidebar replaces header */}
-        <main style={{ padding: '48px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>
+        <main style={{ padding: '48px clamp(14px, 3.5vw, 32px) 64px', maxWidth: 1180, margin: '0 auto', minWidth: 0 }}>
           <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>
             Admin · Users
           </div>
@@ -377,6 +378,7 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
   const [accessExpiresAt, setAccessExpiresAt] = useState<string>(
     user.accessExpiresAt ? user.accessExpiresAt.slice(0, 10) : ''
   );
+  const [mockExamEarlyAccess, setMockExamEarlyAccess] = useState(user.mockExamEarlyAccess ?? false);
   const [saving, setSaving] = useState(false);
 
   const toggleRole = (role: string) => {
@@ -389,6 +391,7 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
     const patch: Partial<AdminUserRow> & { accessExpiresAt?: string | null } = {
       isAdmin, roles, tier,
       accessExpiresAt: accessExpiresAt.trim() === '' ? null : accessExpiresAt,
+      mockExamEarlyAccess,
     };
     await onSave(user, patch as Partial<AdminUserRow>);
     setSaving(false);
@@ -467,6 +470,25 @@ function EditUserDrawer({ user, onClose, onSave }: { user: AdminUserRow; onClose
           <p style={{ fontSize: 11, color: T.textGhost, marginTop: 8, lineHeight: 1.55 }}>
             Empty = no expiration. Use this to comp study time after offline study or extend a window manually. Time gets set to end-of-day UTC.
           </p>
+        </Section>
+
+        <Section title="Mock exam early access">
+          <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', padding: '10px 12px', border: `1px solid ${T.border}`, borderRadius: 10, background: mockExamEarlyAccess ? 'rgba(232,93,60,0.06)' : 'transparent' }}>
+            <input
+              type="checkbox"
+              checked={mockExamEarlyAccess}
+              onChange={e => setMockExamEarlyAccess(e.target.checked)}
+              style={{ width: 18, height: 18, cursor: 'pointer' }}
+            />
+            <div>
+              <div style={{ fontSize: 13, color: T.text, fontWeight: 600 }}>
+                Unlock the mock exam now
+              </div>
+              <div style={{ fontSize: 11, color: T.textMute, marginTop: 2, lineHeight: 1.5 }}>
+                Bypasses the 60-hour study-time gate. Useful for baseline diagnostic mocks before they start, or for instructor / QA accounts.
+              </div>
+            </div>
+          </label>
         </Section>
 
         <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', marginTop: 18 }}>

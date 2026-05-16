@@ -6,7 +6,17 @@ import { GLOSSARY } from '@/lib/content/glossary';
 import { T, SHADOW_3D, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 
-const CATEGORIES = ['all', 'national', 'hawaii', 'agency', 'finance', 'contracts', 'title', 'math'] as const;
+// Categories ordered by relevance to PSI exam coverage. New buckets added
+// 2026-05-14 alongside the deck expansion (181 → 314 terms): property,
+// fair-housing, land-use, closing, management, investment.
+const CATEGORIES = [
+  'all',
+  'national', 'hawaii',
+  'property', 'agency', 'contracts', 'title',
+  'finance', 'closing', 'investment',
+  'fair-housing', 'land-use', 'management',
+  'math',
+] as const;
 
 export default function FlashcardsPage() {
   const [cat, setCat] = useState<typeof CATEGORIES[number]>('all');

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import {
   loadLog,
@@ -25,9 +25,9 @@ import {
 // Local accrual always runs as a per-device cache; server is authoritative
 // when wired.
 
-let serverEnabled: boolean | null = null;
-
-// Routes where the timer should not run (meta / nav-only / admin)
+// Routes where the timer should NOT run — admin chrome, account flows,
+// purely navigational pages. Admins still track on study pages like every
+// other student (Zach explicitly asked for this).
 const NON_STUDY_PREFIXES = [
   '/profile',
   '/admin',
@@ -45,9 +45,22 @@ function isStudyPath(path: string): boolean {
 
 export function TimeTracker() {
   const pathname = usePathname();
-  // Last meaningful engagement (scroll, keydown, click, touchstart, audio play)
+  // Last meaningful engagement (scroll, keydown, click, touchstart, audio play).
   const lastEngagement = useRef<number>(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  // Auth state lives in a component-level ref (NOT a module-level singleton
+  // like the previous implementation). The old design had a single `let
+  // serverEnabled` shared across the whole module — once any visit set it to
+  // false (e.g., anonymous page view before sign-up), the entire tab stopped
+  // syncing for the rest of the session even after the user authenticated.
+  // That explains why some students had a handful of TimeEvent rows total:
+  // their first page was anonymous, the flag stuck at false, and nothing
+  // ever shipped to /api/time/heartbeat afterward.
+  //
+  // We also re-probe whenever the pathname changes so a fresh sign-in is
+  // detected within seconds, not at the next full page reload.
+  const serverEnabled = useRef<boolean | null>(null);
+  const [authProbeKey, setAuthProbeKey] = useState(0);
 
   // Engagement listeners — these signals are the gate. Pure mousemove does
   // NOT count because it's the cheapest signal to fake.
@@ -72,16 +85,19 @@ export function TimeTracker() {
     };
   }, []);
 
-  // Probe server auth state once per page session
+  // Probe auth on mount and whenever the URL changes. Re-probing on
+  // pathname change catches the after-signup / after-login state without
+  // requiring a full reload.
   useEffect(() => {
-    if (serverEnabled !== null) return;
-    fetch('/api/auth/me')
+    let cancelled = false;
+    fetch('/api/auth/me', { cache: 'no-store' })
       .then(r => r.json())
-      .then(data => { serverEnabled = !!data?.user; })
-      .catch(() => { serverEnabled = false; });
-  }, []);
+      .then(data => { if (!cancelled) serverEnabled.current = !!data?.user; })
+      .catch(() => { if (!cancelled) serverEnabled.current = null; });
+    return () => { cancelled = true; };
+  }, [pathname, authProbeKey]);
 
-  // Tick — accrue when engagement is recent AND tab is visible AND route counts
+  // Tick — accrue when engagement is recent AND tab is visible AND route counts.
   useEffect(() => {
     if (typeof window === 'undefined' || !pathname) return;
     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -93,12 +109,17 @@ export function TimeTracker() {
       const idleSeconds = (Date.now() - lastEngagement.current) / 1000;
       if (idleSeconds > IDLE_THRESHOLD_SECONDS) return;
 
-      // Local accrual (always)
+      // Local accrual (always — per-device cache for anon visitors)
       const next = addSeconds(loadLog(), pathname, TICK_SECONDS);
       saveLog(next);
 
-      // Server sync (best effort, only when authenticated)
-      if (serverEnabled) {
+      // Server sync — try whenever auth state is unknown (null) or known to
+      // be active (true). We only short-circuit when we're sure the user is
+      // anonymous (false). A 401/503 doesn't permanently disable; instead
+      // we trigger a re-probe so the next tick re-evaluates auth state. A
+      // session cookie that hasn't propagated yet, a deploy mid-session, or
+      // a stale tab no longer takes the user offline for the whole session.
+      if (serverEnabled.current !== false) {
         try {
           const res = await fetch('/api/time/heartbeat', {
             method: 'POST',
@@ -106,8 +127,12 @@ export function TimeTracker() {
             body: JSON.stringify({ path: pathname, seconds: TICK_SECONDS }),
             keepalive: true,
           });
-          if (res.status === 401 || res.status === 503) {
-            serverEnabled = false;
+          if (res.ok) {
+            serverEnabled.current = true;
+          } else if (res.status === 401 || res.status === 503) {
+            // Auth disappeared — re-probe instead of giving up.
+            serverEnabled.current = null;
+            setAuthProbeKey(k => k + 1);
           }
           // 429 = daily cap hit; UI will surface this via the next summary fetch.
         } catch {

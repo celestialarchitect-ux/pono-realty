@@ -32,8 +32,17 @@ COPY --from=builder /app/.next/static ./.next/static
 # explicitly so the runtime can load the query engine.
 COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
+# Ship the prisma schema + CLI so start.sh can run `db push` on boot
+# (idempotent — only diffs missing columns/tables).
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules/prisma ./node_modules/prisma
+# Explicit startup script: runs prisma db push, then exec's node server.js.
+# Inline shell chaining inside a startCommand was swallowing the server
+# launch silently — a real script with `set +e` + `exec` is reliable.
+COPY --from=builder /app/start.sh ./start.sh
+RUN chmod +x ./start.sh
 
 EXPOSE 3000
 ENV PORT=3000
 
-CMD ["node", "server.js"]
+CMD ["./start.sh"]

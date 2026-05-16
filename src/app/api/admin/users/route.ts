@@ -30,6 +30,7 @@ export async function GET() {
       lastSeenAt: true,
       passedExamAt: true,
       accessExpiresAt: true,
+      mockExamEarlyAccess: true,
     },
   });
 

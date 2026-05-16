@@ -24,16 +24,26 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Ralph Foulger's",
-    statusBarStyle: 'default',
+    // black-translucent lets the academy's cream/dark header bleed into the
+    // notch area on iPhone, looking native instead of stamped-on-top.
+    statusBarStyle: 'black-translucent',
   },
   icons: {
+    // SVG icon for capable browsers (Chrome/Firefox use this as the favicon).
+    // PNGs are kept for iOS apple-touch-icon (Safari ignores SVG here) and
+    // for Android manifest installs.
     icon: [
       { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
     apple: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
+      // 180×180 PNG is the standard iOS Home Screen size. iOS strictly
+      // requires PNG here — SVG values are silently ignored and Safari
+      // falls back to a screenshot.
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: '/icon.svg',
+    shortcut: '/icon-192.png',
   },
   formatDetection: {
     telephone: false,

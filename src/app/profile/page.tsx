@@ -18,6 +18,8 @@ import { CURRICULUM } from '@/lib/curriculum';
 import { setPin as pwaSetPin, clearPin as pwaClearPin } from '@/components/PWAInstaller';
 import { StudyPlanner } from '@/components/StudyPlanner';
 import { QuizHistory } from '@/components/QuizHistory';
+import { StudentInbox } from '@/components/StudentInbox';
+import { SectionProgressDashboard } from '@/components/SectionProgressDashboard';
 
 const BUCKET_LABELS: Record<string, string> = {
   chapters: 'Curriculum chapters',
@@ -40,6 +42,11 @@ interface AnalyticsRes {
   recentSessions: { path: string; bucket: string; start: string; end: string; seconds: number }[];
   lastActiveAt: string | null;
   lastPath?: string | null;
+  // Per-bucket "last visited" so the Continue grid can show one resume
+  // card per section (chapters, flashcards, math, glossary, quizzes, tutor,
+  // practice). Server-computed from the chronologically-newest TimeEvent
+  // in each bucket.
+  lastBySection?: Record<string, { path: string; createdAt: string; seconds: number }>;
 }
 interface MeUser {
   name: string;
@@ -173,6 +180,11 @@ export default function ProfilePage() {
       {/* VERIFY EMAIL BANNER */}
       {isServer && user && user.emailVerified === false && <VerifyEmailBanner email={user.email} />}
 
+      {/* INBOX — direct messages + broadcasts from the academy. Hidden
+          when there are no messages, expanded automatically when the
+          MessageBell deep-links here with ?inbox=1. */}
+      {isServer && user && <div style={{ marginBottom: 22 }}><StudentInbox /></div>}
+
       {/* ACADEMIC GRADE — composite score, locked until 5 study hours */}
       {isServer && user && <GradeCard />}
 
@@ -220,7 +232,9 @@ export default function ProfilePage() {
               Take your mock exam →
             </Link>
           ) : (
-            <Link href="/course" style={{ ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
+            <Link
+              href={analytics.lastBySection?.chapters?.path ?? analytics.lastPath ?? '/course'}
+              style={{ ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10, fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none' }}>
               Continue the curriculum →
             </Link>
           )}
@@ -291,7 +305,17 @@ export default function ProfilePage() {
       {/* QUIZ HISTORY — drill into past attempts + review wrong answers */}
       {isServer && <QuizHistory />}
 
-      {/* CONTINUE + COURSE PROGRESS */}
+      {/* CONTINUE — per-section resume cards. Surfaces the last visited
+          path in every major area (chapters, flashcards, math, glossary,
+          quizzes, tutor, practice) so the student can pick up whichever
+          one they were on without hunting through the nav. */}
+      {isServer && <ContinueGrid lastBySection={analytics.lastBySection ?? {}} byPath={analytics.byPath ?? {}} />}
+
+      {/* RICH PROGRESS DASHBOARD — every section with time spent, sessions,
+          best/avg quiz score, inventory size, usage rating + progress bar. */}
+      {isServer && <SectionProgressDashboard />}
+
+      {/* COURSE PROGRESS (full chapter list with per-chapter progress) */}
       {isServer && <ContinueAndCourseProgress byPath={analytics.byPath ?? {}} lastPath={analytics.lastPath ?? null} />}
 
       {/* RECENT SESSIONS */}
@@ -375,6 +399,159 @@ function Stat({ label, value, sub, accent = 'default', live = false }: { label: 
       <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, fontWeight: 900, color: accentColor[accent], letterSpacing: '-0.02em', lineHeight: 1, marginBottom: 4 }}>{value}</div>
       <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em' }}>{sub}</div>
       <style>{`@keyframes rfs-pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.35 } }`}</style>
+    </div>
+  );
+}
+
+// Section-by-section "Continue" grid. One card per major area of the
+// academy. Each card shows the last path the student visited in that
+// bucket (e.g. "Continue your last quiz: Laws of Agency") and a Resume
+// button. When a bucket has no activity yet, we still render a Start
+// card so every section is discoverable from the profile.
+//
+// This is the answer to "make sure every section remembers where I was":
+// progress lives in TimeEvent (server-side), which is durable across
+// devices and login sessions — not localStorage.
+function ContinueGrid({
+  lastBySection,
+  byPath,
+}: {
+  lastBySection: Record<string, { path: string; createdAt: string; seconds: number }>;
+  byPath: Record<string, number>;
+}) {
+  // Ordered so the most-actionable sections come first.
+  // Each bucket maps to: label, indexHref (fallback when no last-visit
+  // exists yet), label-builder for the resume target.
+  const SECTIONS: Array<{
+    bucket: string;
+    label: string;
+    indexHref: string;
+    startCta: string;
+    accent: 'ocean' | 'coral' | 'amber' | 'green';
+    resumeLabel: (path: string) => string;
+  }> = [
+    {
+      bucket: 'chapters',
+      label: 'Chapters',
+      indexHref: '/course',
+      startCta: 'Open the curriculum',
+      accent: 'ocean',
+      resumeLabel: path => {
+        // /course/<slug> or /free/<slug> — resolve to chapter title.
+        const slug = path.replace(/^\/(course|free)\//, '').split('/')[0];
+        const ch = CURRICULUM.find(c => c.slug === slug);
+        return ch ? `Ch ${ch.number}: ${ch.title}` : 'Continue reading';
+      },
+    },
+    {
+      bucket: 'quizzes',
+      label: 'Quizzes',
+      indexHref: '/quizzes',
+      startCta: 'Browse quizzes',
+      accent: 'coral',
+      resumeLabel: path => {
+        const slug = path.replace(/^\/quizzes\//, '').split('/')[0];
+        const ch = CURRICULUM.find(c => c.slug === slug);
+        return ch ? `Quiz · Ch ${ch.number} ${ch.title}` : 'Continue your quiz';
+      },
+    },
+    {
+      bucket: 'flashcards',
+      label: 'Flashcards',
+      indexHref: '/flashcards',
+      startCta: 'Open flashcards',
+      accent: 'amber',
+      resumeLabel: () => 'Continue flashcards',
+    },
+    {
+      bucket: 'math',
+      label: 'Math drills',
+      indexHref: '/math',
+      startCta: 'Open math drills',
+      accent: 'ocean',
+      resumeLabel: () => 'Continue math drills',
+    },
+    {
+      bucket: 'glossary',
+      label: 'Glossary',
+      indexHref: '/glossary',
+      startCta: 'Open glossary',
+      accent: 'amber',
+      resumeLabel: () => 'Continue glossary',
+    },
+    {
+      bucket: 'tutor',
+      label: 'AI Tutor',
+      indexHref: '/tutor',
+      startCta: 'Ask the AI Tutor',
+      accent: 'green',
+      resumeLabel: () => 'Continue your conversation',
+    },
+    {
+      bucket: 'practice',
+      label: 'Mock exam',
+      indexHref: '/practice',
+      startCta: 'Take a mock exam',
+      accent: 'coral',
+      resumeLabel: () => 'Resume your mock',
+    },
+  ];
+
+  const accentColor: Record<string, string> = {
+    ocean: T.ocean, coral: T.coral, amber: T.amber, green: T.green,
+  };
+
+  return (
+    <div style={{ ...CARD, padding: 24, marginBottom: 22 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
+        <div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>
+            Continue where you left off
+          </div>
+          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(20px, 3vw, 24px)', fontWeight: 800, color: T.text, margin: 0 }}>
+            Every section remembers your spot
+          </h2>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 12 }}>
+        {SECTIONS.map(s => {
+          const last = lastBySection[s.bucket];
+          const seconds = last ? (byPath[last.path] ?? last.seconds ?? 0) : 0;
+          const hasProgress = !!last;
+          const href = last?.path ?? s.indexHref;
+          const targetLabel = last ? s.resumeLabel(last.path) : s.startCta;
+          const accent = accentColor[s.accent];
+          return (
+            <Link key={s.bucket} href={href} style={{ textDecoration: 'none' }}>
+              <div style={{
+                padding: '14px 16px', borderRadius: 12,
+                background: hasProgress ? T.bgRaised : 'transparent',
+                border: `1px solid ${hasProgress ? T.border : 'rgba(0,0,0,0.05)'}`,
+                borderLeftWidth: 3, borderLeftColor: accent,
+                display: 'flex', flexDirection: 'column', gap: 6,
+                minHeight: 90, height: '100%', boxSizing: 'border-box',
+              }}>
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.18em', color: accent, textTransform: 'uppercase', fontWeight: 700 }}>
+                  {s.label}
+                </div>
+                <div style={{ fontSize: 14, color: T.text, fontWeight: 600, lineHeight: 1.4, overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                  {targetLabel}
+                </div>
+                {hasProgress ? (
+                  <div style={{ fontSize: 11, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.05em', marginTop: 'auto' }}>
+                    {formatDuration(seconds, 'short') || '0m'} logged · resume →
+                  </div>
+                ) : (
+                  <div style={{ fontSize: 11, color: T.textMute, fontStyle: 'italic', marginTop: 'auto' }}>
+                    Not started yet — start →
+                  </div>
+                )}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

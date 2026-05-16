@@ -150,7 +150,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       <div style={{ position: 'relative', zIndex: 10 }}>
         {/* Admin pages drop the public-site <Header /> — the sidebar
             in admin/layout.tsx provides the academy wordmark + nav. */}
-        <main style={{ padding: '40px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>{children}</main>
+        <main style={{ padding: '40px clamp(14px, 3.5vw, 32px) 64px', maxWidth: 1180, margin: '0 auto', minWidth: 0 }}>{children}</main>
         <Footer />
       </div>
     </div>

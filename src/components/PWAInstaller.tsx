@@ -47,15 +47,87 @@ export function PWAInstaller() {
   const [showLock, setShowLock] = useState(false);
   const [hasPin, setHasPin] = useState(false);
 
-  // --- 1. Register service worker ---
+  // --- 1. Register service worker + auto-update home-screen installs ---
+  //
+  // Home-screen-installed PWAs are notorious for serving stale cached
+  // shells because the OS doesn't reload the page like a browser tab does.
+  // This block fixes that:
+  //
+  //   • Re-checks for a new sw.js on every navigation + every visibility
+  //     gain (returning to the app after the OS suspended it).
+  //   • When a new SW finishes installing and is sitting in `waiting`,
+  //     we ping it with SKIP_WAITING — the SW handler (in /sw.js) then
+  //     calls skipWaiting() and activates immediately.
+  //   • When that new worker takes control (controllerchange), we reload
+  //     ONCE so the active tab is rendering the new build's HTML and JS.
+  //
+  // Net effect: install the app to your home screen, ship a new version,
+  // re-open the app — it auto-updates without you deleting + re-adding.
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (!('serviceWorker' in navigator)) return;
-    // Defer registration off the critical path.
-    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback ?? ((cb: () => void) => setTimeout(cb, 600));
+
+    let reloadedOnce = false;
+    let registrationRef: ServiceWorkerRegistration | null = null;
+
+    const onControllerChange = () => {
+      if (reloadedOnce) return;
+      reloadedOnce = true;
+      window.location.reload();
+    };
+
+    const promptUpdate = (reg: ServiceWorkerRegistration) => {
+      // If a new worker is already waiting, tell it to activate.
+      if (reg.waiting && navigator.serviceWorker.controller) {
+        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+    };
+
+    const checkForUpdate = () => {
+      if (registrationRef) registrationRef.update().catch(() => {});
+    };
+
+    const idle = (window as unknown as { requestIdleCallback?: (cb: () => void) => void }).requestIdleCallback
+      ?? ((cb: () => void) => setTimeout(cb, 600));
+
     idle(() => {
-      navigator.serviceWorker.register('/sw.js').catch(() => { /* registration failed; site still works */ });
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => {
+          registrationRef = reg;
+          // Already waiting on first load? Activate it.
+          promptUpdate(reg);
+
+          reg.addEventListener('updatefound', () => {
+            const installing = reg.installing;
+            if (!installing) return;
+            installing.addEventListener('statechange', () => {
+              // New worker installed and the old one is still active —
+              // ping the new one to skipWaiting so it activates immediately.
+              if (installing.state === 'installed' && navigator.serviceWorker.controller) {
+                installing.postMessage({ type: 'SKIP_WAITING' });
+              }
+            });
+          });
+        })
+        .catch(() => { /* registration failed; site still works */ });
     });
+
+    // Reload once when the new SW takes control.
+    navigator.serviceWorker.addEventListener('controllerchange', onControllerChange);
+
+    // Re-check for updates whenever the user brings the app back to focus.
+    // PWAs don't fire `beforeunload` so a long-lived home-screen app
+    // otherwise misses every deploy until manual refresh.
+    const onFocus = () => checkForUpdate();
+    const onVisible = () => { if (document.visibilityState === 'visible') checkForUpdate(); };
+    window.addEventListener('focus', onFocus);
+    document.addEventListener('visibilitychange', onVisible);
+
+    return () => {
+      navigator.serviceWorker.removeEventListener('controllerchange', onControllerChange);
+      window.removeEventListener('focus', onFocus);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, []);
 
   // --- 2. Capture install prompt ---
@@ -250,11 +322,8 @@ function PinLockScreen({ onUnlock }: { onUnlock: () => void }) {
       fontFamily: "'Inter', system-ui, sans-serif",
       color: '#fbf7f0',
     }}>
-      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 36, fontWeight: 900, letterSpacing: '-0.02em', marginBottom: 4, color: '#e8c989' }}>
+      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 48, fontWeight: 900, letterSpacing: '-0.02em', marginBottom: 36, color: '#e8c989' }}>
         RF
-      </div>
-      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, letterSpacing: '0.24em', color: 'rgba(251,247,240,0.6)', textTransform: 'uppercase', marginBottom: 36 }}>
-        Academy of Real Estate
       </div>
       <div style={{ fontSize: 14, color: 'rgba(251,247,240,0.7)', marginBottom: 24 }}>
         {error ? 'Incorrect PIN — try again.' : 'Enter your 4-digit PIN'}

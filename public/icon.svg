@@ -13,10 +13,10 @@
   <rect width="512" height="512" rx="96" fill="url(#bg)"/>
   <rect x="30" y="30" width="452" height="452" rx="80" fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.55"/>
   <rect x="48" y="48" width="416" height="416" rx="68" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.35"/>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central"
+  <!-- Just "RF" — sized large to fill the tile so it reads at every size,
+       even on home-screen badges where text-under-glyph subtitles are
+       illegible. -->
+  <text x="50%" y="52%" text-anchor="middle" dominant-baseline="central"
         font-family="Georgia, 'Playfair Display', serif" font-weight="900"
-        font-size="240" fill="url(#gold)" letter-spacing="-12">RF</text>
-  <text x="50%" y="83%" text-anchor="middle"
-        font-family="Georgia, serif" font-weight="500"
-        font-size="28" fill="url(#gold)" letter-spacing="6" opacity="0.85">ACADEMY OF REAL ESTATE</text>
+        font-size="320" fill="url(#gold)" letter-spacing="-16">RF</text>
 </svg>

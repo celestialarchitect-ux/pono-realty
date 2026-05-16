@@ -136,7 +136,7 @@ function Shell({ children }: { children: React.ReactNode }) {
       <Backgrounds />
       <div style={{ position: 'relative', zIndex: 10 }}>
         {/* sidebar replaces header */}
-        <main style={{ padding: '48px 32px 64px', maxWidth: 1180, margin: '0 auto' }}>{children}</main>
+        <main style={{ padding: '48px clamp(14px, 3.5vw, 32px) 64px', maxWidth: 1180, margin: '0 auto', minWidth: 0 }}>{children}</main>
         <Footer />
       </div>
     </div>

@@ -25,14 +25,14 @@ interface NavItem {
 }
 
 const ITEMS: NavItem[] = [
-  { href: '/admin',           label: 'Dashboard',     icon: 'chart-up' },
-  { href: '/admin/prospects', label: 'Prospects',     icon: 'target' },
-  { href: '/admin/users',     label: 'All students',  icon: 'graduate' },
-  { href: '/admin/quizzes',   label: 'Quiz analytics',icon: 'exam' },
-  { href: '/admin/questions', label: 'Question bank', icon: 'library' },
-  { href: '/admin/inbox',     label: 'Inbox',         icon: 'tutor',   badgeKey: 'unreadInbound' },
-  { href: '/admin/support',   label: 'Support',       icon: 'audit',   badgeKey: 'openTickets' },
-  { href: '/profile',         label: 'My profile',    icon: 'calendar' },
+  { href: '/admin',           label: 'Dashboard',         icon: 'chart-up' },
+  { href: '/admin/prospects', label: 'Prospects',         icon: 'target' },
+  { href: '/admin/users',     label: 'All students',      icon: 'graduate' },
+  // Question bank + analytics merged — was two separate pages until launch.
+  { href: '/admin/questions', label: 'Questions & analytics', icon: 'library' },
+  { href: '/admin/inbox',     label: 'Inbox',             icon: 'tutor',   badgeKey: 'unreadInbound' },
+  { href: '/admin/support',   label: 'Support',           icon: 'audit',   badgeKey: 'openTickets' },
+  { href: '/profile',         label: 'My profile',        icon: 'calendar' },
 ];
 
 export function AdminNav() {
@@ -72,21 +72,31 @@ export function AdminNav() {
 // ── Desktop: vertical left sidebar ──────────────────────────────────────
 
 function DesktopSidebar({ pathname, badges }: { pathname: string; badges: NavBadges }) {
+  // Outer wrapper owns the column background + border and stretches to the
+  // full row height (default `align-self: stretch` from the parent flex).
+  // The inner <aside> is the sticky 100vh chrome. Without this split, the
+  // sticky element only paints 100vh while the row grows with the page, so
+  // long admin pages show the body background below the sidebar's footprint.
   return (
-    <aside
-      aria-label="Admin navigation"
+    <div
       style={{
-        position: 'sticky', top: 0,
-        height: '100vh',
         width: 260,
         flexShrink: 0,
         background: 'rgba(251,247,240,0.96)',
         borderRight: `1px solid ${T.border}`,
         backdropFilter: 'saturate(140%) blur(10px)',
         WebkitBackdropFilter: 'saturate(140%) blur(10px)',
+        position: 'relative',
+        zIndex: 50,
+      }}
+    >
+    <aside
+      aria-label="Admin navigation"
+      style={{
+        position: 'sticky', top: 0,
+        height: '100vh',
         padding: '28px 18px 24px',
         display: 'flex', flexDirection: 'column', gap: 18,
-        zIndex: 50,
       }}
     >
       {/* Wordmark */}
@@ -149,6 +159,7 @@ function DesktopSidebar({ pathname, badges }: { pathname: string; badges: NavBad
         <a href="mailto:support@ralphfoulger.com" style={{ color: T.ocean }}>support@ralphfoulger.com</a>
       </div>
     </aside>
+    </div>
   );
 }
 

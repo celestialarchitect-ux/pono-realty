@@ -13,6 +13,7 @@ import {
   type ExamDifficulty,
 } from '@/lib/content/exam-bank';
 import type { ExamItem } from '@/lib/content/exam-bank';
+import { TOUGH_VARIANT_POOL } from '@/lib/content/tough-variant-pool';
 import { T, CARD, BUTTON_3D } from '@/lib/theme';
 import { Header, Footer, Backgrounds } from '@/components/Shell';
 import {
@@ -42,20 +43,36 @@ export default function PracticeExam() {
   useEffect(() => {
     const probe = async () => {
       let totalSeconds = 0;
+      let serverEarlyAccess = false;
+      let isAdmin = false;
       try {
-        const res = await fetch('/api/time/summary', { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
+        // Fetch summary + auth in parallel; admins bypass the gate entirely.
+        const [summaryRes, meRes] = await Promise.all([
+          fetch('/api/time/summary', { cache: 'no-store' }),
+          fetch('/api/auth/me', { cache: 'no-store' }),
+        ]);
+        if (summaryRes.ok) {
+          const data = await summaryRes.json();
           totalSeconds = data.totalSeconds ?? 0;
+          serverEarlyAccess = data.mockExamEarlyAccess === true;
         } else {
           totalSeconds = loadLog().totalSeconds;
+        }
+        if (meRes.ok) {
+          const me = await meRes.json();
+          isAdmin = me?.user?.isAdmin === true;
         }
       } catch {
         totalSeconds = loadLog().totalSeconds;
       }
       const p = progressTo60(totalSeconds);
       setStudiedSeconds(totalSeconds);
-      if (p.unlocked || hasUnlockOverride()) {
+      // Four ways to unlock the mock exam:
+      //   1. admin (full access to everything — no gates)
+      //   2. studiedSeconds ≥ 60h (natural gate for regular students)
+      //   3. admin granted mockExamEarlyAccess on a specific student
+      //   4. localStorage dev override (legacy QA shortcut)
+      if (isAdmin || p.unlocked || serverEarlyAccess || hasUnlockOverride()) {
         setUnlocked(true);
         setPhase('pick');
       }
@@ -77,9 +94,52 @@ export default function PracticeExam() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [secondsLeft, phase]);
 
+  // Track which variant index we picked for each sampled question so the
+  // recorded QuizAnswer.variantIndex matches what the student actually saw.
+  const [variantIndexByPos, setVariantIndexByPos] = useState<Record<number, number>>({});
+
   const start = (d: ExamDifficulty) => {
     setDifficulty(d);
-    setQuestions(sampleMockExam(Date.now(), d));
+    const sampled = sampleMockExam(Date.now(), d);
+    // Rotate tough-bank items to a random variant from TOUGH_VARIANT_POOL.
+    // Chapter-derived items keep the same wording the chapter quizzes use
+    // (so a student doesn't get a "new question" on the mock that they
+    // never saw during studying).
+    const salt = (typeof crypto !== 'undefined' && 'randomUUID' in crypto) ? crypto.randomUUID() : String(Date.now());
+    const indexByPos: Record<number, number> = {};
+    const withVariants: ExamItem[] = sampled.map((q, pos) => {
+      if (typeof q.chapterIndex === 'number' && q.chapterIndex >= 0) {
+        indexByPos[pos] = 0;
+        return q;
+      }
+      // Tough item — id is the djb2 hash of the original q.q text.
+      let h = 5381;
+      for (let i = 0; i < q.q.length; i++) { h = ((h << 5) + h) + q.q.charCodeAt(i); h |= 0; }
+      const id = `tough-${Math.abs(h).toString(36).slice(0, 7)}`;
+      const generated = TOUGH_VARIANT_POOL[id];
+      if (!generated || generated.length === 0) {
+        indexByPos[pos] = 0;
+        return q;
+      }
+      // [original, ...generated] — index 0 is always the original wording.
+      const pool = [{ q: q.q, options: q.options, correctIndex: q.correctIndex, explain: q.explain }, ...generated];
+      // Deterministic-per-attempt pick: hash(id + salt) mod pool.length.
+      let h2 = 5381;
+      const s = id + salt;
+      for (let i = 0; i < s.length; i++) { h2 = ((h2 << 5) + h2) + s.charCodeAt(i); h2 |= 0; }
+      const idx = Math.abs(h2) % pool.length;
+      const v = pool[idx];
+      indexByPos[pos] = idx;
+      return {
+        ...q,
+        q: v.q,
+        options: v.options as ExamItem['options'],
+        correctIndex: v.correctIndex,
+        explain: v.explain,
+      };
+    });
+    setQuestions(withVariants);
+    setVariantIndexByPos(indexByPos);
     setAnswers({});
     setCurrent(0);
     setSecondsLeft(EXAM_TIME_MINUTES * 60);
@@ -118,7 +178,9 @@ export default function PracticeExam() {
           context: `mock-${difficulty}`,
           answers: questions.map((q, i) => ({
             questionId: questionIdFor(q),
-            variantIndex: 0,
+            // Tough-bank items now get rotated to one of TOUGH_VARIANT_POOL,
+            // so record which one the student saw (chapter items stay 0).
+            variantIndex: variantIndexByPos[i] ?? 0,
             selectedIndex: answers[i] ?? -1,
             correctIndex: q.correctIndex,
             correct: answers[i] === q.correctIndex,

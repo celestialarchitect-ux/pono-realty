@@ -13,19 +13,35 @@
 //
 // To force a cache reset, bump CACHE_VERSION and redeploy.
 
-const CACHE_VERSION = 'rfa-shell-v1';
+// Bump on every deploy that ships new SW code or icons. Cache name change
+// triggers the `activate` cleanup pass which deletes stale caches.
+const CACHE_VERSION = 'rfa-shell-v3-rf-only-icon';
 const PRECACHE_URLS = [
   '/',
   '/manifest.json',
   '/icon.svg',
+  '/apple-touch-icon.png',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/icon-maskable-512.png',
 ];
 
-// On install: precache the bare minimum shell and activate immediately.
+// On install: precache the bare minimum shell. We DON'T auto-skipWaiting
+// here — the client orchestrates that via a SKIP_WAITING message so the
+// reload happens at a predictable moment, not while the user is mid-tap.
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_VERSION).then((cache) => cache.addAll(PRECACHE_URLS))
   );
-  self.skipWaiting();
+});
+
+// Client tells us to activate the new worker immediately. Fired from
+// PWAInstaller after the install event so home-screen PWAs (which can't
+// rely on a hard refresh) update on the user's next app launch.
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
 // On activate: drop every cache from older versions, take control of every

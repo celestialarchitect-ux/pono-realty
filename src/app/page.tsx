@@ -146,6 +146,147 @@ export default function Landing() {
           </p>
         </section>
 
+        {/* THE OFFICIAL PSI BLUEPRINT — category-by-category breakdown */}
+        <section style={{ padding: '80px 32px', borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
+          <div style={{ maxWidth: 1180, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 44 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
+                The Official PSI Blueprint
+              </div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(34px, 4.5vw, 56px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.05, color: T.text, maxWidth: 900, margin: '0 auto 16px' }}>
+                Every category. Every weight. Mapped to a chapter.
+              </h2>
+              <p style={{ fontSize: 17, lineHeight: 1.6, color: T.textDim, maxWidth: 760, margin: '0 auto' }}>
+                When PSI hands you that sheet of paper on exam day, this is what&apos;s on it. We rebuild it here &mdash; same categories, same item counts, same proportions &mdash; so you study exactly what the exam tests, in exactly the right ratios.
+              </p>
+            </div>
+
+            {/* HEADLINE STATS */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 48, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
+              {[
+                { num: '130', label: 'Total items', sub: 'on exam day' },
+                { num: '240', label: 'Minutes', sub: '4-hour window' },
+                { num: '70%', label: 'To pass', sub: 'both portions' },
+                { num: '20', label: 'Categories', sub: 'tested by PSI' },
+              ].map((s) => (
+                <div key={s.label} style={{ ...CARD, padding: '20px 16px', textAlign: 'center' }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 32, fontWeight: 800, color: T.ocean, letterSpacing: '-0.02em', lineHeight: 1 }}>{s.num}</div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: T.text, marginTop: 8, letterSpacing: '0.04em', textTransform: 'uppercase' }}>{s.label}</div>
+                  <div style={{ fontSize: 11, color: T.textMute, marginTop: 2, fontFamily: "'JetBrains Mono', monospace" }}>{s.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* TWO-PORTION BLUEPRINT */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: 28 }}>
+              {[
+                { portion: 'national' as const, items: 80, minutes: 150, label: 'Uniform / National Portion', sub: 'General real estate principles & U.S. law' },
+                { portion: 'state' as const, items: 50, minutes: 90, label: 'Hawaii State Portion', sub: 'HRS Title 16, leasehold, HARPTA, GET, condo law' },
+              ].map((p) => {
+                const chapters = CURRICULUM.filter(c => c.portion === p.portion);
+                return (
+                  <div key={p.portion} style={{ ...CARD, padding: '28px 24px' }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <h3 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 24, fontWeight: 800, color: T.text, letterSpacing: '-0.01em' }}>{p.label}</h3>
+                      <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 14, fontWeight: 700, color: T.ocean }}>{p.items} items</span>
+                    </div>
+                    <div style={{ fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em', marginBottom: 4 }}>{p.minutes} min · {Math.round(p.items / p.minutes * 60)} items/hr pace</div>
+                    <p style={{ fontSize: 14, color: T.textDim, marginBottom: 20, lineHeight: 1.5 }}>{p.sub}</p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      {chapters.map((c) => {
+                        const pct = Math.round((c.examItems / p.items) * 100);
+                        return (
+                          <Link key={c.slug} href={`/free/${c.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <div style={{ padding: '10px 12px', borderRadius: 8, background: T.bg, border: `1px solid ${T.border}`, transition: 'all 0.15s ease' }}>
+                              <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 6 }}>
+                                <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, minWidth: 0 }}>
+                                  <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: T.textMute, fontWeight: 700 }}>Ch.{c.number}</span>
+                                  <span style={{ fontSize: 14, fontWeight: 600, color: T.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{c.title.replace(/^Hawaii:\s*/, '')}</span>
+                                </div>
+                                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 12, color: T.ocean, fontWeight: 700, flexShrink: 0, marginLeft: 12 }}>{c.examItems} <span style={{ color: T.textMute, fontWeight: 500 }}>· {pct}%</span></span>
+                              </div>
+                              <div style={{ height: 4, borderRadius: 2, background: T.border, overflow: 'hidden' }}>
+                                <div style={{ height: '100%', width: `${pct}%`, background: p.portion === 'national' ? T.ocean : T.sand, borderRadius: 2 }} />
+                              </div>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+
+                    <div style={{ marginTop: 16, paddingTop: 14, borderTop: `1px solid ${T.border}`, display: 'flex', justifyContent: 'space-between', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", color: T.textMute, letterSpacing: '0.06em' }}>
+                      <span>{chapters.length} chapters</span>
+                      <span>{chapters.reduce((s, c) => s + c.examItems, 0)} of {p.items} items mapped</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div style={{ marginTop: 32, padding: '20px 24px', background: T.bgElevated, border: `1px solid ${T.border}`, borderRadius: 12, maxWidth: 820, marginLeft: 'auto', marginRight: 'auto' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: T.ocean, color: '#fff', fontSize: 13, fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontFamily: "'JetBrains Mono', monospace" }}>i</div>
+                <div style={{ fontSize: 14, color: T.textDim, lineHeight: 1.55 }}>
+                  <strong style={{ color: T.text }}>Source:</strong> Official PSI Hawaii Real Estate Candidate Information Bulletin, published by the Hawaii Department of Commerce &amp; Consumer Affairs. Item counts are exact &mdash; not estimates. Each chapter in our curriculum is built around its target category and weighted to match the real exam.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VS THE PSI BOOK — direct comparison */}
+        <section style={{ background: T.bgRaised, padding: '72px 32px', borderBottom: `1px solid ${T.border}` }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ textAlign: 'center', marginBottom: 40 }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>
+                Why this beats the $30 PSI book
+              </div>
+              <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text, maxWidth: 820, margin: '0 auto' }}>
+                A book gives you questions. We give you a system.
+              </h2>
+            </div>
+
+            <div style={{ ...CARD, overflow: 'hidden' }}>
+              {/* HEADER ROW */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', borderBottom: `1px solid ${T.border}`, background: T.bgElevated }}>
+                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700 }}>Feature</div>
+                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.textMute, textTransform: 'uppercase', fontWeight: 700, textAlign: 'center', borderLeft: `1px solid ${T.border}` }}>PSI Exam Prep Book</div>
+                <div style={{ padding: '18px 20px', fontSize: 12, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.14em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, textAlign: 'center', borderLeft: `1px solid ${T.border}`, background: T.bg }}>Ralph&apos;s Academy</div>
+              </div>
+
+              {[
+                { feat: 'Format', psi: 'Paperback or PDF', us: 'Mobile + desktop web app' },
+                { feat: 'Maps to official PSI category weights', psi: 'Claimed, not shown', us: 'Showcased above &mdash; every chapter mapped' },
+                { feat: 'Practice questions', psi: '720', us: 'Growing bank, weighted to PSI items' },
+                { feat: 'Answer rationales', psi: 'Yes', us: 'Yes &mdash; plus citation to chapter & statute' },
+                { feat: 'Audio narration of every chapter', psi: '&mdash;', us: 'Yes' },
+                { feat: 'Spaced-repetition flashcards', psi: '&mdash;', us: 'Yes' },
+                { feat: 'Math drill module', psi: 'Formula review only', us: 'Interactive drills + step-by-step solutions' },
+                { feat: 'Full-length timed mock exam', psi: '110-question sample', us: '130-item timed simulation matching PSI' },
+                { feat: '24/7 AI tutor grounded in HRS + PSI outline', psi: '&mdash;', us: 'Yes' },
+                { feat: 'Progress tracking & weak-category detection', psi: '&mdash;', us: 'Yes' },
+                { feat: 'Glossary with key terms', psi: '&mdash;', us: 'Yes' },
+                { feat: 'Required 60-hour study tracking', psi: '&mdash;', us: 'Auto-tracked' },
+                { feat: 'Hawaii state law depth', psi: '37 pages', us: '9 dedicated chapters · HRS 467 · 514B · 521 · HARPTA · GET' },
+                { feat: 'Certificate of completion', psi: '&mdash;', us: 'Issued · 2-year validity · verifiable URL' },
+                { feat: 'Pass-the-exam-or-money-back', psi: 'Explicitly disclaimed', us: 'See pricing for details' },
+                { feat: 'Built by a Hawaii broker who teaches it', psi: 'Generic national publisher', us: 'Ralph Foulger, CPM · licensed in HI since 1972' },
+              ].map((row, i) => (
+                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr', borderTop: i === 0 ? 'none' : `1px solid ${T.border}` }}>
+                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.text, fontWeight: 600 }}>{row.feat}</div>
+                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.textMute, textAlign: 'center', borderLeft: `1px solid ${T.border}` }} dangerouslySetInnerHTML={{ __html: row.psi }} />
+                  <div style={{ padding: '14px 20px', fontSize: 14, color: T.text, fontWeight: 600, textAlign: 'center', borderLeft: `1px solid ${T.border}`, background: T.bg }} dangerouslySetInnerHTML={{ __html: row.us }} />
+                </div>
+              ))}
+            </div>
+
+            <p style={{ marginTop: 24, textAlign: 'center', fontSize: 13, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.06em' }}>
+              The book costs $30 and ships in a week. Ralph&apos;s Academy is in your pocket the moment you sign up.
+            </p>
+          </div>
+        </section>
+
         {/* THE VALUE STACK */}
         <section style={{ background: `linear-gradient(180deg, ${T.bg} 0%, ${T.bgElevated} 100%)`, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}`, padding: '72px 32px' }}>
           <div style={{ maxWidth: 1180, margin: '0 auto' }}>

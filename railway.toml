@@ -3,6 +3,9 @@ builder = "DOCKERFILE"
 dockerfilePath = "./Dockerfile"
 
 [deploy]
-startCommand = "node server.js"
+# Use the explicit start.sh from the Docker image. Inline shell chaining
+# in startCommand was silently failing past the prisma push step; a real
+# script with `set +e` and `exec node server.js` reliably boots the app.
+startCommand = "./start.sh"
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10

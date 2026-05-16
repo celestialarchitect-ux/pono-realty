@@ -50,12 +50,17 @@ model User {
   emailVerifiedAt  DateTime?
   stripeCustomerId String?      @unique
   passedExamAt     DateTime?
+  // Admin grants early access to the mock exam, bypassing the 60-hour
+  // study-time gate. Useful for students who want to take a baseline mock
+  // before they begin studying, or for QA / instructor accounts.
+  mockExamEarlyAccess Boolean   @default(false)
   createdAt        DateTime     @default(now())
   lastSeenAt       DateTime     @default(now())
   timeEvents       TimeEvent[]
   emailTokens      EmailToken[]
   studyPlan        StudyPlan?
   quizAttempts     QuizAttempt[]
+  variantOverrides QuestionVariantOverride[] @relation("editor")
 
   @@index([createdAt])
 }
@@ -187,6 +192,33 @@ model EmailToken {
 }
 
 // Per-quiz attempt. One row each time a student submits a chapter quiz
+// Admin-authored override for a specific (questionId, variantIndex) pair.
+// Loaded at quiz-fetch time and merged on top of the static VARIANT_POOL,
+// so an admin fixing a typo in /admin/questions sees the change reach
+// students immediately. Up to ONE row per (questionId, variantIndex) —
+// later edits overwrite the same row.
+//
+// reason: free-text note from the editor explaining the change. Surfaced
+// in the admin dossier next to the override badge.
+// editedById: which admin made the change. Surfaced + audited.
+model QuestionVariantOverride {
+  id            String   @id @default(cuid())
+  questionId    String
+  variantIndex  Int
+  q             String
+  optionsJson   String
+  correctIndex  Int
+  explain       String
+  reason        String?
+  editedById    String
+  editor        User     @relation("editor", fields: [editedById], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([questionId, variantIndex])
+  @@index([editedById])
+}
+
 // OR a mock exam. Used for the student grade calculation AND for the
 // admin quiz-analytics dossier (per-question right/wrong percentages,
 // hot-spot detection, retake patterns).

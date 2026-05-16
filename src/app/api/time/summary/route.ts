@@ -31,9 +31,17 @@ export async function GET() {
     totalSeconds += sec;
   }
 
+  // Pull the mock-exam early-access flag so the practice page can bypass
+  // the 60-hour gate when admins have granted it. Cheap single-column read.
+  const u = await db.user.findUnique({
+    where: { id: user.id },
+    select: { mockExamEarlyAccess: true },
+  });
+
   return NextResponse.json({
     totalSeconds,
     byBucket,
     user: { id: user.id, email: user.email, name: user.name, tier: user.tier, isAdmin: user.isAdmin },
+    mockExamEarlyAccess: u?.mockExamEarlyAccess ?? false,
   });
 }

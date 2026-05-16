@@ -27,6 +27,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       id: true, email: true, firstName: true, lastName: true, name: true, phone: true,
       tier: true, isAdmin: true, roles: true, accessExpiresAt: true, emailVerifiedAt: true,
       stripeCustomerId: true, passedExamAt: true, createdAt: true, lastSeenAt: true,
+      mockExamEarlyAccess: true,
     },
   });
   if (!user) return NextResponse.json({ error: 'not_found' }, { status: 404 });
@@ -53,7 +54,12 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
     }),
   ]);
 
-  const grade = computeGrade({ quizAttempts, timeEvents });
+  const grade = computeGrade({
+    quizAttempts,
+    timeEvents,
+    isAdmin: user.isAdmin,
+    goalDate: plan?.goalDate ?? null,
+  });
 
   const totalSeconds = timeEvents.reduce((s, e) => s + e.seconds, 0);
   const sevenDaysAgo = Date.now() - 7 * 86400_000;
@@ -91,6 +97,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ id:
       emailVerified: !!user.emailVerifiedAt,
       stripeCustomerId: user.stripeCustomerId,
       passedExamAt: user.passedExamAt?.toISOString() ?? null,
+      mockExamEarlyAccess: user.mockExamEarlyAccess,
       createdAt: user.createdAt.toISOString(),
       lastSeenAt: user.lastSeenAt.toISOString(),
     },
@@ -132,7 +139,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   if (!hasRole(session, 'admin')) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const { id } = await params;
-  let body: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: string | null };
+  let body: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: string | null; mockExamEarlyAccess?: boolean };
   try { body = await req.json(); } catch {
     return NextResponse.json({ error: 'bad_json' }, { status: 400 });
   }
@@ -143,7 +150,8 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     return NextResponse.json({ error: 'cannot_demote_self', message: "You can't remove your own admin flag." }, { status: 400 });
   }
 
-  const data: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: Date | null } = {};
+  const data: { isAdmin?: boolean; roles?: string[]; tier?: string; accessExpiresAt?: Date | null; mockExamEarlyAccess?: boolean } = {};
+  if (typeof body.mockExamEarlyAccess === 'boolean') data.mockExamEarlyAccess = body.mockExamEarlyAccess;
   if (typeof body.isAdmin === 'boolean') data.isAdmin = body.isAdmin;
   if (Array.isArray(body.roles)) {
     const clean = body.roles.filter(r => typeof r === 'string' && VALID_ROLES.has(r));

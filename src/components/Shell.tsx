@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { T, SHADOW_3D, BUTTON_3D } from '@/lib/theme';
 import { ReportProblemModal } from './ReportProblemModal';
+import { MessageBell } from './MessageBell';
 
 const NAV_ITEMS: Array<[string, string]> = [
   ['/free', 'Free Course'],
@@ -81,16 +82,19 @@ export function Header({ active }: { active?: string }) {
           // Auth probe in flight — reserve space so the layout doesn't jump
           <span style={{ minWidth: 96, height: 36 }} aria-hidden />
         ) : user ? (
-          <Link href="/profile" style={{
-            ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
-            fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-          }}>
-            <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,255,255,0.18)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800 }}>
-              {(user.firstName?.[0] ?? user.name?.[0] ?? '?').toUpperCase()}
-            </span>
-            My Profile
-          </Link>
+          <>
+            <MessageBell />
+            <Link href="/profile" style={{
+              ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,
+              fontSize: 13, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none',
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+            }}>
+              <span style={{ width: 22, height: 22, borderRadius: '50%', background: 'rgba(255,255,255,0.18)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800 }}>
+                {(user.firstName?.[0] ?? user.name?.[0] ?? '?').toUpperCase()}
+              </span>
+              My Profile
+            </Link>
+          </>
         ) : (
           <Link href="/login" style={{
             ...BUTTON_3D.primary, padding: '10px 18px', borderRadius: 10,

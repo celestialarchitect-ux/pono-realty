@@ -14,7 +14,7 @@ export async function GET() {
   const session = await getSessionUser();
   if (!session) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
 
-  const [quizAttempts, timeEvents] = await Promise.all([
+  const [quizAttempts, timeEvents, plan] = await Promise.all([
     db.quizAttempt.findMany({
       where: { userId: session.id },
       select: { scorePct: true, kind: true, context: true, completedAt: true },
@@ -24,9 +24,21 @@ export async function GET() {
       where: { userId: session.id },
       select: { seconds: true, createdAt: true },
     }),
+    // The student's goal date drives the commitment-component bar — when
+    // they push the goal out, the required weekly pace drops and the
+    // commitment grade rises accordingly.
+    db.studyPlan.findUnique({
+      where: { userId: session.id },
+      select: { goalDate: true },
+    }),
   ]);
 
-  const result = computeGrade({ quizAttempts, timeEvents });
+  const result = computeGrade({
+    quizAttempts,
+    timeEvents,
+    isAdmin: session.isAdmin,
+    goalDate: plan?.goalDate ?? null,
+  });
 
   // Strip the numeric private score before returning to the client. We
   // intentionally don't tell students "you got an 84.3" — they get the
