@@ -199,7 +199,7 @@ export default function Landing() {
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
               <Feature icon="audiobook" title="Audiobook for every chapter" body="Listen in the car, on a hike, at the gym. Every chapter is professionally narrated so you can learn while you live your life." />
-              <Feature icon="tutor" title="24/7 AI Real Estate Tutor" body="Trained on the Hawaii curriculum and a deep library of real estate textbooks. Stuck at 11 PM? Ask anything. Get a clear answer in seconds." highlight />
+              <Feature icon="tutor" title="24/7 AI Real Estate Tutor" body="Grounded in our 20-chapter curriculum, the official PSI outline, and HRS Title 16 — cites where it found each answer. Every response tagged [National] or [Hawaii]. Human-audited weekly. Stuck at 11 PM? Get a clear answer in seconds." highlight />
               <Feature icon="book" title="Read → Study → Quiz" body="Each chapter teaches in three phases. Read the material, internalize the key terms, prove you got it before moving on. Knowledge sticks because the structure forces it to." />
               <Feature icon="flashcards" title={`${totalTerms}+ smart flashcards`} body="Spaced repetition built in — the cards you miss come back more often, the ones you nail recede. The system learns you and prioritizes your weak spots automatically." />
               <Feature icon="calculator" title="Math drills (where most fail)" body="Prorations, commission splits, LTV, capitalization, GRM — with step-by-step worked examples. The single category that knocks the most candidates out, eliminated." />
@@ -211,23 +211,23 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* DAILY LESSON PLANNER — THE GAME-CHANGER FEATURE */}
+        {/* HOW THE PROGRAM RUNS — merged: daily planner + time window + final exam */}
         <section style={{ padding: '72px 32px', background: T.bgRaised, borderTop: `1px solid ${T.border}`, borderBottom: `1px solid ${T.border}` }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
             <div style={{ textAlign: 'center', marginBottom: 36 }}>
               <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12, fontWeight: 700 }}>
-                The game-changer · New
+                How the program runs
               </div>
               <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(36px, 5.5vw, 60px)', fontWeight: 900, letterSpacing: '-0.025em', lineHeight: 1.05, color: T.text, marginBottom: 16 }}>
-                A daily class schedule. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Like going to actual school.</em>
+                Set your goal date. <em style={{ color: T.ocean, fontStyle: 'italic' }}>We build your daily schedule.</em>
               </h2>
               <p style={{ fontSize: 18, color: T.textDim, lineHeight: 1.65, maxWidth: 780, margin: '0 auto' }}>
-                Tell the system when you want to finish &mdash; two weeks, six weeks, three months, anytime. It builds you a <strong style={{ color: T.text }}>full lesson plan for every single study day</strong>: today&apos;s chapters, today&apos;s flashcards, today&apos;s math drills, today&apos;s mock exam. With <strong style={{ color: T.text }}>class times</strong>, like a real-school schedule. Open your profile and you know exactly what to do.
+                Hawaii law requires <strong style={{ color: T.text }}>60 documented study hours</strong> before you can sit the PSI exam. Tell the system when you want to finish &mdash; two weeks, six weeks, three months. It builds you a full lesson plan for every study day, with <strong style={{ color: T.text }}>class times</strong>, like a real-school schedule. Open your profile and you know exactly what to do.
               </p>
             </div>
 
-            {/* MOCK SCHEDULE — visual demo of a day */}
-            <div style={{ background: T.bg, border: `1px solid ${T.border}`, borderRadius: 18, padding: 28, maxWidth: 780, margin: '0 auto 32px', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
+            {/* MOCK SCHEDULE — visual proof the planner is real */}
+            <div style={{ background: T.bg, border: `1px solid ${T.border}`, borderRadius: 18, padding: 28, maxWidth: 780, margin: '0 auto 40px', boxShadow: '0 12px 40px rgba(0,0,0,0.08)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 18, flexWrap: 'wrap', gap: 12 }}>
                 <div>
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: '0.22em', color: T.ocean, textTransform: 'uppercase', fontWeight: 700, marginBottom: 4 }}>
@@ -245,7 +245,6 @@ export default function Landing() {
                 </div>
               </div>
 
-              {/* Sample class blocks */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <MockClassBlock time="9:00 AM" minutes={60} typeLabel="Chapter" iconKind="book" color={T.ocean} title="Chapter 3: Valuation & Market Analysis" subtitle="National portion · 8 exam items · 24 key terms" />
                 <MockClassBlock time="10:05 AM" minutes={15} typeLabel="Quiz" iconKind="exam" color="#c08a2e" title="Chapter 3 quiz" subtitle="End-of-chapter check · 8 questions" />
@@ -255,67 +254,40 @@ export default function Landing() {
               </div>
 
               <div style={{ marginTop: 18, padding: '12px 16px', background: T.bgRaised, borderRadius: 10, border: `1px solid ${T.border}`, fontSize: 12, color: T.textMute, lineHeight: 1.55, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.04em' }}>
-                <strong style={{ color: T.text }}>Calendar view</strong> shows all 14 days · <strong style={{ color: T.text }}>Upcoming days</strong> shows every chapter you&apos;ll cover. Skip a day, slip behind, fall sick &mdash; the planner rebalances automatically.
+                Skip a day, slip behind, fall sick &mdash; the planner rebalances automatically. Last 30% of your timeline becomes review + mock exams.
               </div>
             </div>
 
-            {/* Why this matters */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, marginTop: 36 }}>
-              <FeatureCard iconKind="target" title="Goal-driven, not time-driven" body="Set your exam date. The schedule works backward so you finish on time without panicking the last week." />
-              <FeatureCard iconKind="brain" title="Spaced repetition built in" body="Daily flashcards on what you just learned + what you've forgotten. The actual mechanism that makes learning stick." />
-              <FeatureCard iconKind="chart-up" title="Mock-heavy in the home stretch" body="Last 30% of your timeline becomes review + mock exams — exactly what licensing schools have been doing for decades." />
-              <FeatureCard iconKind="sync" title="Auto-rebalances" body="Behind one day? Studied extra? Took a Sunday off? The plan adjusts. No spreadsheets to re-do." />
+            {/* THE 4-STEP JOURNEY */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+              <Step
+                number="01"
+                title="Enroll. Set your goal date."
+                body="Pick how fast you want to finish — 2 weeks, 6 weeks, 3 months. The planner generates your daily time blocks. Standard caps at 3 months; Plus at 6."
+              />
+              <Step
+                number="02"
+                title="Move through 20 chapters."
+                body="Read or listen, drill the math, run the flashcards, take the chapter quizzes. Progress tracked against your plan — you always know if you're on pace."
+              />
+              <Step
+                number="03"
+                title="Pass our final exam (70%+)."
+                body="Before we issue your course-completion certificate, you pass our school's final at 70% — the same threshold the state exam uses. We don't shortcut this."
+              />
+              <Step
+                number="04"
+                title="Get certified. Take PSI."
+                body="Your certificate is valid for 2 years (state rule). Register for the official PSI Hawaii Salesperson Exam — and walk in confident."
+              />
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: 36 }}>
-              <Link href="/signup" style={{ ...BUTTON_3D.primary, padding: '14px 32px', borderRadius: 12, fontSize: 14, fontWeight: 700, letterSpacing: '0.04em', textDecoration: 'none', display: 'inline-flex' }}>
-                Start with the free course →
-              </Link>
-              <p style={{ fontSize: 12, color: T.textMute, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.08em', marginTop: 12 }}>
-                The planner unlocks when you enroll in Standard or Plus.
+            <div style={{ ...CARD, padding: '24px 28px', borderRadius: 14, marginTop: 28, borderLeft: `3px solid ${T.coral}` }}>
+              <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>If you hit the ceiling</div>
+              <p style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim, margin: 0 }}>
+                <strong style={{ color: T.text }}>Plus students</strong> can buy a one-time <strong style={{ color: T.text }}>$249.99 extension</strong> for 90 more days. <strong style={{ color: T.text }}>Standard students</strong> re-enroll at the Standard price for a fresh window. The window exists because material decays when it sits unstudied &mdash; not to gate income out of you.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* TIME WINDOW + FINAL EXAM */}
-        <section style={{ padding: '72px 32px', maxWidth: 980, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.textMute, textTransform: 'uppercase', marginBottom: 12 }}>How the program runs</div>
-            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 48px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.1, color: T.text }}>
-              60 hours of study. <em style={{ color: T.ocean, fontStyle: 'italic' }}>Two weeks if you go full-time.</em>
-            </h2>
-            <p style={{ fontSize: 16, color: T.textDim, lineHeight: 1.7, maxWidth: 720, margin: '14px auto 0' }}>
-              Hawaii law requires 60 documented study hours. <strong style={{ color: T.text }}>That&apos;s the real timeline.</strong> Full-time students finish in ~2 weeks. The 3- and 6-month windows are the latest moment access ends &mdash; the safety net for life, not the expected pace. Your profile includes a built-in study planner that builds a daily schedule from any goal date you pick.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
-            <Step
-              number="01"
-              title="Enroll. Set your goal date."
-              body="Pick how fast you want to finish — 2 weeks, 6 weeks, 3 months, whenever. The study planner generates your daily time blocks. Standard gives you 3 months as a ceiling; Plus gives you 6."
-            />
-            <Step
-              number="02"
-              title="Move through 20 chapters."
-              body="Read or listen, drill the math, run the flashcards, take the chapter quizzes. The platform tracks your progress against your plan so you always know if you&apos;re on pace."
-            />
-            <Step
-              number="03"
-              title="Pass our final exam (70%+)."
-              body="Before we issue your course-completion certificate, you have to pass our school&apos;s final exam at 70% or above — the same threshold the state exam uses. We don&apos;t shortcut this."
-            />
-            <Step
-              number="04"
-              title="Get your certificate. Take PSI."
-              body="Your school-completion certificate is valid for 2 years (state rule). Use it to register for the official PSI Hawaii Salesperson Exam — and walk in confident."
-            />
-          </div>
-          <div style={{ ...CARD, padding: '28px 32px', borderRadius: 16, marginTop: 28, borderLeft: `3px solid ${T.coral}` }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.22em', color: T.coral, textTransform: 'uppercase', marginBottom: 8, fontWeight: 700 }}>If you hit the ceiling</div>
-            <p style={{ fontSize: 15, lineHeight: 1.75, color: T.textDim, margin: 0 }}>
-              If you reach the end of your window without finishing: <strong style={{ color: T.text }}>Plus students</strong> can buy a one-time <strong style={{ color: T.text }}>$249.99 extension</strong> for 90 more days of full access. <strong style={{ color: T.text }}>Standard students</strong> re-enroll at the full Standard price for a fresh window. The window exists for the same reason every Hawaii school uses one &mdash; material decays when it sits unstudied &mdash; not to gate income out of you.
-            </p>
           </div>
         </section>
 
@@ -350,41 +322,6 @@ export default function Landing() {
                 When COVID closed in-person classrooms, online behemoths absorbed the volume &mdash; but they teach mainland defaults that don&apos;t map to Hawaii&apos;s leasehold market, HARPTA withholdings, or HRS 514B condo law. <strong style={{ color: T.text }}>2026 is the return.</strong> Same Ralph. Same Hawaii-first curriculum. Now with audiobook narration, smart flashcards, math drills, mock exams, and a 24/7 AI tutor grounded in the curriculum, the statutes, and the PSI exam outline.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* AI ACCURACY PROMISE */}
-        <section data-mobile-padding style={{ padding: '72px 32px', maxWidth: 1100, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 40 }}>
-            <div style={{ fontSize: 11, fontFamily: "'JetBrains Mono', monospace", letterSpacing: '0.24em', color: T.coral, textTransform: 'uppercase', marginBottom: 12 }}>The AI commitment</div>
-            <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(32px, 4.5vw, 50px)', fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1.08, color: T.text }}>
-              Master AI tutor &mdash; <em style={{ color: T.ocean, fontStyle: 'italic' }}>human-audited for accuracy.</em>
-            </h2>
-            <p style={{ fontSize: 17, color: T.textDim, maxWidth: 720, margin: '20px auto 0', lineHeight: 1.7 }}>
-              Every answer the AI gives is grounded in our verified Hawaii curriculum, the official PSI exam content outline, and Hawaii Revised Statutes. We audit a sample of every week&apos;s conversations &mdash; if it says something wrong, we catch it, correct the model, and notify any affected student.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
-            <Pillar
-              icon="target"
-              title="Grounded, not guessing"
-              body="The tutor pulls from our 20-chapter curriculum, the PSI Content Outline, HRS Title 16 (real estate law), and a verified library of real estate references. It cites where it found each answer."
-            />
-            <Pillar
-              icon="compass"
-              title="Hawaii vs national, always tagged"
-              body="Every answer leads with [National] or [Hawaii] so you know which portion of the PSI exam the topic falls under. No accidental confusion."
-            />
-            <Pillar
-              icon="audit"
-              title="Weekly human audit"
-              body="We sample student conversations every week. If the AI says something wrong, we flag it, retrain the prompt, and reach out personally to anyone who got bad info."
-            />
-            <Pillar
-              icon="no-cheat"
-              title="Refuses to cheat for you"
-              body="The tutor won&apos;t take graded exams for you, won&apos;t fabricate case citations, and won&apos;t answer live-exam questions. Real estate is a profession of fiduciary trust — your AI tutor models it."
-            />
           </div>
         </section>
 
@@ -561,16 +498,6 @@ function CredStat({ big, sub }: { big: string; sub: string }) {
     <div style={{ ...CARD, padding: '20px 18px', borderRadius: 12, textAlign: 'center' }}>
       <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 36, fontWeight: 900, color: T.ocean, lineHeight: 1, letterSpacing: '-0.02em', marginBottom: 6 }}>{big}</div>
       <div style={{ fontSize: 12, lineHeight: 1.5, color: T.textMute }}>{sub}</div>
-    </div>
-  );
-}
-
-function Pillar({ icon, title, body, accent }: { icon: IconKind; title: string; body: string; accent?: 'ocean' | 'coral' | 'sand' }) {
-  return (
-    <div style={{ ...CARD, padding: '24px 22px', borderRadius: 14 }}>
-      <div style={{ marginBottom: 14 }}><IconBadge kind={icon} accent={accent ?? 'ocean'} /></div>
-      <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 18, fontWeight: 800, letterSpacing: '-0.01em', marginBottom: 8, color: T.text }}>{title}</div>
-      <div style={{ fontSize: 14, lineHeight: 1.7, color: T.textDim }}>{body}</div>
     </div>
   );
 }
